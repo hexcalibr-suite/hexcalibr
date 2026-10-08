@@ -18,7 +18,7 @@ more:
   intro: |
     A small hollow hexagon with three blades, printed in **bands of 4.6 mm**. Each band has its own pressure advance value, and the band number is engraved on the front. The blades end in sharp 45° and 90° tips after long straights, the hardest corners a printer meets. Too little PA makes them bulge, too much makes them dull. You score each band, pick the winner with a fixed rule, and type one number into your setup. There are two files per firmware: a **coarse** one with a wide range, and a **fine** one with small steps.
 
-    The tower is 43 mm tall, uses about 4.5 g of filament and prints in about 11 minutes, with **no changes to your profiles**: the file sets the test speed itself. Times and grams are our estimates, ±30 % for the time; PrusaSlicer shows the real figures after slicing.
+    The tower is 43 mm tall, uses about 4.5 g of filament and prints in about 14 minutes, with **no changes to your profiles**: the file sets the test speed itself. The time was measured on the author's printer, the grams are our estimate; PrusaSlicer shows the figures for your profiles after slicing.
 callouts:
   - kind: warn
     text: "Open the file with **File › Open project**, never with **Import**: an import keeps the shape but drops the PA changes and the test speed."

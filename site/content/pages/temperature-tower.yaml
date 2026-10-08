@@ -17,12 +17,12 @@ numbered: true
 intro: |
   A hexagonal tower printed hot to cold, one step colder per 7 mm block. Score each block, let a few fixed rules pick the winner, and type that temperature into your filament profile.
 
-  16 to 24 minutes and 7 to 10 g of filament, with **no changes to your profiles**.
+  About 40 minutes and 7 to 10 g of filament, with **no changes to your profiles**.
 more:
   intro: |
     Each block is printed one step colder than the one below: **10 °C** on the **coarse** file, **5 °C** on the **fine** one. Every block carries the same features, one group per face: four that decide (the snap flag, the string ladder, a steep overhang ramp and a 22 mm bridge), two that only confirm (the engraved temperature and a smooth face), and a round hole you look through that is not counted. Each fails in a recognisable way when the plastic is too hot or too cold.
 
-    The tower prints at a fixed flow of 10 mm³/s (TPU: about 40 minutes). Times and grams are our estimates, ±30 % for the time; PrusaSlicer shows the real figures after slicing.
+    The tower prints at a fixed flow of 10 mm³/s (TPU at 3 mm³/s, so it takes much longer). The time was measured on the author's printer, the grams are our estimate; PrusaSlicer shows the figures for your profiles after slicing.
 callouts:
   - kind: warn
     text: "Open the file with **File › Open project**. Never with **Import**, never as a ZIP: an import keeps the shape but silently drops the temperature changes, and you would print a whole tower at one temperature."
@@ -99,7 +99,7 @@ steps:
       intro: "Two files per material family, coarse and fine. Each starts hot at the bottom and goes down one step per block."
       points:
         - "Every block is 7 mm tall, on a 0.6 mm floor, with a 0.6 mm cap on top: 7 blocks make a 50.2 mm tower, 8 blocks 57.2 mm, 9 blocks 64.2 mm."
-        - "Print time: 16 to 19 minutes for a coarse tower, 20 to 24 for a fine one (TPU about 38 and 44). The file prints with 0.45 mm lines and 0.2 mm layers; the grams assume 1.75 mm filament and no skirt. Both are our own estimates, the time ±30 %: after slicing, PrusaSlicer shows the real figures."
+        - "Print time, measured on the author's printer (PETG): about 38 minutes for the coarse tower and 40 for the fine one, plus your printer's start routine. TPU prints at 3 mm³/s and takes much longer. The file prints with 0.45 mm lines and 0.2 mm layers; the grams assume 1.75 mm filament and no skirt. After slicing, PrusaSlicer shows the figures for your profiles."
         - "The files are named like `temp-tower_PETG_coarse_270-200_10C.3mf` and `temp-tower_PETG_fine_260-220_5C.3mf`: material, variant, the bottom and top temperatures, and the **step**. They are made for a **0.4 mm nozzle**."
         - "Download the **single .3mf file**, not \"Download all\" as a ZIP: PrusaSlicer opens a ZIP's 3MF as plain geometry and the temperature changes are lost."
         - "**IDEX and multi-tool printers:** print the whole tower with **one tool**: in PrusaSlicer, set the object's extruder to that tool. The temperature commands (`M104` without a tool number) act on the active tool. `temp-tower_PETG_coarse_270-200_10C_T0.3mf` is a ready example already set to T0; for another tool, use the plain file and set the extruder."
