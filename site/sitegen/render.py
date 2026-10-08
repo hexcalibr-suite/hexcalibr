@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Matteo Beretta
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""The pages, as static HTML. Adapted from the owner's Wheelly generator
+"""The pages, as static HTML. Adapted from the author's Wheelly generator
 (src/guide/site.py): the same fixed contents with a filter, the same step
 layout (picture on the left, a few points beside it), the same EN/IT pill
 of real links, hreflang alternates and the same language redirect.
@@ -349,9 +349,9 @@ SCORE_BANDS = """
     // v1.3: after a coarse file, the fine file centred on the pick (the preset's fine step);
     // after a fine file, the same at a quarter of its step
     fine.textContent = words.fine.replace('%s', pre
-      ? 'python3 -I calib.py pressure-advance --preset ' + pre + ' --centre ' + fmt(here) +
+      ? words.cmd + ' --preset ' + pre + ' --centre ' + fmt(here) +
         (vari === 'coarse' ? '' : ' --step ' + fmt(step / 4))
-      : 'python3 -I calib.py pressure-advance --firmware ' + fw +
+      : words.cmd + ' --firmware ' + fw +
         ' --start ' + fmt(Math.max(0, here - step)) + ' --end ' + fmt(here + step) + ' --step ' + fmt(step / 4));
   }
   tab.addEventListener('click', function (e) {
@@ -1393,7 +1393,9 @@ class Site:
                  "-": self.T("state_na"), "empty": self.T("state_empty"),
                  "best": self.T("score_band_best"), "tie": self.T("score_band_tie"),
                  "edge": self.T("score_band_edge"), "none": self.T("score_band_none"),
-                 "fine": self.T("score_band_fine") if self.generator else ""}
+                 "fine": self.T("score_band_fine") if self.generator else "",
+                 # the command stays out of the page while the generator is private
+                 "cmd": "python3 -I calib.py pressure-advance" if self.generator else ""}
         r = ["<section class=\"scorecard\">"]
         if fs.get("rules"):
             r.append("<h2>%s</h2><ol class=\"regole\">%s</ol>"

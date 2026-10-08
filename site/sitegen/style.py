@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Matteo Beretta
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""The style sheet, adapted from the owner's Wheelly guide generator
+"""The style sheet, adapted from the author's Wheelly guide generator
 (Wheelly src/guide/site.py), so the two sites read as one family.
 
 Same tokens, same Ink / Amber / Paper palette, same contrast rules: amber is
