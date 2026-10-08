@@ -75,10 +75,10 @@ links:
   book-aranda-it: "https://www.amazon.it/dp/B09NH3BB9F?tag=tr-yt-21"
   book-aranda-uk: "https://www.amazon.co.uk/dp/B09MYW1GKH?tag=tup07c-21"
   # the HexCalibr collection on Printables (all the tests); fill in after upload
-  printables-collection: ""
+  printables-collection: "https://www.printables.com/@Teo_/collections/3817331"
   # each test's own model page (fill in after upload): the download box and the
   # "share your make" step link here
-  printables-temperature-tower: ""
+  printables-temperature-tower: "https://www.printables.com/model/1870420-temperature-tower-for-prusaslicer-pla-petg-absasa"
   printables-max-flow: ""
   printables-pressure-advance: ""
   printables-idex-alignment: ""
