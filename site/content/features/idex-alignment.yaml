@@ -1,0 +1,121 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The interactive IDEX alignment card (pages/idex-alignment-scorecard.yaml):
+# the rules printed on page 1, the diagnosis text of each fitted term, and
+# the station read positions of every bed preset.
+#
+# Aligned with the test definition v1.0.0: suite/definitions/idex_alignment.toml
+# ([analysis], [[diagnosis]], [beds]) and suite/tests/idex_alignment.py
+# (build_layout, fit_plane, analyze), mirrored in docs/dev/idex-alignment-features.md.
+# The card's JavaScript (sitegen/render.py, IDEX_FIT) is a port of `analyze()`:
+# per axis, least squares reading = c0 + cx*x + cy*y over the stations, x and y
+# in mm from the bed centre. Thresholds: ok below 0.05 mm or within 2 standard
+# errors (floor 0.025 mm per reading), watch 0.05-0.10, fix above 0.10, judged
+# by the effect at the outer stations; residual above 0.10 mm = re-read.
+#
+# `scoring: idex` switches the scorecard to this mode. The `features` are the
+# fitted terms (ids = the analyzer's term names, also the PO contexts: keep them).
+status: "IDEX alignment v1.0.0"
+scoring: idex
+
+title: "IDEX alignment card"
+intro: "One row per station, X and Y readings in mm."
+rule_title: "How the card works"
+rules:
+  - "Choose the **bed preset** of the file you printed and the **test** (Vernier or Lite). The card knows where every station sits on each published bed preset."
+  - "Read every station **on the bed, before removing the print**. Stations are numbered like a phone keypad **seen from the front**: 1 back-left, 5 centre, 9 front-right."
+  - "**Vernier:** write the **fine** reading in mm with its sign: a labelled tick is that many tenths (\"2\" = 0.20), the unlabelled tick just beyond a label adds 0.05, and a reading on the **\"+\" side** is positive. Fill the **coarse** box only when the coarse scale reads 6, 8 or 10, or when the fine scale has no clear alignment: the card then picks the right repeat of the fine scale."
+  - "**Lite:** type **+** when T1 moved towards + (X: gap on the left, overlap on the right; Y: gap at the front, overlap at the back), **−** for the opposite, **0** when both contact lines look the same. Lite gives a sign pattern only, no numbers."
+  - "The card fits a plane through the readings of each axis, **reading = c0 + cx·x + cy·y**, with x and y in mm from the bed centre. c0 is the tool offset at the bed centre; the slopes show the mechanics."
+  - "Each slope is judged by its **effect at the outer stations**: **ok** below 0.05 mm (one fine step) or within the reading noise, **watch** from 0.05 to 0.10 mm, **fix** above 0.10 mm. The offset is either ok (below 0.05 mm) or worth applying."
+  - "A station more than **0.10 mm off the plane** is flagged: re-read it with a loupe before trusting the result."
+  - "**Fix the mechanics first** (any slope marked fix), print again, then set the offset. Every correction is **new = old + reading**. On RatOS, do the [sign check](page:idex-alignment#sign-check) once before trusting it."
+
+# The fitted terms, in the analyzer's order (idex_alignment.toml [[diagnosis]]).
+features:
+  - id: x0
+    name: "X offset"
+    pattern: "Same X reading at every station"
+    cause: "Plain X tool offset"
+    action: "Apply the X correction below (new = old + reading)."
+  - id: y0
+    name: "Y offset"
+    pattern: "Same Y reading at every station"
+    cause: "Plain Y tool offset"
+    action: "Apply the Y correction below (new = old + reading)."
+  - id: dx_dx
+    name: "X scale (X reading changes from left to right)"
+    pattern: "X reading changes from left to right"
+    cause: "The two carriages travel different distances in X: belt tension or pitch, a pulley, or the X `rotation_distance` of one carriage."
+    action: "Check both X belts (same tension, same belt), the pulley set screws and the motor mounts. If T0 measures right on a dimensional test, set T1's rotation_distance to old × (1 + slope)."
+  - id: dy_dx
+    name: "Rails or gantry (Y reading changes from left to right)"
+    pattern: "Y reading changes from left to right"
+    cause: "T1's X travel is not parallel to T0's: carriage rails not parallel, or gantry twist or flex that depends on where the parked carriage sits."
+    action: "Check that the X rail(s) are straight and bolted down, and that the gantry is not twisted. A pure rotation can also be a loose toolhead mount."
+    vc4: "**RatRig V-Core 4/4.1 IDEX** (field experience, the author's own printer): a Y gap that grows across the bed was fixed by making the two toolhead belts the **same length**. Count the teeth, or compare the belt ends at the clamps: 1–2 teeth of difference are enough. Re-tension both equally, then print the Vernier again to confirm."
+  - id: dx_dy
+    name: "Racking (X reading changes from front to back)"
+    pattern: "X reading changes from front to back"
+    cause: "Yaw or racking of the gantry as it moves in Y, seen differently by the two carriages."
+    action: "Square the gantry on both Y sides, compare the left and right Y belt tension, and check the gantry joints."
+  - id: dy_dy
+    name: "Y scale (Y reading changes from front to back)"
+    pattern: "Y reading changes from front to back"
+    cause: "Rare with a shared Y gantry: usually a misreading, a loose nozzle or hotend, or the bed moving between the two tools."
+    action: "Re-read the stations; check that both hotends and the bed are rigid."
+    vc4: "**RatRig V-Core 4/4.1 IDEX:** the same belt-length check as for a Y reading that changes from left to right can apply here (field experience, the author's own printer)."
+  - id: residual
+    name: "One station off the plane"
+    pattern: "One station disagrees with the plane through the others"
+    cause: "A misreading, a bad first layer at that spot (bed mesh), or local backlash."
+    action: "Re-read that station with a loupe; if it persists, check the bed mesh and the carriage there."
+
+# Station read positions per bed preset, in mm from the bed centre (+X right,
+# +Y back), 0.4 mm nozzle, default 10 mm margin. GENERATED from core
+# suite/tests/idex_alignment.py build_layout() v1.0.0: for each station
+# [x, y of the X reading, x, y of the Y reading]; `span` = the largest |x|
+# and |y| of all read points (the analyzer's "outer stations").
+# Regenerate if the layout changes; do not edit by hand.
+beds:
+  - id: "180"
+    name: "180 × 180 (MINI-size beds)"
+    vernier: {span: [70.95, 72.225], st: {1: [-64.875, 72.225, -27.9874, 62.85], 3: [19.3624, 72.225, 56.25, 62.85], 5: [-22.7563, 8.4, 14.1313, -0.975], 7: [-64.875, -55.425, -27.9874, -64.8], 9: [19.3624, -55.425, 56.25, -64.8]}}
+    lite: {span: [78.2, 78.2], st: {1: [-78.2, 70, -62.4, 78.2], 3: [54.2, 70, 70, 78.2], 5: [-12, 0, 3.8, 8.2], 7: [-78.2, -70, -62.4, -61.8], 9: [54.2, -70, 70, -61.8]}}
+  - id: "250"
+    name: "250 × 250"
+    vernier: {span: [105.95, 107.225], st: {1: [-99.875, 107.225, -62.9874, 97.85], 3: [54.3624, 107.225, 91.25, 97.85], 5: [-22.7563, 8.4, 14.1313, -0.975], 7: [-99.875, -90.425, -62.9874, -99.8], 9: [54.3624, -90.425, 91.25, -99.8]}}
+    lite: {span: [113.2, 113.2], st: {1: [-113.2, 105, -97.4, 113.2], 3: [89.2, 105, 105, 113.2], 5: [-12, 0, 3.8, 8.2], 7: [-113.2, -105, -97.4, -96.8], 9: [89.2, -105, 105, -96.8]}}
+  - id: "300"
+    name: "300 × 300: RatRig VC4 300 IDEX, Sovol SV04, Tenlog TL-D3"
+    vernier: {span: [130.95, 132.225], st: {1: [-124.875, 132.225, -87.9874, 122.85], 2: [-22.7563, 132.225, 14.1313, 122.85], 3: [79.3624, 132.225, 116.25, 122.85], 4: [-124.875, 8.4, -87.9874, -0.975], 5: [-22.7563, 8.4, 14.1313, -0.975], 6: [79.3624, 8.4, 116.25, -0.975], 7: [-124.875, -115.425, -87.9874, -124.8], 8: [-22.7563, -115.425, 14.1313, -124.8], 9: [79.3624, -115.425, 116.25, -124.8]}}
+    lite: {span: [138.2, 138.2], st: {1: [-138.2, 130, -122.4, 138.2], 2: [-12, 130, 3.8, 138.2], 3: [114.2, 130, 130, 138.2], 4: [-138.2, 0, -122.4, 8.2], 5: [-12, 0, 3.8, 8.2], 6: [114.2, 0, 130, 8.2], 7: [-138.2, -130, -122.4, -121.8], 8: [-12, -130, 3.8, -121.8], 9: [114.2, -130, 130, -121.8]}}
+  - id: "350"
+    name: "350 × 350"
+    vernier: {span: [155.95, 157.225], st: {1: [-149.875, 157.225, -112.9874, 147.85], 2: [-22.7563, 157.225, 14.1313, 147.85], 3: [104.3624, 157.225, 141.25, 147.85], 4: [-149.875, 8.4, -112.9874, -0.975], 5: [-22.7563, 8.4, 14.1313, -0.975], 6: [104.3624, 8.4, 141.25, -0.975], 7: [-149.875, -140.425, -112.9874, -149.8], 8: [-22.7563, -140.425, 14.1313, -149.8], 9: [104.3624, -140.425, 141.25, -149.8]}}
+    lite: {span: [163.2, 163.2], st: {1: [-163.2, 155, -147.4, 163.2], 2: [-12, 155, 3.8, 163.2], 3: [139.2, 155, 155, 163.2], 4: [-163.2, 0, -147.4, 8.2], 5: [-12, 0, 3.8, 8.2], 6: [139.2, 0, 155, 8.2], 7: [-163.2, -155, -147.4, -146.8], 8: [-12, -155, 3.8, -146.8], 9: [139.2, -155, 155, -146.8]}}
+  - id: "400"
+    name: "400 × 400: RatRig VC4 400 IDEX"
+    vernier: {span: [180.95, 182.225], st: {1: [-174.875, 182.225, -137.9874, 172.85], 2: [-22.7563, 182.225, 14.1313, 172.85], 3: [129.3624, 182.225, 166.25, 172.85], 4: [-174.875, 8.4, -137.9874, -0.975], 5: [-22.7563, 8.4, 14.1313, -0.975], 6: [129.3624, 8.4, 166.25, -0.975], 7: [-174.875, -165.425, -137.9874, -174.8], 8: [-22.7563, -165.425, 14.1313, -174.8], 9: [129.3624, -165.425, 166.25, -174.8]}}
+    lite: {span: [188.2, 188.2], st: {1: [-188.2, 180, -172.4, 188.2], 2: [-12, 180, 3.8, 188.2], 3: [164.2, 180, 180, 188.2], 4: [-188.2, 0, -172.4, 8.2], 5: [-12, 0, 3.8, 8.2], 6: [164.2, 0, 180, 8.2], 7: [-188.2, -180, -172.4, -171.8], 8: [-12, -180, 3.8, -171.8], 9: [164.2, -180, 180, -171.8]}}
+  - id: "500"
+    name: "500 × 500: RatRig VC4 500 IDEX"
+    vernier: {span: [230.95, 232.225], st: {1: [-224.875, 232.225, -187.9874, 222.85], 2: [-22.7563, 232.225, 14.1313, 222.85], 3: [179.3624, 232.225, 216.25, 222.85], 4: [-224.875, 8.4, -187.9874, -0.975], 5: [-22.7563, 8.4, 14.1313, -0.975], 6: [179.3624, 8.4, 216.25, -0.975], 7: [-224.875, -215.425, -187.9874, -224.8], 8: [-22.7563, -215.425, 14.1313, -224.8], 9: [179.3624, -215.425, 216.25, -224.8]}}
+    lite: {span: [238.2, 238.2], st: {1: [-238.2, 230, -222.4, 238.2], 2: [-12, 230, 3.8, 238.2], 3: [214.2, 230, 230, 238.2], 4: [-238.2, 0, -222.4, 8.2], 5: [-12, 0, 3.8, 8.2], 6: [214.2, 0, 230, 8.2], 7: [-238.2, -230, -222.4, -221.8], 8: [-12, -230, 3.8, -221.8], 9: [214.2, -230, 230, -221.8]}}
+  - id: "xl"
+    name: "Prusa XL 360 × 360"
+    vernier: {span: [160.95, 162.225], st: {1: [-154.875, 162.225, -117.9874, 152.85], 2: [-22.7563, 162.225, 14.1313, 152.85], 3: [109.3624, 162.225, 146.25, 152.85], 4: [-154.875, 8.4, -117.9874, -0.975], 5: [-22.7563, 8.4, 14.1313, -0.975], 6: [109.3624, 8.4, 146.25, -0.975], 7: [-154.875, -145.425, -117.9874, -154.8], 8: [-22.7563, -145.425, 14.1313, -154.8], 9: [109.3624, -145.425, 146.25, -154.8]}}
+    lite: {span: [168.2, 168.2], st: {1: [-168.2, 160, -152.4, 168.2], 2: [-12, 160, 3.8, 168.2], 3: [144.2, 160, 160, 168.2], 4: [-168.2, 0, -152.4, 8.2], 5: [-12, 0, 3.8, 8.2], 6: [144.2, 0, 160, 8.2], 7: [-168.2, -160, -152.4, -151.8], 8: [-12, -160, 3.8, -151.8], 9: [144.2, -160, 160, -151.8]}}
+  - id: "mk4"
+    name: "Prusa MK4/MK4S 250 × 210"
+    vernier: {span: [105.95, 87.225], st: {1: [-99.875, 87.225, -62.9874, 77.85], 3: [54.3624, 87.225, 91.25, 77.85], 5: [-22.7563, 8.4, 14.1313, -0.975], 7: [-99.875, -70.425, -62.9874, -79.8], 9: [54.3624, -70.425, 91.25, -79.8]}}
+    lite: {span: [113.2, 93.2], st: {1: [-113.2, 85, -97.4, 93.2], 3: [89.2, 85, 105, 93.2], 5: [-12, 0, 3.8, 8.2], 7: [-113.2, -85, -97.4, -76.8], 9: [89.2, -85, 105, -76.8]}}
+  - id: "coreone"
+    name: "Prusa Core One 250 × 220"
+    vernier: {span: [105.95, 92.225], st: {1: [-99.875, 92.225, -62.9874, 82.85], 3: [54.3624, 92.225, 91.25, 82.85], 5: [-22.7563, 8.4, 14.1313, -0.975], 7: [-99.875, -75.425, -62.9874, -84.8], 9: [54.3624, -75.425, 91.25, -84.8]}}
+    lite: {span: [113.2, 98.2], st: {1: [-113.2, 90, -97.4, 98.2], 3: [89.2, 90, 105, 98.2], 5: [-12, 0, 3.8, 8.2], 7: [-113.2, -90, -97.4, -81.8], 9: [89.2, -90, 105, -81.8]}}
+  - id: "j1"
+    name: "Snapmaker J1 300 × 200"
+    vernier: {span: [130.95, 82.225], st: {1: [-124.875, 82.225, -87.9874, 72.85], 3: [79.3624, 82.225, 116.25, 72.85], 5: [-22.7563, 8.4, 14.1313, -0.975], 7: [-124.875, -65.425, -87.9874, -74.8], 9: [79.3624, -65.425, 116.25, -74.8]}}
+    lite: {span: [138.2, 88.2], st: {1: [-138.2, 80, -122.4, 88.2], 3: [114.2, 80, 130, 88.2], 5: [-12, 0, 3.8, 8.2], 7: [-138.2, -80, -122.4, -71.8], 9: [114.2, -80, 130, -71.8]}}

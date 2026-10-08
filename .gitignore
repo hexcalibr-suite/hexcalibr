@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+site/_build/
+# the owner's photo brief list is generated locally and stays private
+site/PHOTO-SHOTLIST.md

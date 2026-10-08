@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The languages of the site. English is the source and must stay first.
+# A new language: `python3 -m sitegen init <code>`, add it here with
+# enabled: false, and switch it on when the start pages and at least one test
+# guide are fully translated (see CONTRIBUTING-TRANSLATIONS.md).
+# `translators` is shown on the License & credits page.
+languages:
+  en:
+    name: English
+    enabled: true
+  it:
+    name: Italiano
+    enabled: true
+    translators: ["Matteo Beretta"]

@@ -1,0 +1,448 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# Test F7, IDEX / multi-tool alignment (v1.0.0: Lite and Vernier). Facts about
+# the model come from suite/definitions/idex_alignment.toml,
+# suite/tests/idex_alignment.py, suite/README.md and
+# docs/dev/idex-alignment-features.md; anything not final is {{TBD}}.
+# The interactive card (fit, verdicts, corrections) is
+# pages/idex-alignment-scorecard.yaml + features/idex-alignment.yaml.
+# Photo ids: F7 = IDEX alignment (F1 temperature tower, F2 pressure advance).
+#
+# Every step: a few short, action-first points (plus every warning) always
+# shown; the reasons, notes, misreadings and extra photos under `more:`.
+id: idex-alignment
+title: "IDEX / multi-tool alignment"
+nav_title: "IDEX / multi-tool alignment"
+description: "Check the XY offset between two toolheads at every spot of the bed, read it to 0.05 mm, and find out whether a drift comes from the offset or from the mechanics."
+sketch: sketches/idex-alignment.svg   # pencil drawing beside the intro (hexcalibr-core: calib.py sketch)
+numbered: true
+intro: |
+  One layer, two tools, a small station at every corner and edge of the bed. At each station T1 prints next to T0, and you read how far apart they landed, **in X and in Y**. The same gap everywhere is a plain offset; a gap that changes across the bed is mechanical.
+more:
+  points:
+    - "If the gap is the same everywhere, one number fixes it. If it changes across the bed, the cause is mechanical, and the pattern says where to look."
+    - "There are two versions. **Lite** shows gap or overlap at a glance and uses under 0.5 g of filament. **Vernier** reads numbers to **0.05 mm** and uses under 2 g. Both print in minutes."
+    - "The [interactive card](page:idex-alignment-scorecard) turns your readings into the offset, a verdict for each mechanism and the lines to type into your firmware."
+callouts:
+  - kind: warn
+    text: "Open the file with **File › Open project**, never with **Import**. Set **skirt loops to 0**, and keep the tool offsets in **one place only**: in the firmware (RatOS) **or** in the slicer, never both ([step 3](page:idex-alignment#prepare))."
+need:
+  title: "What you need"
+  columns:
+    - title: "To print"
+      items:
+        - "An IDEX or multi-tool printer, in **normal** mode (not copy or mirror)"
+        - "The [file for your bed size](page:idex-alignment#download), Lite or Vernier"
+        - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project), with your multi-extruder printer profile"
+        - "The same filament type in both tools, in **two contrasting colours**: the reference is PETG"
+        - "A clean, levelled bed, with the Z offset between the tools already set"
+    - title: "To read it"
+      items:
+        - "A loupe (10×) or a phone camera with a macro mode"
+        - "A lamp you can move, for raking light"
+        - "The [IDEX alignment card](page:idex-alignment-scorecard), on screen or printed"
+        - "Your current tool offsets (on RatOS: `idex_xoffset` and `idex_yoffset`)"
+
+steps:
+  - part: "Before printing"
+
+  - id: what-for
+    title: "What it is for: Lite or Vernier"
+    points:
+      - "It checks that T1 prints **exactly where T0 does**, everywhere on the bed."
+      - "**Lite:** a quick check, gap or overlap, no numbers. **Vernier:** reads the offset to **0.05 mm**."
+      - "Use **Lite** after maintenance; use **Vernier** to set the offset, or after an automatic calibration."
+    photos:
+      - id: F7_bed-overview_PETG_VC4
+        alt: "The whole Vernier test on the bed of an IDEX printer, nine stations in two colours"
+        caption: "The Vernier on a 400 mm bed: nine stations, numbered like a phone keypad seen from the front."
+        shot: "TOP-DOWN, whole bed, camera straight down (or as high and square as possible), front edge of the bed at the bottom of the frame, all nine stations in frame. Vernier 400 file, PETG, T0 orange and T1 blue (or any strongly contrasting pair, T0 the lighter one). Even, diffuse light: no glare on the PEI sheet. Leave the print on the bed. The hex badges must be readable at full size."
+    more:
+      points:
+        - "It checks that the second toolhead prints **exactly where the first one does**, everywhere on the bed. The difference is the **tool offset**. When it is wrong, a two-colour part shows a step where the colours meet, and a support material in the second tool lands next to the part instead of under it."
+        - beginner: "On an IDEX printer the two toolheads are two separate carriages. The firmware stores how far apart their nozzles are, the **offset**, and shifts T1 by that amount. If the stored offset is wrong, every T1 line lands a little to the side. If the two carriages do not move the same way (belts, rails, a twisted gantry), the error even changes from one spot of the bed to another."
+        - "**Lite** is the author's original **nested-U test** (\"Calibrazione idex\"), made parametric for {suite}. At each station, T0 prints an outer U and T1 an inner U that should just touch it. A gap on one side and an overlap on the other show which way T1 moved. One U reads X, the other reads Y, at **every** station. It answers \"is it the same everywhere?\" quickly, but gives no numbers."
+        - "**Vernier** is new: at each station, an X scale and a Y scale like the vernier of a caliper. You read the offset directly, in **0.05 mm** steps, from −1.0 to +1.0 mm. The card fits the readings of all stations and separates the offset from the mechanics."
+        - "**Use Lite** for a quick check after maintenance, or to see whether the offset is the same over the bed. **Use Vernier** to set the offset, after an automatic calibration, or when Lite shows a difference between stations."
+        - "**RatOS VAOC and other automatic calibrations** (the Prusa XL's pin, nozzle cameras) measure the offset **at one place**, without printing. This test checks the result **in plastic, over the whole bed**: it confirms that the stored offset is right where the parts are, and shows mechanical problems that a single spot cannot see, such as one carriage travelling farther than the other or a racked gantry."
+        - expert: "The reading uses the **centres** of the ticks, not their edges, so line width, squish and flow do not change it. That is the advantage of the Vernier over the Lite and over checkerboard tests. The Lite reads edges: a line that is too wide or too thin shows as a gap or overlap on **both** sides."
+      photos:
+        - id: F7_bed-layout_render
+          alt: "Plan of the nine Vernier stations on a 400 mm bed"
+          caption: "Layout on a 400 mm bed, front at the bottom. T0 in orange, T1 in blue."
+          shot: "RENDER, already done: docs/previews/idex-vernier-bed-400.svg rendered to PNG (headless Chrome, 2×) without its title line and with the station names reduced to their numbers (images carry no words)."
+
+  - id: download
+    title: "Download the right file"
+    intro: "One file per **test** (Lite or Vernier) and per **bed size**."
+    table:
+      head: ["Preset", "Files", "Bed (mm)", "Stations", "Printers"]
+      rows:
+        - ["`180`", "`idex-lite_180.3mf` · `idex-vernier_180.3mf`", "180 × 180", "5", "small beds"]
+        - ["`250`", "`idex-lite_250.3mf` · `idex-vernier_250.3mf`", "250 × 250", "5", "250 mm beds"]
+        - ["`300`", "`idex-lite_300.3mf` · `idex-vernier_300.3mf`", "300 × 300", "9", "RatRig V-Core 4 300 IDEX, Sovol SV04, Tenlog TL-D3"]
+        - ["`350`", "`idex-lite_350.3mf` · `idex-vernier_350.3mf`", "350 × 350", "9", "350 mm beds"]
+        - ["`400`", "`idex-lite_400.3mf` · `idex-vernier_400.3mf`", "400 × 400", "9", "RatRig V-Core 4 400 IDEX"]
+        - ["`500`", "`idex-lite_500.3mf` · `idex-vernier_500.3mf`", "500 × 500", "9", "RatRig V-Core 4 500 IDEX"]
+        - ["`xl`", "`idex-lite_xl.3mf` · `idex-vernier_xl.3mf`", "360 × 360", "9", "Prusa XL (any two tools)"]
+        - ["`mk4`", "`idex-lite_mk4.3mf` · `idex-vernier_mk4.3mf`", "250 × 210", "5", "MK4/MK4S-size beds, multi-tool conversions only"]
+        - ["`coreone`", "`idex-lite_coreone.3mf` · `idex-vernier_coreone.3mf`", "250 × 220", "5", "Core One-size beds with more than one tool"]
+        - ["`j1`", "`idex-lite_j1.3mf` · `idex-vernier_j1.3mf`", "300 × 200", "5", "Snapmaker J1"]
+    points:
+      - "**Pick the preset for your bed size.** If yours is not listed, take the next smaller one: the stations then sit a little further in, which is fine."
+      - "Download the **single .3mf file** from the {suite} page on Printables (below), not a ZIP."
+      - warn: "**Prusa XL:** when the plate is empty, PrusaSlicer **arranges** a project on the XL automatically and may move the whole test up to 10 mm towards the front-left corner. That is fine: the test is one object, so the stations keep their places relative to each other, and the scale and skew results are not affected. Do not move single stations."
+    printables: printables-idex-alignment
+    more:
+      intro: "One file per **test** (Lite or Vernier) and per **bed size**. PrusaSlicer centres the test on your bed: the preset only decides how far out the stations go, about 10 mm from each edge."
+      points:
+        - "Beds of 300 mm and more get **9 stations** (corners, edge midpoints and centre); smaller beds get **5** (corners and centre)."
+        - "Download the **single .3mf file**, not \"Download all\" as a ZIP: PrusaSlicer opens a ZIP's 3MF as plain geometry and the tool assignment is lost."
+        - "Filament and time, PETG at a 0.2 mm first layer: **Lite** 0.17 g (5 stations) to 0.32 g (9 stations), a few minutes. **Vernier** 0.66 g to 1.19 g, about 3.5 to 17 minutes depending on your first-layer speed. A 0.3 mm first layer uses about 50 % more. These are our estimates; PrusaSlicer shows the real figures after slicing."
+        - expert: "**Other beds, nozzles or tool pairs:** one command in the {suite} [repository](link:repository), with Python 3.11 and nothing else. `python3 -I calib.py idex-vernier --bed 330x330` for a custom bed, `--nozzle 0.6` for another nozzle (files end in `_n0.6`), `--ref-tool 1 --tool 3` to compare other tools of a toolchanger (files end in `_T1-T3`). Read such files with `calib.py idex-analyze` and the same options: the card only knows the presets."
+
+  - id: prepare
+    title: "Prepare the printer and the slicer"
+    callouts:
+      - kind: warn
+        title: "Tool offsets in one place only"
+        text: "The XY offset between the tools can live in the **firmware** or in the **slicer**. Use one, and set the other to zero. Corrected in both places, every change counts twice."
+        items:
+          - "**RatOS** keeps the offsets in the firmware (`idex_xoffset`, `idex_yoffset`, set by VAOC or by hand). Then the slicer's **Extruder offset** must be **0, 0** for every extruder (Printer Settings › Extruder 2 › Position)."
+          - "Other firmwares (Marlin `M218`, the Prusa XL's nozzle offsets) also apply their offsets themselves. Use the slicer's **Extruder offset** only if your firmware does not."
+          - "Never \"fix\" a result by changing the slicer while the firmware also applies an offset."
+    points:
+      - "Load T0 and T1 with the **same filament in two contrasting colours**, both hot and primed."
+      - "Set **skirt loops to 0**, turn off the **wipe tower** and **ooze prevention**, and print in **normal** IDEX mode."
+      - warn: "**No skew correction for this test.** A skew profile changes where the printer puts every point, and a wrong one distorts the results: it can look like a mechanical fault, or hide one. On Klipper, `SET_SKEW CLEAR=1` turns it off ([Klipper: skew correction](https://www.klipper3d.org/Skew_Correction.html)). **On RatOS** a console command is not enough: `START_PRINT` and VAOC load the profile named by `variable_skew_profile` in `[gcode_macro RatOS]` again ([RatOS util.cfg](https://github.com/Rat-OS/RatOS-configuration/blob/v2.1.x/macros/util.cfg#L384-L396)). Comment that line out in `printer.cfg` for the test, and restore it afterwards."
+    more:
+      points:
+        - "**Two contrasting colours**, same filament type: load T0 and T1 with, for example, orange and blue, or black and white. The reading depends on telling T0 from T1 at a glance. The reference photos are **PETG**; PLA works just as well."
+        - "**Both tools loaded, hot and primed.** Use the temperatures you normally print with."
+        - "**Skirt loops = 0** (Print Settings › Skirt and brim › **Loops**). The skirt would go around the whole layout: about 1.5 m of filament per loop on a 400 mm bed, sometimes one loop per tool."
+        - "**No wipe tower, no ooze prevention** (Print Settings › Multiple Extruders). The test needs neither: there is only one tool change. **No brim** is already forced on the object."
+        - "**IDEX mode: normal** (single toolhead, automatic tool change), not **copy** or **mirror**. RatOS does not apply `idex_xoffset` in copy or mirror mode."
+        - "**A good first layer:** bed mesh applied, and the **Z offset between the tools** already set (most multi-tool printers measure it automatically, for example RatOS with its Z probe and VAOC, the Prusa XL tool offset calibration, the Bambu Lab H2D nozzle offset calibration, the Snapmaker J1 Z offset calibration; otherwise set it by hand as your printer's manual describes). A T1 line that is squished or starved changes the line width: the Vernier does not care, but the Lite does."
+        - "**Elephant foot compensation is forced to 0 on the object**, whatever your profile says. The whole test is one first layer: the compensation would shrink every line by its value (often 0.1–0.2 mm), eat the one-line ticks and shift every contact edge of the Lite. Do not set it back in the object's settings."
+        - beginner: "The other settings forced on the object are there for the same reason, a clean single layer: Arachne perimeters (each tick becomes one bead), no supports, no raft, no ironing, no fuzzy skin."
+
+  - part: "Print it"
+
+  - id: open-project
+    title: "Open it as a project"
+    callouts:
+      - kind: warn
+        title: "Before you print: one object, two extruders"
+        text: "After opening, the **object list** on the right must show **one object** whose parts are named after the stations, assigned to **extruder 1** and **extruder 2**."
+        items:
+          - "Every station has two parts, for example `S1 back-left: T0 main scales` (extruder 1) and `S1 back-left: T1 vernier scales` (extruder 2). Lite: `T0 outer U` and `T1 inner U`."
+          - "**Everything on extruder 1, or a pile of separate objects: do not print.** Open the file again with **File › Open project**, not Import."
+          - "Do not move, scale, rotate or arrange single parts. The card knows where each station sits **relative to the bed centre**."
+    points:
+      - "In PrusaSlicer, **File › Open project** (Ctrl+O, or ⌘O on macOS) and choose the .3mf."
+      - "Choose your **IDEX (multi-extruder) printer profile** and a filament for each extruder."
+      - warn: "Opening the project replaces anything already on the plate. Print the test **on its own**."
+    photos:
+      - id: F7_ui-object-list_PS29
+        alt: "PrusaSlicer object list of the IDEX Vernier test, with station parts on extruders 1 and 2"
+        caption: "One object; each station has a T0 part on extruder 1 and a T1 part on extruder 2."
+        shot: "SCREENSHOT. PrusaSlicer 2.9.x, idex-vernier_400.3mf opened as project on a generic IDEX two-extruder profile, Expert mode, light theme, English UI. The object list on the right expanded: the object 'idex-vernier 400' and its parts 'S1 back-left: T0 main scales' / 'S1 back-left: T1 vernier scales' and so on, with the Extruder column showing 1 and 2. Plater 3D view to the left with the two filament colours. Highlight the Extruder column with an amber (#EFA00B) rounded rectangle. Generic preset names only."
+    more:
+      points:
+        - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import geometry only** drops the extruder assignment."
+        - "The project carries **no printer, filament or print profile**: PrusaSlicer keeps yours. Choose your **IDEX (multi-extruder) printer profile** and a filament for each extruder."
+        - "PrusaSlicer **centres** the test on your bed. The stations end up about 10 mm from the edges for the matching preset."
+
+  - id: check
+    title: "Check the slice"
+    callouts:
+      - kind: warn
+        title: "One layer, one tool change"
+        text: "Slice and look at the **Preview** before printing."
+        items:
+          - "The vertical slider shows **exactly one layer**. Any first-layer height from 0.1 to 0.39 mm gives one layer."
+          - "In the legend, switch the view to **Tool**: the T0 parts in one colour, the T1 parts in the other, at every station."
+          - "The G-code has **one tool change**: all of T0 first, then all of T1. Export it and search for your tool-change command (for example `T1`): one hit in the print, besides any in the start G-code."
+          - "**No skirt** around the layout. If there is one, set the loops to 0 ([step 3](page:idex-alignment#prepare))."
+    points:
+      - "Click **Slice now** and switch to **Preview**."
+      - "Zoom on a Vernier station: each tick must show as **one single bead**, with no tick missing. Lite: the outer and inner U are separate lines that touch."
+      - "Check the object's settings (the gear icon next to the object in the list): **elephant foot compensation 0**."
+    more:
+      points:
+        - "Pick **your** printer, print and filament profiles in the right-hand panel, as for any print."
+        - expert: "PrusaSlicer orders the tools of a layer to start with the last one used, so a single-layer print with two extruders gets one tool change. With `toolchange_ordering = optimized` the order is T0 then T1."
+
+  - id: print
+    title: "Print it"
+    points:
+      - "Send it and start: a **single layer**, **under 0.5 g** for the Lite and **under 2 g** for the Vernier, done in **minutes**."
+      - "Watch T1's first station: if its line is thin or missing, prime T1 and print again."
+      - "**Leave the print on the bed** and read it there."
+    more:
+      points:
+        - "Watch the first station of T1: if it starts with a thin or missing line, T1 was not primed. Prime it in your tool-change macro and print again."
+        - "**Leave the print on the bed.** Read it there, before removing it. Peeling a single layer stretches it, and PETG on textured PEI hardly comes off flat."
+        - beginner: "Write the date and the current tool offsets on a piece of paper next to the printer. You will compare the next test with this one."
+
+  - part: "Read it"
+
+  - id: stations
+    title: "Find the stations"
+    points:
+      - "Stations are numbered like a **phone keypad seen from the front**: 1 back-left, 5 centre, 9 front-right."
+      - "**Read on the bed**, standing at the front, so left, right, front and back are the printer's. If you must turn your head, the badge tells you which way is up."
+      - "Use a **10× loupe** or a phone's macro mode, with **raking light** from one side."
+    more:
+      points:
+        - "Stations are numbered like a **phone keypad seen from the front of the printer**: **1** back-left, **2** back, **3** back-right, **4** left, **5** centre, **6** right, **7** front-left, **8** front, **9** front-right. Beds under 300 mm have only 1, 3, 5, 7 and 9."
+        - "Each station has a **hexagonal badge** with its number, printed by T0. The number reads upright when you stand at the front."
+        - beginner: "A **10× loupe** or the **macro mode** of a phone makes the 0.05 mm steps easy. Use **raking light**: a lamp low and to the side, skimming across the lines, so each line casts a small shadow. Light from above makes them disappear into the plate."
+        - beginner: "Read one station at a time and write X and Y down at once, with the station number. Nine stations make 18 numbers: easy to mix up."
+
+  - id: read-lite
+    title: "Read the Lite: gap or overlap"
+    intro: "T0 prints the outer U, T1 the inner U. The **vertical U** reads **X**; the **horizontal U** reads **Y**."
+    table:
+      head: ["What you see", "Meaning", "On the card"]
+      rows:
+        - ["Both contact lines look the same, no gap and no ridge", "Aligned here (within about 0.1 mm)", "0"]
+        - ["Vertical U: **gap on the left**, overlap or ridge on the right", "T1 sits to the **right** (+X) of T0", "X: +"]
+        - ["Vertical U: gap on the right, overlap on the left", "T1 sits to the **left** (−X)", "X: −"]
+        - ["Horizontal U: **gap at the front**, overlap at the back", "T1 sits towards the **back** (+Y)", "Y: +"]
+        - ["Horizontal U: gap at the back, overlap at the front", "T1 sits towards the **front** (−Y)", "Y: −"]
+        - ["Gap on **both** sides, or overlap on both", "Not an offset: T1's line is thinner (or wider) than modelled", "0, and see the note below"]
+    points:
+      - "Rule of thumb: **T1 moved away from the gap, towards the overlap.**"
+      - "Compare the stations. **The same answer everywhere** is a plain offset. **An answer that changes from station to station** is mechanics: print the Vernier and use the card."
+    photos:
+      - id: F7_lite-station_render
+        alt: "Plan of one Lite station: two nested U shapes and the hexagonal badge"
+        caption: "One Lite station: the vertical U reads X, the horizontal U reads Y. T0 in orange, T1 in blue."
+        shot: "RENDER, already done: copy of docs/previews/idex-lite-station.png."
+    more:
+      intro: "Each Lite station has two nested U shapes. T0 prints the outer U, T1 the inner U, and T1's outer edges are modelled to **touch** T0's inner edges exactly. The **vertical U** (rails front to back) reads **X**; the **horizontal U** (rails left to right) reads **Y**."
+      points:
+        - misread: "**A gap on both sides** is a width problem, not an offset: T1 under-extrudes, its first layer is too high, or the Z offset between the tools is off. An overlap on both sides is the opposite. Fix the first layer of T1 before trusting the Lite."
+        - expert: "On the card, Lite readings count as ±0.1 mm. The fit then shows which mechanism changes the sign across the bed, but no offset to apply."
+      photos:
+        - id: F7_lite-gap_PETG_VC4
+          alt: "Close-up of a Lite station with a gap on the left side of the vertical U"
+          caption: "Gap on the left, overlap on the right: T1 sits to the right of T0 here."
+          shot: "MACRO, top-down, one Lite station on the bed, front at the bottom, the vertical U filling most of the frame. Made on purpose with a temporary +0.2 mm X error on T1 (for example `SET_GCODE_OFFSET X_ADJUST=0.2` while T1 prints, or a temporary idex_xoffset change). Raking light from the left, low, so the gap on the left shows as a dark line and the overlap on the right as a ridge. PETG, T0 orange, T1 blue."
+        - id: F7_lite-aligned_PETG_VC4
+          alt: "Close-up of an aligned Lite station: both contact lines look the same"
+          caption: "Aligned: both contact lines look the same, no gap and no ridge."
+          shot: "MACRO, same framing, light and colours as F7_lite-gap, at a station that reads aligned after the offset is set."
+
+  - id: read-vernier
+    title: "Read the Vernier: the fine scale"
+    intro: "Each station has an **X block** on the left and a **Y block** on the right, each with a **fine** and a **coarse** scale."
+    points:
+      - "**Find the T1 tick that lines up best** with the T0 tick next to it."
+      - "**Read the label next to it**, in tenths of a millimetre (\"1\" = 0.10 mm); the unlabelled tick just beyond a label adds 0.05."
+      - "**Sign:** positive on the **\"+\"** side, **right** in the X block and **back** in the Y block."
+    photos:
+      - id: F7_vernier-station_render
+        alt: "Plan of one Vernier station: X block, hexagonal badge, Y block"
+        caption: "One Vernier station. X block on the left, Y block on the right; in each, the fine scale (labels to 5) and the coarse scale (labels to 10). The \"+\" marks the positive end."
+        shot: "RENDER, already done: copy of docs/previews/idex-vernier-station.png."
+    more:
+      intro: "Each Vernier station has an **X block** on the left (ticks standing front to back, spread left to right) and a **Y block** on the right (ticks lying left to right, spread front to back), with the badge in between. Each block has a **fine** scale (labels up to 5) and a **coarse** scale (labels up to 10)."
+      points:
+        - "T0 prints the **main scale** and its labels; T1 prints the **vernier scale** right next to it, with slightly closer ticks. In the X block the labels are below T0's comb; in the Y block, to its right."
+        - "**Find the T1 tick that lines up best with the T0 tick next to it**, as if they were one straight line. Around it, the neighbouring ticks are off by the same amount in opposite directions, like an arrowhead pointing at the right tick."
+        - "**Read the number next to that T0 tick.** The labels are in **tenths of a millimetre**: \"1\" = 0.10 mm, \"3\" = 0.30 mm. Only every second tick has a label: the **unlabelled tick just beyond a label adds 0.05**. One tick past the \"2\", away from 0, reads 0.25."
+        - "**The sign:** a **\"+\"** marks the positive end of each scale, **right** in the X block and **back** in the Y block. A reading on the \"+\" side is positive, on the other side negative. Aligned on \"0\": reading 0.00."
+        - "Example: in the X block the best tick is the first unlabelled one past \"1\", on the \"+\" side: **X = +0.15**. T1 prints 0.15 mm to the right of T0 there."
+        - "Write X and Y for every station, for example `5: X +0.15, Y −0.05`, and type them into the [card](page:idex-alignment-scorecard)."
+        - expert: "If two neighbouring ticks look equally good, the value is halfway between them (0.025 steps). That is optional and not yet verified at a 0.4 mm nozzle: the scale is rated at 0.05 mm."
+        - expert: "Why it works: T0's fine ticks are 1.10 mm apart, T1's 1.05 mm. If T1 prints d mm to the right, its tick k sits at k × 1.05 + d and meets T0's tick k (at k × 1.10) when k = d ÷ 0.05. The label is the offset."
+      photos:
+        - id: F7_vernier-reading-015_render
+          alt: "Close-up drawing of the fine X scale with T1 printed 0.15 mm to the right"
+          caption: "T1 printed +0.15 mm: the blue tick one past the \"1\", on the right, continues the orange tick below it. Its neighbours are off on both sides by the same amount."
+          shot: "RENDER, already done: copy of docs/previews/idex-vernier-reading-example.png (T1 shifted +0.15 mm)."
+        - id: F7_vernier-zero_PETG_VC4
+          alt: "Macro photo of a fine Vernier scale aligned on 0"
+          caption: "Reading 0.00: the ticks at \"0\" form one straight line."
+          shot: "MACRO (loupe or phone macro), top-down, the fine X scale of the centre station filling the frame, front at the bottom, labels readable. Raking light from the side, along the ticks. A station that reads 0.00 after the offset is set. PETG, T0 orange, T1 blue. Optional: a thin amber (#EFA00B) arrow at the aligned tick added in editing."
+        - id: F7_vernier-plus015_PETG_VC4
+          alt: "Macro photo of a fine Vernier scale reading +0.15"
+          caption: "Reading +0.15: the aligned tick is one past the \"1\", on the \"+\" side."
+          shot: "MACRO, same framing and light as F7_vernier-zero, at a station that reads +0.15 (made on purpose with a temporary −0.15 change of idex_xoffset if needed). Mark the aligned tick and its two symmetric neighbours with thin amber (#EFA00B) arrows added in editing; no text in the image."
+
+  - id: read-coarse
+    title: "When to use the coarse scale"
+    points:
+      - "**Look at the coarse scale first.** Find the T1 tick that continues a T0 tick. If it is **0, 2 or 4** (up to 0.4 mm), read the fine scale and leave the coarse box empty."
+      - "If it is **6, 8 or 10**, the offset is large. Either apply the coarse value, print again and read the fine scale, or type **both** readings into the card: it works out the true value."
+    photos:
+      - id: F7_vernier-coarse_PETG_VC4
+        alt: "Macro photo of a coarse Vernier scale reading a large offset"
+        caption: "A large offset: the coarse scale reads +0.6 while the fine scale wraps around. Trust the coarse scale for the window."
+        shot: "MACRO, a whole X block (fine and coarse scales) of one station, top-down, front at the bottom. Made with a deliberate +0.6 mm X error on T1 (temporary idex_xoffset change), so the coarse scale aligns at '6' on the + side while the fine scale appears to align near the − end. Raking light, PETG, T0 orange, T1 blue."
+    more:
+      points:
+        - "The fine scale covers ±0.50 mm, and it **repeats**: past 0.5 mm it seems to line up again near the other end. The coarse scale (0.2 mm steps, ±1.0 mm) tells you which window you are in."
+        - "Also use it when the fine scale **lines up nowhere**, or only at its last tick (\"5\"): you are out of its range."
+        - expert: "Offsets above 1 mm are out of range of both scales. Correct roughly first (VAOC, or a single-spot test), then use this one."
+
+  - id: read-mistakes
+    title: "Common misreadings"
+    points:
+      - "Find the **\"+\"** first, and judge a tick by the **symmetry of its neighbours**, not on its own."
+      - "Print with **skew correction off**, and with a first layer that is not over-squished."
+    more:
+      points:
+        - misread: "**A tick merged by squish:** when the first layer is too low, neighbouring ticks spread and touch, and a blob looks like an alignment. Judge by the **symmetry of the neighbours**, not by one tick. If whole rows of ticks merge, raise T1's first layer (or the Z offset between the tools) and print again."
+        - misread: "**Elephant foot:** a wide, squashed first layer makes every tick fatter and closes the gaps between them. The Vernier still reads the centres, but the alignment becomes hard to see. On the Lite, it closes the gaps on both sides. Check that the object's elephant foot compensation is 0 and the first layer is not over-squished."
+        - misread: "**Reading the wrong side:** the labels carry no sign. Always find the **\"+\"** first: right in the X block, back in the Y block. Standing at the side of the printer, or looking at a photo turned around, flips the sign."
+        - misread: "**Mixing up the blocks:** the X block is the one with ticks standing front to back. The Y block, right of the badge, has ticks lying left to right."
+        - misread: "**Reading the coarse scale as fine:** the coarse labels go to 10 and step by 2 (2 = 0.20 mm); the fine labels go to 5 and step by 1."
+        - misread: "**A skew profile was active:** a wrong `[skew_correction]` profile bends the results across the bed and sends you looking for a mechanical fault that is not there. One user lost most of a tuning session this way; with the skew set to 0 the readings made sense. Print this test with skew correction off ([step 3](page:idex-alignment#prepare)), and measure the skew again only **after** the IDEX mechanics are fixed."
+        - tip: "Not sure? Photograph the scale with the phone, zoom in, and count the ticks from \"0\" to the aligned one: each tick is 0.05 mm on the fine scale, 0.2 mm on the coarse."
+
+  - part: "Apply the result"
+
+  - id: scorecard
+    title: "Enter the readings in the card"
+    points:
+      - "Open the [IDEX alignment card](page:idex-alignment-scorecard). Choose the **bed preset** of the file you printed and the test (Vernier or Lite), then type X and Y for each station. Fill the coarse boxes only when you read the coarse scale."
+      - "**Fix the mechanics before the offset.** With a slope marked **fix**, no single offset is right everywhere. Correct the cause ([next step](page:idex-alignment#diagnosis)), print again, then set the offset."
+    more:
+      points:
+        - "The card fits a plane through the readings of each axis, **reading = c0 + cx·x + cy·y**, with x and y measured from the bed centre."
+        - "It reports the **offset at the bed centre** (c0 for X and Y), and a verdict for each slope, judged by its effect at the outer stations: **ok** below 0.05 mm, **watch** from 0.05 to 0.10 mm, **fix** above 0.10 mm. It also shows rotation and shear, and flags any station more than 0.10 mm off the plane."
+        - "With your current offsets typed in, it prints the exact RatOS `SAVE_VARIABLE` lines, plus the PrusaSlicer, Prusa XL and Marlin equivalents."
+        - beginner: "You can also print the card and write the numbers by hand: the rules are on page 1, the grid on page 2."
+
+  - id: diagnosis
+    title: "What the pattern means"
+    intro: "Each pattern points to one cause. \"X reading\" is the number from the X blocks, \"Y reading\" from the Y blocks."
+    table:
+      head: ["Pattern on the bed", "Likely cause", "What to do and check"]
+      rows:
+        - ["**Same reading everywhere** (offset only)", "A plain tool offset", "Set the offset ([next step](page:idex-alignment#apply)). Nothing mechanical to check."]
+        - ["**X reading grows from left to right**", "Carriage X scale: the two carriages travel different distances in X", "Check both X belts (same tension, same belt), the pulley set screws and the motor mounts. If T0 measures right on a dimensional test, set T1's `rotation_distance` to old × (1 + slope)."]
+        - ["**Y reading changes from left to right**", "Rails not parallel, or gantry twist: T1's X travel is not parallel to T0's", "Check that the X rail(s) are straight and bolted down along their whole length, and that the gantry is not twisted. A pure rotation can also be a loose toolhead mount. **RatRig V-Core 4/4.1 IDEX:** see the belt-length note below."]
+        - ["**X reading changes from front to back**", "Racking or yaw of the gantry, seen differently by the two carriages", "Square the gantry on both Y sides, compare the left and right Y belt tension, check the gantry joints."]
+        - ["**Y reading changes from front to back**", "Rare: a Y scale difference, usually a misreading, a loose hotend or a moving bed", "Re-read; check that both nozzles and hotends are tight and the bed does not move. **RatRig V-Core 4/4.1 IDEX:** the belt-length note below may apply too."]
+        - ["**One station off** (more than 0.1 mm from the others' plane)", "A misreading, a bad first layer there (bed mesh), or local backlash", "Re-read that station with a loupe; if it persists, check the bed mesh and the carriage at that spot."]
+    more:
+      points:
+        - beginner: "\"Y reading changes from left to right\" means the **T1 lines drift further from T0 the further you go** across the bed: for example Y −0.10 at the left stations, 0.00 in the middle, +0.10 at the right. A fixed offset cannot fix that."
+        - tip: "**RatRig V-Core 4/4.1 IDEX, belt length (field experience, the author's own printer):** a Y gap between T0 and T1 that grew across the bed was fixed by shortening **one toolhead's belt by 1–2 teeth**, so that the two toolhead belts were the **same length**. Count the teeth, or compare the belt ends at the clamps of the two toolheads: a difference of 1–2 teeth is enough to cause it. Then **re-tension both equally** and print the Vernier again to confirm. RatRig's build guide asks for **identical lengths for the two Y belts** ([V-Core 4.1 build guide, step 42](https://wiki.ratrig.com/products/v-core-4-1/build-guide/x-axis-and-belt-installation); [V-Core 4.0 IDEX Y belts](https://wiki.ratrig.com/build-guides/v-core-40-hybrid-and-idex-y-axis-belts)); we found no official note on the toolhead belts. Treat it as a tip to check, not a rule."
+        - "**Rotation and shear** (expert): the card also combines the two cross slopes. A **rotation** means T1's frame is turned against T0's (the toolhead or a carriage is mounted at a slight angle); a **shear** means the axes are not square to each other in the same way for both tools."
+        - expert: "The slope is in mm per mm: an X slope of +0.0005 means T1 travels 0.05 % farther than T0, about +0.1 mm at 200 mm from the centre."
+
+  - id: belt-iterations
+    title: "Equalise the belts step by step"
+    intro: "Belts suspected? Change one thing at a time and measure after each run."
+    points:
+      - "**Move one belt anchor by one tooth**, then re-tension both belts the same way."
+      - "**Redo the offset calibration** (VAOC on RatOS), then **print the test again**."
+      - "**Compare** with the previous run in the [card](page:idex-alignment-scorecard): smaller is better; if it grew, go back one tooth."
+    more:
+      intro: "When the Y reading changes across the bed (`dy_dx`, sometimes `dy_dy`) and the belts are the suspect, go one small change at a time and measure after each. Another RatRig V-Core 4 IDEX user reached about 0.05 mm this way, by moving only the belt anchoring at the toolheads, a little in or out each time."
+      points:
+        - "**Move one anchor by one tooth.** Shift the belt end in one toolhead clamp by one tooth, in or out. Change one thing per run."
+        - "**Re-tension** both belts the same way as before (same frequency or the same method you always use)."
+        - "**Redo the offset calibration:** VAOC on RatOS, or your printer's Z and XY offset routine. A belt change moves the nozzle, so the old offsets no longer hold."
+        - "**Print the test again.** The **Lite** is enough to see whether you are going the right way; print the **Vernier** for the numbers once it looks close."
+        - "**Compare with the previous run:** type the readings into the [card](page:idex-alignment-scorecard), and compare the **Y left to right** and **Y front to back** effects with the run before. Smaller is better; if it grew, go back one tooth and try the other side."
+        - "**Keep a log** like the table above, on paper or in the card (**Remember this run** keeps the previous result in your browser and shows it next to the new one; **Copy results** puts the text on the clipboard)."
+        - beginner: "Write down which clamp you moved and in which direction. After three or four runs nobody remembers."
+      table:
+        head: ["Run", "Change made", "Y left to right (`dy_dx`)", "Y front to back (`dy_dy`)", "Offset X / Y", "Notes"]
+        rows:
+          - ["0", "none (starting point)", "", "", "", ""]
+          - ["1", "", "", "", "", ""]
+          - ["2", "", "", "", "", ""]
+          - ["3", "", "", "", "", ""]
+
+  - id: apply
+    title: "Set the offset"
+    intro: "On every system: **new value = old value + reading**, X and Y separately, using the offset at the bed centre from the card."
+    points:
+      - "**RatOS:** type the two `SAVE_VARIABLE` lines the card writes (`idex_xoffset`, `idex_yoffset`) in the console."
+      - "**PrusaSlicer, Prusa XL, Marlin:** add the readings to the stored offset; the card writes the values."
+      - warn: "**RatOS with `default_toolhead = 1`:** the roles of the two tools swap, and the rule becomes **new = old − reading**. This is derived from the RatOS macros and **not tested on a printer**: do the sign check below."
+      - "Print the Vernier again: the readings should now be within ±0.05 mm at every station."
+    more:
+      intro: "**Reading** = where T1 prints minus where T0 prints, for the same commanded position. +X is to the right, +Y towards the back, seen from the front. On every system below: **new value = old value + reading**, X and Y separately, using the offset at the bed centre from the card."
+      points:
+        - "**RatOS** (Klipper IDEX, `default_toolhead = 0`): `idex_xoffset` += X and `idex_yoffset` += Y. Type in the console `SAVE_VARIABLE VARIABLE=idex_xoffset VALUE=<new>` and `SAVE_VARIABLE VARIABLE=idex_yoffset VALUE=<new>`. The card writes both lines when you give it the current values, which are in `ratos-variables.cfg`. Restart Klipper (`FIRMWARE_RESTART`) afterwards so that every macro reads the new values."
+        - "Example: `idex_xoffset` is 0.30 and the card says X +0.15: the new value is 0.45. `idex_yoffset` is −0.12 and Y reads −0.05: the new value is −0.17."
+        - "**PrusaSlicer** (only if the firmware does not apply offsets): Printer Settings › **Extruder 2** › Position › **Extruder offset**: add the readings to X and Y. RatOS users keep this at 0, 0."
+        - "**Prusa XL:** in the printer's toolhead settings, the **nozzle offset** of the tested tool: add the readings (0.01 mm steps, ±1 mm). Re-running the automatic calibration overwrites manual changes."
+        - "**Marlin** (`M218`): `M218 T1 X<old + X> Y<old + Y>`, then `M500` to store it. On dual X carriage machines `M218 T1 X` is the X2 home position: the same rule applies."
+        - expert: "Why \"+\": on RatOS the non-default toolhead runs with `SET_GCODE_OFFSET X_ADJUST={-idex_xoffset}`, so a larger `idex_xoffset` moves T1 towards −X. PrusaSlicer subtracts `extruder_offset` from the G-code coordinates, Marlin and the XL subtract the hotend offset from the commanded position. All three move T1 the opposite way of the offset, so adding the reading cancels it."
+
+  - id: sign-check
+    title: "Check the sign once (required with RatOS)"
+    callouts:
+      - kind: warn
+        title: "Required the first time you use the test with RatOS"
+        text: "The sign rule comes from the firmware source code. A deliberate change of 0.20 mm proves it on your machine in two short prints. Recommended on any other firmware too."
+    points:
+      - "Read **station 5, X** (call it **a**), add **+0.20** to `idex_xoffset`, and print the Vernier again."
+      - "It must now read **a − 0.20**. If it reads **a + 0.20**, the sign is reversed: use **new = old − reading**, and please tell us."
+      - "Then set `idex_xoffset` to the value the card suggests."
+    more:
+      points:
+        - "Print the Vernier and read **station 5, X**: call it **a** (for example +0.15)."
+        - "Add **+0.20** to `idex_xoffset`: `SAVE_VARIABLE VARIABLE=idex_xoffset VALUE=<current + 0.20>`."
+        - "Print the Vernier again and read station 5, X. It must now read **a − 0.20** (in the example, −0.05): the reading **decreases by 0.20**."
+        - "If it reads **a + 0.20** instead, the sign is reversed on your machine: use **new = old − reading**, and please tell us (with your RatOS version and `default_toolhead`)."
+
+  - id: when-again
+    title: "When to run it again"
+    points:
+      - "After **VAOC** or any automatic offset calibration, to confirm it over the whole bed."
+      - "After changing a **nozzle**, a **hotend** or a **toolhead**, or taking a toolhead off its carriage."
+      - "After work on **belts, pulleys, rails or the gantry**, or after a crash."
+    more:
+      points:
+        - "When two-colour parts show a step where the colours meet, or supports in the second tool land beside the part."
+        - "A quick **Lite** every few months shows whether anything moved; the **Vernier** when it did."
+
+  - id: share
+    title: "Share your result"
+    points:
+      - "Printed the test? **Post your Make** on the [Printables page](link:printables-idex-alignment) with a photo of the **whole bed** and a close-up of your **best and your worst** station, and say which offset you set."
+    more:
+      points:
+        - "Makes help other users judge their own print, and they help the project grow."
+        - "We regularly pick the clearest Makes and ask their authors whether we may use the photo in this official guide, with their name and a link."
+
+  - part: "Troubleshooting"
+
+  - id: troubleshooting
+    title: "The slice or the print looks wrong"
+    points:
+      - "**Everything prints with one tool, or the stations are separate objects:** the file was imported, or came from a ZIP. Open the single .3mf with **File › Open project**."
+      - "**A skirt circles the whole bed:** set Print Settings › Skirt and brim › **Loops** to 0."
+      - "**Two layers instead of one:** the first-layer height is 0.4 mm or more. Use 0.1 to 0.39 mm for this print."
+    more:
+      points:
+        - "**A wipe tower appears:** turn it off in Print Settings › Multiple Extruders. The test does not need it."
+        - "**Stations too close to the edge, or off the bed:** the preset is for a bigger bed. Use the one for your bed size, or a smaller one."
+        - "**Ticks missing or merged in the Preview:** check the object's settings (elephant foot compensation 0, Arachne) and that the object was not scaled."
+        - "**T1's first station is thin or missing:** T1 was not primed after the tool change. Prime it in the tool-change macro and print again."
+
+  - id: troubleshooting-more
+    title: "The readings make no sense"
+    points:
+      - "**The fine scale lines up nowhere, or at its last tick:** the offset is beyond ±0.5 mm. Read [the coarse scale](page:idex-alignment#read-coarse)."
+      - "**The reading changes across the bed:** that is mechanics, not offset. See [what the pattern means](page:idex-alignment#diagnosis)."
+      - "**After applying the correction the error doubled:** the sign is reversed on your setup (or the offset is set in both the firmware and the slicer). Do the [sign check](page:idex-alignment#sign-check) and set the slicer's extruder offset to 0 on RatOS."
+    more:
+      points:
+        - "**The card says coarse and fine disagree:** one of the two is misread. Re-read both, starting from the \"+\" end."
+        - "**Gap or overlap on both sides of the Lite:** a line width problem, not an offset. Check T1's flow and first-layer height."
+        - "**The Y gap grows across the bed on a RatRig V-Core 4/4.1 IDEX:** check that the two toolhead belts are the same length. Count the teeth, or compare the belt ends at the clamps; 1–2 teeth of difference are enough. Re-tension both equally and print the Vernier again (field experience, the author's own printer)."
+        - "**The readings change across the bed in a way no belt or rail explains, or change after a restart:** check that no skew correction was active ([step 3](page:idex-alignment#prepare)). On RatOS look for `variable_skew_profile` in `[gcode_macro RatOS]`: `START_PRINT` loads it even after a `SET_SKEW CLEAR=1` in the console."
+        - "**Nothing changes after `SAVE_VARIABLE`:** the printer is in copy or mirror mode, where RatOS does not apply `idex_xoffset`, or the value is not reloaded yet. Print in normal mode."
+        - "**One station far off the others:** re-read it with a loupe; then check the bed mesh and the first layer at that spot."

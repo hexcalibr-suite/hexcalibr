@@ -1,0 +1,49 @@
+name: Guide site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# one Pages deployment at a time; a newer push waits instead of cancelling a running deploy
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r site/requirements.txt
+      - name: Check and build
+        working-directory: site
+        run: |
+          python3 -m sitegen check
+          python3 -m sitegen build
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: site/_build
+
+  # GitHub Pages on the free plan needs a public repository: deploy only once it is public.
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.event.repository.visibility == 'public' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,175 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# What to look at on each band of the maximum volumetric flow tower, and how
+# to score it. ONE source for two places: the "How to read it" steps of
+# pages/max-flow.yaml (one step per feature) and the printable scorecard
+# (pages/max-flow-scorecard.yaml).
+#
+# Aligned with the test definition v1.2.0 (hex column + wedge, hotend tiers):
+# suite/definitions/max_flow.toml ([[features]], [presets]), mirrored in
+# docs/dev/max-flow-features.md §6. Same ids, same order. If the TOML
+# changes, change this file (ids are also the PO contexts and the page
+# anchors: keep them stable).
+#
+# `scoring: flow` switches the scorecard to the max-flow mode: one wall state
+# per band (pass / degrading / fail / not scored), two flags (heater sag,
+# extruder clicks), the flow of each band from the file menu, and the
+# suggested max volumetric speed (80 / 85 / 90 % of the last good band).
+# The scorecard has no per-feature columns: the features below say how to
+# decide the wall state.
+status: "max-flow v1.2.0 (hex column + wedge)"
+scoring: flow
+
+title: "Maximum volumetric flow scorecard"
+intro: "One row per band: the wall, the heater, the extruder."
+rule_title: "How the limit is chosen"
+rules:
+  - "Read **from the bottom up**, on the **middle of the two long straights, both walls**, in the **upper two thirds** of each band (its first layers are the transition)."
+  - "Mark the wall of each band: **✓** pass (even, complete, same gloss as below), **◐** degrading (matte or satin, the odd thin line, lines still complete), **✕** fail (gaps, missing or stringy lines, light through the wall), **–** not scored."
+  - "Tick **Heater sag** if the hotend temperature sagged more than about 3 °C during that band, and **Clicks** if the extruder clicked or knocked. Either one counts as a fail, even if the wall still looks fine."
+  - "The **onset** is the lowest band that fails. The **limit** is the band just below it."
+  - "Set the filament's **Max volumetric speed** to **85 %** of the limit (**80 %** if the limit band was already degrading; up to **90 %** for a clean, sharp onset)."
+  - "**Band 1 already fails:** not a flow problem (temperature far too low, clog, wet filament, wrong filament diameter). **Nothing fails:** print the next file up for your nozzle."
+  - "**IDEX:** one card per tool. Write the tool, nozzle and temperature on it."
+
+# For the scorecard's file menu: band 1 (bottom) first, flows in mm3/s
+# (max_flow.toml [presets], v1.3.0). The _T0 / _T1 files have the same bands;
+# a fine pass (--centre, "_fine_" file) is typed as a custom range.
+blocks_max: 16
+presets:
+  - name: "standard-0.4 · 4–32 mm³/s"
+    flows: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+  - name: "standard-0.6 · 6–36 mm³/s"
+    flows: [6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36]
+  - name: "hf-0.4 · 10–50 mm³/s (also _T0 / _T1)"
+    flows: [10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50]
+  - name: "hf-0.6 · 12–60 mm³/s"
+    flows: [12, 20, 28, 36, 44, 52, 60]
+  - name: "uhf-0.4 · 16–64 mm³/s (also _T0 / _T1)"
+    flows: [16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64]
+  - name: "uhf-0.6 · 28–100 mm³/s"
+    flows: [28, 40, 52, 64, 76, 88, 100]
+  - name: "uhf-0.8 · 28–100 mm³/s"
+    flows: [28, 40, 52, 64, 76, 88, 100]
+  - name: "extreme-0.8 · 30–180 mm³/s"
+    flows: [30, 55, 80, 105, 130, 155, 180]
+  - name: "extreme-1.0 · 30–180 mm³/s"
+    flows: [30, 55, 80, 105, 130, 155, 180]
+
+features:
+  - id: faces
+    name: "Middle of the long straights"
+    weight: primary
+    what: "The **middle third of both long straights**, outside and inside, where the nozzle holds full speed. The column and the round end do not count."
+    pass: "A continuous, even wall: every line touches the next, with the same gloss as the low bands."
+    fail: "Thin or missing lines, gaps between layers, a rough \"sandpaper\" texture or stringy lines. It starts in the middle of the straights and spreads in the next bands."
+    points:
+      - "Hold the part at arm's length first, then close up with a light raking along each straight. The straight along X faces the back: turn the part round."
+    photos:
+      - id: F3_face-good_PETG_VC4
+        alt: "Close-up of the middle of the front straight, bands 14 to 30 of the yellow PETG wedge: fine, even layer lines, the wall closed and smooth"
+        caption: "Bands 14–30 (hf-0.4, PETG, T0): every line complete, the wall closed and smooth."
+        shot: "DONE from _A645933 (the owner's hf-0.4_10-50_T0 PETG wedge, front straight, camera square to it): a 1650×1100 crop of the middle of the straight, bands 2–6 (14–30). Same photo, same size and same position along the straight as F3_face-fail_PETG_VC4; only the height changes."
+      - id: F3_face-fail_PETG_VC4
+        alt: "Close-up of the same part of the front straight, bands 34 to 50: thin, broken and missing lines, loose strings and small blobs"
+        caption: "Bands 34–50, same photo, same spot along the straight: thin and broken lines, gaps and strings. Band 34 is the onset."
+        shot: "DONE from _A645933: a 1650×1100 crop right above F3_face-good_PETG_VC4, same position along the straight, bands 7–11 (34–50)."
+    more:
+      intro: "The engraved number is the flow **on the long straights**: the nozzle speeds up out of the column, holds full speed along the straight, keeps most of it through the round end and brakes back into the column. So judge **the middle third of each straight**, in the **upper two thirds** of each band: the first layers of a band are the transition while the hotend settles at the new flow."
+      points:
+        - beginner: "Find the **lowest band that fails**, not the worst-looking one. The band just below it is your limit."
+        - misread: "**The divider groove is not a defect.** At the bottom of every band a groove runs across the numbers face, and the first layers change. Judge each band above it."
+        - misread: "**The seam is not a failure.** The seam is on the column's rear corner, away from the straights you read: a small zit or gap there means nothing here."
+        - misread: "**Wavy lines near the start of a straight** are ringing (vibration) after the corner, not flow. They fade along the straight and look the same in many bands."
+
+  - id: light
+    name: "See-through test"
+    weight: primary
+    what: "Hold the part against a lamp or a bright window, or shine a phone torch inside the wedge, at one straight at a time."
+    pass: "Light shows evenly through the wall: no bright dots, no slits."
+    fail: "Bright pinholes or horizontal slits along the straights. The first band with them is the onset."
+    more:
+      intro: "The wall is a single line, so under-extrusion lets light through long before it is obvious from outside. In a dark room the failing bands light up."
+      points:
+        - misread: "Dark filament shows little; a light colour works best. With black filament, rely on the straights and the squeeze test."
+
+  - id: sheen
+    name: "Sheen (early cue)"
+    weight: check
+    what: "The **gloss** of the long straights, band by band. PETG is glossy when the flow is fine."
+    pass: "The same gloss as the bands below."
+    fail: "The wall turns **matte or satin** while the lines are still complete: you are close to the limit, usually one band before the onset."
+    more:
+      intro: "As the flow rises, the plastic leaves the nozzle colder, and the surface loses its gloss. It is an **early cue**: mark that band **◐ degrading** on the card."
+      points:
+        - misread: "Some filaments (matte PLA, silk, carbon-filled) never shine: skip this cue for them."
+
+  - id: corners
+    name: "Column vs straights (diagnosis)"
+    weight: check
+    what: "The hex column, compared with the long straights of the same band."
+    pass: "When the straights fail, the column still looks solid: the nozzle nearly stops at its corners, so this is a true melt (flow) limit."
+    fail: "The column fails in the same band as the straights, or before them: suspect something else (extruder skipping, temperature too low, a partial clog, or the slicer slowing the layer down)."
+    more:
+      points:
+        - expert: "On a slow-accelerating printer (1000 mm/s² and below) the fast 0.4 files hold the top band's speed for only 0.1–0.2 s on the straights. Print the larger-nozzle file of your tier if you can: same flow, lower speed."
+        - "The round end slows the fastest bands a little (above about 140–170 mm/s). It is not read; if it looks better than the straights, that is why."
+
+  - id: clicks
+    name: "Extruder clicks (listen while printing)"
+    weight: primary
+    what: "Listen to the extruder while the upper bands print, and note the number on the column at the nozzle height."
+    pass: "No clicks."
+    fail: "A click or knock: the gear slipped on the filament. That band is at or above the limit, even if the wall still looks acceptable."
+    points:
+      - "Tick **Clicks** on the card for that band."
+    more:
+      points:
+        - beginner: "Stay close to the printer during the top bands. A phone held close to the extruder records the sound if you want to check it later."
+
+  - id: heater
+    name: "Heater sag (watch the temperature)"
+    weight: primary
+    what: "The hotend temperature graph (Mainsail, Fluidd, OctoPrint or the printer's screen) during the upper bands."
+    pass: "The temperature stays within about **2–3 °C** of the target through the band."
+    fail: "It drops further and recovers only after the band, or Klipper stops with \"Heater extruder not heating at expected rate\": the heater cannot melt that flow. That band is at or above the limit."
+    points:
+      - "Tick **Heater sag** on the card for the first band where it sags."
+      - warn: "Never raise the temperature above the hotend's or the filament's rated maximum to chase a higher band."
+    more:
+      intro: "Melting 50 mm³/s and more takes a lot of heater power. When the heater cannot keep up, the hotend cools, and the melt with it: the wall fails a band or two later."
+
+  - id: bottleneck
+    name: "Extruder or hotend? (diagnosis)"
+    weight: check
+    what: "Compare the clicks with the wall of the same band and of the band below."
+    pass: "Thin, rough wall first, clicks later or never: the **hotend's** melt limit."
+    fail: "Clicks while the wall of that band is still complete: the **extruder** is the limit (grip, motor torque or speed)."
+    points:
+      - "Either way, the band below is your usable limit."
+    more:
+      points:
+        - expert: "1 mm/s of 1.75 mm filament is 2.4 mm³/s. Above about 50–70 mm³/s, pancake-motor extruders (Orbiter, Sherpa Mini, Galileo 2, LGX Lite) often slip before a UHF hotend gives up. More motor current (within its rating), a stronger extruder or a hotter melt that needs less force can raise the extruder limit; nothing on the extruder helps a hotend limit."
+
+  - id: squeeze
+    name: "Layer bond (squeeze test)"
+    weight: check
+    what: "After printing, squeeze a long straight gently between thumb and finger, band by band, from the bottom up."
+    pass: "The wall flexes and springs back."
+    fail: "The wall cracks or splits along a layer line: the layers did not fuse at that flow."
+    more:
+      points:
+        - "Do it **last**, after every other reading and after any photo: a cracked band cannot be looked at again."
+
+  - id: label
+    name: "Flow numbers on the column"
+    what: "The column's front-left face is doubled (thicker) and carries one number per band: its flow in mm³/s on the long straights."
+    pass: "The numbers are readable all the way up: the numbers face prints at half speed, with ordinary lines, so it stays readable above the onset."
+    fail: "Unreadable from the start: the file was imported, not opened as a project. Check the layer height in the preview."
+    photos:
+      - id: F3_fin-readable_PETG_VC4
+        aspect: "3/2"
+        alt: "Close-up of the column's numbers face, 50 at the top down to 18, with the start of the front straight beside it: the wall is smooth level with 30 and below, torn with gaps level with 34 and above"
+        caption: "The numbers face stays readable all the way up, while the straight beside it is already torn: smooth level with 30, gaps from 34 up."
+        shot: "DONE: _A645934, full frame, the owner's hf-0.4_10-50_T0 PETG wedge, the numbers face (50 down to 18) and the start of the front straight, camera square to them, dark background."

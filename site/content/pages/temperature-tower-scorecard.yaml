@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The printable scoring card of the temperature tower. Its columns and rules
+# come from content/features/temperature-tower.yaml.
+id: temperature-tower-scorecard
+kind: scorecard
+features: temperature-tower
+title: "Temperature tower scorecard"
+nav_title: "Temperature tower scorecard"
+breadcrumb: "Printable card"
+description: "A printable scoring card for the temperature tower: pass, too hot or too cold for each feature of each block."
+intro: |
+  Score each block, then let the rules pick the temperature: click the cells on screen, or print the card and use a pen. How to judge each feature: [temperature tower guide](page:temperature-tower#how-to-read).
+
+  Write down too: filament **brand, type, colour**, the **file** (coarse 10 °C or fine 5 °C, or your own range), **nozzle**, **test flow (10 mm³/s unless you generated another)**, **date**. A card without them is useless next month.
+callouts:
+  - kind: info
+    text: "The columns follow the hexagonal tower model v2.3.0, in reading order: **Strings first** (before you touch the tower), the **Flag** last. Label and Surface only confirm; the **Hole** column is not counted at all. Pick your file in the menu (coarse files have 10 °C steps, fine files 5 °C). **TPU:** mark the Flag column – on every block. Printed on A4: the rules on page 1, the whole grid on page 2."

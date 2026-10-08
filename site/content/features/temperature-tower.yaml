@@ -1,0 +1,221 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The features of each temperature-tower block, and how to score them.
+# ONE source for two places: the "How to read it" steps of
+# pages/temperature-tower.yaml (one step per feature) and the printable
+# scorecard (pages/temperature-tower-scorecard.yaml, one column per feature).
+#
+# Aligned with the tower definition v2.3.0 (hexagonal, the default style):
+# suite/definitions/temp_tower.toml ([[features]], `location`, `weight`), mirrored in
+# docs/dev/temp-tower-features.md. Same ids, same order. If the TOML changes,
+# change this file (ids are also the PO contexts and the page anchors: keep
+# them stable). Faces, seen with the engraved numbers facing you and turning
+# clockwise seen from above: front, front-right, back-right, back, back-left,
+# front-left; the back corner carries the string ladder.
+# v2.2 dropped hole, corner90, fin30 and spike (they looked the same on every
+# block of the owner's PETG towers); label and smooth now only confirm.
+# v2.3 brought the hole back, through the front rib, with weight "confirms":
+# shown and described, but never counted (the scorecard marks its column and
+# leaves it out of the passes, the tie-break and the gate).
+status: "tower v2.3.0 (hex)"
+
+title: "Temperature tower scorecard"
+intro: "One row per block, one column per feature."
+rule_title: "How the best block is chosen"
+# A block that fails this feature is out, whatever else it does.
+# (TPU: the flag is not scored - mark it – and the gate does not apply.)
+gate: flag
+rules:
+  - "Hold the tower with the engraved numbers facing you. Score each block on its own, **above its bottom 1 mm** (there the temperature was still changing): **✓** pass, **H** fails because it is too hot, **C** fails because it is too cold, **–** cannot judge (damaged, not printed, not scored for this material)."
+  - "**Strings first, before you touch the tower:** brushing or handling removes them."
+  - "**Strength first.** A block whose **snap flag** fails is out, however good it looks: a part that splits between layers is never the right answer. (TPU: the flag is not scored; skip this rule.)"
+  - "Among the blocks left, the one with the **most ✓** wins. The **Hole** column is not counted: mark it to see whether it agrees, it never adds a ✓ and never breaks a tie."
+  - "**Tie:** the block with fewer failures (H + C) wins."
+  - "**Still a tie:** the **cooler** block wins."
+  - "**Note:** for parts that must be strong, go **one block hotter** than the block the rules picked."
+  - "**Not every column changes.** At the tower's flow and over a wide range, the strings usually show the hot end, and the smooth face and the top of the bridge show the cold end; the label, the hole and the ramp may look the same on every block. A column that does not change gets ✓ on every block: the flag and the columns that do change decide. The hole is never counted."
+  - "**Sanity check:** H marks belong at the bottom (hot end) and C marks at the top (cold end). An H above a C, or marks scattered at random, means something other than temperature is at work: see [Troubleshooting](page:temperature-tower#troubleshooting)."
+
+# For the scorecard's material menu: block 1 (bottom, hottest) first, one 7 mm
+# block per temperature (temp_tower.toml [materials], coarse 10 °C, fine 5 °C).
+blocks_max: 9
+presets:
+  - name: "PLA 240→180 / 10 °C"
+    temps: [240, 230, 220, 210, 200, 190, 180]
+  - name: "PLA 230→190 / 5 °C"
+    temps: [230, 225, 220, 215, 210, 205, 200, 195, 190]
+  - name: "PETG 270→200 / 10 °C"
+    temps: [270, 260, 250, 240, 230, 220, 210, 200]
+  - name: "PETG 260→220 / 5 °C"
+    temps: [260, 255, 250, 245, 240, 235, 230, 225, 220]
+  - name: "ABS/ASA 280→220 / 10 °C"
+    temps: [280, 270, 260, 250, 240, 230, 220]
+  - name: "ABS/ASA 270→230 / 5 °C"
+    temps: [270, 265, 260, 255, 250, 245, 240, 235, 230]
+  - name: "TPU 250→200 / 10 °C"
+    temps: [250, 240, 230, 220, 210, 200]
+  - name: "TPU 240→210 / 5 °C"
+    temps: [240, 235, 230, 225, 220, 215, 210]
+  - name: "PC 310→250 / 10 °C"
+    temps: [310, 300, 290, 280, 270, 260, 250]
+  - name: "PC 300→260 / 5 °C"
+    temps: [300, 295, 290, 285, 280, 275, 270, 265, 260]
+
+features:
+  - id: pins
+    name: "String ladder (stringing)"
+    short: "Strings"
+    weight: primary
+    what: "**Back corner:** two small posts tied to the corner by rungs, with an open **window** in every block. Look for strings across the windows. Mostly shows heat."
+    pass: "No strings across the windows, or a few fine hairs that brush off."
+    fail_hot: "Strings or a web across the windows; blobs on the posts."
+    fail_cold: "No strings, but the posts are rough or have gaps between layers."
+    points:
+      - "**Score this first**, before you touch the tower, looking **through** the windows against a bright light."
+    photos:
+      - id: F1_pins-compare_PETG_VC4
+        aspect: "3/2"
+        alt: "The string ladder's window on two blocks of the PETG tower: almost clean at 210 °C, a dense web of strings at 270 °C"
+        caption: "Top, 210 °C: almost clean. Bottom, 270 °C, too hot: a dense web across the window. At 240 °C, the block this tower picks, a few strings remain (see the whole ladder under More)."
+        shot: "DONE from _A645891 (coarse PETG tower v2.3, 270→200, before brushing): two equal crops of the back corner, one block each, rung to rung, stacked as on the tower (210 °C on top, 270 °C below), thin dark separator, no text in the image."
+    more:
+      intro: "The ladder stands between the back and back-left faces: two small hexagonal posts, each tied to the corner by a short rung at the bottom of each block. Every layer the nozzle travels from the corner to the posts and on to the flag; hot plastic oozes and leaves strings across the windows. Strings to the flag count here too."
+      points:
+        - "**Score this first, before you touch the tower.** Brushing, handling or even a careful look with your fingers removes most strings."
+        - "Look **through** the windows from the side, along the back face or along the back-left face, with a lamp or a bright window **behind** the tower: the strings show as dark threads against the light."
+        - beginner: "Photograph the ladder before brushing too: in the owner's tests the strings were obvious on the nozzle cam and in photos taken before brushing, and gone afterwards."
+        - expert: "Retraction is not tuned yet at this point of the sequence. Do not chase zero strings: mark H only when the strings are clearly worse than on the colder blocks."
+        - misread: "If **every** block strings about the same, the filament is probably wet. Dry it before trusting this column."
+      photos:
+        - id: F1_pins-ladder_PETG_VC4
+          aspect: "3/2"
+          alt: "The whole PETG tower seen from the back-right, the string ladder on the right: strings dense on the bottom blocks, thinning out towards the top"
+          caption: "The whole ladder, 270 °C at the bottom to 200 °C at the top: the web thins out block by block. Mark H where it is clearly worse than on the cooler blocks, not wherever a string remains."
+          shot: "DONE: _A645891, full frame, the coarse PETG tower v2.3 (270→200) before brushing, back-right face and string ladder against a dark background."
+
+  - id: ramp
+    name: "Overhang ramp (55/65/75/80°)"
+    short: "Ramp"
+    weight: primary
+    what: "**Back-right face:** four overhang tongues, at 55°, 65°, 75° and 80°. Note the **steepest tongue whose underside is still clean**. Mostly shows heat."
+    pass: "The undersides are smooth and the edges straight up to the steepest tongue that is clean on the cooler blocks."
+    fail_hot: "Undersides droopy or stringy, edges curling up, starting at a lower angle than in cooler blocks."
+    fail_cold: "Undersides clean, but the lines separate or the edges are ragged."
+    more:
+      intro: "55° is next to the right corner, then 65° and 75°, and 80° at the back. They all reach 5 mm out, so only the angle changes: at 75° and 80° each layer hangs almost entirely in the air, where hot plastic droops. Write the angle in the Notes column (55, 65, 75, 80, or 0 if none)."
+      points:
+        - beginner: "Turn the tower so you look up at the undersides of the tongues under a lamp. Start from the 55° tongue next to the right corner, go towards the back and stop at the first rough one."
+        - expert: "The tongues print at the bridge speed (25 mm/s) with the bridge fan: the file turns on PrusaSlicer's *Detect bridging perimeters* for this object. The angle reached also depends on your fan; use the number to compare blocks: the angle at which the tongues start to fail drops as the temperature rises."
+        - misread: "The 80° tongue is very flat and may droop a little on every block. That says nothing about temperature: compare where the droop **starts** from block to block."
+        - misread: "Seen from the side, the tongues may look the same on every block: on the owner's PETG tower (270 → 200 °C) they did. Judge the undersides; if they too look the same, mark ✓ on every block."
+
+  - id: bridge
+    name: "Long bridge (22 mm beam)"
+    short: "Bridge"
+    weight: primary
+    what: "**In front of the front-left face:** a 22 mm bridge beam on two long ribs. Read it from the side and from below. Fails both ways."
+    pass: "The underside is flat and straight, the lines touch each other, at most a slight sag."
+    fail_hot: "Visible sag (more than about 0.5 mm at mid-span) or strands hanging from it."
+    fail_cold: "The lines do not fuse: gaps between strands, a rough top with lifted strands, lines broken or lifted at the ends."
+    photos:
+      - id: F1_bridge-compare_PETG_VC4
+        aspect: "3/2"
+        alt: "The bridge beam of two blocks seen square to the front-left face: rough and lumpy on top at 210 °C, even lines at 240 °C"
+        caption: "Top, 210 °C, too cold: the top of the beam is rough, with lifted strands and a blob. Bottom, 240 °C, the chosen block: even lines and a clean top edge."
+        shot: "DONE from _A645894 (coarse PETG tower v2.3, 270→200): two equal crops of the front-left face, rib to rib, one beam each, stacked as on the tower (210 °C on top, 240 °C below), thin dark separator, no text in the image."
+    more:
+      intro: "The ribs stand one at each end of the face; the beam has 5.8 mm of open air under it and 7 mm of open space behind it. Hot plastic sags, cold plastic does not fuse."
+      points:
+        - beginner: "From the side: look square at the front-left face at beam height, with the lamp lighting the face **behind** the beam. The beam's bottom edge then reads as a line against the lit face: compare it with the beam's straight top edge and with the beams of the blocks above and below. From below: tilt the tower back and look up at the underside, with the light skimming along the strands."
+        - expert: "The span is long on purpose: sag grows quickly with span, so a 22 mm beam separates the hot blocks more clearly than a short bridge."
+        - "Look at the **top** of each beam too. On the owner's PETG tower (270 → 200 °C) the cold blocks showed there first: from 230 °C down the top was rough, with lifted strands; 240 °C was the cleanest."
+        - expert: "Bridges depend strongly on the bridge fan speed and the bridge flow ratio. If every bridge looks the same, it tells you little about temperature: score them all ✓ or all –."
+
+  - id: label
+    name: "Engraved temperature (fine detail)"
+    short: "Label"
+    weight: check
+    what: "**Front face:** the engraved block temperature. Check that the grooves stay crisp. Only confirms."
+    pass: "All three digits crisp; the grooves open and sharp-edged along their whole length."
+    fail_hot: "Grooves partly filled or blurred, edges rounded, digits hard to read."
+    fail_cold: "Grooves fine, but the face around them is matte or rough, or shows gaps between lines."
+    more:
+      intro: "The temperature is centred on the face, engraved with 0.6 mm grooves. It tells you which block you are looking at; as a test it only confirms (it rarely changes from block to block). Mostly shows heat."
+      points:
+        - beginner: "Read it at arm's length without a magnifier, then with your phone camera's zoom. If you have to guess a digit, it fails."
+        - misread: "Score the **grooves**, not whether you can still guess the number. A blurred 215 that you recognise because the blocks above and below are 220 and 210 is still a fail."
+
+  - id: smooth
+    name: "Smooth face (surface quality)"
+    short: "Surface"
+    weight: check
+    what: "**Front-right face:** the whole face is plain. Look at the layer lines and the sheen. Only confirms."
+    pass: "Even, uniform layer lines with a consistent sheen."
+    fail_hot: "Wavy or uneven lines, glossy smears, zits or ooze marks."
+    fail_cold: "Matte or rough texture, an under-extruded look, gaps between layers."
+    photos:
+      - id: F1_smooth-compare_PETG_VC4
+        aspect: "3/2"
+        alt: "The engraved label and the smooth face of two blocks: streaky and feathered at 210 °C, even at 240 °C"
+        caption: "Top, 210 °C, too cold: the smooth face (right of the numbers) is streaky and feathered, with small lumps. Bottom, 240 °C, the chosen block: even layer lines."
+        shot: "DONE from _A645896 (coarse PETG tower v2.3, 270→200, front view): two equal crops of the label and the front-right face, one block each, stacked as on the tower (210 °C on top, 240 °C below), thin dark separator, no text in the image."
+    more:
+      intro: "Fails both ways: hot plastic smears and ripples, cold plastic looks dry and rough. On the owner's coarse PETG tower (270 → 200 °C) it showed the cold end clearly: streaky, feathered layers from 220 °C down (a trace at 230), even from 240 °C up; the hot blocks looked no different."
+      points:
+        - beginner: "Tilt the tower under a lamp so the light skims the face: ripples and matte bands show up at once."
+        - misread: "Silk, matte and glitter filaments change their sheen on purpose. With them, judge only the ripples and gaps, not the gloss."
+        - misread: "Wavy lines that look the same on **every** block are mechanical (ringing, wobble), not temperature."
+
+  - id: hole
+    name: "See-through hole (roof shape)"
+    short: "Hole"
+    weight: confirms
+    what: "**Front rib,** next to the numbers: a round 3.5 mm hole in every block. Look through it against the light: too hot, it turns into a **teardrop**. **Not counted.**"
+    pass: "A round opening with a clean, evenly curved top; nothing hangs inside."
+    fail_hot: "The top droops or comes to a point (a teardrop); strands or sagging loops hang inside the hole."
+    fail_cold: "The top is rough or gappy: separate lines, small holes in the roof, a ragged outline."
+    points:
+      - "Turn the **smooth face** towards you, light **behind** the tower, eye **level** with the holes."
+    more:
+      intro: "The front rib is the rib at the corner between the front face (the numbers) and the front-left face. A round hole has to be closed over at the top, layer by layer: when the plastic is too hot, that roof sags. The hole only confirms what the other columns say. Mostly shows heat."
+      points:
+        - "Turn the tower so the **front-right (smooth) face** faces you, square. The front rib now stands out on your **left**, face-on, with one hole per block."
+        - "Put a lamp or a bright window **behind** the tower and look through the holes **level with them**: the hole shows as a bright shape on the dark rib. Compare its top with the blocks above and below."
+        - beginner: "Round is good. A top that sags into a point, like a drop of water upside down, means that block was too hot."
+        - expert: "The hole's last layers close over the gap as a short bridge: PrusaSlicer prints them at the bridge speed with the bridge fan, the same on every block. No other bridge or steep overhang prints in those layers (the long beam starts 1 mm above the hole), so the roof's shape depends on the block's temperature, not on another feature."
+        - misread: "Looking from above or below. From an angle, the inside of the hole and the beam behind it cut into the top of the light, and every hole looks flattened. Keep your eye level with the hole you are reading."
+        - misread: "Every hole the same, round or slightly pointed. That is normal for many filaments and says nothing about temperature; it is why this column is not counted. Only a change from block to block is worth a mark."
+        - misread: "A tiny bump at the very top that looks the same on every block is where the last line closed the roof, not a droop. Judge the overall shape, block against block."
+
+  - id: flag
+    name: "Snap flag (layer adhesion)"
+    short: "Flag"
+    weight: primary
+    what: "**Back-left face, on the shelf:** a thin flag at the shelf's outer edge. Break it with a fingernail: how it breaks tells how well the layers fused. **Colder is never better here, and it decides first.**"
+    pass: "It bends first, resists, and breaks with a jagged or whitened edge."
+    fail_hot: "The flag is already wavy or blobby before you test it."
+    fail_cold: "It snaps cleanly and flat along one layer line, with very little force."
+    points:
+      - "Break the flags **last**, with the tower fully cooled: fingernail on the **top edge**, push **towards the tower**."
+    photos:
+      - id: F1_flag-compare_PETG_VC4
+        aspect: "3/2"
+        alt: "The broken flag stumps of two blocks: a smooth, flat break on a cold block, a jagged, whitened break at 240 °C"
+        caption: "Top, too cold: a clean, flat break along one layer. Bottom, 240 °C, the chosen block: a jagged, whitened break."
+        shot: "BACK-LEFT face, AFTER breaking the flags (fingernail on the top edge, push towards the tower). Macro of the stumps at the outer edge of the back-left shelf, camera at about 45° to the face, slightly above, one hard light raking across the breaks so flat vs jagged reads. Two equal crops, one block each, stacked as on the tower: the coldest block (200 or 210 °C) on top, 240 °C below. No text in the image, no paper tags needed (the caption says it). STILL TO SHOOT: the owner's tower so far has only the top three flags broken (200, 210, 220 °C) and was shot from the front, not as a macro of the breaks; break the 240 °C flag too."
+    more:
+      intro: "The flag is one line thick, about 3 mm from the wall, with nothing above its top edge. Shows cold."
+      points:
+        - "Break the flags **last**, after you have scored everything else on the block, and with the tower fully cooled."
+        - "Put a fingernail on the flag's **top edge** and push it **towards the tower** until it breaks. Every block's flag can be reached this way; you do not need to pull."
+        - beginner: "Go from the top (coldest) block down. The first block where breaking feels clearly harder and the edge looks jagged or whitened is your coldest acceptable block."
+        - expert: "Compare the force between blocks rather than judging one flag alone; a single line is weaker than any real part. For parts that must be strong, choose at least one block above the coldest one that passes."
+        - "**TPU:** the flag is not scored. TPU bends instead of snapping: mark it – on every block."
+        - misread: "Wet filament also makes layers weak and brittle at every temperature. If no flag passes, dry the spool and print again."
+      photos:
+        - id: F1_flag-how_PETG_VC4
+          aspect: "3/2"
+          alt: "One hand holds the PETG tower from the top; a fingertip of the other hand pushes a flag on the back-left face towards the tower; a broken flag lies on the cloth"
+          caption: "Hold the tower from the top with one hand, put a fingertip on the flag's top edge and push towards the tower. A flag broken a moment earlier lies on the cloth."
+          shot: "DONE: _A645925, full frame, the owner's coarse PETG tower v2.3 (270→200), back-left face, dark background. Not a fingernail but a fingertip; the free space above the flag is hidden by the finger."

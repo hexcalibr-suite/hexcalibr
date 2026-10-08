@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+id: further-reading
+title: "Further reading"
+nav_title: "Further reading"
+description: "Books and references that go beyond calibration: diagnosing failed prints, hardware faults and materials."
+intro: |
+  {suite} tunes a printer that already works. When a print fails for a reason no calibration can fix (a clog, a loose belt, a faulty thermistor), these resources help you find the cause first.
+steps:
+  - id: books
+    title: "Books"
+    points:
+      - "**[3D Printing Failures: 2022 Edition](link:book-aranda)**, by Sean Aranda (affiliate link): a troubleshooting handbook organised **by symptom**."
+      - "Amazon stores (affiliate links): [Italy](link:book-aranda-it) · [United Kingdom](link:book-aranda-uk)."
+      - note: "As an Amazon Associate I earn from qualifying purchases. The price is the same for you; it helps keep {suite} free."
+    more:
+      points:
+        - "You start from what you see on the print (stringing, warping, layer shifts, gaps, elephant foot) and it points you to the chapters with causes and fixes, including hardware faults such as heaters, thermistors, stepper motors and clogs. It also covers maintenance, electrical safety and materials."
+        - beginner: "Read it when something is clearly broken, before calibrating: a test cannot be read on a printer with a partial clog or a loose belt."
+        - expert: "It was written for 2021–2022 printers and its slicer examples use Cura. Use it for diagnosis; for the settings, follow the PrusaSlicer names in these guides."
+        - "In this suite, its chapters on **stringy or blobby prints** and **poor layer adhesion** go with the [temperature tower](temperature-tower.html); **over and under extrusion**, **gaps** and **elephant foot** go with the first-layer and flow tests."
+
+  - id: online
+    title: "Online references"
+    points:
+      - "[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/): the reference for tuning Klipper and Marlin printers, one variable at a time."
+      - "[Klipper documentation](https://www.klipper3d.org/): pressure advance, input shaping and every Klipper command."
+      - "[Prusa Knowledge Base](https://help.prusa3d.com/): print-quality troubleshooting with photos, and everything about Prusa printers and PrusaSlicer."
+      - "[CNC Kitchen](https://www.cnckitchen.com/): measured, well-explained tests on materials, strength and hotends."

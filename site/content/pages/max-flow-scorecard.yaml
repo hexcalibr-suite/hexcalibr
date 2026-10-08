@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The printable scoring card of the maximum volumetric flow test. Its rules,
+# the file menu and the flows per band come from content/features/max-flow.yaml
+# (`scoring: flow`, sitegen/render.py SCORE_FLOW).
+id: max-flow-scorecard
+kind: scorecard
+features: max-flow
+title: "Maximum volumetric flow scorecard"
+nav_title: "Maximum volumetric flow scorecard"
+breadcrumb: "Printable card"
+description: "A printable scoring card for the maximum volumetric flow tower: pass, degrading or fail for each band, heater sag and clicks, and the suggested max volumetric speed."
+intro: |
+  Choose your file in the menu (or type the flows of a custom range), mark each band on screen or on paper, and the card suggests the **Max volumetric speed** for your filament profile. How to judge a band: [maximum volumetric flow guide](page:max-flow#how-to-read).
+
+  Write down too: filament **brand, type, colour**, **temperature**, **hotend, nozzle, extruder**, the **tool** (IDEX: one card per tool), your **external perimeter acceleration**, **date**. A value without them is useless next month.
+callouts:
+  - kind: info
+    text: "Follows the max-flow test v1.3.0, hex column and wedge (all nine files are in the menu; the `_T0` / `_T1` files have the same bands; for a `_fine_` file, type its flows as a custom range). Judge the middle of the two long straights. The wall decides together with **Heater sag** and **Clicks**: any of them failing makes the band fail. Printed on A4: the rules on page 1, the grid on page 2."

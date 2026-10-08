@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+id: license
+title: "License and credits"
+nav_title: "License and credits"
+description: "How the suite's models, guides and code are licensed, the reserved name, and the sources the tests build on."
+intro: |
+  {suite} is open: you may use, share and adapt the models, the guides and the code under the licenses below. What is reserved is the **name**.
+steps:
+  - id: licenses
+    title: "Licenses"
+    table:
+      head: ["What", "License"]
+      rows:
+        - ["Test models (3MF, STL) and their designs", "[Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (CC BY-SA 4.0)"]
+        - ["Guides, texts, photos and drawings on this site", "CC BY-SA 4.0"]
+        - ["Code: model generators, this site's generator, scripts", "[GNU GPL version 3 or later](https://www.gnu.org/licenses/gpl-3.0.html) (GPL-3.0-or-later)"]
+    points:
+      - "CC BY-SA 4.0 means you may share and adapt the models and texts, also commercially, as long as you **give credit** and **share your changes under the same license**."
+      - "**Credit** means: the name {suite}, the author ({author}), a **link back to the original page** of the model or guide, the license, and a note if you changed anything."
+      - "The official downloads are the {suite} pages on [Printables](link:printables-collection), and this site is the official guide. Linking to them, rather than re-uploading the files, keeps everyone on the latest, corrected version."
+      - "Translations contributed to this site are published under the same CC BY-SA 4.0 license."
+
+  - id: name
+    title: "The name is reserved"
+    points:
+      - "The licenses cover the files, not the name. **{suite}** and its logo identify the official project and may not be used for modified versions or re-uploads, so that nobody mistakes them for the original."
+      - "If you publish an adapted version, give it a different name and say that it is based on {suite}, with a link. That is both allowed and welcome."
+
+  - id: not-affiliated
+    title: "Not affiliated"
+    points:
+      - "{suite} is an independent project. It is **not affiliated with, endorsed or sponsored by** Prusa Research, Bambu Lab, Rat Rig, the OrcaSlicer project or any other manufacturer or software project named on this site."
+      - "PrusaSlicer, Prusa, Printables, Bambu Lab, Bambu Studio, Rat Rig, RatOS, OrcaSlicer, Klipper and other names are trademarks of their respective owners, used here only to say what the tests work with."
+      - "The tests are provided as they are, without warranty. Calibration prints change temperatures and speeds while printing: stay within your printer's limits."
+
+  - id: credits
+    title: "Credits and sources"
+    intro: "The test **methods** build on public work by others. The models, texts and photos here are original: no model, text or image has been copied from these sources. Read them: they go deeper than any single guide."
+    points:
+      - "[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) by Andrew Ellis: the one-variable-per-test approach, the order of filament tests, and the pattern methods for pressure advance and flow."
+      - "[Klipper documentation](https://www.klipper3d.org/): pressure advance, resonance compensation and rotation distance, and the G-code each firmware accepts."
+      - "[OrcaSlicer wiki](https://github.com/OrcaSlicer/OrcaSlicer/wiki): the calibration sequence of its Calibration menu and how its temperature, flow and pressure advance tests are read."
+      - "[CNC Kitchen](https://www.cnckitchen.com/) by Stefan Hermann: why 20 mm calibration cubes mislead, and hotend flow-rate benchmarking."
+      - "[Prusa Knowledge Base](https://help.prusa3d.com/) and the [PrusaSlicer source code](https://github.com/prusa3d/PrusaSlicer): how projects, per-layer G-code and pressure advance behave on Prusa printers."
+      - "[RatOS](https://github.com/Rat-OS/RatOS-configuration): IDEX tool-offset tolerances and tool-change behaviour."
+
+  - id: translators
+    title: "Translations"
+    points:
+      - "Want to add a language or fix a translation? See [how to translate](link:translate)."
+    translators: true

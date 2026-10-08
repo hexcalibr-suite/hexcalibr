@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The interactive IDEX alignment card. Its rules, the diagnosis text and the
+# station positions come from content/features/idex-alignment.yaml; the fit
+# is a JavaScript port of calib.py idex-analyze (sitegen/render.py, IDEX_FIT).
+id: idex-alignment-scorecard
+kind: scorecard
+features: idex-alignment
+title: "IDEX alignment card"
+nav_title: "IDEX alignment card"
+breadcrumb: "Printable card"
+description: "Type the X and Y readings of each station: the card fits offset, scale and skew, gives a verdict per mechanism and prints the firmware lines."
+intro: |
+  Type the readings of each station, in mm, as explained in the [IDEX alignment guide](page:idex-alignment#read-vernier). The card works out the tool offset at the bed centre, a verdict for each mechanism, and the lines to type into RatOS, PrusaSlicer, a Prusa XL or Marlin. Nothing is sent anywhere: the calculation runs in your browser.
+
+  Write down too: **printer**, **nozzles**, **filament**, **date**, and the **offsets before the change**. The next run is compared with this one.
+callouts:
+  - kind: info
+    text: "Follows the IDEX alignment test v1.0.0 (Lite and Vernier), 0.4 mm nozzle, bed presets as in the guide. Printed on A4: the rules on page 1, the grid on page 2."

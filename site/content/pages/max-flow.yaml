@@ -1,0 +1,374 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# Test F3 on this site, the maximum volumetric flow test (v1.3.0: hex column
+# + wedge with two long straights, per-band M220 speed factor, hotend tiers;
+# 7 wide bands on the heavy files, optional fine pass with --centre). Facts come from
+# suite/definitions/max_flow.toml, suite/README.md ("Maximum volumetric flow
+# design", hotend research) and docs/dev/max-flow-features.md; anything not
+# final is {{TBD}}. The per-feature reading steps come from
+# content/features/max-flow.yaml.
+#
+# Every step: the essentials (1-3 short points, the warnings, the main photo)
+# and a `more:` part, collapsed under "More" (see sitegen/content.py).
+id: max-flow
+title: "Maximum volumetric flow"
+nav_title: "Maximum volumetric flow"
+description: "Find how much plastic your hotend can melt per second with a hex column and a long wedge printed faster band by band, then cap your filament profile just below it."
+numbered: true
+sketch: sketches/max-flow.svg   # pencil drawing beside the intro (hexcalibr-core: calib.py sketch)
+intro: |
+  A thin wall printed in bands, each one faster than the one below: a small hex column with a long wedge, whose two straight walls keep the nozzle at full speed long enough for the hotend to show its real limit. The number on the column beside each band is its flow in mm³/s. Find the last band that is still clean on the long straights, and put 80–90 % of it into your filament profile.
+
+  9 to 25 minutes and 16 to 45 g of filament, with **no changes to your profiles**.
+more:
+  intro: |
+    The wall is **one thick line** (1.75 × the nozzle wide, 0.75 × the nozzle high: 0.70 × 0.30 mm on a 0.4 nozzle), so the same flow needs half the speed of an ordinary line. A speed factor sent at each band (`M220`) makes the printer run faster; the slicer itself sees a slow, steady print and never slows it down. The numbers are the flow in the middle of the two long straights.
+
+    The result is the **Max volumetric speed** of the filament profile: PrusaSlicer then caps every speed it writes so that the hotend is never asked for more plastic than it can melt.
+callouts:
+  - kind: warn
+    text: "Open the file with **File › Open project**. Never with **Import**, never as a ZIP: an import keeps the shape but drops the per-band speed factors, and the whole tower would print at a crawl."
+need:
+  title: "What you need"
+  columns:
+    - title: "To print"
+      items:
+        - "The [file for your hotend and nozzle](page:max-flow#which-file)"
+        - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+        - "Your own printer, print and filament profiles, already working"
+        - "The temperature from the [temperature tower](page:temperature-tower)"
+        - "The filament to test, **dry**: 16 to 45 g of it"
+        - "A bed at least **180 mm** wide (the `uhf-0.4` file needs 200 mm: a MK4, a Core One or larger)"
+    - title: "To read it"
+      items:
+        - "Your ears and the hotend temperature graph, **during** the print"
+        - "A lamp you can move, or a phone torch"
+        - "The [scorecard](page:max-flow-scorecard), printed or on screen"
+
+steps:
+  - part: "Before printing"
+
+  - id: what-for
+    title: "What it is for, and when to run it"
+    points:
+      - "It finds the **maximum flow your hotend can melt** for this filament **at this temperature**, before the wall starts to starve."
+      - "Run it **after the temperature tower** and before pressure advance. The result goes into **Filament Settings › Advanced › Max volumetric speed**, at 80–90 %."
+    photos:
+      - id: F3_overview_PETG_VC4
+        alt: "The whole maximum flow test in yellow PETG, front view: the hex column on the left with the band numbers 10 to 50 on its face, the long wedge with its round end on the right; the lower part of the wall is smooth, the upper part torn and rough"
+        caption: "The owner's test, hf-0.4 on T0, PETG: smooth up to band 30, torn from band 34 up. The column's face carries each band's flow in mm³/s."
+        aspect: "3/2"
+        shot: "DONE: _A645936, full frame, the owner's hf-0.4_10-50_T0 PETG wedge, front view (the 30° straight and the numbers face towards the camera), dark background."
+      - id: F3_printing_PETG_VC4
+        kind: video
+        aspect: "16/9"
+        alt: "Phone video of the yellow PETG wedge being printed: the toolhead runs along the long straights, round the end and back to the column"
+        caption: "The test printing on the owner's RatRig V-Core 4 (T0). The nozzle holds full speed along the two long straights."
+        shot: "DONE: IMG_9683.mov, 8 s phone video, HLG converted to SDR, tools/clip.sh with GRADE=none, full length."
+    more:
+      points:
+        - "Every speed PrusaSlicer writes is capped by the filament's **Max volumetric speed**. Too high, and fast perimeters and infill under-extrude; too low (or left at the profile's default), and the printer never runs as fast as it could."
+        - "The limit belongs to the filament **and** the hotend, nozzle, temperature and extruder. Hotter plastic melts faster: that is why it comes **after the temperature tower**, at the temperature you chose there."
+        - "It comes **before** pressure advance: PA depends on the flow you print at."
+        - beginner: "The number on the spool box or in a generic profile is a guess for an average hotend. This test measures your own."
+        - "**Why long straights.** Max flow is a steady limit: the hotend must melt the plastic as fast as it leaves. The melt zone keeps a little hot plastic in reserve, so a short burst above the limit can still come out right. Each long straight holds the top band's speed for 0.3–0.5 s, and the nozzle keeps most of its speed through the round end, so the reserve runs out and the wall shows the real limit. Our earlier hexagon held full speed for only about 0.1 s per face and could read too high."
+        - expert: "**Compared with OrcaSlicer's test.** Orca prints a continuous vase-mode spiral and raises the flow smoothly with height; you measure the height where the wall fails. Here each band has one flow and its number printed beside it, and the long straights hold full speed about as long as Orca's spiral does on a part of the same size."
+
+  - id: which-file
+    title: "Which file"
+    points:
+      - "Find your hotend in the table, then take the file for **your nozzle**. Not listed? Use the row with the closest claim."
+      - "**IDEX:** test each tool on its own: `_T0` and `_T1` files ([see below](page:max-flow#apply))."
+      - "Get the **single .3mf** from the {suite} page on Printables (below), never \"Download all\" as a ZIP."
+    printables: printables-max-flow
+    table:
+      head: ["Hotend", "Claim (mm³/s)", "Measured independently", "0.4 nozzle", "0.6 nozzle", "0.8 / 1.0 nozzle"]
+      rows:
+        - ["E3D V6", "–", "10–15 (CNC Kitchen)", "`standard-0.4`", "`standard-0.6`", "–"]
+        - ["E3D Revo, Revo High Flow", "HF 0.4: 16–27, HF 0.6: 22–31", "14 / 23.5 at 0.4 (CNC Kitchen)", "`standard-0.4`", "`standard-0.6`", "`hf-0.6` (not yet confirmed on a 0.8 nozzle)"]
+        - ["Prusa MK4S / Core One (HF nozzle)", "24 (PLA); HF 0.6: 31–36", "–", "`standard-0.4`", "`hf-0.6`", "–"]
+        - ["Bambu Lab X1 / P1, A1", "≈ 32 / ≈ 28 (ABS, 280 °C)", "profiles: 21 (PLA)", "`hf-0.4`", "`hf-0.6`", "–"]
+        - ["Bambu Lab H2D / H2S", "≈ 40; High Flow hotend ≈ 65", "–", "`hf-0.4`", "`hf-0.6` (High Flow hotend: `uhf-0.6`)", "–"]
+        - ["Creality K1, K1C, K1 Max, K2 Plus", "≈ 32 (K2 Plus: 32 or 40, sources disagree)", "–", "`hf-0.4`", "`hf-0.6`", "–"]
+        - ["Slice Mosquito / Magnum", "35 / 40", "15–25 / 35 at 280 °C (CNC Kitchen)", "`hf-0.4`", "`hf-0.6`", "–"]
+        - ["E3D Volcano, Bondtech CHT", "– / +25–65 %", "Volcano 0.6: 30; CHT 0.6: 40, 1.0: 60–90 (CNC Kitchen)", "`hf-0.4`", "`hf-0.6`", "`uhf-0.8`; CHT 1.0: `extreme-1.0`"]
+        - ["Phaetus Rapido 2 HF, Dragon HF", "≈ 52 / ≈ 62+", "Rapido HF 0.4: 24 (Ellis)", "`hf-0.4`", "`uhf-0.6`", "`uhf-0.8`"]
+        - ["Phaetus Rapido UHF, Rapido 2 UHF, Dragon UHF; Trianglelab Dragon ACE", "≈ 75 / ≈ 75 / ≈ 70.5; 74", "Rapido UHF 0.4: 30 (Ellis)", "`hf-0.4`, then `uhf-0.4`", "`uhf-0.6`", "`uhf-0.8`"]
+        - ["Mellow / VzBot Goliath, Chube Conduction", "≈ 50+ / none (about 80 reported)", "–", "`uhf-0.4`", "`uhf-0.6`", "`uhf-0.8`"]
+        - ["Slice Magnum+, E3D SuperVolcano, Phaetus Rapido X", "≈ 88–91 / ≈ 110 / ≈ 100+", "–", "–", "`uhf-0.6`", "`extreme-0.8` / `extreme-1.0`"]
+    photos:
+      - id: F3_tower-iso_render
+        alt: "Render of the maximum flow test: a small hex column with numbers on its front face and a long wedge with a round end"
+        caption: "standard-0.4: one thin wall, two long straights, a number per band on the column."
+        aspect: "1/1"
+        shot: "RENDER, already done: copy of docs/previews/flow-tower-iso.png. Replace only with a real photo that reads as clearly."
+    more:
+      intro: "Nine files in four tiers. The tier comes from your hotend, the file from your nozzle. Each file's top band is at least **120 % of the highest claim** of its tier, so a hotend that really reaches its claim still shows a failing band."
+      table:
+        head: ["File", "Bands (mm³/s)", "Line × layer", "Top speed", "Footprint", "PETG", "Time"]
+        rows:
+          - ["`max-flow_standard-0.4_4-32.3mf`", "4, 6 … 32 (15 bands)", "0.70 × 0.30 mm", "168 mm/s", "146 × 61 mm", "18.6 g", "≈ 25 min"]
+          - ["`max-flow_standard-0.6_6-36.3mf`", "6, 9 … 36 (11)", "1.05 × 0.45 mm", "84 mm/s", "95 × 40 mm", "18.4 g", "≈ 21 min"]
+          - ["`max-flow_hf-0.4_10-50.3mf`", "10, 14 … 50 (11)", "0.70 × 0.30 mm", "262 mm/s", "169 × 70 mm", "15.8 g", "≈ 14 min"]
+          - ["`max-flow_hf-0.6_12-60.3mf`", "12, 20 … 60 (7)", "1.05 × 0.45 mm", "140 mm/s", "132 × 53 mm", "16.0 g", "≈ 11 min"]
+          - ["`max-flow_uhf-0.4_16-64.3mf`", "16, 20 … 64 (13)", "0.70 × 0.30 mm", "336 mm/s", "**193** × 80 mm", "21.0 g", "≈ 14 min"]
+          - ["`max-flow_uhf-0.6_28-100.3mf`", "28, 40 … 100 (7)", "1.05 × 0.45 mm", "233 mm/s", "169 × 69 mm", "20.5 g", "≈ 9 min"]
+          - ["`max-flow_uhf-0.8_28-100.3mf`", "28, 40 … 100 (7)", "1.40 × 0.60 mm", "131 mm/s", "134 × 53 mm", "25.2 g", "≈ 12 min"]
+          - ["`max-flow_extreme-0.8_30-180.3mf`", "30, 55 … 180 (7)", "1.40 × 0.60 mm", "236 mm/s", "170 × 68 mm", "30.8 g", "≈ 12 min"]
+          - ["`max-flow_extreme-1.0_30-180.3mf`", "30, 55 … 180 (7)", "1.75 × 0.75 mm", "151 mm/s", "154 × 60 mm", "45.0 g", "≈ 17 min"]
+      points:
+        - "**Claims are not measurements.** Makers state their figure with different filaments, temperatures, nozzles (often 0.8–1.2 mm) and failure criteria; on a 0.4 nozzle every hotend reaches far less. **≈** marks a figure we found only through a retailer or a search excerpt, not on the maker's own page: treat it as approximate."
+        - "Times are estimates at 4000 mm/s²; PrusaSlicer shows the real time after slicing. Grams are PETG, 1.75 mm filament. The footprint includes the 3 mm brim."
+        - "**Seven wide bands on the bigger files.** `hf-0.6`, `uhf-0.6`, `uhf-0.8` and both `extreme` files go up in larger steps (8, 12 and 25 mm³/s, about 12–14 % of the top band) to save a third or more of the filament. Each band is as tall as on the other files, so it is just as easy to judge; the limit is simply less precise ([what that changes](page:max-flow#choose))."
+        - "**Bed fit.** Every file fits a 180 × 180 mm bed (Prusa MINI, Bambu Lab A1 mini) with room for a skirt, except `uhf-0.4`: it is 193 mm long, because holding 336 mm/s for 0.3 s needs it. It fits a MK4 (250 × 210), a Core One (250 × 220) and any larger bed."
+        - "**Nothing failed?** Print the next tier for your nozzle (standard → hf → uhf → extreme). **Everything failed?** Print the tier below."
+        - "**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf` and `max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` are assigned to that tool, object and speed codes. Per-tool versions of the other files are not published yet."
+        - expert: "**Your own range:** `python3 -I calib.py max-flow --start 6 --end 30 --step 3 --nozzle 0.4 --name PETG-revo`. Add `--estimate` for grams, time, top speed and the acceleration the top band needs."
+        - expert: "**Worked example, the owner's RatRig V-Core 4 IDEX** (Klipper): Phaetus Rapido UHF and an LDO Orbiter 2.5 on both tools; T0 has an \"Alpha\" PCD 0.4 nozzle, T1 a Phaetus PS M6 copper 0.4. Files: `max-flow_hf-0.4_10-50_T0.3mf` and `_T1.3mf`. **T0, PETG at 240 °C:** band 30 is the last clean wall, band 34 the onset; the heater held within ±0.8 °C (72 % power at most) and the extruder never clicked, so the hotend's melt was the limit, not the extruder. Set **25 mm³/s** (85 %). T1 has the same V6 bore: expect a band or two either way, and give it its own number."
+        - misread: "**Taking the 0.6 or 0.8 file for a 0.4 nozzle because the hotend is UHF.** A 0.4 nozzle caps even a UHF hotend: Ellis measured about 30 mm³/s on a Rapido UHF with a 0.4 brass nozzle against the 75 claimed. Pick the file for the nozzle you print with."
+
+  - part: "Print it"
+
+  - id: open-project
+    title: "Open it as a project and check the preview"
+    points:
+      - "**File › Open project** (Ctrl+O, ⌘O on macOS), pick your profiles, slice."
+      - "Leave it as it opens: the **long side along X** (left to right). Every file but `uhf-0.4` fits a 180 mm bed."
+      - "In the Preview legend choose **Volumetric flow rate** and hover each band on a long straight: it must show **the number on the column**."
+      - "The print time shown is the real one."
+    photos:
+      - id: F3_ui-flow-preview_PS29
+        alt: "PrusaSlicer preview of the flow test in Volumetric flow rate view, one colour per band, a band hovered showing its flow"
+        caption: "Preview, Volumetric flow rate: each band in its own colour on the long straights, the value equal to the engraved number."
+        shot: "SCREENSHOT. PrusaSlicer 2.9.x Preview of the sliced hf-0.4 file with a Klipper printer profile and UNCHANGED filament settings, legend switched to Volumetric flow rate: the bands in a colour ramp from 10 to 50 mm³/s, one band hovered so its value shows, the band markers on the vertical slider visible. Light theme, English UI. Highlight the legend with an amber (#EFA00B) rounded rectangle. No personal printer names."
+    more:
+      points:
+        - "Dragging the file in? Choose **Open as project**, never **Import geometry only**."
+        - "**Volumetric flow rate** is the check that nothing in the slicer capped the test: on the long straights band 1 shows the lowest number, the top of the legend the highest (32.0 on standard-0.4). The numbers on the column print at half speed and show lower values: that is intended. **Speed** shows the band speeds (21–168 mm/s on standard-0.4). The layer height is 0.75 × the nozzle (0.30 mm on the 0.4 files), whatever your profile says."
+        - "**Feature type:** one **External perimeter** line per layer, and **nothing inside the wedge**: no infill, no floor, no gap fill. The numbers face is a small solid block on the column. The **seam** sits on the column's rear corner on every layer, never on the long straights or the round end."
+        - "The vertical slider shows one marker per band; hovering shows `M220 S…`. In the G-code each band starts with `;CALIB max_flow band=N/15 flow=X`."
+        - "**The print time is reliable** with Klipper, Marlin and Prusa printer profiles: PrusaSlicer's preview and time estimate apply `M220`."
+        - "**RepRapFirmware printer profiles:** the preview ignores `M220`. The legend shows the slow base speed (5–17 mm/s; 13.5 on standard-0.4) and the time is several times too long; the printer still prints the real bands."
+        - "**All bands lower than the engraved numbers, by the same ratio?** Your filament profile slowed the base speed down. For this slice only: in **Filament Settings › Cooling** set **Slow down if layer print time is below** and **Enable fan if layer print time is below** to 5 s, and/or raise **Max volumetric speed** above 6.5 mm³/s; slice, export, then **discard** the change (never save it)."
+        - "**Spiral vase** and **Sequential printing** must be off. Gap fill or infill must not appear: if it does, the file was imported."
+        - expert: "**Why along X.** On a bed slinger, X moves only the toolhead, the lighter axis. On CoreXY either axis is fine; keep X so results compare."
+
+  - id: how-it-works
+    title: "No profile changes: how the speed rises"
+    callouts:
+      - kind: warn
+        title: "If you cancel the print, send M220 S100"
+        text: "The top of the tower sets the speed back with `M220 S100`. If you **cancel** before the top, type **`M220 S100`** in the printer's console: Klipper, Marlin and RepRapFirmware keep the factor, and your next print would run up to 8–29 times too fast, up to the firmware's limits. Prusa Buddy printers reset it at the next print start."
+    points:
+      - "**Leave your profiles as they are**, including the filament's max volumetric speed: the slicer cannot cap what the printer adds."
+    more:
+      points:
+        - "The file asks PrusaSlicer for one slow speed (13.5 mm/s on standard-0.4). At the start of each band, `M220 S<percent>` tells the printer to run everything that many times faster: `M220 S1010` is 10.1 ×."
+        - "**Flow = speed × line area.** standard-0.4, band 26: 13.5 mm/s × 10.10 × 0.1907 mm² = 26.0 mm³/s."
+        - "PrusaSlicer's cooling logic (*Slow down if layer print time is below*, *Enable fan if below*) and the filament's max volumetric speed only see the slow speed: they never slow the bands down, and the fan stays at your filament's normal setting."
+        - "`M220` works on Marlin, Prusa firmware (MK4/MK4S, MK3.9/3.5, Core One, XL, MINI, MK3), Klipper and RepRapFirmware: one file for every printer."
+        - "`M220` also speeds up travel and retraction moves. Your firmware limits cap them."
+        - expert: "The factors go up to about 2900 %. One unconfirmed report says factors of 1000 % or more misbehave on an unnamed printer; no firmware source we read clamps them. If yours does, the bands above it stop getting faster and look better than their label: generate a file with `--max-factor 999`."
+
+  - id: firmware-limits
+    title: "Check your firmware limits"
+    points:
+      - "**Klipper:** `max_velocity` in `[printer]` at least the top speed in the table, `max_accel` at least the acceleration (or `SET_VELOCITY_LIMIT` for this session)."
+      - "**Marlin:** `M203` X/Y at least the top speed and **`M203 E`** at least the filament speed. **Prusa:** **Printer Settings › Machine limits**."
+      - "Above a limit the speed stops rising: the band prints below its label and looks better than it should."
+    table:
+      head: ["File", "Top band (mm³/s)", "Top speed: max velocity ≥", "Acceleration for 0.3 s at full speed", "Marlin `M203 E` ≥ (filament)"]
+      rows:
+        - ["standard-0.4", "32", "168 mm/s", "540 mm/s²", "13.3 mm/s"]
+        - ["standard-0.6", "36", "84 mm/s", "280 mm/s²", "15.0 mm/s"]
+        - ["hf-0.4", "50", "262 mm/s", "1960 mm/s²", "20.8 mm/s"]
+        - ["hf-0.6", "60", "140 mm/s", "470 mm/s²", "24.9 mm/s"]
+        - ["uhf-0.4", "64", "336 mm/s", "3840 mm/s²", "26.6 mm/s"]
+        - ["uhf-0.6", "100", "233 mm/s", "1340 mm/s²", "41.6 mm/s"]
+        - ["uhf-0.8", "100", "131 mm/s", "430 mm/s²", "41.6 mm/s"]
+        - ["extreme-0.8", "180", "236 mm/s", "1670 mm/s²", "74.8 mm/s"]
+        - ["extreme-1.0", "180", "151 mm/s", "490 mm/s²", "74.8 mm/s"]
+    more:
+      intro: "**Read the middle of the two long straights.** The nozzle leaves the column, speeds up along the first straight, goes round the end, runs back along the second and brakes into the column. The engraved number is the flow at **full speed** on the straights. The test runs at your profile's **external perimeter acceleration** (*Print Settings › Speed › Acceleration control*)."
+      table:
+        head: ["Top band of the file", "1000 mm/s²", "3000 mm/s²", "4000 mm/s²", "10000 mm/s²"]
+        rows:
+          - ["standard-0.4 (32)", "0.43 s", "0.49 s", "0.50 s", "0.52 s"]
+          - ["standard-0.6 (36)", "0.48 s", "0.50 s", "0.51 s", "0.51 s"]
+          - ["hf-0.4 (50)", "0.20 s (Klipper: peak 49)", "0.34 s", "0.35 s", "0.39 s"]
+          - ["hf-0.6 (60)", "0.45 s", "0.49 s", "0.50 s", "0.51 s"]
+          - ["uhf-0.4 (64)", "0.09 s (Klipper: peak 53)", "0.28 s", "0.30 s", "0.35 s"]
+          - ["uhf-0.6 (100)", "0.26 s", "0.37 s", "0.39 s", "0.41 s"]
+          - ["uhf-0.8 (100)", "0.46 s", "0.50 s", "0.51 s", "0.52 s"]
+          - ["extreme-0.8 (180)", "0.23 s", "0.35 s", "0.36 s", "0.39 s"]
+          - ["extreme-1.0 (180)", "0.45 s", "0.50 s", "0.50 s", "0.52 s"]
+      points:
+        - "The table shows how long the top band holds full speed on the shorter straight, after speeding up and before braking. Every file reaches its label on the straights from 1000 mm/s² up; the lower bands hold it much longer."
+        - "**Klipper's `minimum_cruise_ratio`** (default 0.5, `[printer]`; formerly `max_accel_to_decel`) limits the peak speed of a short move. The straights are long enough that it changes nothing at 4000 mm/s²; at 1000 mm/s² the fast 0.4 files peak a little below their top label (table)."
+        - "**The round end:** the nozzle keeps the band's speed through it up to about 140–170 mm/s and slows to that on faster bands (Klipper's default `square_corner_velocity` 5). Do not read it; read the straights."
+        - "`[extruder] max_extrude_cross_section` needs no change: the tower's line is 0.30 × nozzle², the default limit 4 × nozzle². Klipper has no extruder speed limit on printing moves; `max_extrude_only_velocity` only matters for the [extrude-in-air check](page:max-flow#air)."
+        - "**Marlin:** `M203 E` caps the whole move, printing moves included (filament speed = flow ÷ 2.405). `M201 E` caps the extruder acceleration. **Prusa:** with *Emit to G-code*, the machine limits in the printer profile are what the printer uses; standard-0.4 fits every Prusa profile, hf-0.4 needs 262 mm/s (MK4/Core One normal mode, not stealth)."
+        - "**Bed slingers at 1000–3000 mm/s²:** the straights reach the label, but hold it for less time on the fast 0.4 files. Prefer the larger-nozzle file of your tier if you have that nozzle: the same flow at a lower speed."
+        - expert: "`python3 -I calib.py max-flow --preset hf-0.4 --effective --accel 4000 --max-velocity 300 --min-cruise-ratio 0.5` prints the flow each band really reaches with your own limits."
+
+  - id: safety
+    title: "Temperature and safety"
+    points:
+      - "Print at the temperature you will print with: the one from the [temperature tower](page:temperature-tower)."
+      - warn: "**Stay below your hotend's maximum temperature** (and the filament's). Never raise it, or a firmware limit, to chase a higher band."
+      - warn: "**Hotends with a PTFE (Teflon) tube down to the nozzle are not safe above about 250 °C:** the tube degrades and gives off harmful fumes."
+      - warn: "**Watch the hotend temperature graph during the top bands.** A heater that cannot keep up sags; Klipper may stop the print with \"Heater extruder not heating at expected rate\"."
+    more:
+      points:
+        - "Max flow rises steeply with temperature (CNC Kitchen: a V6 that skipped at 15 mm³/s at 215 °C ran 15 mm³/s cleanly at 275 °C). **If you change the temperature later, the result is no longer valid: test again.**"
+        - "At 50–180 mm³/s the heater melts several grams per minute; a 40–60 W cartridge can fall behind. A sag of more than a few °C is itself a failure of that band ([heater sag](page:max-flow#heater))."
+        - "The uhf and extreme files move at up to 336 mm/s: check that the toolhead, the belts and the part's grip on the bed are fine at that speed before leaving it alone."
+
+  - id: print
+    title: "Slice and print"
+    points:
+      - "Start the print and **stay with it**: listen to the extruder and watch the hotend temperature during the upper bands."
+      - "Note the number on the column at the nozzle height when the extruder clicks or the temperature sags."
+      - warn: "If the extruder grinds hard for several bands, stop the print and send `M220 S100`."
+    more:
+      points:
+        - "A thin, wavy or broken line on the straights, seen at the nozzle, is the onset. The printer's console also shows the band being printed (`;CALIB max_flow band=N`)."
+        - "Let the part cool before taking it off. Keep the brim on until you have read it: it holds the thin wall straight."
+        - beginner: "Write the filament, the temperature, the nozzle and the tool on a piece of tape on the brim."
+        - expert: "**Nozzle-cam recording:** `python3 -I calib.py record --test max-flow --printer <printer URL> --camera <camera name>` follows the print and records one clip per band over its upper two thirds (`max-flow_wall_band8_18mm3s.mp4`). Compare a clean band with the onset band side by side."
+      photos:
+        - id: F3_wall-nozzlecam_PETG_VC4
+          kind: video
+          aspect: "20/9"
+          alt: "Two nozzle-cam clips side by side, same framing, half speed, about one layer each: on the left band 6 (30 mm³/s), an even, closed wall; on the right band 8 (38 mm³/s), dark gaps between the lines"
+          caption: "Nozzle cam, the owner's PETG on T0 at 240 °C, half speed. Left, band 6, 30 mm³/s: the last clean wall. Right, band 8, 38 mm³/s: dark gaps on the straights. The heater held within ±0.8 °C and the extruder never clicked: the hotend's melt was the limit."
+          shot: "DONE: calib.py record clips max-flow_wall_band6_30mm3s (14.2–17.0 s) and band8_38mm3s (12.75–15.55 s), each cropped 800×720 around the nozzle, side by side with a thin dark separator, tools/clip.sh at 0.5 speed. Poster at 1.6 s. No on-screen text."
+
+  - part: "Read it"
+
+  - id: how-to-read
+    title: "How to read it"
+    points:
+      - "Read **from the bottom up**, on the **middle of the two long straights, both walls**, in the **upper two thirds** of each band."
+      - "On the [scorecard](page:max-flow-scorecard), mark the wall of each band **✓**, **◐** (degrading), **✕** (fail) or **–**, and tick **Heater sag** and **Clicks** where you noted them."
+      - "Do the squeeze test **last**."
+    photos:
+      - id: F3_layout-top_render
+        alt: "Top view of the flow test: the hex column on the left, the straight along X, the straight at 30° and the round end"
+        caption: "Seen from above: the column (numbers on its front-left face, seam on its rear corner), the two long straights and the round end."
+        aspect: "1/1"
+        shot: "RENDER, already done: copy of docs/previews/flow-top.png (front at the bottom)."
+    more:
+      points:
+        - "**The numbers** are on the column's front-left face, which is doubled (thicker): the flow of each band in mm³/s. The **seam** is on the column's rear corner, away from the straights you read."
+        - "**Both walls:** the 30° straight faces the front, like the numbers; the straight along X faces the back. Turn the part round, or look at it from inside the wedge. They must agree."
+        - "**Primary signals:** the long straights, the see-through test, extruder clicks and heater sag. Any one of them failing makes the band fail. The sheen, the column and the squeeze test confirm and explain."
+        - "The steps below show what each looks like. Then [choose the value](page:max-flow#choose); the on-screen card does it for you."
+        - misread: "**Judging the column or the round end.** The nozzle nearly stops at the column's corners and slows in the round end on fast bands, so they look good longer than the straights. Read the middle of the straights."
+        - misread: "**Reading the transition layers.** The first layers of each band are still settling at the new flow; judge above them."
+
+  - features: max-flow
+
+  - id: choose
+    title: "Choose the value"
+    intro: "The on-screen card does this for you."
+    points:
+      - "The **onset** is the lowest band that fails (wall ✕, light through it, clicks or heater sag). The **limit** is the band just below it."
+      - "Use **80–90 % of the limit**: 85 % as a rule, 80 % if the limit band was already degrading."
+      - "**IDEX:** each tool gets its own result."
+    more:
+      points:
+        - "Example, the owner's PETG on hf-0.4 (T0, PCD 0.4 nozzle, 240 °C): band 30 is clean, band 34 shows the first gaps, the heater stays within ±0.8 °C and the extruder is silent. Onset 34, limit **30**: the hotend's melt capacity. **25 mm³/s** (85 %)."
+        - "Example, standard-0.4: band 18 fails, band 16 is clean. Limit 16: **13–14 mm³/s**."
+        - "**Band 1 already fails:** not a flow problem. Check the temperature, a partial clog, wet filament and the filament diameter in the profile."
+        - "**Nothing fails:** print the next file up for your nozzle, or a custom range above the top band."
+        - "**Seven-band files** (`hf-0.6`, `uhf-0.6`, `uhf-0.8`, `extreme`): one step is 12–14 % of the top band, so your real limit lies somewhere between the last clean band and the onset. 80–90 % of the last clean band is still a safe setting: you only leave part of one step unused. Example, PETG on uhf-0.6: band 64 is clean, band 76 shows gaps. Limit 64: **51–58 mm³/s**."
+        - "The jump between two wide bands is large, so a **degrading** band is rarer and the loss of gloss may show up on the onset band itself. Judge each band just as on the other files."
+        - expert: "**Fine pass, when the last mm³/s matter:** print 7 narrow bands centred midway between your last clean band and the onset, same file family: `python3 -I calib.py max-flow --preset uhf-0.6 --centre 70` gives `max-flow_uhf-0.6_fine_58-82.3mf` (steps of 3 on hf-0.6, 4 on uhf, 8 on extreme). It costs about as much filament as the first file (14–40 g), so print it only if you need the precision. Read it the same way; on the scorecard, type its flows as a custom range. `--tool 1` works here too."
+        - "**IDEX:** T0 and T1 may differ by a band or two, even with identical hotends: nozzles, extruders and thermistors differ. Write both down and use each on its own tool."
+        - misread: "**Using the onset band itself, or 100 % of the limit.** The limit is the edge of a cliff: real prints have longer moves, bridges and infill that heat the hotend differently. The 10–20 % margin keeps them clear."
+
+  - part: "Apply the result"
+
+  - id: apply
+    title: "Put it in your filament profile"
+    points:
+      - "**Filament Settings › Advanced › Max volumetric speed** = your value. Save the profile, e.g. `Brand PETG – 245 °C – 24`."
+      - "Leave **Print Settings › Speed › Autospeed › Max volumetric speed** at **0**."
+      - "**IDEX:** one filament profile per tool, each with its own value, selected on its extruder."
+    photos:
+      - id: F3_ui-max-volumetric_PS29
+        alt: "PrusaSlicer filament settings, Advanced page, the Max volumetric speed field"
+        caption: "Filament Settings › Advanced: Max volumetric speed."
+        shot: "SCREENSHOT. PrusaSlicer 2.9.x, Expert mode, Filament Settings tab, Advanced page, the Print speed override group with Max volumetric speed visible and filled in (e.g. 24). Highlight the field with an amber (#EFA00B) rounded rectangle. Light theme, English UI."
+    more:
+      points:
+        - "This is the **one change you keep**. PrusaSlicer then slows down any move that would need more plastic than this."
+        - "The print-wide **Autospeed › Max volumetric speed** is a second cap that applies to every filament and every tool: keep it at 0 (off), or at least at the filament value."
+        - "**IDEX and multi-tool:** PrusaSlicer has no per-extruder max volumetric speed in the printer settings; each extruder uses its own filament profile. Make one per tool (for example `PETG T0 ALPHA 0.4` and `PETG T1 PS 0.4`) and select each on its extruder in the plater."
+        - "The value belongs to this filament **at this temperature**, with this hotend, nozzle and extruder. **After any temperature change, test again.**"
+        - "Then re-check **pressure advance**: it depends on the flow you print at."
+
+  - id: when-again
+    title: "When to run it again"
+    points:
+      - "A new filament, or a new printing temperature for it."
+      - "A new hotend, heater, nozzle (size or material) or extruder."
+    more:
+      points:
+        - "Two spools of the same brand and type usually agree; a different colour can differ by a band."
+        - "Then, in the sequence: **pressure advance**, then **flow**."
+
+  - id: air
+    title: "Optional: the extrude-in-air check"
+    points:
+      - "For a precise number without a tower, or to confirm a borderline band: extrude a fixed length of filament in the air at each flow and **weigh** (or measure) what came out."
+      - "The tower's result is the one to use for printing: it is usually a little lower."
+    more:
+      intro: "In the printer's console: `M83` (relative extrusion), a short prime, then one `G1 E45 F…` per flow: a 2 mm³/s reference, then each band of your file. With 1.75 mm filament, F is the flow × 24.95 (2 mm³/s: `F50`; 20 mm³/s: `F499`). Pause after each step to cut the blob. There is no X or Y move."
+      points:
+        - "Heat the hotend to your printing temperature and **park the nozzle at least 50 mm above the bed**."
+        - "Send the commands one step at a time. After each step, cut the blob with tweezers and put it on a numbered paper."
+        - "**Weigh it** (a 0.01 g scale): each blob should weigh **0.137 g** in PETG (45 mm of 1.75 mm filament). Efficiency = blob ÷ the 2 mm³/s reference blob. The limit is the last flow above about **97 %**."
+        - "**Or measure it** (Ellis' method): before each step, mark the filament 65 mm above the extruder inlet; after it, 20 mm should remain. More than 21 mm left means more than 2 % lost."
+        - "45 mm per step stays under Klipper's `max_extrude_only_distance` (50 mm by default) and Marlin's `EXTRUDE_MAXLENGTH`. Klipper's `max_extrude_only_velocity` and Marlin's `M203 E` cap these steps."
+        - expert: "At UHF flows a 45 mm step lasts under 2 s: prefer the tower there."
+
+  - id: share
+    title: "Share your result"
+    points:
+      - "Printed the test? **Post your Make** on the [Printables page](link:printables-max-flow) with a photo of your **last good and first failed** band, your hotend, nozzle, temperature and the value you chose."
+    more:
+      points:
+        - "Makes help other users judge their own print, and they help the project grow. Results from hotends not in the table are especially welcome."
+        - "We regularly pick the clearest Makes and ask their authors whether we may use the photo in this official guide, with their name and a link."
+
+  - part: "Troubleshooting"
+
+  - id: troubleshooting
+    title: "The bands do not get faster"
+    points:
+      - "**The tower printed at a crawl, no markers on the slider:** open the single .3mf with **File › Open project**, not Import."
+      - "**The upper bands all look the same, too good:** a firmware limit capped them ([check](page:max-flow#firmware-limits))."
+      - "**The next print runs far too fast:** send `M220 S100` (Klipper: or `RESTART`)."
+    more:
+      points:
+        - "**The legend shows lower flows than the engraved numbers on the straights:** your filament's cooling slowdown or max volumetric speed capped the base speed; see [the session-only fix](page:max-flow#open-project)."
+        - "**The time shown is several times too long and the legend shows the slow base speed (5–17 mm/s):** a RepRapFirmware printer profile. The printer still prints the real bands."
+        - "**The top bands stop getting faster on a printer that accepts high factors badly** (above 999 %): generate the file with `--max-factor 999`."
+        - "**Klipper stops with \"Move exceeds maximum extrusion\":** `max_extrude_cross_section` was lowered below its default. The tower needs 0.30 × nozzle²."
+
+  - id: troubleshooting-more
+    title: "Other problems"
+    points:
+      - "**Band 1 already fails:** too cold, a partial clog, wet filament, or the wrong filament diameter."
+      - "**The column fails with the straights:** the extruder is skipping or something slows the whole layer; not a melt limit."
+      - "**Klipper: \"Heater extruder not heating at expected rate\":** the heater could not keep up. The band where it stopped is above your limit."
+    more:
+      points:
+        - "**The thin wall came loose or bent at speed:** keep the brim, clean the bed, check the first layer. A wobbly wall makes the straights hard to read."
+        - "**PrusaSlicer says the object is outside the print area:** the `uhf-0.4` file is 193 mm long; use a bed of 200 mm or more. On a 180 mm bed, turn off the skirt or move it closer, and keep the long side along X."
+        - "**Clicks in every band, from the start:** extruder tension, a worn gear, or a bowden tube with too much friction. Fix that first."
+        - "**IDEX: the other tool heats or prints:** the object is assigned to the wrong extruder. Use the `_T0` / `_T1` file for the tool you test, or set the object's extruder."
+        - "**PrusaSlicer 3.x:** these files are made for PrusaSlicer 2.9 (2.7 is the minimum). For 3.x the tests will be prepared as Lua plugins, once its plugin system is stable."

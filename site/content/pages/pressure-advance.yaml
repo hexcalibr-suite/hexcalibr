@@ -1,0 +1,359 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# Test F2, pressure advance (v1.3.0, hex pinwheel, fixed test speed via M220, coarse and fine files;
+# v1.2.1: read the convex probes, the inside corners are not counted). Facts about the model
+# come from suite/definitions/pressure_advance.toml, suite/README.md and
+# docs/dev/pressure-advance-features.md; anything not final is {{TBD}}.
+# The per-feature reading steps come from content/features/pressure-advance.yaml.
+id: pressure-advance
+title: "Pressure advance"
+nav_title: "Pressure advance"
+description: "Tune pressure advance (linear advance) per filament with a small hexagonal tower: one PA value per band, scored band by band."
+sketch: sketches/pressure-advance.svg   # pencil drawing beside the intro (hexcalibr-core: calib.py sketch)
+numbered: true
+intro: |
+  A small hexagonal tower printed in **bands of 4.6 mm**, each with its own pressure advance value. Score the blade tips band by band, pick the winner with a fixed rule, and type one number into your setup.
+more:
+  intro: |
+    A small hollow hexagon with three blades, printed in **bands of 4.6 mm**. Each band has its own pressure advance value, and the band number is engraved on the front. The blades end in sharp 45° and 90° tips after long straights, the hardest corners a printer meets. Too little PA makes them bulge, too much makes them dull. You score each band, pick the winner with a fixed rule, and type one number into your setup. There are two files per firmware: a **coarse** one with a wide range, and a **fine** one with small steps.
+
+    The tower is 43 mm tall, uses about 4.5 g of filament and prints in about 11 minutes, with **no changes to your profiles**: the file sets the test speed itself. Times and grams are our estimates, ±30 % for the time; PrusaSlicer shows the real figures after slicing.
+callouts:
+  - kind: warn
+    text: "Open the file with **File › Open project**, never with **Import**: an import keeps the shape but drops the PA changes and the test speed."
+need:
+  title: "What you need"
+  columns:
+    - title: "To print"
+      items:
+        - "The [file for your firmware and extruder](page:pressure-advance#download)"
+        - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+        - "Your own printer, print and filament profiles, already working"
+        - "The nozzle temperature found with the [temperature tower](page:temperature-tower)"
+        - "The filament to test, **dry**, about 5 g of it"
+    - title: "To read it"
+      items:
+        - "A lamp you can move, and a dark card or cloth"
+        - "The [scorecard](page:pressure-advance-scorecard), printed or on screen"
+        - "Optional: a phone camera, to zoom on the tips"
+
+steps:
+  - part: "Before printing"
+
+  - id: what-for
+    title: "What it is for, and when to run it"
+    points:
+      - "Find the **pressure advance** (PA) value: sharp corners, no bulges, no gaps after them."
+      - "Run it **after the temperature tower**, once **per filament** and once **per toolhead**."
+    photos:
+      - id: F2_overview_PETG_VC4
+        aspect: "3/4"
+        focus: "51% 50%"
+        alt: "The whole coarse pressure advance tower in yellow PETG, front view: band numbers 1 to 9 engraved on the front face, band 1 at the bottom; the outline of the right tip turns ragged in the top bands"
+        caption: "The tower: band 1 (PA 0) at the bottom, more PA in each band going up. The band numbers are engraved on the front. On this coarse tower (0 → 0.200) the outline of the right tip, at the right edge, turns ragged in the top bands: far too much PA."
+        shot: "DONE: _A645906, full frame, the owner's coarse PETG tower (klipper-dd coarse 0–0.200), camera square to the front (numbered) face, the right 90° tip in profile at the right edge, dark background. No ruler."
+    more:
+      points:
+        - "It finds the **pressure advance** (PA) value that keeps the line width even when the nozzle slows down and speeds up: sharp corners without bulges, and no gaps after them."
+        - beginner: "Molten plastic in the nozzle behaves a little like toothpaste in a tube: when you squeeze, it takes a moment to come out, and when you stop, it keeps oozing. When the nozzle brakes into a corner, plastic keeps coming and piles up: the corner **bulges**. After the corner the flow arrives late and the line is thin. PA tells the firmware to push a little earlier and ease off a little earlier. Too much of it and the corners come out **rounded**, dull or with small gaps."
+        - "Klipper, Prusa and RepRapFirmware call it **pressure advance**; Marlin calls it **linear advance** (`K` factor). It is the same idea, but the numbers are not interchangeable between firmwares."
+        - "Run it **after the temperature tower**: PA depends on how runny the plastic is, so tune it at the temperature you will print with."
+        - "Run it **per filament**: every type, brand and sometimes colour needs its own value. And **per toolhead** on IDEX and multi-tool printers: each hotend and extruder gets its own tower and its own value."
+        - "In the sequence it comes after maximum volumetric flow and **before** flow and retraction: good PA changes top surfaces and often removes most stringing by itself."
+        - expert: "The result is valid for the test speed (98 mm/s, 8 mm³/s, unless you generate another) and the external-perimeter acceleration of your profile, and it assumes input shaping is already tuned. Write both down with the value."
+
+  - id: coarse-or-fine
+    title: "Coarse or fine: which file first"
+    points:
+      - "Print the **fine** file if you already have a PA value to start from."
+      - "Print the **coarse** file if you know nothing about this filament or printer, then a fine pass around its best band."
+    more:
+      intro: "Every firmware and extruder has two files, both with 9 bands and the same height. Print the coarse one **only if you do not know your PA at all**."
+      points:
+        - "**Fine** (the usual choice): the range most printers and filaments land in, in small steps (0.01 on Klipper and Prusa direct drive). If you have a value from your filament profile or an earlier test, start here."
+        - "**Coarse:** a range two to five times wider, sure to reach **clearly too high** in its top bands (0 → 0.20 on Klipper and Prusa direct drive). Print it for a new filament or printer you know nothing about, or to see once, plainly, what both too low and too high look like."
+        - "**Then a fine pass around the best coarse band:** print the **fine** file for your firmware and extruder. If the best coarse band lies above the fine file's range, take that band's value: the coarse result is your value."
+        - "**What too high looks like** at the top of a coarse tower: the tips are **rounded or \"eaten\"**, the wall **thins just before each tip** (the last 1–2 mm of the straight look starved), and **gaps open at the line start** on the seam bump at the back."
+        - expert: "`--centre` uses the preset's fine step; add `--step` for another one, e.g. a quarter of it for a very fine third pass. Files are named like `pressure-advance_klipper-dd_fine_0.01-0.09.3mf`."
+
+  - id: download
+    title: "Download the right file"
+    table:
+      head: ["File", "Firmware and printers", "Extruder", "Fine: band 1 → 9 (step)", "Coarse: band 1 → 9 (step)", "Command in each band"]
+      rows:
+        - ["`klipper-dd`", "Klipper", "direct drive", "0 → 0.08 (0.01)", "0 → 0.20 (0.025)", "`SET_PRESSURE_ADVANCE ADVANCE=…`"]
+        - ["`klipper-bowden`", "Klipper", "bowden", "0 → 0.8 (0.1)", "0 → 1.6 (0.2)", "`SET_PRESSURE_ADVANCE ADVANCE=…`"]
+        - ["`klipper-dd_…_T0` / `_T1`", "Klipper IDEX (e.g. RatOS): one file per toolhead", "direct drive", "0 → 0.08 (0.01)", "0 → 0.20 (0.025)", "`SET_PRESSURE_ADVANCE EXTRUDER=extruder ADVANCE=…` (T0) or `EXTRUDER=extruder1` (T1)"]
+        - ["`buddy-dd`", "Prusa Buddy firmware 5.0+: MK4, MK4S, MK3.9, MK3.5, Core One, XL", "direct drive", "0 → 0.08 (0.01)", "0 → 0.20 (0.025)", "`M572 S…`"]
+        - ["`buddy-bowden`", "Prusa Buddy firmware 5.0+: MINI, MINI+", "bowden", "0 → 0.48 (0.06)", "0 → 1.0 (0.125)", "`M572 S…`"]
+        - ["`marlin-dd`", "Marlin 2 with linear advance (LIN_ADVANCE); Prusa MK3/MK3S", "direct drive", "0 → 0.16 (0.02)", "0 → 0.40 (0.05)", "`M900 K…`"]
+        - ["`marlin-bowden`", "Marlin 2 with linear advance", "bowden", "0 → 1.6 (0.2)", "0 → 2.0 (0.25)", "`M900 K…`"]
+        - ["`rrf-dd`", "RepRapFirmware 3 (Duet)", "direct drive", "0 → 0.16 (0.02)", "0 → 0.40 (0.05)", "`M572 D0 S…`"]
+        - ["`rrf-bowden`", "RepRapFirmware 3 (Duet)", "bowden", "0 → 0.8 (0.1)", "0 → 1.6 (0.2)", "`M572 D0 S…`"]
+    points:
+      - "Find your firmware and extruder in the table and download that **single .3mf** file, not a ZIP."
+      - "Get it from the {suite} page on Printables (below)."
+    printables: printables-pressure-advance
+    more:
+      intro: "There is one pair of files (coarse and fine) per **firmware family** and **extruder type**: PrusaSlicer pastes the PA command into the G-code exactly as written, so each firmware needs its own file. Every file has 9 bands; band 1 is always PA 0."
+      points:
+        - "The files are named like `pressure-advance_klipper-dd_coarse_0-0.20.3mf` and `pressure-advance_klipper-dd_fine_0-0.08.3mf`: firmware and extruder, **coarse or fine**, then the PA of the bottom and top bands. The value of every band is also in the slicer: see [the markers](page:pressure-advance#check)."
+        - "Download the **single .3mf file**, not \"Download all\" as a ZIP: PrusaSlicer opens a ZIP's 3MF as plain geometry and the PA changes are lost."
+        - "Every band is 4.6 mm tall, on a 0.6 mm floor, with a 0.8 mm cap on top: the tower is 42.8 mm tall. About 4.5 g of PETG (0.45 g per band); the file prints with 0.45 mm lines and 0.2 mm layers, and the grams assume 1.75 mm filament and no skirt."
+        - "The ranges are made for a **0.4 mm nozzle**. Bigger nozzles usually need **less** PA (Prusa's own values at 0.6 mm are about 60 % of those at 0.4), so the same files still cover them, at a coarser step."
+        - beginner: "**Direct drive or bowden?** Follow the filament from the spool. If the extruder motor sits on the print head and pushes the filament straight into the hotend, it is **direct drive** (Prusa MK4, Core One, XL, most Klipper machines). If the motor is on the frame and pushes the filament through a long PTFE tube to the head, it is **bowden** (Prusa MINI, Ender 3 and many older printers)."
+        - beginner: "**Which firmware?** Prusa MK4, MK4S, MK3.9, MK3.5, Core One, XL and MINI run **Buddy**. If you control the printer from Mainsail or Fluidd, it runs **Klipper**. Duet boards run **RepRapFirmware**. Most other printers, and the Prusa MK3/MK3S, run **Marlin**."
+        - "**XL and other Buddy multi-tool printers:** `M572` has no tool number on Buddy; it applies to the **active tool**, which is the one printing the tower. So the same `buddy-dd` file works for every XL tool: assign the object to the tool you want to tune ([IDEX and multi-tool](page:pressure-advance#idex-apply))."
+        - expert: "**A custom range** (fine pass, other nozzle, other tool) is one command in the {suite} [repository](link:repository), with Python 3.11 and nothing else: `python3 -I calib.py pressure-advance --preset klipper-dd --centre 0.04` (the fine pass around a value), or `python3 -I calib.py pressure-advance --firmware klipper --start 0.02 --end 0.04 --step 0.0025 --name PETG-fine`. `--firmware` is `klipper`, `buddy`, `marlin` or `rrf`; at most 20 bands. Also: `--variant coarse` or `fine` for one preset file, `--tool N` for IDEX, `--nozzle 0.6`, `--restore V` (sets PA back to V at the end)."
+        - expert: "**Test faster when you can:** PA effects grow with speed. Add `--flow 12` (about 147 mm/s) or `--speed <your real external-perimeter speed>` to any of these commands, staying below 0.8 × your filament's max volumetric speed ([the test speed](page:pressure-advance#speed)). Example: `python3 -I calib.py pressure-advance --preset klipper-dd --variant coarse --flow 12 --restore 0.04`."
+
+  - part: "Print it"
+
+  - id: open-project
+    title: "Open it as a project"
+    callouts:
+      - kind: warn
+        title: "Before you print: one marker per band"
+        text: "After opening, slice and look at the vertical layer slider in the Preview: it must show **one marker per band**, plus one at the top. Hovering a marker shows the PA command, for example `;CALIB pressure_advance band=3/9 pa=0.020`, `SET_PRESSURE_ADVANCE ADVANCE=0.020` and `M220 S1651`."
+        items:
+          - "On multi-extruder printer profiles (IDEX, XL, MMU) there may be a short cluster of markers per band. That is fine."
+          - "**No markers: do not print.** Open the file again with **File › Open project**, and check in **Preferences** that the drop-project dialog is on (see below)."
+          - "Quick check: export the G-code and search it for `;CALIB pressure_advance`: [details in the next step](page:pressure-advance#check)."
+    points:
+      - "In PrusaSlicer, **File › Open project** (Ctrl+O, or ⌘O on macOS) and choose the .3mf."
+      - "Dragging the file in? Choose **Open as project**, never **Import geometry only**."
+      - warn: "Opening the project replaces anything already on the plate. The PA changes belong to the plate, so print the tower **on its own**."
+    more:
+      points:
+        - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import geometry only** drops the PA changes."
+        - "If you once ticked \"don't show again\" with the wrong choice, dragging will import silently. Turn the question back on in **Preferences › General › Show drop project dialog**."
+        - "The project carries **no printer, filament or print profile**: PrusaSlicer keeps yours. It only carries the tower, a few per-object settings the test needs (0.2 mm layers, 0.45 mm lines, two perimeters, both external, classic perimeter generator, no gap fill, no infill, the seam at the back, the test speed) and the PA changes."
+        - beginner: "Do not scale, rotate, cut or sink the tower. The PA changes are fixed heights: if the tower changes size, they land in the wrong place."
+
+  - id: check
+    title: "Check the markers"
+    callouts:
+      - kind: warn
+        title: "No markers, no print"
+        text: "The vertical slider must show **one marker per band**, at the first layer of each band. Hovering a marker shows the PA command for that band."
+        items:
+          - "On multi-extruder printer profiles (IDEX, XL, MMU) there may be more than one marker per band. That is fine: they all carry the same value."
+          - "**If no markers are visible, do not print.** The PA changes were dropped and the whole tower would print with one value. Open the file again with **File › Open project** (not Import), and check **Preferences › General › Show drop project dialog** so that dragging a file asks you again."
+          - "Quick check before printing: export the G-code and search it for `;CALIB pressure_advance`. All nine bands must be there, from `band=1/9 pa=0.000` up."
+    points:
+      - "Select **your** profiles, click **Slice now** and switch to **Preview**."
+      - "Hover a marker: the PA value must go up one step per band."
+      - "Check that the command matches your firmware: `SET_PRESSURE_ADVANCE` (Klipper), `M572 S` (Prusa Buddy), `M900 K` (Marlin), `M572 D0 S` (RepRapFirmware)."
+    photos:
+      - id: F2_ui-slider-markers_PS29
+        alt: "PrusaSlicer preview of the pressure advance tower with a marker per band on the layer slider"
+        caption: "One marker per band; hover to read the PA command."
+        shot: "SCREENSHOT. PrusaSlicer 2.9.x Preview of the sliced klipper-dd tower (v1.1 file), single-extruder printer profile, light theme, English UI. One marker per band on the vertical slider plus the top one; hover the band 3 marker so its tooltip shows ';CALIB pressure_advance band=3/9 pa=0.020', the SET_PRESSURE_ADVANCE line and M220 S1651. Crop to the 3D view plus the vertical slider. No personal printer names in the preset combos (use a generic profile name)."
+    more:
+      points:
+        - "Pick **your** printer, print and filament profiles in the right-hand panel, as for any print."
+        - "Click **Slice now** and switch to **Preview**. On the vertical layer slider there is a small marker at the first layer of each band."
+        - "Hover a marker: it shows the custom G-code, a comment such as `;CALIB pressure_advance band=3/9 pa=0.020`, the command for your firmware and `M220 S1651` (the test speed, [next step](page:pressure-advance#speed)). The values must go up one step per band. The last marker, at the top, sets `M220 S100` back."
+        - "Check that the command matches your firmware: `SET_PRESSURE_ADVANCE` for Klipper, `M572 S` for Prusa Buddy, `M900 K` for Marlin, `M572 D0 S` for RepRapFirmware. A wrong family is ignored by the printer, or stops it with an error."
+        - expert: "The same line may appear more than once per band: on multi-extruder profiles PrusaSlicer keeps a custom G-code only if it lands exactly on a layer top, so each command is repeated on a 0.01 mm grid. That is harmless. Unlike temperature, PA acts at once, so there is no transition zone: each band is valid from its first layer."
+
+  - id: speed
+    title: "The test speed: nothing to change"
+    callouts:
+      - kind: warn
+        title: "If you cancel the print, send M220 S100"
+        text: "The file speeds the printer up with `M220`, and the cap at the top sets it back with `M220 S100`. If you **cancel** the print before the top, type **`M220 S100`** in the printer's console (or terminal): Klipper, Marlin and RepRapFirmware keep the factor, and your next print would run many times too fast. Prusa Buddy printers (MK4, Core One, XL, MINI) reset it at the next print start by themselves."
+    points:
+      - "**No profile changes are needed.** The walls print at **98 mm/s**, about **8 mm³/s**, with your own acceleration."
+      - "Check it in the Preview: switch the legend to **Speed**; the walls show about **98 mm/s** in every band."
+    photos:
+      - id: F2_ui-speed-preview_PS29
+        alt: "PrusaSlicer preview of the tower in Speed view, the walls at about 98 mm/s"
+        caption: "Preview, Speed view: the walls at about 98 mm/s from the bottom band to the top, with your profiles unchanged."
+        shot: "SCREENSHOT. PrusaSlicer 2.9.x Preview of the sliced v1.1 klipper-dd tower with a Klipper (or Prusa) printer profile and UNCHANGED filament cooling settings, legend switched to Speed: the walls in one colour at about 98 mm/s, the floor and the cap in other colours. Light theme, English UI. Optional second crop, same framing, legend on Volumetric flow rate showing about 8 mm³/s. Highlight the legend with an amber (#EFA00B) rounded rectangle. No personal printer names."
+    more:
+      points:
+        - "How: the file asks PrusaSlicer for a very low wall speed (about 6 mm/s), so the slicer sees long layers and never slows them down for cooling. Every band also sends **`M220 S1651`**, a speed factor that the printer applies: 6 × 16.5 ≈ 98 mm/s. `M220` works on every firmware, so it adds no new file variants."
+        - "The floor, the first layer and the 0.8 mm cap at the top print at **100 %**, with your own speeds."
+        - "**Check in the Preview:** slice, and in the legend at the bottom left switch the view from **Feature type** to **Speed**: the walls show about **98 mm/s**, the same from the bottom band to the top. In **Volumetric flow rate** they show about **8 mm³/s**. The print time is the real one. This works with Klipper, Marlin and Prusa printer profiles: PrusaSlicer applies `M220` in its preview."
+        - "**RepRapFirmware printer profiles:** PrusaSlicer ignores `M220` in the preview there. The legend shows the low base speed and the time is many times too long; the printer still prints at 98 mm/s."
+        - "**Fan:** the slicer sees long layers, so the fan runs at your filament's **minimum** fan speed, with the bridge fan on the few short overhangs of the engraved numbers. That is how your big parts are cooled."
+        - beginner: "Why a fixed speed: PA only shows when the nozzle changes speed. Before, the slicer slowed a small tower like this one down to 15 mm/s, where even PA 0 looks fine."
+        - expert: "**Another test speed:** generate a file with `--speed <your external-perimeter speed>` or `--flow <mm³/s>` ([custom range](page:pressure-advance#download)). PrusaSlicer can no longer cap the flow with your filament's **max volumetric speed**, so stay below it: use about **0.8 × your filament's max volumetric speed** (with 15 mm³/s, `--flow 12`)."
+        - expert: "If the Speed view shows less than 98 mm/s, your filament's **Slow down if layer print time is below** is above 28 s, which is rare. Lower it for this print only, and do not save the change."
+
+  - id: settings
+    title: "Check the rest of the settings"
+    points:
+      - "Print at the temperature you chose with the [temperature tower](page:temperature-tower)."
+      - "Use the **print profile you really print with**, and write down its external-perimeter acceleration."
+      - "Make sure nothing else sets PA during the print."
+    more:
+      points:
+        - "Set the nozzle temperature to the one you chose with the [temperature tower](page:temperature-tower). PA found at another temperature is not the right one."
+        - "Use the **print profile you really print with**: the file sets the speed, but the **external-perimeter acceleration** is your profile's. **Write it down** with the test speed (on Klipper also `square_corner_velocity`): the value is valid for them."
+        - "**No other PA source during the print.** The **Before / After layer change G-code** must not set PA. A PA line in the filament start G-code is fine: band 1's command comes later and wins."
+        - "**Sequential printing off** (it disables the per-layer commands), **spiral vase off**, **variable layer height off**. The file sets 0.2 mm layers; any first layer below 0.6 mm works."
+        - "**Skirt** 0 or 1 loop. **Wipe tower** and **ooze prevention** off."
+        - expert: "Klipper's documentation tests at low acceleration (`SQUARE_CORNER_VELOCITY=1 ACCEL=500`), which exaggerates the corners but tunes PA for conditions you do not print at. If you want them, type the command in the console before printing and `FIRMWARE_RESTART` afterwards: the file itself sends no motion settings."
+
+  - id: print
+    title: "Slice and print"
+    points:
+      - "Slice again after any change, export the G-code (or send it to the printer) and start the print."
+      - warn: "**After the print, the printer keeps the top band's PA** until something sets it again. On the last layer the printer's screen shows **PA test done: restore your PA**. On Klipper, `RESTART` or `FIRMWARE_RESTART` typed in the console, or the next `SET_PRESSURE_ADVANCE`; on Marlin, a reset, and **do not `M500`** before your own value is set; on Prusa Buddy, the next print's filament start G-code sets it again."
+      - warn: "**Close the dialog before you restart.** Mainsail rebuilds the window from the console history when it reconnects, so after a `RESTART` typed with the window still open, the window comes back. Click **Close** first, then type `RESTART` once the print has finished: a restart during the print stops it."
+    photos:
+      - id: F2_ui-end-dialog_Mainsail
+        alt: "Mainsail showing the HexCalibr PA test finished dialog with its single Close button"
+        caption: "Klipper: on the last layer, Mainsail (or Fluidd) tells you once that the top band's PA is still active. Close closes it."
+        shot: "SCREENSHOT. Mainsail (2.9 or later) dashboard in a desktop browser, light or default dark theme, on the last layer of a v1.2 klipper-dd print (no --restore): the 'HexCalibr: PA test finished' dialog in the centre with its three texts (top band PA 0.080 still active; RESTART or FIRMWARE_RESTART in the console, or the filament start G-code; --restore files) and its single 'Close' footer button; the status line behind it showing 'PA test done: restore your PA'. Crop to the dialog plus a little of the page. Hide the printer's host name and any IP address. A Fluidd twin with suffix _Fluidd is welcome."
+    more:
+      points:
+        - "Watch the value change at each band. **Klipper:** every `SET_PRESSURE_ADVANCE` answers in the Mainsail or Fluidd console with the new `pressure_advance` value. **RepRapFirmware:** send `M572` with no value in the console to read it. **Marlin:** many screens show the `K` value in the advanced settings menu. **Prusa Buddy:** the screen does not show it; follow the print height against the markers instead."
+        - "The bands are short: a band takes about a minute. Watching the corner of the right blade in the first bands, you can often see the bulge with your own eyes."
+        - "**Klipper: a dialog in Mainsail or Fluidd.** On the last layer, a few seconds before the end, the Klipper files open a window once: **HexCalibr: PA test finished**. It only informs you. The top band's PA is still active; it goes back to your `printer.cfg` value after `RESTART` or `FIRMWARE_RESTART`, typed in the console when the print has finished, or at the next print if your filament start G-code sets PA. The only button, **Close**, closes the window."
+        - expert: "**One-click restore (optional).** Paste this macro into your `printer.cfg`, save, and restart Klipper once: `\n[gcode_macro HEXCALIBR_RESTORE]\ngcode:\n  RESPOND TYPE=command MSG=action:prompt_end\n  RESTART\n` After a test print, type `HEXCALIBR_RESTORE` in the console: it closes the dialog, then reloads `printer.cfg`, with the `pressure_advance` of every extruder and the speed factor at 100 %. The test files never run it: you run it, when the print has finished."
+        - expert: "The dialog uses Klipper's `RESPOND` command (`[respond]`, already in RatOS and in the Mainsail and Fluidd configuration). Without it Klipper only writes `Unknown command` in the console and the print goes on; Mainsail 2.9 or later shows the window. The macro needs `[respond]` too."
+        - beginner: "Write the filament brand, colour, nozzle, test speed and acceleration on a piece of tape on the tower. In a month you will not remember which tower was which."
+
+  - part: "Read it"
+
+  - id: how-to-read
+    title: "How to read it: score each band"
+    points:
+      - "Open the [scorecard](page:pressure-advance-scorecard) and choose your file in the firmware menu."
+      - "Hold the tower with the numbers facing you: band 1, at the bottom, is PA 0."
+      - "Follow each **convex tip** from band 1 up under raking light, and mark ✓, **L** (too low), **H** (too high) or **–** for each probe."
+    photos:
+      - id: F2_layout-top_render
+        alt: "Top view of one band of the pressure advance tower, the front face at the bottom"
+        caption: "One band seen from above, front (numbers, thicker wall) at the bottom. The 45° tip points to the bottom left, the right 90° tip to the right, the back-left 90° tip to the top left; the seam bump is on the back face."
+        shot: "RENDER, already done: copy of docs/previews/pa-band-top.png (front face at the bottom). Replace with a real top-down photo of the top band only if it reads as clearly."
+    more:
+      points:
+        - "Open the [scorecard](page:pressure-advance-scorecard) (print it, or fill it on screen). One row per band, one column per probe. Choose your file in the firmware menu: it fills in the PA value of every band."
+        - "Hold the tower with the **engraved numbers facing you**. Band 1 is at the **bottom** and is always **PA 0**. Each band's number is engraved on the front face, above a groove that marks where the band starts."
+        - "**Read the convex probes: PA shows there.** They are the **blade tips** (the right and back-left 90° tips, the front-left 45° tip), the **last millimetre of each straight** just before a tip, and the **seam bump** on the back face. The inside corners where the blades fold back, and the three plain **120°** corners of the hexagon, are only references."
+        - "**Follow one convex corner from band 1 upward**, with the light raking along the face. With PA too low its edge carries a vertical **row of small blobs**; the row fades out at the right band. On the first real print (PETG, Klipper, fine file) the blobs were there in bands 1–4 and gone from band 5 (0.04) up."
+        - "Use **raking light**: a lamp low and to the side, so the light skims along the face. Do not judge under light from above."
+        - beginner: "**Look at the corner edge-on, against a light background:** hold the tower so the tip edge is a silhouette against a window or a sheet of white paper, or photograph it like that. Blobs show as a bumpy outline; the band where the outline turns straight is your area."
+        - "Where they are, turning the tower: on the **front-right face**, a 15 mm straight into the **right 90° tip**; on the **back face**, the rear **seam bump**, then a short straight into the **back-left 90° tip**; on the **front-left face**, an 18 mm straight into the **45° tip**."
+        - "For each band and each probe, write **✓** (pass), **L** (fails because PA is too low), **H** (fails because PA is too high) or **–** (can't judge). The next steps show what each looks like."
+        - "One rule for every probe: **too low** piles plastic up **at and just before** the corner (bulge, blob) and leaves the line thin after it; **too high** **starves** the corner (rounded, dull, \"eaten\", small gap) and leaves the line slightly fat after it."
+        - "Ignore the floor and the first layer. Judge each band **in its middle**, away from its divider groove."
+        - misread: "**\"The inside corners are filled in every band, so PA must go higher.\"** Do not judge PA at an inside corner: on the outside of a print a concave corner is always slightly rounded, by about half a line width, whatever the PA. On the first real print they looked the same in all nine bands while a tip had already found the value. That column of the scorecard is not counted."
+        - misread: "**Every band looks identical:** PA effects are small at low speed. Reprint faster, with `--flow 12` (about 147 mm/s) or your real external-perimeter speed ([custom range](page:pressure-advance#download))."
+        - misread: "**Bulge and gap in the same band, at the same place,** is not a PA problem. Check the extruder first: a loose idler, backlash or slipping filament."
+        - misread: "**The wrong temperature or wet filament mimic PA errors.** Too hot plastic swells every corner; wet filament gives rough, uneven lines and blobs in every band. Print at the temperature chosen with the tower, with dry filament, before trusting this test."
+        - misread: "**Ringing (ghosting) is not PA:** waves that repeat after each corner and fade along the face come from vibrations, and are fixed with input shaping."
+        - misread: "**The band boundary is not a defect:** the divider groove, and a faint line where the value changes, are there on purpose."
+
+  - features: pressure-advance
+
+  - id: choose
+    title: "Choose the value"
+    intro: "Apply the rule in this order; the on-screen card does it for you."
+    points:
+      - "Go up from band 1 to the **lowest band where both 90° tips stop bulging**."
+      - "Take it unless it shows too-high signs (rounded tips, gaps). **Tie** with the band above: take the **higher**."
+      - "Best band is band 1 or the top band? Shift the range and print again."
+    more:
+      points:
+        - "Go up the tower from band 1. Find the **lowest band where both 90° tips have stopped bulging** (the row of blobs on the edge is gone). Ignore the inside corners: they are rounded in every band."
+        - "In that band and the one above, look for **too-high signs**: tips rounded, dull or \"eaten\", a gap on the 45° tip, a thin end before a tip, a gap at the seam."
+        - "**Your value is the lowest band with no bulge at the 90° tips and no gap anywhere.** The 45° tip may still swell very slightly there: that is normal."
+        - "**Tie:** if two neighbouring bands look equally good, take the **higher** one. When in doubt, lean higher."
+        - "If the best band is **band 1 or the top band**, the right value may lie outside the range: print the **coarse** file, which reaches much higher."
+        - "Example: Klipper direct drive, PETG, fine file. Bands 1 to 4 (PA 0 to 0.030) show a row of small blobs on the right 90° tip. Band 5 (0.040) has a straight, sharp edge; the 45° tip swells a little. Band 6 (0.050) looks just as good. Band 7 shows a thin end before the 45° tip. Tie between 5 and 6: take the higher, **0.050**."
+        - "**After a coarse tower:** print the **fine** file for your firmware and extruder and score it the same way. If the coarse result lies above the fine range, keep the coarse value."
+        - "Write down, next to the value: firmware, nozzle, filament, temperature, test speed (98 mm/s unless you generated another) and acceleration."
+        - misread: "Choosing the band whose 45° tip is perfectly sharp. That is usually one band too high for your 90° corners, which are the corners of your real parts."
+        - expert: "If L and H marks do not sit neatly with L at the bottom and H at the top, something other than PA varies along the tower. Check the Speed view in the Preview again: every band must show the same speed."
+
+  - part: "Apply the result"
+
+  - id: apply
+    title: "Put it in your setup"
+    points:
+      - "Add the value to your **filament** start G-code (**Filament Settings › Custom G-code › Start G-code**) and save it as your own preset."
+      - "The command: Klipper `SET_PRESSURE_ADVANCE ADVANCE=…`, Prusa Buddy `M572 S…`, Marlin `M900 K…`, RepRapFirmware `M572 D0 S…`."
+      - warn: "**Klipper IDEX: name the extruder.** A filament start G-code without `EXTRUDER=` applies to whichever tool is active when the line runs, which is not always the tool that will use this filament. Write `SET_PRESSURE_ADVANCE EXTRUDER=extruder{if filament_extruder_id > 0}{filament_extruder_id}{endif} ADVANCE=0.050`, or keep one filament preset per tool. RatOS IDEX routes a plain command to the active toolhead."
+    photos:
+      - id: F2_ui-filament-startgcode_PS29
+        alt: "PrusaSlicer filament settings, Custom G-code page, with a pressure advance line in the start G-code"
+        caption: "Filament Settings › Custom G-code › Start G-code: one line sets PA for this filament."
+        shot: "SCREENSHOT. PrusaSlicer 2.9.x, Expert mode, Filament Settings tab, Custom G-code page, Start G-code field containing one line 'SET_PRESSURE_ADVANCE ADVANCE=0.050' (or Prusa's M572 line for a Buddy printer). Highlight the line with an amber (#EFA00B) rounded rectangle. Light theme, English UI, generic preset names."
+    more:
+      intro: "Where PA lives depends on the firmware. Setting it in the **filament** profile is usually best: the value follows the spool."
+      points:
+        - "**Klipper, for one value on the printer:** in `printer.cfg`, under `[extruder]`, set `pressure_advance: 0.050` (on IDEX, `[extruder1]` for the second toolhead), then `FIRMWARE_RESTART`."
+        - "**Klipper, per filament (recommended):** in PrusaSlicer, **Filament Settings › Custom G-code › Start G-code**, add `SET_PRESSURE_ADVANCE ADVANCE=0.050`. Save it as your own filament preset."
+        - "**Prusa Buddy** (MK4/MK4S, MK3.9/3.5, Core One, XL, MINI): Prusa's own filament presets already contain a line such as `M572 S{if nozzle_diameter[0]==0.4}0.03{elsif …}`. In **Filament Settings › Custom G-code › Start G-code**, change the number for your nozzle, then save the preset as your own. Old `M900 K` values are converted by the firmware, but use `M572`."
+        - "**Marlin 2:** per filament, add `M900 K0.08` to the filament start G-code. Or once on the printer: send `M900 K0.08`, then `M500` to store it."
+        - "**RepRapFirmware:** add `M572 D0 S0.05` to `config.g` (one line per extruder drive: `D1` for the second), or put it in the filament start G-code."
+        - "**PrusaSlicer 3.0** (upcoming) has native filament settings for PA (`pressure_advance` and `pressure_advance_value`), and it writes the right command for your G-code flavour. When you switch to it, remove any hand-written PA line from the filament start G-code, so that the value is not set twice. PrusaSlicer 2.9 does not have these settings."
+        - beginner: "The numbers above are examples. Use the value of the band you chose, written exactly as on the scorecard."
+
+  - id: idex-apply
+    title: "IDEX and multi-tool printers"
+    points:
+      - "**One tower per toolhead.** Each hotend and extruder has its own PA, even when two toolheads are identical: print one tower with each tool, never in copy or mirror mode."
+      - "Store the result **per tool**: `[extruder]` and `[extruder1]` in Klipper, or one filament preset per tool in PrusaSlicer, or the `EXTRUDER=` line above."
+    more:
+      points:
+        - "**Klipper IDEX:** use `pressure-advance_klipper-dd_fine_0-0.08_T0.3mf` (or `…_coarse_0-0.20_T0.3mf`) for the first toolhead and the `…_T1.3mf` twin for the second. Each file is already assigned to its extruder, and its commands name it (`EXTRUDER=extruder` / `EXTRUDER=extruder1`)."
+        - "**Prusa XL and Marlin:** use the normal file and assign the object to the tool you are testing (right-click the object › **Extruder**). The command applies to the active tool, which is the one printing."
+        - "**RepRapFirmware:** the `rrf` files set `M572 D0`, extruder 0. Per-tool files for other extruders are not published yet."
+        - expert: "Two identical toolheads with the same filament often agree within one band. If they differ by more, look at the extruders: a worn gear or a different PTFE length shows up here first."
+
+  - id: when-again
+    title: "When to run it again"
+    points:
+      - "After a new filament, nozzle, hotend, extruder or bowden tube, a large temperature change, or new input shaper, speed or acceleration settings."
+    more:
+      points:
+        - "A new filament type or brand, sometimes a new colour."
+        - "A new nozzle (size or material), hotend or extruder, or a different bowden tube length."
+        - "A large change in printing temperature."
+        - "A change of input shaper settings, or a big change of external-perimeter speed or acceleration."
+        - "Then, in the sequence: **flow**, then **retraction**. Both read better once PA is right."
+
+  - id: share
+    title: "Share your result"
+    points:
+      - "Printed the test? **Post your Make** on the [Printables page](link:printables-pressure-advance) with a photo of your **best and your worst** band, and say which value you chose."
+    more:
+      points:
+        - "Makes help other users judge their own print, and they help the project grow."
+        - "We regularly pick the clearest Makes and ask their authors whether we may use the photo in this official guide, with their name and a link."
+
+  - part: "Troubleshooting"
+
+  - id: troubleshooting
+    title: "Every band looks the same"
+    points:
+      - "**No markers on the slider:** the file was imported instead of opened, came from a ZIP, was dropped together with other files, or PrusaSlicer is older than 2.7. Open the single .3mf with **File › Open project**."
+      - "**The walls printed slowly:** check the Speed view ([the test speed](page:pressure-advance#speed)). If it shows less than 98 mm/s, the file was imported instead of opened (no `M220` markers), or your filament slows down layers below more than 28 s: lower that for this print only."
+      - "**The next print runs far too fast:** the PA print was cancelled before its top, and the speed factor is still set. Send `M220 S100` (Klipper: or `RESTART`)."
+    more:
+      points:
+        - "**Markers are there but nothing changed:** the printer ignored the command. Check that the file matches your firmware family. **Marlin:** linear advance is an option of the firmware build; without `LIN_ADVANCE`, `M900` does nothing. Send `M900` alone from a terminal: if it does not answer with a K value, your firmware has no linear advance."
+        - "**Something resets PA during the print:** a **Before / After layer change G-code**, or a macro, that sets PA. Remove it for this print."
+        - "**The range is too narrow to see a change:** all bands look good or all look bad. Print the **coarse** file, or a custom range with a larger step."
+        - "**The test speed is too low for your printer:** PA effects are small at low speed. If you normally print outer walls faster than 98 mm/s, reprint with `--flow 12` (about 147 mm/s) or `--speed <your external-perimeter speed>` ([custom range](page:pressure-advance#download))."
+        - "**You were looking at the inside corners:** they look the same in every band whatever the PA. Read the tips instead ([how to read](page:pressure-advance#how-to-read))."
+
+  - id: troubleshooting-more
+    title: "Other problems"
+    points:
+      - "**The printer stops with an error at a band change** (for example `Unknown command` or a Klipper error about an extruder): the file is for another firmware family, or, on IDEX, for another tool. Use the file for your firmware and for the tool the object is assigned to."
+      - "**Even the top band bulges:** the range is too low (run a range shifted up), or the temperature is too high. Check the temperature first."
+      - "**Even band 2 shows gaps:** the range is too high (run a finer range starting at 0), or the extruder under-extrudes."
+    more:
+      points:
+        - "**Bulge and gap at the same place, in the same band:** not PA. Check the extruder: idler tension, gear backlash, filament slipping or a partly clogged nozzle."
+        - "**The 45° tip broke off or curled up:** score it –; the 90° tips decide."
+        - "**Lines in every band look rough or bubbly, or hiss when printing:** wet filament. Dry it and print again."
+        - "**PrusaSlicer 3.x alpha:** not tested with these files yet."

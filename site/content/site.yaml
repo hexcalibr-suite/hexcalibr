@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The site as a whole. `suite_name` is the reserved project name, still to be
+# chosen (HexCalibr, 2026-10-07): change it here and every page follows (texts write {suite}).
+suite_name: "HexCalibr"
+author: "Matteo Beretta"
+# Where the site is published, for canonical and hreflang URLs. Empty: the
+# links are relative (valid HTML; search engines resolve them). Set it once
+# the GitHub Pages address is known, e.g. https://teoteo.github.io/<repo>
+base_url: "https://hexcalibr.ui4.eu"
+# Shows the photographer's brief under each missing photo. Turn off for launch.
+show_photo_briefs: false   # set HEXCALIBR_BRIEFS=1 to show shot briefs in a local build
+# Shows {{TBD}} marks highlighted. Off on the public site, where they are dropped
+# (the build still lists them). HEXCALIBR_TBD=1 shows them in a local build.
+show_tbd: false
+# The model generator (calib.py) is in a private repository. While this is false,
+# the points that tell readers to run it (they contain `calib.py` or a `--option`)
+# are left out of the pages, and the pressure-advance card prints no command.
+generator_public: false
+tagline: "3D print calibration suite"
+description: "Step-by-step calibration tests for PrusaSlicer: run them, read them, apply the result."
+
+# The contents, in reading order. `page:` is a written page; `planned:` a test
+# that is announced but not written yet (shown greyed out, as in Wheelly).
+# Groups with `numbered: true` are numbered in one sequence: that number IS
+# the recommended order.
+contents:
+  - group: "Start here"
+    entries:
+      - page: home
+      - page: before-you-start
+  - group: "Tests, in the recommended order"
+    numbered: true
+    entries:
+      - planned: "First layer and Z offset"
+        note: "printer · do it first"
+      - page: temperature-tower
+        note: "filament · the first test for a new filament"
+      - page: max-flow
+        note: "filament + hotend · after the temperature tower"
+      - page: pressure-advance
+        note: "filament, per firmware · after the temperature tower"
+      - planned: "Flow (extrusion multiplier)"
+        note: "filament · after pressure advance"
+      - planned: "Retraction"
+        note: "filament"
+      - planned: "Dimensions, shrinkage and fit"
+        note: "printer + filament"
+  - group: "IDEX and multi-tool"
+    numbered: true
+    entries:
+      - page: idex-alignment
+        note: "per tool pair · after VAOC or any offset calibration"
+  - group: "Printable cards"
+    entries:
+      - page: temperature-tower-scorecard
+      - page: max-flow-scorecard
+      - page: pressure-advance-scorecard
+      - page: idex-alignment-scorecard
+  - group: "About"
+    entries:
+      - page: further-reading
+      - page: license
+
+# Addresses used in texts as [text](link:<name>). Empty = not known yet: the
+# words show greyed with "(coming soon)", and the download box of each guide
+# shows a disabled "Coming to Printables" button. Downloads are on Printables
+# only. Fill in the Printables URLs after the upload (launch checklist).
+links:
+  # Affiliate links: one address per language (the store of that language).
+  book-aranda:
+    default: "https://www.amazon.co.uk/dp/B09MYW1GKH?tag=tup07c-21"
+    it: "https://www.amazon.it/dp/B09NH3BB9F?tag=tr-yt-21"
+  book-aranda-it: "https://www.amazon.it/dp/B09NH3BB9F?tag=tr-yt-21"
+  book-aranda-uk: "https://www.amazon.co.uk/dp/B09MYW1GKH?tag=tup07c-21"
+  # the HexCalibr collection on Printables (all the tests); fill in after upload
+  printables-collection: ""
+  # each test's own model page (fill in after upload): the download box and the
+  # "share your make" step link here
+  printables-temperature-tower: ""
+  printables-max-flow: ""
+  printables-pressure-advance: ""
+  printables-idex-alignment: ""
+  repository: "https://github.com/hexcalibr-suite/hexcalibr"
+  translate: "https://github.com/hexcalibr-suite/hexcalibr/blob/main/site/CONTRIBUTING-TRANSLATIONS.md"

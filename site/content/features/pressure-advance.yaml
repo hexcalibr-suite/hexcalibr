@@ -1,0 +1,235 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The probes of each pressure-advance band, and how to score them.
+# ONE source for two places: the "How to read it" steps of
+# pages/pressure-advance.yaml (one step per feature) and the printable
+# scorecard (pages/pressure-advance-scorecard.yaml, one column per feature).
+#
+# Aligned with the test definition v1.3.0 (hex pinwheel; v1.2.1: the inside
+# corners have weight "confirms", shown but never counted, and the convex
+# probes lead the reading; v1.3: a coarse and a fine file per preset):
+# suite/definitions/pressure_advance.toml ([[features]], [presets]), mirrored
+# in docs/dev/pressure-advance-features.md. Same ids, same order. If the TOML
+# changes, change this file (ids are also the PO contexts and the page
+# anchors: keep them stable). Seen with the engraved band numbers facing you.
+#
+# `scoring: bands` switches the scorecard to the pressure-advance mode:
+# states pass / L (PA too low) / H (PA too high) / not scored, a PA value
+# per band filled in from the firmware preset, and the decision rule below.
+status: "pressure advance v1.3.0 (hex pinwheel, coarse and fine)"
+scoring: bands
+
+title: "Pressure advance scorecard"
+intro: "One row per band, one column per probe."
+rule_title: "How the best band is chosen"
+rules:
+  - "Hold the tower with the engraved band numbers facing you. Score each band on its own, **in its middle**, away from the divider groove: **✓** pass, **L** fails because PA is too low (bulge, blob, filled corner), **H** fails because PA is too high (rounded, gap, slit), **–** cannot judge."
+  - "Go up from band 1. A band **qualifies** when both **90° tips** are ✓ and **no counted probe** is H. The **Inside** column is not counted: a concave corner is rounded by the bead width in every band, so do not judge PA there."
+  - "Your value is the **lowest band that qualifies**. The 45° tip may still be L there: that is normal."
+  - "**Tie:** if the band just above also qualifies and has at least as many ✓, take that **higher** band (when in doubt, lean higher)."
+  - "If the result is **band 1 or the top band**, the range is wrong: print a tower with the range shifted that way."
+  - "**Sanity check:** L marks belong at the bottom (low PA) and H marks at the top. Marks scattered at random, or L and H on the same probe of one band, point to something else: see [Troubleshooting](page:pressure-advance#troubleshooting)."
+
+# For the scorecard's firmware menu: band 1 (bottom, always PA 0) first,
+# nine bands (pressure_advance.toml [presets], 0.4 mm nozzle), the coarse and
+# the fine file of each preset. `firmware` is the calib.py family, `preset`
+# and `variant` pick the next-pass command (--preset P --centre V).
+blocks_max: 9
+presets:
+  - name: "Klipper, direct drive, fine (0–0.08)"
+    firmware: klipper
+    preset: klipper-dd
+    variant: fine
+    temps: ["0.000", "0.010", "0.020", "0.030", "0.040", "0.050", "0.060", "0.070", "0.080"]
+  - name: "Klipper, direct drive, coarse (0–0.20)"
+    firmware: klipper
+    preset: klipper-dd
+    variant: coarse
+    temps: ["0.000", "0.025", "0.050", "0.075", "0.100", "0.125", "0.150", "0.175", "0.200"]
+  - name: "Klipper, bowden, fine (0–0.80)"
+    firmware: klipper
+    preset: klipper-bowden
+    variant: fine
+    temps: ["0.000", "0.100", "0.200", "0.300", "0.400", "0.500", "0.600", "0.700", "0.800"]
+  - name: "Klipper, bowden, coarse (0–1.60)"
+    firmware: klipper
+    preset: klipper-bowden
+    variant: coarse
+    temps: ["0.000", "0.200", "0.400", "0.600", "0.800", "1.000", "1.200", "1.400", "1.600"]
+  - name: "Prusa Buddy, direct drive: MK4/MK4S, MK3.9/3.5, Core One, XL, fine (0–0.08)"
+    firmware: buddy
+    preset: buddy-dd
+    variant: fine
+    temps: ["0.000", "0.010", "0.020", "0.030", "0.040", "0.050", "0.060", "0.070", "0.080"]
+  - name: "Prusa Buddy, direct drive: MK4/MK4S, MK3.9/3.5, Core One, XL, coarse (0–0.20)"
+    firmware: buddy
+    preset: buddy-dd
+    variant: coarse
+    temps: ["0.000", "0.025", "0.050", "0.075", "0.100", "0.125", "0.150", "0.175", "0.200"]
+  - name: "Prusa Buddy, bowden: MINI/MINI+, fine (0–0.48)"
+    firmware: buddy
+    preset: buddy-bowden
+    variant: fine
+    temps: ["0.000", "0.060", "0.120", "0.180", "0.240", "0.300", "0.360", "0.420", "0.480"]
+  - name: "Prusa Buddy, bowden: MINI/MINI+, coarse (0–1.00)"
+    firmware: buddy
+    preset: buddy-bowden
+    variant: coarse
+    temps: ["0.000", "0.125", "0.250", "0.375", "0.500", "0.625", "0.750", "0.875", "1.000"]
+  - name: "Marlin 2, direct drive, fine (0–0.16)"
+    firmware: marlin
+    preset: marlin-dd
+    variant: fine
+    temps: ["0.000", "0.020", "0.040", "0.060", "0.080", "0.100", "0.120", "0.140", "0.160"]
+  - name: "Marlin 2, direct drive, coarse (0–0.40)"
+    firmware: marlin
+    preset: marlin-dd
+    variant: coarse
+    temps: ["0.000", "0.050", "0.100", "0.150", "0.200", "0.250", "0.300", "0.350", "0.400"]
+  - name: "Marlin 2, bowden, fine (0–1.60)"
+    firmware: marlin
+    preset: marlin-bowden
+    variant: fine
+    temps: ["0.000", "0.200", "0.400", "0.600", "0.800", "1.000", "1.200", "1.400", "1.600"]
+  - name: "Marlin 2, bowden, coarse (0–2.00)"
+    firmware: marlin
+    preset: marlin-bowden
+    variant: coarse
+    temps: ["0.000", "0.250", "0.500", "0.750", "1.000", "1.250", "1.500", "1.750", "2.000"]
+  - name: "RepRapFirmware, direct drive, fine (0–0.16)"
+    firmware: rrf
+    preset: rrf-dd
+    variant: fine
+    temps: ["0.000", "0.020", "0.040", "0.060", "0.080", "0.100", "0.120", "0.140", "0.160"]
+  - name: "RepRapFirmware, direct drive, coarse (0–0.40)"
+    firmware: rrf
+    preset: rrf-dd
+    variant: coarse
+    temps: ["0.000", "0.050", "0.100", "0.150", "0.200", "0.250", "0.300", "0.350", "0.400"]
+  - name: "RepRapFirmware, bowden, fine (0–0.80)"
+    firmware: rrf
+    preset: rrf-bowden
+    variant: fine
+    temps: ["0.000", "0.100", "0.200", "0.300", "0.400", "0.500", "0.600", "0.700", "0.800"]
+  - name: "RepRapFirmware, bowden, coarse (0–1.60)"
+    firmware: rrf
+    preset: rrf-bowden
+    variant: coarse
+    temps: ["0.000", "0.200", "0.400", "0.600", "0.800", "1.000", "1.200", "1.400", "1.600"]
+
+features:
+  - id: tip90
+    name: "90° blade tips"
+    short: "90° tips"
+    weight: primary
+    what: "**Right tip** (end of the front-right face) and **back-left tip** (end of the back face): the main reading. Follow each one from band 1 up, under raking light."
+    pass: "Both tips are sharp, straight vertical edges. The two faces meet in a crisp line, with no swelling and no notch."
+    fail_low: "The tip bulges outwards: a rounded, swollen edge or a vertical row of small blobs, often with a slight bump just before it on the long face."
+    fail_high: "The tip is rounded off or \"eaten\": a dull, sunken edge. The last 1–2 mm before the tip look thin or gappy."
+    points:
+      - "Mark ✓ only when **both** tips pass."
+    photos:
+      - id: F2_tip90-edgeon_PETG_VC4
+        alt: "The right 90 degree tip seen edge-on against a white background, bands 1 to 6: a row of small blobs that stops at band 5"
+        caption: "One tip edge-on against a light background: the row of small blobs in the low bands fades out at the right band."
+        shot: "RIGHT 90° tip, the whole tower, seen exactly edge-on (camera on the line of the tip edge, so the edge is a silhouette) against a plain white sheet or a bright window, soft even light, no raking light. Bands 1 to 6 in frame (bottom up). The owner's PETG tower shows blobs in bands 1–4, gone from band 5 (0.04): keep that tower for this shot. Paper tags with the band numbers beside the tower. STILL TO SHOOT: on the owner's coarse PETG tower (98 mm/s) no blobs are visible on any tip in bands 1–2, so use a tower that shows them (the fine PETG tower, or one printed with --flow 12)."
+    more:
+      intro: "**Two tips:** the **right blade**, at the end of the long front-right face, and the **back-left blade**, at the end of the back face. The nozzle arrives at full speed along a straight, brakes hard and turns 90°. These convex tips are **the main reading**: they behave like the 90° corners of your real parts, and PA shows on them first."
+      points:
+        - "**Follow one tip from band 1 upward**, with the light raking along the face. With PA too low its edge carries a **vertical row of small blobs**; the row fades out at the right band. Then check the other tip."
+        - "Look straight down the tip edge, as if sighting along a ruler. Then look from the side and imagine a set square on the tip."
+        - "Mark ✓ only when **both** tips pass. If one bulges and the other does not, mark L: the back-left tip has a shorter straight, so it often reacts a little later."
+        - beginner: "**Look at the tip edge-on against a light background** (a window, a sheet of white paper), or photograph it that way: the blobs stand out as a bumpy outline, and the band where the outline turns straight is easy to spot."
+        - beginner: "Compare with band 1 first. It is printed with PA off, so its tips show you exactly what \"bulge\" looks like on your printer. Then go up until the tips look like the corner of a sheet of paper."
+        - expert: "The reading is valid for the test speed (98 mm/s unless you generated another) and your external-perimeter acceleration (and, on Klipper, `square_corner_velocity`). Write them down with the result: a different acceleration moves the optimum."
+        - misread: "**Every band looks identical:** PA effects are small at low speed. Reprint faster with `--flow 12` (about 147 mm/s) or at your real external-perimeter speed ([the test speed](page:pressure-advance#speed)), staying below 0.8 × your filament's max volumetric speed."
+        - misread: "**Wrong temperature:** plastic that is too hot also swells corners, in every band. If even the top band bulges, check that you printed at the temperature chosen with the [temperature tower](page:temperature-tower) before raising PA."
+      photos:
+        - id: F2_coarse-ok_PETG_VC4
+          aspect: "3/2"
+          alt: "The right 90 degree tip of the coarse PETG tower around band 3 (PA 0.050), seen from outside the tip: a straight, sharp edge between two even faces"
+          caption: "Coarse tower, band 3 (PA 0.050) in the middle of the frame: the right tip is a straight, sharp edge and the front-right face, on the left, stays even right up to it. Bands 2 and 4 look the same."
+          shot: "DONE from _A645905 (owner's coarse PETG tower, klipper-dd coarse 0–0.200): the right 90° tip seen roughly on its bisector, front-right face on the left, 1650x1100 crop centred on band 3, same framing as F2_coarse-high_PETG_VC4. No paper tag, no text in the image."
+        - id: F2_coarse-high_PETG_VC4
+          aspect: "3/2"
+          alt: "The same right 90 degree tip around band 8 (PA 0.175): the edge eaten away in scallops and the end of the front-right face gouged and thin"
+          caption: "Same photo and framing, band 8 (PA 0.175), clearly too high: the tip is eaten away in scallops and the last millimetre of the front-right face before it is thin and gappy. On this tower the damage starts faintly in band 5 (0.100) and is plain from band 7 (0.150) up."
+          shot: "DONE from _A645905, same crop size and framing as F2_coarse-ok_PETG_VC4, centred on band 8, the top of the tower just in frame."
+
+  - id: tip45
+    name: "45° blade tip"
+    short: "45° tip"
+    weight: primary
+    what: "**Front-left blade tip**, at the end of the 18 mm front-left face: the most sensitive probe."
+    pass: "A thin, clean point. Both faces stay flat right up to the tip."
+    fail_low: "The point is fat or club-shaped, with a blob or a seam-like ridge on the tip."
+    fail_high: "The point is blunt, short or ragged. A small gap or hollow shows on the tip or just before it."
+    points:
+      - "Compare its point with the bands above and below, rather than judging it alone."
+    more:
+      intro: "**Front-left blade,** at the end of the long front-left face (18 mm). The nozzle almost stops here before turning back, so this is the **most sensitive** probe: the last to stop bulging as PA rises, and the first to blunt when it is too high."
+      points:
+        - beginner: "It is normal for the 45° tip to still swell **slightly** in the band where the 90° tips already pass. Do not raise PA just for it."
+        - expert: "Use it as the early warning for too high: when it starts to look blunt or gapped, the band above your choice is already too much."
+        - misread: "A blob on the tip in **every** band, the same size, is usually not PA: look at the seam settings, or at a wipe or retraction move ending there."
+
+  - id: inner
+    name: "Inside corners"
+    short: "Inside"
+    weight: confirms
+    what: "**Three inside corners**, where each blade folds back onto the hexagon. **Not counted:** do not judge PA here."
+    pass: "A slightly rounded crease, the same in every band. That is normal at any PA."
+    fail_low: "Do not mark L here: a filled, rounded crease is the width of the bead, not PA too low."
+    fail_high: "A dark slit or gap opens in the crease, only in the top bands. It confirms an H on the tips; it never decides alone."
+    points:
+      - "Glance at them last, after the tips. If the crease looks the same in every band, that is what it should do: move on."
+    more:
+      intro: "**Three inside corners,** where each blade folds back onto the hexagon: on the **back-right face** (behind the right blade), on the **back-left face**, and on the **front face**, left of the numbers (behind the 45° blade). **Do not judge PA here, and they are not counted.** On the outside of a print a concave corner is always slightly rounded, by about half a line width: the bead cannot form a sharp inward crease, whatever the PA."
+      points:
+        - misread: "**\"The inside corners are filled in every band, so PA must go higher.\"** No: a concave corner is always rounded by the bead width. On the first real print they looked the same in all nine bands while the tips had already found the value (0.04). Read the convex tips instead."
+        - misread: "A slit in **every** band, also in band 1, is not PA too high: it is under-extrusion or a gap between the two wall lines. Check the flow and the filament diameter."
+
+  - id: straight
+    name: "Long straights (speed change)"
+    short: "Straights"
+    weight: primary
+    what: "**Front-right face** (15 mm) and **front-left face** (18 mm): compare the line width at both ends, in light that skims along the face."
+    pass: "Even line width and sheen along the whole face."
+    fail_low: "The first 3–5 mm after the plain hex corner look thin or matte (the pressure lags). The last few millimetres before the tip look swollen."
+    fail_high: "The start of the face looks slightly swollen. The end before the tip looks thin or dull."
+    more:
+      intro: "**Front-right face** (15 mm, into the right tip) and **front-left face** (18 mm, into the 45° tip). The nozzle speeds up after the previous corner and slows down into the tip: PA shows as a change in line width at both ends of the face."
+      points:
+        - "Hold the face almost edge-on to a lamp, so the light skims along it. Look at the two ends, not the middle. The **last millimetre before the tip** is the most telling: it swells with PA too low and thins with PA too high."
+        - expert: "On fast profiles with high acceleration the acceleration phase is short: the effect at the start of the face can be faint. Score what you see; the tips decide."
+        - misread: "**Ringing or ghosting is not PA.** Ripples that repeat after each corner and fade along the face are vibrations of the printer: they are fixed with input shaping, not with PA. PA changes the **width** of the line, it does not make waves."
+        - misread: "**Wet filament** gives a rough, uneven, sometimes bubbly surface in every band. It mimics the thin starts of PA too low. Dry the spool and print again."
+
+  - id: seam
+    name: "Seam: line start and end"
+    short: "Seam"
+    weight: check
+    what: "**Rear bump**, in the middle of the back face: every layer starts and ends there. It only **confirms** the corner reading."
+    pass: "A small, even seam line: no blob, no hole."
+    fail_low: "A blob or zit at the end of the line, with a thin or missing start next to it."
+    fail_high: "A gap or hole at the line start or where the line ends; on the top bands of a coarse tower the seam opens clearly."
+    more:
+      intro: "**Rear bump,** in the middle of the back face: a convex probe. Every layer starts and ends on its apex. Retraction and wipe also act on this spot, so the seam only **confirms** the corner reading: it never decides on its own."
+      points:
+        - beginner: "Look at the bump from straight behind, with the light from one side. The seam is the thin vertical line on the top of the bump."
+        - misread: "A seam that looks the same in every band is set by retraction, wipe or the seam settings, not by PA. Score it – and move on."
+
+  - id: hex120
+    name: "Plain 120° hex corners (reference)"
+    short: "120°"
+    weight: check
+    what: "**Three gentle corners:** front-right (next to the numbers), back-right and left. They should look fine over a wide range of PA: use them as a sanity check."
+    pass: "Clean in most bands."
+    fail_low: "Even these corners bulge: PA is far too low (typical of band 1, PA 0)."
+    fail_high: "Even these corners look dull or gapped: PA is far too high."
+    points:
+      - "If the 120° corners already fail in the band you are about to choose, your choice is far off: look again at the tips."
+    more:
+      points:
+        - misread: "**The divider groove is not a defect.** At the bottom of every band a groove runs across the front face, and the wall changes slightly right where the new value starts. Judge each band in its middle, never at the groove."

@@ -1,0 +1,84 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+id: before-you-start
+title: "Before you start"
+nav_title: "Before you start"
+description: "What to check in PrusaSlicer and on the printer before printing any calibration test."
+intro: |
+  Five minutes here save a wasted test. These checks are the same for every test in the suite; each guide only adds what is special to it.
+steps:
+  - id: version
+    title: "PrusaSlicer version"
+    points:
+      - "Use **PrusaSlicer 2.9**. 2.7 and 2.8 also open the projects; older versions load only the shape, without the changes that make it a test."
+      - "PrusaSlicer 3.x is still alpha and these files are not tested with it yet."
+      - "Always open tests with **File › Open project**, never with **Import**, and download single .3mf files, never ZIPs."
+
+  - id: printer-ready
+    title: "A printer that already prints"
+    points:
+      - "The tests calibrate the fine details. They assume the basics are right: tight belts, a level (or meshed) bed, a hotend without leaks, a working part-cooling fan."
+      - "Do the firmware checks first on a new printer: PID tuning of hotend and bed, extruder steps (rotation distance), and input shaping if your printer has it."
+      - "The **first layer** test comes before all the others: every test stands on its first layer."
+
+  - id: dry-filament
+    title: "Dry filament"
+    points:
+      - "If a spool has been out of its bag for weeks (days for PETG, TPU, nylon and PC), dry it before calibrating."
+    more:
+      points:
+        - "Wet filament strings, pops, and makes weak layers at **every** temperature. It ruins the temperature, retraction and flow tests in ways that look like wrong settings."
+        - beginner: "Crackling or small bubbles on the extruded plastic are the classic signs of wet filament."
+
+  - id: profiles
+    title: "Your profiles, not ours"
+    points:
+      - "The tests carry no printer, filament or print profile. Before slicing, select in PrusaSlicer **your** printer, the **print profile you really use** and the **filament profile** of the spool you test."
+      - "Save every result in a **new** filament profile with a clear name (brand, type, colour, value). Keep the original."
+    more:
+      points:
+        - "A test printed with a different speed or layer height from your real prints gives an answer for a different situation."
+        - "Some tests set a few per-object settings (layer height, perimeters, infill). Leave them: they are part of the test."
+
+  - id: global-settings
+    title: "Global settings to check"
+    table:
+      head: ["Setting", "Where", "For the tests"]
+      rows:
+        - ["Skirt loops", "**Print Settings › Skirt and brim › Skirt › Loops (minimum)**", "**0**: saves filament; the tests do not need a skirt"]
+        - ["Brim", "**Print Settings › Skirt and brim › Brim**", "0, unless a tall test tends to come loose"]
+        - ["Supports", "**Print Settings › Support material**", "Off: overhangs and bridges are what is being tested"]
+        - ["Sequential printing", "**Print Settings › Output options › Complete individual objects**", "Off: it disables the per-layer changes"]
+        - ["Wipe tower", "**Print Settings › Multiple Extruders › Wipe tower**", "Off for single-tool tests"]
+        - ["Cooling", "**Filament Settings › Cooling**", "As you normally print: the test must match your real parts"]
+    points:
+      - "One test per plate. The per-layer changes belong to the plate, so opening a test replaces what was there, and another object on the plate would receive the same changes."
+      - "Do not scale, rotate, cut or sink a test object: its changes are at fixed heights."
+    more:
+      points:
+        - beginner: "If you change a setting just for the tests, change it back afterwards, or save it in a separate print profile called for example \"Calibration\"."
+
+  - id: idex
+    title: "IDEX and multi-tool printers"
+    points:
+      - "**Use a single tool for the temperature tests.** The temperature changes in the file are addressed to one tool: download the file for that tool and assign the object to the same extruder in PrusaSlicer."
+      - "Turn off the wipe tower and **Ooze prevention** for single-tool tests: there is no tool change to prepare for."
+      - "Check that your start G-code does not heat the unused tool, or that it stays parked. A hot idle nozzle oozes and may drip onto the test."
+    more:
+      points:
+        - "Print in normal mode, not copy or mirror mode, unless a test says otherwise."
+        - expert: "On RatOS, tool changes and wake-ups set the tool back to its start temperatures. With a single tool and no tool change, this does not affect the tests."
+        - "Calibrate each tool separately when the hotends or nozzles differ. The IDEX-specific tests (offsets between tools) come at the end of the sequence."
+
+  - id: safety
+    title: "Safety"
+    points:
+      - warn: "Stay near the printer during the first minutes of every test. Calibration prints change temperatures and speeds while printing."
+      - warn: "Never print above your hotend's maximum temperature. Hotends with a PTFE tube down to the nozzle must not go above about 240 °C."
+      - "Ventilate the room for ABS, ASA and PC, and keep the enclosure closed while printing them."
+
+  - id: notes
+    title: "Keep notes"
+    points:
+      - "For every test write down: filament brand, type and colour; nozzle size and material; print speed; date; result."
+      - "Mark the printed test with the same information, on a piece of tape. A drawer of unlabelled towers tells you nothing."
