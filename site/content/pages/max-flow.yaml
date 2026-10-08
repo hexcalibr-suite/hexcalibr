@@ -139,9 +139,11 @@ steps:
       - "The print time shown is the real one."
     photos:
       - id: F3_ui-flow-preview_PS29
-        alt: "PrusaSlicer preview of the flow test in Volumetric flow rate view, one colour per band, a band hovered showing its flow"
-        caption: "Preview, Volumetric flow rate: each band in its own colour on the long straights, the value equal to the engraved number."
-        shot: "SCREENSHOT. PrusaSlicer 2.9.x Preview of the sliced hf-0.4 file with a Klipper printer profile and UNCHANGED filament settings, legend switched to Volumetric flow rate: the bands in a colour ramp from 10 to 50 mm³/s, one band hovered so its value shows, the band markers on the vertical slider visible. Light theme, English UI. Highlight the legend with an amber (#EFA00B) rounded rectangle. No personal printer names."
+        aspect: "1600/1334"
+        focus: "50% 55%"
+        alt: "PrusaSlicer preview of the hf-0.4 flow test in Volumetric flow rate view: colour bands up the wall, the legend from 0.74 to 42.5 mm³/s, the band 6 marker on the slider showing flow=30 and M220 S1049"
+        caption: "Preview, Volumetric flow rate (hf-0.4): one colour per band up the wall; the slider marker of band 6 reads flow=30."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, max-flow_hf-0.4_10-50 sliced, legend on Volumetric flow rate (0.74–42.5 mm³/s: the top of the legend is 42.5, not 50), band markers on the slider, band 6/11 tooltip; legend and tooltip highlighted in amber."
     more:
       points:
         - "Dragging the file in? Choose **Open as project**, never **Import geometry only**."
@@ -299,9 +301,10 @@ steps:
       - "**IDEX:** one filament profile per tool, each with its own value, selected on its extruder."
     photos:
       - id: F3_ui-max-volumetric_PS29
-        alt: "PrusaSlicer filament settings, Advanced page, the Max volumetric speed field"
-        caption: "Filament Settings › Advanced: Max volumetric speed."
-        shot: "SCREENSHOT. PrusaSlicer 2.9.x, Expert mode, Filament Settings tab, Advanced page, the Print speed override group with Max volumetric speed visible and filled in (e.g. 24). Highlight the field with an amber (#EFA00B) rounded rectangle. Light theme, English UI."
+        aspect: "1600/435"
+        alt: "PrusaSlicer filament settings, Advanced page, the Max volumetric speed field set to 25 mm³/s"
+        caption: "Filament Settings › Advanced: Max volumetric speed, here 25 mm³/s."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, Filament Settings › Advanced, Print speed override group, Max volumetric speed typed as 25 for the shot (reverted after); the field highlighted in amber."
     more:
       points:
         - "This is the **one change you keep**. PrusaSlicer then slows down any move that would need more plastic than this."

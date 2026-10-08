@@ -124,9 +124,10 @@ steps:
       - warn: "Opening the project replaces anything already on the plate, and any custom G-code you had added there. The temperature changes belong to the plate, so print the tower **on its own**."
     photos:
       - id: F1_ui-open-dialog_PS29
+        aspect: "1158/466"
         alt: "PrusaSlicer's drop dialog with Open as project highlighted"
         caption: "Dragging the file in: choose Open as project."
-        shot: "SCREENSHOT, not a photo. PrusaSlicer 2.9.x, light theme, English UI, window about 1400 px wide. Drag the .3mf onto the plater so the Open/Import dialog shows; crop to the dialog plus a little context; highlight 'Open as project' with a 3 px amber (#EFA00B) rounded rectangle added afterwards. Make an Italian-UI twin with suffix _it if the owner wants per-language screenshots."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, the Load project file dialog after dropping temp-tower_PETG_coarse_270-200_10C.3mf, whole dialog, Open as project highlighted in amber."
     more:
       points:
         - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import geometry only** drops the temperature changes."
@@ -150,9 +151,11 @@ steps:
       - "Hover the markers on the layer slider: the `M104` values must go down one step per block."
     photos:
       - id: F1_ui-slider-markers_PS29
-        alt: "PrusaSlicer preview with custom G-code markers on the layer slider"
+        aspect: "1600/1334"
+        focus: "50% 60%"
+        alt: "PrusaSlicer preview of the temperature tower: one custom G-code marker per block on the layer slider, the block 5 tooltip showing M104 S230 and M220 S1445"
         caption: "One marker per block; hover to read the temperature."
-        shot: "SCREENSHOT. PrusaSlicer 2.9.x Preview of the sliced PETG tower (hexagonal), single-extruder printer profile, light theme, English UI. One marker per block on the vertical slider; hover one marker so its tooltip with M104 S… is visible. Crop to the 3D view plus the vertical slider. No personal printer names in the preset combos (use a generic profile name)."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, coarse PETG tower (270→200) sliced, legend on Feature type, 3D view and vertical slider; markers and the block 5/8 tooltip highlighted in amber."
     more:
       points:
         - "Pick **your** printer, print and filament profiles in the right-hand panel, as for any print."
@@ -172,9 +175,10 @@ steps:
       - "To check, switch the Preview legend to **Volumetric flow rate**: about **10 mm³/s** in every block."
     photos:
       - id: F1_ui-flow-preview_PS29
+        aspect: "1600/999"
         alt: "PrusaSlicer preview of the temperature tower in Volumetric flow rate view, the blocks at about 10 mm³/s"
         caption: "Preview, Volumetric flow rate: every block at about 10 mm³/s, with your profiles unchanged."
-        shot: "SCREENSHOT. PrusaSlicer 2.9.x Preview of the sliced v2.2 PETG coarse tower with a Klipper (or Prusa) printer profile and UNCHANGED filament cooling settings, legend switched to Volumetric flow rate: the block walls in one colour at about 10 mm³/s, the floor, the cap and the bridges in other colours. Light theme, English UI. Highlight the legend with an amber (#EFA00B) rounded rectangle. No personal printer names."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, coarse PETG tower sliced, legend on Volumetric flow rate (0.55–20.09 mm³/s), walls at about 10 mm³/s; legend highlighted in amber."
     more:
       points:
         - "**No profile changes are needed.** The blocks print at a fixed flow of **10 mm³/s** (123 mm/s with the file's 0.2 mm layers and 0.45 mm lines): a moderate, typical flow. TPU prints at 3 mm³/s, PC at 8."
@@ -278,9 +282,10 @@ steps:
       - "Save it as a new profile, for example `Brand PLA White – 215`."
     photos:
       - id: F1_ui-filament-temps_PS29
+        aspect: "1600/448"
         alt: "PrusaSlicer filament settings with the nozzle first layer and other layers fields"
         caption: "Filament Settings › Filament › Temperature: the two nozzle fields."
-        shot: "SCREENSHOT. PrusaSlicer 2.9.x, Expert mode, Filament Settings tab, Filament page, the Temperature group fully visible. Highlight the two Nozzle fields (First layer / Other layers) with an amber rounded rectangle. Light theme, English UI."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, Filament Settings › Filament, Temperature group (Nozzle 240/240); the two Nozzle fields highlighted in amber."
     more:
       points:
         - "Open **Filament Settings › Filament › Temperature**."

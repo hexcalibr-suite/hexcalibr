@@ -150,9 +150,10 @@ steps:
       - warn: "Opening the project replaces anything already on the plate. Print the test **on its own**."
     photos:
       - id: F7_ui-object-list_PS29
+        aspect: "1600/472"
         alt: "PrusaSlicer object list of the IDEX Vernier test, with station parts on extruders 1 and 2"
         caption: "One object; each station has a T0 part on extruder 1 and a T1 part on extruder 2."
-        shot: "SCREENSHOT. PrusaSlicer 2.9.x, idex-vernier_400.3mf opened as project on a generic IDEX two-extruder profile, Expert mode, light theme, English UI. The object list on the right expanded: the object 'idex-vernier 400' and its parts 'S1 back-left: T0 main scales' / 'S1 back-left: T1 vernier scales' and so on, with the Extruder column showing 1 and 2. Plater 3D view to the left with the two filament colours. Highlight the Extruder column with an amber (#EFA00B) rounded rectangle. Generic preset names only."
+        shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, idex-vernier_400 opened as project on the owner's IDEX profile, not sliced; 3D view and the expanded object list (S1–S9 T0/T1 parts); the Extruder column highlighted in amber."
     more:
       points:
         - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import geometry only** drops the extruder assignment."

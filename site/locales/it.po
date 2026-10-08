@@ -5974,20 +5974,22 @@ msgstr "Il tempo di stampa mostrato è quello reale."
 #. photo alt
 msgctxt "max-flow/open-project"
 msgid ""
-"PrusaSlicer preview of the flow test in Volumetric flow rate view, one "
-"colour per band, a band hovered showing its flow"
+"PrusaSlicer preview of the hf-0.4 flow test in Volumetric flow rate view: "
+"colour bands up the wall, the legend from 0.74 to 42.5 mm³/s, the band 6 "
+"marker on the slider showing flow=30 and M220 S1049"
 msgstr ""
-"Anteprima di PrusaSlicer del test di flusso nella vista Flusso volumetrico, "
-"un colore per fascia, una fascia evidenziata con il suo flusso"
+"Anteprima di PrusaSlicer del test di flusso hf-0.4 nella vista Flusso "
+"volumetrico: fasce di colore lungo la parete, la legenda da 0,74 a 42,5 "
+"mm³/s, il segno della fascia 6 sul cursore che mostra flow=30 e M220 S1049"
 
 #. photo caption
 msgctxt "max-flow/open-project"
 msgid ""
-"Preview, Volumetric flow rate: each band in its own colour on the long "
-"straights, the value equal to the engraved number."
+"Preview, Volumetric flow rate (hf-0.4): one colour per band up the wall; "
+"the slider marker of band 6 reads flow=30."
 msgstr ""
-"Anteprima, Flusso volumetrico: ogni fascia nel suo colore sui rettilinei "
-"lunghi, il valore uguale al numero inciso."
+"Anteprima, Flusso volumetrico (hf-0.4): un colore per fascia lungo la "
+"parete; il segno della fascia 6 sul cursore indica flow=30."
 
 #. More: point
 msgctxt "max-flow/open-project"
@@ -7192,15 +7194,18 @@ msgstr ""
 #. photo alt
 msgctxt "max-flow/apply"
 msgid ""
-"PrusaSlicer filament settings, Advanced page, the Max volumetric speed field"
+"PrusaSlicer filament settings, Advanced page, the Max volumetric speed "
+"field set to 25 mm³/s"
 msgstr ""
 "Impostazioni filamento di PrusaSlicer, pagina Avanzate, il campo Velocità "
-"volumetrica massima"
+"volumetrica massima impostato a 25 mm³/s"
 
 #. photo caption
 msgctxt "max-flow/apply"
-msgid "Filament Settings › Advanced: Max volumetric speed."
-msgstr "Impostazioni filamento › Avanzate: Velocità volumetrica massima."
+msgid "Filament Settings › Advanced: Max volumetric speed, here 25 mm³/s."
+msgstr ""
+"Impostazioni filamento › Avanzate: Velocità volumetrica massima, qui 25 "
+"mm³/s."
 
 #. More: point
 msgctxt "max-flow/apply"
@@ -8780,6 +8785,20 @@ msgstr ""
 "Anteprima, vista Velocità: le pareti a circa 98 mm/s dalla fascia più bassa "
 "alla più alta, con i tuoi profili invariati."
 
+#. photo alt
+msgctxt "pressure-advance/speed"
+msgid ""
+"PrusaSlicer preview of the same tower in Volumetric flow rate view, the "
+"walls at about 7–8 mm³/s"
+msgstr ""
+"Anteprima di PrusaSlicer della stessa torre nella vista Flusso volumetrico, "
+"le pareti a circa 7–8 mm³/s"
+
+#. photo caption
+msgctxt "pressure-advance/speed"
+msgid "The same preview, Volumetric flow rate: the walls at about 7–8 mm³/s."
+msgstr "La stessa anteprima, Flusso volumetrico: le pareti a circa 7–8 mm³/s."
+
 #. More: point
 msgctxt "pressure-advance/speed"
 msgid ""
@@ -9588,20 +9607,22 @@ msgstr ""
 #. photo alt
 msgctxt "pressure-advance/apply"
 msgid ""
-"PrusaSlicer filament settings, Custom G-code page, with a pressure advance "
-"line in the start G-code"
+"PrusaSlicer filament settings, Custom G-code page, with "
+"SET_PRESSURE_ADVANCE EXTRUDER=extruder ADVANCE=0.04 in the start G-code"
 msgstr ""
 "Impostazioni filamento di PrusaSlicer, pagina G-code personalizzato, con "
-"una riga di pressure advance nel G-code iniziale"
+"SET_PRESSURE_ADVANCE EXTRUDER=extruder ADVANCE=0.04 nel G-code iniziale"
 
 #. photo caption
 msgctxt "pressure-advance/apply"
 msgid ""
 "Filament Settings › Custom G-code › Start G-code: one line sets PA for this "
-"filament."
+"filament, here SET_PRESSURE_ADVANCE EXTRUDER=extruder ADVANCE=0.04 "
+"(Klipper)."
 msgstr ""
 "Impostazioni filamento › G-code personalizzato › G-code iniziale: una riga "
-"imposta il PA per questo filamento."
+"imposta il PA per questo filamento, qui SET_PRESSURE_ADVANCE "
+"EXTRUDER=extruder ADVANCE=0.04 (Klipper)."
 
 #. More: intro
 msgctxt "pressure-advance/apply"
@@ -10958,10 +10979,14 @@ msgstr ""
 
 #. photo alt
 msgctxt "temperature-tower/check"
-msgid "PrusaSlicer preview with custom G-code markers on the layer slider"
+msgid ""
+"PrusaSlicer preview of the temperature tower: one custom G-code marker per "
+"block on the layer slider, the block 5 tooltip showing M104 S230 and M220 "
+"S1445"
 msgstr ""
-"Anteprima di PrusaSlicer con i segni del G-code personalizzato sul cursore "
-"degli strati"
+"Anteprima di PrusaSlicer della torre di temperatura: un segno del G-code "
+"personalizzato per blocco sul cursore degli strati, il suggerimento del "
+"blocco 5 che mostra M104 S230 e M220 S1445"
 
 #. photo caption
 msgctxt "temperature-tower/check"
