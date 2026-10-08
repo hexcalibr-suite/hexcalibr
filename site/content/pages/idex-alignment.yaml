@@ -57,7 +57,8 @@ steps:
       - id: F7_bed-overview_PETG_VC4
         alt: "The whole Vernier test on the bed of an IDEX printer, nine stations in two colours"
         caption: "The Vernier on a 400 mm bed: nine stations, numbered like a phone keypad seen from the front."
-        shot: "TOP-DOWN, whole bed, camera straight down (or as high and square as possible), front edge of the bed at the bottom of the frame, all nine stations in frame. Vernier 400 file, PETG, T0 orange and T1 blue (or any strongly contrasting pair, T0 the lighter one). Even, diffuse light: no glare on the PEI sheet. Leave the print on the bed. The hex badges must be readable at full size."
+        aspect: "3/2"
+        shot: "DONE: _A645944 (2026-10-08 evening), front view of the whole bed, PETG, T0 yellow, T1 red; white balance corrected (blue enclosure light). Was: TOP-DOWN, whole bed, camera straight down (or as high and square as possible), front edge of the bed at the bottom of the frame, all nine stations in frame. Vernier 400 file, PETG, T0 orange and T1 blue (or any strongly contrasting pair, T0 the lighter one). Even, diffuse light: no glare on the PEI sheet. Leave the print on the bed. The hex badges must be readable at full size."
     more:
       points:
         - "It checks that the second toolhead prints **exactly where the first one does**, everywhere on the bed. The difference is the **tool offset**. When it is wrong, a two-colour part shows a step where the colours meet, and a support material in the second tool lands next to the part instead of under it."
@@ -240,7 +241,8 @@ steps:
         - id: F7_lite-aligned_PETG_VC4
           alt: "Close-up of an aligned Lite station: both contact lines look the same"
           caption: "Aligned: both contact lines look the same, no gap and no ridge."
-          shot: "MACRO, same framing, light and colours as F7_lite-gap, at a station that reads aligned after the offset is set."
+          aspect: "3/2"
+          shot: "DONE: _A645943, station 6 of the Lite 400, PETG, T0 yellow, T1 red; white balance corrected. Was: MACRO, same framing, light and colours as F7_lite-gap, at a station that reads aligned after the offset is set."
 
   - id: read-vernier
     title: "Read the Vernier: the fine scale"
@@ -254,6 +256,11 @@ steps:
         alt: "Plan of one Vernier station: X block, hexagonal badge, Y block"
         caption: "One Vernier station. X block on the left, Y block on the right; in each, the fine scale (labels to 5) and the coarse scale (labels to 10). The \"+\" marks the positive end."
         shot: "RENDER, already done: copy of docs/previews/idex-vernier-station.png."
+      - id: F7_vernier-station_PETG_VC4
+        aspect: "9/4"
+        alt: "Photo of a printed Vernier station: on the left the X block, in the middle the hexagonal badge with the number 8, on the right the Y block; T0 in yellow with the labels, T1 in red"
+        caption: "The same station printed, station 8 of the Vernier 400: T0 yellow, T1 red. Each red comb sits right next to the yellow scale it is read against."
+        shot: "DONE: _A645947 (2026-10-08 evening), station 8, PETG, white balance corrected."
     more:
       intro: "Each Vernier station has an **X block** on the left (ticks standing front to back, spread left to right) and a **Y block** on the right (ticks lying left to right, spread front to back), with the badge in between. Each block has a **fine** scale (labels up to 5) and a **coarse** scale (labels up to 10)."
       points:

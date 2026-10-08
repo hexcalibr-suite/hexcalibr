@@ -2776,6 +2776,21 @@ msgid ""
 "marks the positive end."
 msgstr ""
 
+#. photo alt
+msgctxt "idex-alignment/read-vernier"
+msgid ""
+"Photo of a printed Vernier station: on the left the X block, in the middle "
+"the hexagonal badge with the number 8, on the right the Y block; T0 in "
+"yellow with the labels, T1 in red"
+msgstr ""
+
+#. photo caption
+msgctxt "idex-alignment/read-vernier"
+msgid ""
+"The same station printed, station 8 of the Vernier 400: T0 yellow, T1 red. "
+"Each red comb sits right next to the yellow scale it is read against."
+msgstr ""
+
 #. More: intro
 msgctxt "idex-alignment/read-vernier"
 msgid ""
