@@ -80,7 +80,7 @@ steps:
     points:
       - "Find your hotend in the table, then take the file for **your nozzle**. Not listed? Use the row with the closest claim."
       - "**IDEX:** test each tool on its own: `_T0` and `_T1` files ([see below](page:max-flow#apply))."
-      - "Get the **single .3mf** from the {suite} page on Printables (below), never \"Download all\" as a ZIP."
+      - "The code in the table is the middle of the **file name**: `hf-0.4` is **`max-flow_hf-0.4_10-50.3mf`** (the numbers are the flow range). Get that **single .3mf** from the {suite} page on Printables (below), never \"Download all\" as a ZIP."
     printables: printables-max-flow
     table:
       head: ["Hotend", "Claim (mm³/s)", "Measured independently", "0.4 nozzle", "0.6 nozzle", "0.8 / 1.0 nozzle"]

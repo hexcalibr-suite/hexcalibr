@@ -80,17 +80,17 @@ steps:
   - id: download
     title: "Download the right file"
     table:
-      head: ["File", "Firmware and printers", "Extruder", "Fine: band 1 → 9 (step)", "Coarse: band 1 → 9 (step)", "Command in each band"]
+      head: ["Firmware and printers", "Extruder", "Fine: band 1 → 9 (step)", "Coarse: band 1 → 9 (step)", "Command in each band"]
       rows:
-        - ["`klipper-dd`", "Klipper", "direct drive", "0 → 0.08 (0.01)", "0 → 0.20 (0.025)", "`SET_PRESSURE_ADVANCE ADVANCE=…`"]
-        - ["`klipper-bowden`", "Klipper", "bowden", "0 → 0.8 (0.1)", "0 → 1.6 (0.2)", "`SET_PRESSURE_ADVANCE ADVANCE=…`"]
-        - ["`klipper-dd_…_T0` / `_T1`", "Klipper IDEX (e.g. RatOS): one file per toolhead", "direct drive", "0 → 0.08 (0.01)", "0 → 0.20 (0.025)", "`SET_PRESSURE_ADVANCE EXTRUDER=extruder ADVANCE=…` (T0) or `EXTRUDER=extruder1` (T1)"]
-        - ["`buddy-dd`", "Prusa Buddy firmware 5.0+: MK4, MK4S, MK3.9, MK3.5, Core One, XL", "direct drive", "0 → 0.08 (0.01)", "0 → 0.20 (0.025)", "`M572 S…`"]
-        - ["`buddy-bowden`", "Prusa Buddy firmware 5.0+: MINI, MINI+", "bowden", "0 → 0.48 (0.06)", "0 → 1.0 (0.125)", "`M572 S…`"]
-        - ["`marlin-dd`", "Marlin 2 with linear advance (LIN_ADVANCE); Prusa MK3/MK3S", "direct drive", "0 → 0.16 (0.02)", "0 → 0.40 (0.05)", "`M900 K…`"]
-        - ["`marlin-bowden`", "Marlin 2 with linear advance", "bowden", "0 → 1.6 (0.2)", "0 → 2.0 (0.25)", "`M900 K…`"]
-        - ["`rrf-dd`", "RepRapFirmware 3 (Duet)", "direct drive", "0 → 0.16 (0.02)", "0 → 0.40 (0.05)", "`M572 D0 S…`"]
-        - ["`rrf-bowden`", "RepRapFirmware 3 (Duet)", "bowden", "0 → 0.8 (0.1)", "0 → 1.6 (0.2)", "`M572 D0 S…`"]
+        - ["Klipper", "direct drive", "`pressure-advance_klipper-dd_fine_0-0.08.3mf`\n0 → 0.08 (0.01)", "`pressure-advance_klipper-dd_coarse_0-0.20.3mf`\n0 → 0.20 (0.025)", "`SET_PRESSURE_ADVANCE ADVANCE=…`"]
+        - ["Klipper", "bowden", "`pressure-advance_klipper-bowden_fine_0-0.80.3mf`\n0 → 0.8 (0.1)", "`pressure-advance_klipper-bowden_coarse_0-1.60.3mf`\n0 → 1.6 (0.2)", "`SET_PRESSURE_ADVANCE ADVANCE=…`"]
+        - ["Klipper IDEX (e.g. RatOS): one file per toolhead", "direct drive", "`pressure-advance_klipper-dd_fine_0-0.08_T0.3mf` / `_T1.3mf`\n0 → 0.08 (0.01)", "`pressure-advance_klipper-dd_coarse_0-0.20_T0.3mf` / `_T1.3mf`\n0 → 0.20 (0.025)", "`SET_PRESSURE_ADVANCE EXTRUDER=extruder ADVANCE=…` (T0) or `EXTRUDER=extruder1` (T1)"]
+        - ["Prusa Buddy firmware 5.0+: MK4, MK4S, MK3.9, MK3.5, Core One, XL", "direct drive", "`pressure-advance_buddy-dd_fine_0-0.08.3mf`\n0 → 0.08 (0.01)", "`pressure-advance_buddy-dd_coarse_0-0.20.3mf`\n0 → 0.20 (0.025)", "`M572 S…`"]
+        - ["Prusa Buddy firmware 5.0+: MINI, MINI+", "bowden", "`pressure-advance_buddy-bowden_fine_0-0.48.3mf`\n0 → 0.48 (0.06)", "`pressure-advance_buddy-bowden_coarse_0-1.00.3mf`\n0 → 1.0 (0.125)", "`M572 S…`"]
+        - ["Marlin 2 with linear advance (LIN_ADVANCE); Prusa MK3/MK3S", "direct drive", "`pressure-advance_marlin-dd_fine_0-0.16.3mf`\n0 → 0.16 (0.02)", "`pressure-advance_marlin-dd_coarse_0-0.40.3mf`\n0 → 0.40 (0.05)", "`M900 K…`"]
+        - ["Marlin 2 with linear advance", "bowden", "`pressure-advance_marlin-bowden_fine_0-1.60.3mf`\n0 → 1.6 (0.2)", "`pressure-advance_marlin-bowden_coarse_0-2.00.3mf`\n0 → 2.0 (0.25)", "`M900 K…`"]
+        - ["RepRapFirmware 3 (Duet)", "direct drive", "`pressure-advance_rrf-dd_fine_0-0.16.3mf`\n0 → 0.16 (0.02)", "`pressure-advance_rrf-dd_coarse_0-0.40.3mf`\n0 → 0.40 (0.05)", "`M572 D0 S…`"]
+        - ["RepRapFirmware 3 (Duet)", "bowden", "`pressure-advance_rrf-bowden_fine_0-0.80.3mf`\n0 → 0.8 (0.1)", "`pressure-advance_rrf-bowden_coarse_0-1.60.3mf`\n0 → 1.6 (0.2)", "`M572 D0 S…`"]
     points:
       - "Find your firmware and extruder in the table and download that **single .3mf** file, not a ZIP."
       - "Get it from the {suite} page on Printables (below)."

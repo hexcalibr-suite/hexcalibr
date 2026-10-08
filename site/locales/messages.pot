@@ -4264,7 +4264,9 @@ msgstr ""
 #. point
 msgctxt "max-flow/which-file"
 msgid ""
-"Get the **single .3mf** from the {suite} page on Printables (below), never "
+"The code in the table is the middle of the **file name**: `hf-0.4` is "
+"**`max-flow_hf-0.4_10-50.3mf`** (the numbers are the flow range). Get that "
+"**single .3mf** from the {suite} page on Printables (below), never "
 "\"Download all\" as a ZIP."
 msgstr ""
 
@@ -6516,11 +6518,6 @@ msgstr ""
 
 #. table header
 msgctxt "pressure-advance/download"
-msgid "File"
-msgstr ""
-
-#. table header
-msgctxt "pressure-advance/download"
 msgid "Firmware and printers"
 msgstr ""
 
@@ -6546,11 +6543,6 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`klipper-dd`"
-msgstr ""
-
-#. table cell
-msgctxt "pressure-advance/download"
 msgid "Klipper"
 msgstr ""
 
@@ -6561,12 +6553,21 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`SET_PRESSURE_ADVANCE ADVANCE=…`"
+msgid ""
+"`pressure-advance_klipper-dd_fine_0-0.08.3mf`\n"
+"0 → 0.08 (0.01)"
 msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`klipper-bowden`"
+msgid ""
+"`pressure-advance_klipper-dd_coarse_0-0.20.3mf`\n"
+"0 → 0.20 (0.025)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid "`SET_PRESSURE_ADVANCE ADVANCE=…`"
 msgstr ""
 
 #. table cell
@@ -6576,12 +6577,35 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`klipper-dd_…_T0` / `_T1`"
+msgid ""
+"`pressure-advance_klipper-bowden_fine_0-0.80.3mf`\n"
+"0 → 0.8 (0.1)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_klipper-bowden_coarse_0-1.60.3mf`\n"
+"0 → 1.6 (0.2)"
 msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
 msgid "Klipper IDEX (e.g. RatOS): one file per toolhead"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_klipper-dd_fine_0-0.08_T0.3mf` / `_T1.3mf`\n"
+"0 → 0.08 (0.01)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_klipper-dd_coarse_0-0.20_T0.3mf` / `_T1.3mf`\n"
+"0 → 0.20 (0.025)"
 msgstr ""
 
 #. table cell
@@ -6593,12 +6617,21 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`buddy-dd`"
+msgid "Prusa Buddy firmware 5.0+: MK4, MK4S, MK3.9, MK3.5, Core One, XL"
 msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "Prusa Buddy firmware 5.0+: MK4, MK4S, MK3.9, MK3.5, Core One, XL"
+msgid ""
+"`pressure-advance_buddy-dd_fine_0-0.08.3mf`\n"
+"0 → 0.08 (0.01)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_buddy-dd_coarse_0-0.20.3mf`\n"
+"0 → 0.20 (0.025)"
 msgstr ""
 
 #. table cell
@@ -6608,17 +6641,21 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`buddy-bowden`"
-msgstr ""
-
-#. table cell
-msgctxt "pressure-advance/download"
 msgid "Prusa Buddy firmware 5.0+: MINI, MINI+"
 msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`marlin-dd`"
+msgid ""
+"`pressure-advance_buddy-bowden_fine_0-0.48.3mf`\n"
+"0 → 0.48 (0.06)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_buddy-bowden_coarse_0-1.00.3mf`\n"
+"0 → 1.0 (0.125)"
 msgstr ""
 
 #. table cell
@@ -6628,12 +6665,21 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`M900 K…`"
+msgid ""
+"`pressure-advance_marlin-dd_fine_0-0.16.3mf`\n"
+"0 → 0.16 (0.02)"
 msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`marlin-bowden`"
+msgid ""
+"`pressure-advance_marlin-dd_coarse_0-0.40.3mf`\n"
+"0 → 0.40 (0.05)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid "`M900 K…`"
 msgstr ""
 
 #. table cell
@@ -6643,7 +6689,16 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`rrf-dd`"
+msgid ""
+"`pressure-advance_marlin-bowden_fine_0-1.60.3mf`\n"
+"0 → 1.6 (0.2)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_marlin-bowden_coarse_0-2.00.3mf`\n"
+"0 → 2.0 (0.25)"
 msgstr ""
 
 #. table cell
@@ -6653,12 +6708,35 @@ msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_rrf-dd_fine_0-0.16.3mf`\n"
+"0 → 0.16 (0.02)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_rrf-dd_coarse_0-0.40.3mf`\n"
+"0 → 0.40 (0.05)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
 msgid "`M572 D0 S…`"
 msgstr ""
 
 #. table cell
 msgctxt "pressure-advance/download"
-msgid "`rrf-bowden`"
+msgid ""
+"`pressure-advance_rrf-bowden_fine_0-0.80.3mf`\n"
+"0 → 0.8 (0.1)"
+msgstr ""
+
+#. table cell
+msgctxt "pressure-advance/download"
+msgid ""
+"`pressure-advance_rrf-bowden_coarse_0-1.60.3mf`\n"
+"0 → 1.6 (0.2)"
 msgstr ""
 
 #. More: intro
