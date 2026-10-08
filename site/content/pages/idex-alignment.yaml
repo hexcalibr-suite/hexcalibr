@@ -128,9 +128,9 @@ steps:
         - beginner: "The other settings forced on the object are there for the same reason, a clean single layer: Arachne perimeters (each tick becomes one bead), no supports, no raft, no ironing, no fuzzy skin."
       photos:
         - id: F7_ui-vaoc-z-offset_RatOS
-          aspect: "1400/412"
-          alt: "RatOS console after VAOC: Toolhead z-offset calibration done, Perfect toolhead z-offset of 0.012500 mm, T1 toolhead z-offset 0.012500"
-          caption: "Example, RatOS: VAOC measures the Z offset between the tools and reports it in the console (here 0.0125 mm for T1). Other printers have their own routine."
+          aspect: "1280/781"
+          alt: "RatOS dashboard after VAOC: the nozzle camera view, the toolhead panel and the console reporting a perfect toolhead z-offset of 0.005 mm for T1, then the IDEX toolhead offset applied for T0"
+          caption: "Example, RatOS: VAOC measures the Z offset between the tools and reports it in the console (here 0.005 mm for T1). Other printers have their own routine."
 
   - part: "Print it"
 
