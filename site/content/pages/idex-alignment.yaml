@@ -126,6 +126,11 @@ steps:
         - "**A good first layer:** bed mesh applied, and the **Z offset between the tools** already set (most multi-tool printers measure it automatically, for example RatOS with its Z probe and VAOC, the Prusa XL tool offset calibration, the Bambu Lab H2D nozzle offset calibration, the Snapmaker J1 Z offset calibration; otherwise set it by hand as your printer's manual describes). A T1 line that is squished or starved changes the line width: the Vernier does not care, but the Lite does."
         - "**Elephant foot compensation is forced to 0 on the object**, whatever your profile says. The whole test is one first layer: the compensation would shrink every line by its value (often 0.1–0.2 mm), eat the one-line ticks and shift every contact edge of the Lite. Do not set it back in the object's settings."
         - beginner: "The other settings forced on the object are there for the same reason, a clean single layer: Arachne perimeters (each tick becomes one bead), no supports, no raft, no ironing, no fuzzy skin."
+      photos:
+        - id: F7_ui-vaoc-z-offset_RatOS
+          aspect: "1400/412"
+          alt: "RatOS console after VAOC: Toolhead z-offset calibration done, Perfect toolhead z-offset of 0.012500 mm, T1 toolhead z-offset 0.012500"
+          caption: "Example, RatOS: VAOC measures the Z offset between the tools and reports it in the console (here 0.0125 mm for T1). Other printers have their own routine."
 
   - part: "Print it"
 

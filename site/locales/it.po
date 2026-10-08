@@ -14649,3 +14649,22 @@ msgstr ""
 "Tieni la torre dall'alto con una mano, appoggia un polpastrello sul bordo "
 "superiore della bandierina e spingi verso la torre. Sul panno c'è una "
 "bandierina rotta poco prima."
+
+#. alt
+msgctxt "idex-alignment/prepare"
+msgid ""
+"RatOS console after VAOC: Toolhead z-offset calibration done, Perfect "
+"toolhead z-offset of 0.012500 mm, T1 toolhead z-offset 0.012500"
+msgstr ""
+"Console di RatOS dopo VAOC: Toolhead z-offset calibration done, Perfect "
+"toolhead z-offset of 0.012500 mm, T1 toolhead z-offset 0.012500"
+
+#. caption
+msgctxt "idex-alignment/prepare"
+msgid ""
+"Example, RatOS: VAOC measures the Z offset between the tools and reports it "
+"in the console (here 0.0125 mm for T1). Other printers have their own "
+"routine."
+msgstr ""
+"Esempio, RatOS: VAOC misura l'offset Z tra le teste e lo riporta nella "
+"console (qui 0,0125 mm per T1). Le altre stampanti hanno una loro procedura."

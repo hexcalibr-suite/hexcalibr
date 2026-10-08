@@ -2242,6 +2242,21 @@ msgid ""
 "supports, no raft, no ironing, no fuzzy skin."
 msgstr ""
 
+#. More: photo alt
+msgctxt "idex-alignment/prepare"
+msgid ""
+"RatOS console after VAOC: Toolhead z-offset calibration done, Perfect "
+"toolhead z-offset of 0.012500 mm, T1 toolhead z-offset 0.012500"
+msgstr ""
+
+#. More: photo caption
+msgctxt "idex-alignment/prepare"
+msgid ""
+"Example, RatOS: VAOC measures the Z offset between the tools and reports it "
+"in the console (here 0.0125 mm for T1). Other printers have their own "
+"routine."
+msgstr ""
+
 #. part heading (groups steps)
 msgctxt "idex-alignment"
 msgid "Print it"
