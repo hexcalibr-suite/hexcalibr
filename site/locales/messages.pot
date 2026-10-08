@@ -8236,7 +8236,10 @@ msgstr ""
 
 #. point
 msgctxt "temperature-tower/download"
-msgid "Download the **single .3mf file**, never \"Download all\" as a ZIP."
+msgid ""
+"Download the **single .3mf file** named in the table, for example "
+"`temp-tower_PETG_fine_260-220_5C.3mf`: the name must end in **.3mf**. Never "
+"\"Download all\" as a ZIP."
 msgstr ""
 
 #. table header
@@ -8271,12 +8274,16 @@ msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "240 → 180 °C, 7 blocks"
+msgid ""
+"`temp-tower_PLA_coarse_240-180_10C.3mf`\n"
+"240 → 180 °C, 7 blocks"
 msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "230 → 190 °C, 9 blocks"
+msgid ""
+"`temp-tower_PLA_fine_230-190_5C.3mf`\n"
+"230 → 190 °C, 9 blocks"
 msgstr ""
 
 #. table cell
@@ -8296,12 +8303,16 @@ msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "270 → 200 °C, 8 blocks"
+msgid ""
+"`temp-tower_PETG_coarse_270-200_10C.3mf`\n"
+"270 → 200 °C, 8 blocks"
 msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "260 → 220 °C, 9 blocks"
+msgid ""
+"`temp-tower_PETG_fine_260-220_5C.3mf`\n"
+"260 → 220 °C, 9 blocks"
 msgstr ""
 
 #. table cell
@@ -8321,12 +8332,16 @@ msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "280 → 220 °C, 7 blocks"
+msgid ""
+"`temp-tower_ABS-ASA_coarse_280-220_10C.3mf`\n"
+"280 → 220 °C, 7 blocks"
 msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "270 → 230 °C, 9 blocks"
+msgid ""
+"`temp-tower_ABS-ASA_fine_270-230_5C.3mf`\n"
+"270 → 230 °C, 9 blocks"
 msgstr ""
 
 #. table cell
@@ -8348,12 +8363,16 @@ msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "250 → 200 °C, 6 blocks"
+msgid ""
+"`temp-tower_TPU_coarse_250-200_10C.3mf`\n"
+"250 → 200 °C, 6 blocks"
 msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "240 → 210 °C, 7 blocks"
+msgid ""
+"`temp-tower_TPU_fine_240-210_5C.3mf`\n"
+"240 → 210 °C, 7 blocks"
 msgstr ""
 
 #. table cell
@@ -8374,12 +8393,16 @@ msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "310 → 250 °C, 7 blocks"
+msgid ""
+"`temp-tower_PC_coarse_310-250_10C.3mf`\n"
+"310 → 250 °C, 7 blocks"
 msgstr ""
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "300 → 260 °C, 9 blocks"
+msgid ""
+"`temp-tower_PC_fine_300-260_5C.3mf`\n"
+"300 → 260 °C, 9 blocks"
 msgstr ""
 
 #. table cell

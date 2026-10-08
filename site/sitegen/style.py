@@ -266,6 +266,8 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
 .tabella table { border-collapse: collapse; font-size: .92rem; min-width: 100%; }
 .tabella th, .tabella td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--filo);
                            vertical-align: top; }
+.tabella code.file { font-weight: 600; color: var(--testo); }
+.tabella code.file span { white-space: nowrap; }
 .tabella th { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muto);
               font-weight: 600; }
 

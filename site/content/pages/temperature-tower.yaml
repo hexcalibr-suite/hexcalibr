@@ -85,15 +85,15 @@ steps:
     table:
       head: ["Material", "Coarse: bottom → top", "Fine: bottom → top", "Filament (coarse / fine)", "Notes"]
       rows:
-        - ["PLA", "240 → 180 °C, 7 blocks", "230 → 190 °C, 9 blocks", "8.0 / 10.2 g", "The reference material; start with the fine file if unsure."]
-        - ["PETG", "270 → 200 °C, 8 blocks", "260 → 220 °C, 9 blocks", "9.3 / 10.4 g", "Both files go above 250 °C: all-metal hotend only."]
-        - ["ABS / ASA", "280 → 220 °C, 7 blocks", "270 → 230 °C, 9 blocks", "6.9 / 8.7 g", "All-metal hotend. Enclosure closed and warm before you start. The files add a 4 mm brim (included in the grams)."]
-        - ["TPU", "250 → 200 °C, 6 blocks", "240 → 210 °C, 7 blocks", "6.8 / 7.8 g", "Prints at 3 mm³/s; direct drive recommended. The snap flag is not scored."]
-        - ["PC", "310 → 250 °C, 7 blocks", "300 → 260 °C, 9 blocks", "7.9 / 10.0 g", "Prints at 8 mm³/s. All-metal hotend rated for 310 °C, enclosure, hot bed. The files add a 4 mm brim (included in the grams)."]
+        - ["PLA", "`temp-tower_PLA_coarse_240-180_10C.3mf`\n240 → 180 °C, 7 blocks", "`temp-tower_PLA_fine_230-190_5C.3mf`\n230 → 190 °C, 9 blocks", "8.0 / 10.2 g", "The reference material; start with the fine file if unsure."]
+        - ["PETG", "`temp-tower_PETG_coarse_270-200_10C.3mf`\n270 → 200 °C, 8 blocks", "`temp-tower_PETG_fine_260-220_5C.3mf`\n260 → 220 °C, 9 blocks", "9.3 / 10.4 g", "Both files go above 250 °C: all-metal hotend only."]
+        - ["ABS / ASA", "`temp-tower_ABS-ASA_coarse_280-220_10C.3mf`\n280 → 220 °C, 7 blocks", "`temp-tower_ABS-ASA_fine_270-230_5C.3mf`\n270 → 230 °C, 9 blocks", "6.9 / 8.7 g", "All-metal hotend. Enclosure closed and warm before you start. The files add a 4 mm brim (included in the grams)."]
+        - ["TPU", "`temp-tower_TPU_coarse_250-200_10C.3mf`\n250 → 200 °C, 6 blocks", "`temp-tower_TPU_fine_240-210_5C.3mf`\n240 → 210 °C, 7 blocks", "6.8 / 7.8 g", "Prints at 3 mm³/s; direct drive recommended. The snap flag is not scored."]
+        - ["PC", "`temp-tower_PC_coarse_310-250_10C.3mf`\n310 → 250 °C, 7 blocks", "`temp-tower_PC_fine_300-260_5C.3mf`\n300 → 260 °C, 9 blocks", "7.9 / 10.0 g", "Prints at 8 mm³/s. All-metal hotend rated for 310 °C, enclosure, hot bed. The files add a 4 mm brim (included in the grams)."]
     points:
       - warn: "**Above about 250 °C, hotends with a PTFE (Teflon) tube down to the nozzle are not safe:** the tube degrades and gives off harmful fumes. The PETG, ABS/ASA and PC files all go above 250 °C: print them only on an all-metal hotend, and check your hotend's maximum temperature first."
       - "Get it from the {suite} page on Printables (below)."
-      - "Download the **single .3mf file**, never \"Download all\" as a ZIP."
+      - "Download the **single .3mf file** named in the table, for example `temp-tower_PETG_fine_260-220_5C.3mf`: the name must end in **.3mf**. Never \"Download all\" as a ZIP."
     printables: printables-temperature-tower
     more:
       intro: "Two files per material family, coarse and fine. Each starts hot at the bottom and goes down one step per block."

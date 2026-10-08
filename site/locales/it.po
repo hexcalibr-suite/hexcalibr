@@ -10302,8 +10302,14 @@ msgstr "Scaricalo dalla pagina di {suite} su Printables (qui sotto)."
 
 #. point
 msgctxt "temperature-tower/download"
-msgid "Download the **single .3mf file**, never \"Download all\" as a ZIP."
-msgstr "Scarica il **singolo file .3mf**, mai \"Scarica tutto\" come ZIP."
+msgid ""
+"Download the **single .3mf file** named in the table, for example "
+"`temp-tower_PETG_fine_260-220_5C.3mf`: the name must end in **.3mf**. Never "
+"\"Download all\" as a ZIP."
+msgstr ""
+"Scarica il **singolo file .3mf** indicato nella tabella, per esempio "
+"`temp-tower_PETG_fine_260-220_5C.3mf`: il nome deve finire in **.3mf**. Mai "
+"\"Scarica tutto\" come ZIP."
 
 #. table header
 msgctxt "temperature-tower/download"
@@ -10337,13 +10343,13 @@ msgstr "PLA"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "240 → 180 °C, 7 blocks"
-msgstr "240 → 180 °C, 7 blocchi"
+msgid "`temp-tower_PLA_coarse_240-180_10C.3mf`\n240 → 180 °C, 7 blocks"
+msgstr "`temp-tower_PLA_coarse_240-180_10C.3mf`\n240 → 180 °C, 7 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "230 → 190 °C, 9 blocks"
-msgstr "230 → 190 °C, 9 blocchi"
+msgid "`temp-tower_PLA_fine_230-190_5C.3mf`\n230 → 190 °C, 9 blocks"
+msgstr "`temp-tower_PLA_fine_230-190_5C.3mf`\n230 → 190 °C, 9 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
@@ -10362,13 +10368,13 @@ msgstr "PETG"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "270 → 200 °C, 8 blocks"
-msgstr "270 → 200 °C, 8 blocchi"
+msgid "`temp-tower_PETG_coarse_270-200_10C.3mf`\n270 → 200 °C, 8 blocks"
+msgstr "`temp-tower_PETG_coarse_270-200_10C.3mf`\n270 → 200 °C, 8 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "260 → 220 °C, 9 blocks"
-msgstr "260 → 220 °C, 9 blocchi"
+msgid "`temp-tower_PETG_fine_260-220_5C.3mf`\n260 → 220 °C, 9 blocks"
+msgstr "`temp-tower_PETG_fine_260-220_5C.3mf`\n260 → 220 °C, 9 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
@@ -10387,13 +10393,13 @@ msgstr "ABS / ASA"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "280 → 220 °C, 7 blocks"
-msgstr "280 → 220 °C, 7 blocchi"
+msgid "`temp-tower_ABS-ASA_coarse_280-220_10C.3mf`\n280 → 220 °C, 7 blocks"
+msgstr "`temp-tower_ABS-ASA_coarse_280-220_10C.3mf`\n280 → 220 °C, 7 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "270 → 230 °C, 9 blocks"
-msgstr "270 → 230 °C, 9 blocchi"
+msgid "`temp-tower_ABS-ASA_fine_270-230_5C.3mf`\n270 → 230 °C, 9 blocks"
+msgstr "`temp-tower_ABS-ASA_fine_270-230_5C.3mf`\n270 → 230 °C, 9 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
@@ -10416,13 +10422,13 @@ msgstr "TPU"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "250 → 200 °C, 6 blocks"
-msgstr "250 → 200 °C, 6 blocchi"
+msgid "`temp-tower_TPU_coarse_250-200_10C.3mf`\n250 → 200 °C, 6 blocks"
+msgstr "`temp-tower_TPU_coarse_250-200_10C.3mf`\n250 → 200 °C, 6 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "240 → 210 °C, 7 blocks"
-msgstr "240 → 210 °C, 7 blocchi"
+msgid "`temp-tower_TPU_fine_240-210_5C.3mf`\n240 → 210 °C, 7 blocks"
+msgstr "`temp-tower_TPU_fine_240-210_5C.3mf`\n240 → 210 °C, 7 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
@@ -10444,13 +10450,13 @@ msgstr "PC"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "310 → 250 °C, 7 blocks"
-msgstr "310 → 250 °C, 7 blocchi"
+msgid "`temp-tower_PC_coarse_310-250_10C.3mf`\n310 → 250 °C, 7 blocks"
+msgstr "`temp-tower_PC_coarse_310-250_10C.3mf`\n310 → 250 °C, 7 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"
-msgid "300 → 260 °C, 9 blocks"
-msgstr "300 → 260 °C, 9 blocchi"
+msgid "`temp-tower_PC_fine_300-260_5C.3mf`\n300 → 260 °C, 9 blocks"
+msgstr "`temp-tower_PC_fine_300-260_5C.3mf`\n300 → 260 °C, 9 blocchi"
 
 #. table cell
 msgctxt "temperature-tower/download"

@@ -1115,12 +1115,25 @@ class Site:
         return ("<details class=\"approfondisci\"><summary>%s</summary><div class=\"approfondisci-corpo\">%s</div></details>"
                 % (_e(self.T("more")), "".join(inner)))
 
+    def cell(self, text):
+        """A table cell: one line per "\\n". A .3mf file name in `code` keeps
+        its words together and may wrap only once, before its numbers."""
+        html = "<br>".join(self.md(line) for line in text.split("\n"))
+
+        def file_name(m):
+            name = m.group(1)
+            if not name.endswith(".3mf"):
+                return m.group(0)
+            parts = re.split(r"(?<=_)(?=\d)", name, maxsplit=1)
+            return "<code class=\"file\">%s</code>" % "<wbr>".join("<span>%s</span>" % x for x in parts)
+        return re.sub(r"<code>(.*?)</code>", file_name, html)
+
     def table(self, tab):
         r = ["<div class=\"tabella\"><table><thead><tr>"]
         r += ["<th scope=\"col\">%s</th>" % self.md(h) for h in tab["head"]]
         r.append("</tr></thead><tbody>")
         for row in tab["rows"]:
-            r.append("<tr>%s</tr>" % "".join("<td>%s</td>" % self.md(str(c)) for c in row))
+            r.append("<tr>%s</tr>" % "".join("<td>%s</td>" % self.cell(str(c)) for c in row))
         r.append("</tbody></table></div>")
         return "".join(r)
 
