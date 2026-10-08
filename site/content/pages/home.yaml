@@ -34,9 +34,10 @@ steps:
     photos:
       - id: V0_howto-open-print_PS29
         kind: video
-        alt: "Screen recording: a HexCalibr test downloaded, opened as a project in PrusaSlicer, checked in the preview and sent to the printer"
-        caption: "One minute, start to finish: download, File › Open project, check the markers, slice, print."
-        shot: "VIDEO, screen recording, no text overlay, no voice. See docs/media/video-come-funziona.md in the workspace: Printables download → File › Open project (no preset dialog) → preview markers with the M104 tooltip → Slice → Send to printer → print starting in Mainsail. 45–60 s, PrusaSlicer light theme, English UI, about 1600×1000, no personal data on screen. Or set youtube: <id> for the promo version."
+        aspect: "16/9"
+        alt: "Screen recording: the temperature tower downloaded from Printables, opened with File › Open project in PrusaSlicer, sliced, and the layer-slider markers showing each block's M104 temperature"
+        caption: "Half a minute, start to finish: download the single .3mf, File › Open project, slice, check the markers. Then print as usual."
+        shot: "DONE 2026-10-09: two owner screen recordings (Printables download; PrusaSlicer open/slice/markers), cropped to 16:9, the file dialog sidebar blurred; no Send-to-printer part. Was: VIDEO, screen recording, no text overlay, no voice. See docs/media/video-come-funziona.md in the workspace: Printables download → File › Open project (no preset dialog) → preview markers with the M104 tooltip → Slice → Send to printer → print starting in Mainsail. 45–60 s, PrusaSlicer light theme, English UI, about 1600×1000, no personal data on screen. Or set youtube: <id> for the promo version."
     more:
       points:
         - "The tests are small on purpose: a few grams each, with one variable per test. Big \"torture tests\" fail for ten reasons at once and teach nothing."
