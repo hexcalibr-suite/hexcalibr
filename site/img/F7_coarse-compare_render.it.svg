@@ -187,8 +187,8 @@
 <polygon points="670.31,695.40 680.21,695.40 680.21,669.00 670.31,669.00" fill="#e88c30"/>
 <rect x="453.1" y="149.8" width="24.2" height="206.8" rx="6" fill="none" stroke="#2a7d3a" stroke-width="3"/>
 <rect x="414.6" y="455.6" width="30.8" height="206.8" rx="6" fill="none" stroke="#2a7d3a" stroke-width="3"/>
-<text x="390" y="136" font-size="31" font-weight="bold" text-anchor="middle" fill="#2a7d3a" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Fine: allineata su 2 → leggi +0,20</text>
-<text x="390" y="771" font-size="31" font-weight="bold" text-anchor="middle" fill="#2a7d3a" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Grossa: allineata su 2 (0, 2 o 4)</text>
+<text x="390" y="136" font-size="31" font-weight="bold" text-anchor="middle" fill="#2a7d3a" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Scala fine: allineata su 2 → leggi +0,20</text>
+<text x="390" y="771" font-size="31" font-weight="bold" text-anchor="middle" fill="#2a7d3a" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Scala grossa: allineata su 2 (0, 2 o 4)</text>
 <text x="390" y="854" font-size="36" font-weight="bold" text-anchor="middle" fill="#1d3557">→ Usa la scala fine</text>
 </svg>
 <line x1="793" y1="20" x2="793" y2="856" stroke="#d6d3cc" stroke-width="2"/>
@@ -379,8 +379,8 @@
 <polygon points="670.31,695.40 680.21,695.40 680.21,669.00 670.31,669.00" fill="#e88c30"/>
 <rect x="138.5" y="149.8" width="24.2" height="206.8" rx="6" fill="none" stroke="#b3261e" stroke-width="3"/>
 <rect x="537.8" y="455.6" width="30.8" height="206.8" rx="6" fill="none" stroke="#2a7d3a" stroke-width="3"/>
-<text x="390" y="136" font-size="31" font-weight="bold" text-anchor="middle" fill="#b3261e" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Fine: sembra −0,45, in fondo alla scala</text>
-<text x="390" y="771" font-size="31" font-weight="bold" text-anchor="middle" fill="#2a7d3a" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Grossa: allineata su 6 → offset grande</text>
+<text x="390" y="136" font-size="31" font-weight="bold" text-anchor="middle" fill="#b3261e" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Scala fine: sembra −0,45, in fondo alla scala</text>
+<text x="390" y="771" font-size="31" font-weight="bold" text-anchor="middle" fill="#2a7d3a" stroke="#fafaf7" stroke-width="4" paint-order="stroke">Scala grossa: allineata su 6 → offset grande</text>
 <text x="390" y="854" font-size="36" font-weight="bold" text-anchor="middle" fill="#1d3557">→ Fidati della scala grossa</text>
 </svg>
 </svg>
