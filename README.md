@@ -1,4 +1,7 @@
-<p><img src="brand/wordmark/wordmark.svg" alt="HexCalibr — 3D print calibration suite" width="420"></p>
+<p><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="brand/wordmark/wordmark-dark.svg">
+  <img src="brand/wordmark/wordmark.svg" alt="HexCalibr — 3D print calibration suite" width="420">
+</picture></p>
 
 # HexCalibr — 3D print calibration suite
 
