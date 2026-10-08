@@ -74,7 +74,7 @@ steps:
     title: "Safety"
     points:
       - warn: "Stay near the printer during the first minutes of every test. Calibration prints change temperatures and speeds while printing."
-      - warn: "Never print above your hotend's maximum temperature. Hotends with a PTFE tube down to the nozzle must not go above about 240 °C."
+      - warn: "Never print above your hotend's maximum temperature. Hotends with a PTFE tube down to the nozzle must not go above about 250 °C."
       - "Ventilate the room for ABS, ASA and PC, and keep the enclosure closed while printing them."
 
   - id: notes

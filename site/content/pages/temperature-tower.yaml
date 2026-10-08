@@ -102,7 +102,7 @@ steps:
         - "Print time: 16 to 19 minutes for a coarse tower, 20 to 24 for a fine one (TPU about 38 and 44). The file prints with 0.45 mm lines and 0.2 mm layers; the grams assume 1.75 mm filament and no skirt. Both are our own estimates, the time ±30 %: after slicing, PrusaSlicer shows the real figures."
         - "The files are named like `temp-tower_PETG_coarse_270-200_10C.3mf` and `temp-tower_PETG_fine_260-220_5C.3mf`: material, variant, the bottom and top temperatures, and the **step**. They are made for a **0.4 mm nozzle**."
         - "Download the **single .3mf file**, not \"Download all\" as a ZIP: PrusaSlicer opens a ZIP's 3MF as plain geometry and the temperature changes are lost."
-        - "**IDEX and multi-tool printers:** print the whole tower with **one tool**: in PrusaSlicer, set the object's extruder to that tool. The temperature commands (`M104` without a tool number) act on the active tool."
+        - "**IDEX and multi-tool printers:** print the whole tower with **one tool**: in PrusaSlicer, set the object's extruder to that tool. The temperature commands (`M104` without a tool number) act on the active tool. `temp-tower_PETG_coarse_270-200_10C_T0.3mf` is a ready example already set to T0; for another tool, use the plain file and set the extruder."
         - "**Bambu Studio and OrcaSlicer:** the files are made for PrusaSlicer. Other slicers may load the shape only, without the temperature changes."
 
   - part: "Print it"
