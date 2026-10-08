@@ -14,7 +14,7 @@ steps:
       rows:
         - ["Test models (3MF, STL) and their designs", "[Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (CC BY-SA 4.0)"]
         - ["Guides, texts, photos and drawings on this site", "CC BY-SA 4.0"]
-        - ["Code: model generators, this site's generator, scripts", "[GNU GPL version 3 or later](https://www.gnu.org/licenses/gpl-3.0.html) (GPL-3.0-or-later)"]
+        - ["Code: this site's generator and scripts", "[GNU GPL version 3 or later](https://www.gnu.org/licenses/gpl-3.0.html) (GPL-3.0-or-later)"]
     points:
       - "CC BY-SA 4.0 means you may share and adapt the models and texts, also commercially, as long as you **give credit** and **share your changes under the same license**."
       - "**Credit** means: the name {suite}, the author ({author}), a **link back to the original page** of the model or guide, the license, and a note if you changed anything."

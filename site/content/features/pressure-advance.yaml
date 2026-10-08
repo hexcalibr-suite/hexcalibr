@@ -28,7 +28,7 @@ rules:
   - "Go up from band 1. A band **qualifies** when both **90° tips** are ✓ and **no counted probe** is H. The **Inside** column is not counted: a concave corner is rounded by the bead width in every band, so do not judge PA there."
   - "Your value is the **lowest band that qualifies**. The 45° tip may still be L there: that is normal."
   - "**Tie:** if the band just above also qualifies and has at least as many ✓, take that **higher** band (when in doubt, lean higher)."
-  - "If the result is **band 1 or the top band**, the range is wrong: print a tower with the range shifted that way."
+  - "If the result is **band 1 or the top band**, the value may lie outside the range: print the other file of your firmware (coarse after fine, fine after coarse)."
   - "**Sanity check:** L marks belong at the bottom (low PA) and H marks at the top. Marks scattered at random, or L and H on the same probe of one band, point to something else: see [Troubleshooting](page:pressure-advance#troubleshooting)."
 
 # For the scorecard's firmware menu: band 1 (bottom, always PA 0) first,
@@ -142,7 +142,7 @@ features:
         - "Mark ✓ only when **both** tips pass. If one bulges and the other does not, mark L: the back-left tip has a shorter straight, so it often reacts a little later."
         - beginner: "**Look at the tip edge-on against a light background** (a window, a sheet of white paper), or photograph it that way: the blobs stand out as a bumpy outline, and the band where the outline turns straight is easy to spot."
         - beginner: "Compare with band 1 first. It is printed with PA off, so its tips show you exactly what \"bulge\" looks like on your printer. Then go up until the tips look like the corner of a sheet of paper."
-        - expert: "The reading is valid for the test speed (98 mm/s unless you generated another) and your external-perimeter acceleration (and, on Klipper, `square_corner_velocity`). Write them down with the result: a different acceleration moves the optimum."
+        - expert: "The reading is valid for the test speed (98 mm/s) and your external-perimeter acceleration (and, on Klipper, `square_corner_velocity`). Write them down with the result: a different acceleration moves the optimum."
         - misread: "**Every band looks identical:** PA effects are small at low speed. Reprint faster with `--flow 12` (about 147 mm/s) or at your real external-perimeter speed ([the test speed](page:pressure-advance#speed)), staying below 0.8 × your filament's max volumetric speed."
         - misread: "**Wrong temperature:** plastic that is too hot also swells corners, in every band. If even the top band bulges, check that you printed at the temperature chosen with the [temperature tower](page:temperature-tower) before raising PA."
       photos:

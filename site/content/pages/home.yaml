@@ -12,7 +12,7 @@ more:
     It is meant for everyone: the beginner who just wants a filament to print well, and the expert who wants to know what each test really measures. Klipper, Marlin and Prusa printers, single tool and IDEX.
 callouts:
   - kind: warn
-    text: "Open every test with **File › Open project** (Ctrl+O / ⌘O). **Never with Import**, and never \"Import geometry only\" when you drop a file on PrusaSlicer: the shape loads, but the temperature or speed changes that make it a test are silently dropped. Download the single .3mf, not a ZIP."
+    text: "Open every test with **File › Open project** (Ctrl+O / ⌘O). **Never with Import**, and never \"Import 3D models only\" when you drop a file on PrusaSlicer: the shape loads, but the temperature or speed changes that make it a test are silently dropped. Download the single .3mf, not a ZIP."
 steps:
   - id: release-1
     title: "What's in release 1"

@@ -13,7 +13,7 @@ description: "A printable scoring card for the pressure advance test: pass, too 
 intro: |
   Choose your file in the firmware menu (or type the values of a custom range), score each band on screen or on paper, and let the rule pick the value. How to judge each probe: [pressure advance guide](page:pressure-advance#how-to-read).
 
-  Write down too: **firmware**, **nozzle**, filament **brand, type, colour**, **temperature**, **test speed (98 mm/s unless you generated another) and acceleration**, **date**. A value without them is useless next month.
+  Write down too: **firmware**, **nozzle**, filament **brand, type, colour**, **temperature**, **test speed (98 mm/s) and acceleration**, **date**. A value without them is useless next month.
 callouts:
   - kind: info
-    text: "The columns follow the hex pinwheel model v1.3.0 (coarse and fine files are both in the firmware menu). **90° tips**, **45° tip** and **Straights** decide; **Seam** and **120°** only confirm; **Inside** is shown but **not counted** (a concave corner is rounded by the bead width at any PA). Printed on A4: the rules on page 1, the whole grid on page 2. A custom file with more than 9 bands needs a second card."
+    text: "The columns follow the hex pinwheel model v1.3.0 (coarse and fine files are both in the firmware menu). **90° tips**, **45° tip** and **Straights** decide; **Seam** and **120°** only confirm; **Inside** is shown but **not counted** (a concave corner is rounded by the bead width at any PA). Printed on A4: the rules on page 1, the whole grid on page 2."

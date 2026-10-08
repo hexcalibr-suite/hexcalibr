@@ -64,7 +64,7 @@ steps:
         - "Run it again after changing the hotend, the nozzle size or material (a hardened steel nozzle usually wants it a little hotter), or when you start printing much faster."
         - "In the full sequence it comes **after the first layer** is right and **before** pressure advance, flow and retraction: those all depend on the temperature you choose here."
         - beginner: "The temperature printed on the spool is a range, often 40 °C wide. This test tells you where in that range your printer is happiest."
-        - expert: "The result is valid for the flow and cooling the tower prints with: **10 mm³/s** (unless you generate another) and your filament's big-part fan setting. If you print at a very different volumetric flow, the best temperature moves (usually hotter for faster)."
+        - expert: "The result is valid for the flow and cooling the tower prints with: **10 mm³/s** and your filament's big-part fan setting. If you print at a very different volumetric flow, the best temperature moves (usually hotter for faster)."
 
   - id: coarse-or-fine
     title: "Coarse or fine: which file first"
@@ -115,11 +115,11 @@ steps:
         text: "After opening, slice and look at the vertical layer slider in the Preview: it must show **one marker per block**. Hovering a marker shows `M104 S<temp>`."
         items:
           - "On multi-extruder printer profiles (IDEX, XL, MMU) there may be more than one marker per block. That is fine."
-          - "**No markers: do not print.** Open the file again with **File › Open project**, and check in **Preferences** that the drop-project dialog is on (see below)."
+          - "**No markers: do not print.** Open the file again with **File › Open project**, and check in **Preferences** that the load project dialog is on (see below)."
           - "Quick check: export the G-code and search it for \"M104\": [details in the next step](page:temperature-tower#check)."
     points:
       - "In PrusaSlicer, **File › Open project** (Ctrl+O, or ⌘O on macOS) and choose the .3mf."
-      - "Dragging the file in? Choose **Open as project**, never **Import geometry only**."
+      - "Dragging the file in? Choose **Open as project**, never **Import 3D models only**."
       - "Do not scale, rotate, cut or sink the tower."
       - warn: "Opening the project replaces anything already on the plate, and any custom G-code you had added there. The temperature changes belong to the plate, so print the tower **on its own**."
     photos:
@@ -130,8 +130,8 @@ steps:
         shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, the Load project file dialog after dropping temp-tower_PETG_coarse_270-200_10C.3mf, whole dialog, Open as project highlighted in amber."
     more:
       points:
-        - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import geometry only** drops the temperature changes."
-        - "If you once ticked \"don't show again\" with the wrong choice, dragging will import silently. Turn the question back on in **Preferences › General › Show drop project dialog**."
+        - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import 3D models only** drops the temperature changes."
+        - "If you once ticked \"don't show again\" with the wrong choice, dragging will import silently. Turn the question back on in **Preferences › General › Show load project dialog**."
         - "Downloads started from Printables inside PrusaSlicer go through the same question: answer **Open as project**."
         - "The project carries **no printer, filament or print profile**: PrusaSlicer keeps yours. It only carries the tower, a few per-object settings the test needs (0.2 mm layers, 0.45 mm lines, two perimeters, Arachne walls, 15 % infill, no supports, the seam at the back, the test flow) and the temperature changes."
         - beginner: "Do not scale, rotate, cut or sink the tower. The temperature changes are fixed heights: if the tower changes size, the changes land in the wrong place."
@@ -144,7 +144,7 @@ steps:
         text: "The vertical slider must show **one marker per block**, at the first layer of each block. Hovering a marker shows `M104 S<temp>`."
         items:
           - "On multi-extruder printer profiles (IDEX, XL, MMU) there may be more than one marker per block. That is fine: they all carry the same temperature."
-          - "**If no markers are visible, do not print.** The temperature changes were dropped and the whole tower would print at one temperature. Open the file again with **File › Open project** (not Import), and check **Preferences › General › Show drop project dialog** so that dragging a file asks you again."
+          - "**If no markers are visible, do not print.** The temperature changes were dropped and the whole tower would print at one temperature. Open the file again with **File › Open project** (not Import), and check **Preferences › General › Show load project dialog** so that dragging a file asks you again."
           - "Quick check before printing: export the G-code and search it for \"M104\". Every block's temperature must be there, going down by the file's step (10 °C coarse, 5 °C fine)."
     points:
       - "Pick **your** printer, print and filament profiles, click **Slice now** and switch to **Preview**."
@@ -225,7 +225,7 @@ steps:
     photos:
       - id: F1_layout-top_render
         alt: "Top view of one block of the hexagonal tower, the front face at the bottom"
-        caption: "One block seen from above, front (numbers) at the bottom. Clockwise from the front: the smooth face, the ramp tongues, the plain back face, the string ladder on the back corner, the flag at the edge of its shelf, and the bridge beam on its two long ribs; the front rib (bottom left) carries the hole."
+        caption: "One block seen from above, front (numbers) at the bottom. Anticlockwise from the front: the smooth face, the ramp tongues, the plain back face, the string ladder on the back corner, the flag at the edge of its shelf, and the bridge beam on its two long ribs; the front rib (bottom left) carries the hole."
         shot: "RENDER, already done: copy of docs/previews/hex-block-top.png (front face at the bottom). Replace with a real top-down photo of the top block only if it reads as clearly."
     more:
       points:
@@ -235,13 +235,13 @@ steps:
         - "For each block and each feature, write **✓** (pass), **H** (fails because too hot), **C** (fails because too cold) or **–** (can't judge). The next steps show what each looks like."
         - "Judge each block **above its bottom 1 mm**: there the temperature was still changing, and no feature starts there."
         - "Score the features in the order of the steps below: **the strings first, before you touch or brush the tower** (photograph the ladder now if you want a record), and **the snap flags last**: once broken, they cannot be looked at again. Write the ramp angle in the Notes column."
-        - "**Not every feature changes from block to block.** On the owner's coarse PETG tower (270 → 200 °C, at the file's flow) the strings showed the hot end, and the smooth face and the top of the bridge beam showed the cold end; the label, the hole and the ramp tongues seen from the side looked the same on every block. A column that does not change gets ✓ on every block: the flags and the columns that do change decide. The label and the smooth face are marked *Confirms only*; the hole is marked *Confirms* and is not counted at all."
+        - "**Not every feature changes from block to block.** On the author's coarse PETG tower (270 → 200 °C, at the file's flow) the strings showed the hot end, and the smooth face and the top of the bridge beam showed the cold end; the label, the hole and the ramp tongues seen from the side looked the same on every block. A column that does not change gets ✓ on every block: the flags and the columns that do change decide. The label and the smooth face are marked *Confirms only*; the hole is marked *Confirms* and is not counted at all."
         - "Then apply the [rules for choosing the block](page:temperature-tower#choose). The on-screen card applies them for you."
         - beginner: "You do not need to know why a feature fails. You only need to compare blocks: the descriptions tell you which way each failure points."
         - misread: "Reading the tower upside down, or counting from the top. Always find the engraved temperature before you score a row."
       photos:
         - id: F1_scoring-setup_PETG_VC4
-          alt: "The tower on a dark card next to a phone showing the scorecard"
+          alt: "The fine PETG tower on a dark card next to a tablet showing the scorecard"
           caption: "A good reading set-up: dark background, light from one side, the scorecard to hand."
           shot: "Overhead 3/4 view of the desk: tower on a black card, a small desk lamp angled low from one side, the printed scorecard partly filled in next to it with a pen. Calm, uncluttered, daylight-balanced light."
 
@@ -268,8 +268,8 @@ steps:
       points:
         - "For parts that must be strong, go **one block hotter** than the block the rules picked."
         - "Example: PLA fine tower, blocks 220, 215 and 210 °C all score 5 ✓ with one failure each, block 205 fails the snap flag. The cooler of the tied blocks wins: **210 °C**. For strong parts, use 215 °C."
-        - "Example from the owner's coarse tower, PETG 270 → 200: the strings are clearly worse at 250, 260 and 270 °C (H); the top of the bridge is rough at 230 °C and colder, the smooth face streaky from 220 °C down (C). 240 °C is the only block with neither; if its flag holds, the rules pick **240 °C**, and a fine pass 250 → 230 then settles it to 5 °C."
-        - misread: "Choosing the block with the **cleanest ladder**. The coldest blocks string the least and are the weakest: on the owner's PETG the 200–220 °C blocks had almost no strings, but a streaky face and rough bridges. That is why the snap flag comes first."
+        - "Example from the author's coarse tower, PETG 270 → 200: the strings are clearly worse at 250, 260 and 270 °C (H); the top of the bridge is rough at 230 °C and colder, the smooth face streaky from 220 °C down (C). 240 °C is the only block with neither; if its flag holds, the rules pick **240 °C**, and a fine pass 250 → 230 then settles it to 5 °C."
+        - misread: "Choosing the block with the **cleanest ladder**. The coldest blocks string the least and are the weakest: on the author's PETG the 200–220 °C blocks had almost no strings, but a streaky face and rough bridges. That is why the snap flag comes first."
         - misread: "Taking the coldest block with no strings. Stringing is also a retraction problem, tuned later in the sequence."
         - expert: "If the H marks do not all sit below the C marks, something other than temperature is varying across the tower: cooling, wet filament, or transition layers read as blocks. Fix that before trusting the result."
 
@@ -351,7 +351,7 @@ steps:
         - "**Markers are there but the printer never changed temperature:** look at the printer's screen while it prints. Some start or tool-change macros reset the temperature; with a single tool and no tool changes this should not happen."
         - "**The bottom block was printed at the wrong temperature:** the filament profile's First layer and Other layers temperatures were different ([see why](page:temperature-tower#settings))."
         - "**Changes at the wrong heights:** the tower was scaled, cut, sunk or rotated. Open the file again and leave it as it is."
-        - "**The blocks printed slowly:** check the Volumetric flow rate view ([the test flow](page:temperature-tower#flow)). If it shows much less than 10 mm³/s, the file was imported instead of opened (no `M220` markers), or your filament slows down layers below more than 28 s: lower that for this print only, without saving."
+        - "**The blocks printed slowly:** check the Volumetric flow rate view ([the test flow](page:temperature-tower#flow)). If it shows much less than 10 mm³/s, the file was imported instead of opened (no `M220` markers), or your filament's **Slow down if layer print time is below** is above 28 s: lower it for this print only, without saving."
         - "**The next print runs far too fast:** the tower was cancelled before its top, and the speed factor is still set. Send `M220 S100` (Klipper: or `RESTART`)."
 
   - id: troubleshooting-more
@@ -365,6 +365,6 @@ steps:
         - "**The other tool on an IDEX printer heats or cools:** the object is assigned to the wrong extruder. In the object list, set its extruder to the one the file is for."
         - "**\"Temperature out of range\" / above maximum:** the hottest blocks are above your hotend's limit. Do not raise the firmware limit for this test: it exists to protect the hotend. Use the fine file if only the coarse one is too hot."
         - "**Everything fails hot, even the top block:** check that the part cooling fan works and is on. If it is, the best temperature may be below the tower's range: take the coldest block that passes the snap flag and check the manufacturer's range."
-        - "**No flag passes:** wet filament, an extruder that under-extrudes (do the first-layer and extruder checks), or a speed far above the hotend's melting capacity (planned: maximum volumetric flow test)."
+        - "**No flag passes:** wet filament, an extruder that under-extrudes (do the first-layer and extruder checks), or a speed far above the hotend's melting capacity (see the [maximum volumetric flow](page:max-flow) test)."
         - "**The tower came loose or a ladder post broke off:** clean the bed, check the first layer, and use a brim. Score the damaged features –."
         - "**PrusaSlicer 3.x alpha:** not tested with these files yet. PrusaSlicer 3.0 also has its own built-in temperature tower in its Calibration menu."

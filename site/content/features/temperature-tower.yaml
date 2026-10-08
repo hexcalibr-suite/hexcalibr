@@ -84,7 +84,7 @@ features:
       points:
         - "**Score this first, before you touch the tower.** Brushing, handling or even a careful look with your fingers removes most strings."
         - "Look **through** the windows from the side, along the back face or along the back-left face, with a lamp or a bright window **behind** the tower: the strings show as dark threads against the light."
-        - beginner: "Photograph the ladder before brushing too: in the owner's tests the strings were obvious on the nozzle cam and in photos taken before brushing, and gone afterwards."
+        - beginner: "Photograph the ladder before brushing too: in the author's tests the strings were obvious on the nozzle cam and in photos taken before brushing, and gone afterwards."
         - expert: "Retraction is not tuned yet at this point of the sequence. Do not chase zero strings: mark H only when the strings are clearly worse than on the colder blocks."
         - misread: "If **every** block strings about the same, the filament is probably wet. Dry it before trusting this column."
       photos:
@@ -97,7 +97,7 @@ features:
           kind: video
           aspect: "20/9"
           alt: "Two nozzle-cam clips of the string ladder side by side, same framing, half speed, the same moment of a layer: on the left the 270 °C block, strings pulled between the two posts; on the right the 210 °C block, the same move almost clean"
-          caption: "Nozzle cam, the owner's PETG on T0, half speed. Left, 270 °C: the move between the posts pulls strings across the window. Right, 210 °C: the same move, only a stray hair."
+          caption: "Nozzle cam, the author's PETG on T0, half speed. Left, 270 °C: the move between the posts pulls strings across the window. Right, 210 °C: the same move, only a stray hair."
           shot: "DONE: recordings temp-tower_pins_270C (125.3–128.1 s) and temp-tower_pins_210C (125.5–128.3 s) of the coarse PETG tower, each cropped 800×720 around the nozzle, side by side with a thin dark separator, tools/clip.sh at 0.5 speed. Poster at 2.5 s. No on-screen text."
 
   - id: ramp
@@ -114,7 +114,7 @@ features:
         - beginner: "Turn the tower so you look up at the undersides of the tongues under a lamp. Start from the 55° tongue next to the right corner, go towards the back and stop at the first rough one."
         - expert: "The tongues print at the bridge speed (25 mm/s) with the bridge fan: the file turns on PrusaSlicer's *Detect bridging perimeters* for this object. The angle reached also depends on your fan; use the number to compare blocks: the angle at which the tongues start to fail drops as the temperature rises."
         - misread: "The 80° tongue is very flat and may droop a little on every block. That says nothing about temperature: compare where the droop **starts** from block to block."
-        - misread: "Seen from the side, the tongues may look the same on every block: on the owner's PETG tower (270 → 200 °C) they did. Judge the undersides; if they too look the same, mark ✓ on every block."
+        - misread: "Seen from the side, the tongues may look the same on every block: on the author's PETG tower (270 → 200 °C) they did. Judge the undersides; if they too look the same, mark ✓ on every block."
 
   - id: bridge
     name: "Long bridge (22 mm beam)"
@@ -135,7 +135,7 @@ features:
       points:
         - beginner: "From the side: look square at the front-left face at beam height, with the lamp lighting the face **behind** the beam. The beam's bottom edge then reads as a line against the lit face: compare it with the beam's straight top edge and with the beams of the blocks above and below. From below: tilt the tower back and look up at the underside, with the light skimming along the strands."
         - expert: "The span is long on purpose: sag grows quickly with span, so a 22 mm beam separates the hot blocks more clearly than a short bridge."
-        - "Look at the **top** of each beam too. On the owner's PETG tower (270 → 200 °C) the cold blocks showed there first: from 230 °C down the top was rough, with lifted strands; 240 °C was the cleanest."
+        - "Look at the **top** of each beam too. On the author's PETG tower (270 → 200 °C) the cold blocks showed there first: from 230 °C down the top was rough, with lifted strands; 240 °C was the cleanest."
         - expert: "Bridges depend strongly on the bridge fan speed and the bridge flow ratio. If every bridge looks the same, it tells you little about temperature: score them all ✓ or all –."
 
   - id: label
@@ -167,7 +167,7 @@ features:
         caption: "Top, 210 °C, too cold: the smooth face (right of the numbers) is streaky and feathered, with small lumps. Bottom, 240 °C, the chosen block: even layer lines."
         shot: "DONE from _A645896 (coarse PETG tower v2.3, 270→200, front view): two equal crops of the label and the front-right face, one block each, stacked as on the tower (210 °C on top, 240 °C below), thin dark separator, no text in the image."
     more:
-      intro: "Fails both ways: hot plastic smears and ripples, cold plastic looks dry and rough. On the owner's coarse PETG tower (270 → 200 °C) it showed the cold end clearly: streaky, feathered layers from 220 °C down (a trace at 230), even from 240 °C up; the hot blocks looked no different."
+      intro: "Fails both ways: hot plastic smears and ripples, cold plastic looks dry and rough. On the author's coarse PETG tower (270 → 200 °C) it showed the cold end clearly: streaky, feathered layers from 220 °C down (a trace at 230), even from 240 °C up; the hot blocks looked no different."
       points:
         - beginner: "Tilt the tower under a lamp so the light skims the face: ripples and matte bands show up at once."
         - misread: "Silk, matte and glitter filaments change their sheen on purpose. With them, judge only the ripples and gaps, not the gloss."

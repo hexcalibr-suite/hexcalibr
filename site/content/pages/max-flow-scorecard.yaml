@@ -17,4 +17,4 @@ intro: |
   Write down too: filament **brand, type, colour**, **temperature**, **hotend, nozzle, extruder**, the **tool** (IDEX: one card per tool), your **external perimeter acceleration**, **date**. A value without them is useless next month.
 callouts:
   - kind: info
-    text: "Follows the max-flow test v1.3.0, hex column and wedge (all nine files are in the menu; the `_T0` / `_T1` files have the same bands; for a `_fine_` file, type its flows as a custom range). Judge the middle of the two long straights. The wall decides together with **Heater sag** and **Clicks**: any of them failing makes the band fail. Printed on A4: the rules on page 1, the grid on page 2."
+    text: "Follows the max-flow test v1.3.0, hex column and wedge (all nine files are in the menu; the `_T0` / `_T1` files have the same bands). Judge the middle of the two long straights. The wall decides together with **Heater sag** and **Clicks**: any of them failing makes the band fail. Printed on A4: the rules on page 1, the grid on page 2."

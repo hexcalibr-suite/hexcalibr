@@ -121,7 +121,7 @@ steps:
       points:
         - "**Two contrasting colours**, same filament type: load T0 and T1 with, for example, orange and blue, or black and white. The reading depends on telling T0 from T1 at a glance. The reference photos are **PETG**; PLA works just as well."
         - "**Both tools loaded, hot and primed.** Use the temperatures you normally print with."
-        - "**Skirt loops = 0** (Print Settings › Skirt and brim › **Loops**). The skirt would go around the whole layout: about 1.5 m of filament per loop on a 400 mm bed, sometimes one loop per tool."
+        - "**Skirt loops = 0** (Print Settings › Skirt and brim › **Loops (minimum)**). The skirt would go around the whole layout: about 1.5 m of filament per loop on a 400 mm bed, sometimes one loop per tool."
         - "**No wipe tower, no ooze prevention** (Print Settings › Multiple Extruders). The test needs neither: there is only one tool change. **No brim** is already forced on the object."
         - "**IDEX mode: normal** (single toolhead, automatic tool change), not **copy** or **mirror**. RatOS does not apply `idex_xoffset` in copy or mirror mode."
         - "**A good first layer:** bed mesh applied, and the **Z offset between the tools** already set (most multi-tool printers measure it automatically, for example RatOS with its Z probe and VAOC, the Prusa XL tool offset calibration, the Bambu Lab H2D nozzle offset calibration, the Snapmaker J1 Z offset calibration; otherwise set it by hand as your printer's manual describes). A T1 line that is squished or starved changes the line width: the Vernier does not care, but the Lite does."
@@ -130,7 +130,7 @@ steps:
       photos:
         - id: F7_ui-vaoc-z-offset_RatOS
           aspect: "1280/781"
-          alt: "RatOS dashboard after VAOC: the nozzle camera view, the toolhead panel and the console reporting a perfect toolhead z-offset of 0.005 mm for T1, then the IDEX toolhead offset applied for T0"
+          alt: "RatOS dashboard after VAOC: the nozzle camera view, the toolhead panel and the console reporting the IDEX toolhead offset applied for T0, then a perfect toolhead z-offset of 0.005 mm for T1"
           caption: "Example, RatOS: VAOC measures the Z offset between the tools and reports it in the console (here 0.005 mm for T1). Other printers have their own routine."
 
   - part: "Print it"
@@ -157,7 +157,7 @@ steps:
         shot: "DONE: PrusaSlicer 2.9.6, dark theme, English UI, Retina 2x, idex-vernier_400 opened as project on the owner's IDEX profile, not sliced; 3D view and the expanded object list (S1–S9 T0/T1 parts); the Extruder column highlighted in amber."
     more:
       points:
-        - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import geometry only** drops the extruder assignment."
+        - "If you drag the file onto the window instead, PrusaSlicer asks what to do: choose **Open as project**. **Import 3D models only** drops the extruder assignment."
         - "The project carries **no printer, filament or print profile**: PrusaSlicer keeps yours. Choose your **IDEX (multi-extruder) printer profile** and a filament for each extruder."
         - "PrusaSlicer **centres** the test on your bed. The stations end up about 10 mm from the edges for the matching preset."
 
@@ -437,7 +437,7 @@ steps:
     title: "The slice or the print looks wrong"
     points:
       - "**Everything prints with one tool, or the stations are separate objects:** the file was imported, or came from a ZIP. Open the single .3mf with **File › Open project**."
-      - "**A skirt circles the whole bed:** set Print Settings › Skirt and brim › **Loops** to 0."
+      - "**A skirt circles the whole bed:** set Print Settings › Skirt and brim › **Loops (minimum)** to 0."
       - "**Two layers instead of one:** the first-layer height is 0.4 mm or more. Use 0.1 to 0.39 mm for this print."
     more:
       points:
