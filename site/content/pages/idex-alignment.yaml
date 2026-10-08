@@ -292,6 +292,11 @@ steps:
       - "**Look at the coarse scale first.** Find the T1 tick that continues a T0 tick. If it is **0, 2 or 4** (up to 0.4 mm), read the fine scale and leave the coarse box empty."
       - "If it is **6, 8 or 10**, the offset is large. Either apply the coarse value, print again and read the fine scale, or type **both** readings into the card: it works out the true value."
     photos:
+      - id: F7_coarse-compare_render
+        aspect: "1586/876"
+        alt: "Two simulated X blocks side by side. Left, T1 printed 0.20 mm to the right: the coarse scale lines up at 2 and the fine scale at 2, which reads +0.20. Right, T1 printed 0.60 mm to the right: the coarse scale lines up at 6, while the fine scale seems to line up near its far negative end, about −0.45"
+        caption: "Simulation. Left, a small offset (T1 +0.20 mm): the coarse scale lines up at 2, so read the fine scale: +0.20. Right, a large offset (T1 +0.60 mm): the coarse scale lines up at 6, and the fine scale seems to read −0.45 at its far end because it has wrapped around."
+        shot: "RENDER, done: X block of station 5 (Vernier 400 geometry from hexcalibr-core), T1 shifted +0.20 and +0.60 mm, side by side, labels in the image; one SVG per language (.it.svg)."
       - id: F7_vernier-coarse_PETG_VC4
         alt: "Macro photo of a coarse Vernier scale reading a large offset"
         caption: "A large offset: the coarse scale reads +0.6 while the fine scale wraps around. Trust the coarse scale for the window."

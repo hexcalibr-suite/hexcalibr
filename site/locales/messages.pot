@@ -2924,6 +2924,24 @@ msgstr ""
 
 #. photo alt
 msgctxt "idex-alignment/read-coarse"
+msgid ""
+"Two simulated X blocks side by side. Left, T1 printed 0.20 mm to the right: "
+"the coarse scale lines up at 2 and the fine scale at 2, which reads +0.20. "
+"Right, T1 printed 0.60 mm to the right: the coarse scale lines up at 6, "
+"while the fine scale seems to line up near its far negative end, about −0.45"
+msgstr ""
+
+#. photo caption
+msgctxt "idex-alignment/read-coarse"
+msgid ""
+"Simulation. Left, a small offset (T1 +0.20 mm): the coarse scale lines up "
+"at 2, so read the fine scale: +0.20. Right, a large offset (T1 +0.60 mm): "
+"the coarse scale lines up at 6, and the fine scale seems to read −0.45 at "
+"its far end because it has wrapped around."
+msgstr ""
+
+#. photo alt
+msgctxt "idex-alignment/read-coarse"
 msgid "Macro photo of a coarse Vernier scale reading a large offset"
 msgstr ""
 

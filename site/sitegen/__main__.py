@@ -220,7 +220,7 @@ def shotlist(src=None):
             k = 0
         k += 1
         video = ph.get("kind") == "video"
-        exts = (".webm", ".mp4") if video else (".jpg", ".jpeg", ".png", ".webp")
+        exts = (".webm", ".mp4") if video else (".jpg", ".jpeg", ".png", ".webp", ".svg")
         have = bool(ph.get("youtube")) or any(os.path.exists(os.path.join(content.IMG, ph["id"] + ext))
                                               for ext in exts)
         out.append("| %d | `%s`%s%s | %s | %s | %s |"

@@ -984,10 +984,15 @@ class Site:
         self.photos_used.append(ph)
         if ph.get("kind") == "video":
             return self.video(ph)
+        # An image with words in it has one file per language: <id>.<lang>.<ext>,
+        # with <id>.<ext> (English) for the others.
         found = None
-        for ext in (".jpg", ".jpeg", ".png", ".webp"):
-            if os.path.exists(os.path.join(self.photos_dir, ph["id"] + ext)):
-                found = ph["id"] + ext
+        names = [ph["id"] + ext for ext in (".jpg", ".jpeg", ".png", ".webp", ".svg")]
+        if self.lang != "en":
+            names = [n.replace(ph["id"], "%s.%s" % (ph["id"], self.lang), 1) for n in names] + names
+        for name in names:
+            if os.path.exists(os.path.join(self.photos_dir, name)):
+                found = name
                 break
         cap = self.md(ph["caption"]) if ph.get("caption") else ""
         if ph.get("credit"):   # community photo: "Name" or {name, url}
