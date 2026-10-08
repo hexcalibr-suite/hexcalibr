@@ -2940,18 +2940,6 @@ msgid ""
 "its far end because it has wrapped around."
 msgstr ""
 
-#. photo alt
-msgctxt "idex-alignment/read-coarse"
-msgid "Macro photo of a coarse Vernier scale reading a large offset"
-msgstr ""
-
-#. photo caption
-msgctxt "idex-alignment/read-coarse"
-msgid ""
-"A large offset: the coarse scale reads +0.6 while the fine scale wraps "
-"around. Trust the coarse scale for the window."
-msgstr ""
-
 #. More: point
 msgctxt "idex-alignment/read-coarse"
 msgid ""

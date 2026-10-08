@@ -297,10 +297,6 @@ steps:
         alt: "Two simulated X blocks side by side. Left, T1 printed 0.20 mm to the right: the coarse scale lines up at 2 and the fine scale at 2, which reads +0.20. Right, T1 printed 0.60 mm to the right: the coarse scale lines up at 6, while the fine scale seems to line up near its far negative end, about −0.45"
         caption: "Simulation. Left, a small offset (T1 +0.20 mm): the coarse scale lines up at 2, so read the fine scale: +0.20. Right, a large offset (T1 +0.60 mm): the coarse scale lines up at 6, and the fine scale seems to read −0.45 at its far end because it has wrapped around."
         shot: "RENDER, done: X block of station 5 (Vernier 400 geometry from hexcalibr-core), T1 shifted +0.20 and +0.60 mm, side by side, labels in the image; one SVG per language (.it.svg)."
-      - id: F7_vernier-coarse_PETG_VC4
-        alt: "Macro photo of a coarse Vernier scale reading a large offset"
-        caption: "A large offset: the coarse scale reads +0.6 while the fine scale wraps around. Trust the coarse scale for the window."
-        shot: "MACRO, a whole X block (fine and coarse scales) of one station, top-down, front at the bottom. Made with a deliberate +0.6 mm X error on T1 (temporary idex_xoffset change), so the coarse scale aligns at '6' on the + side while the fine scale appears to align near the − end. Raking light, PETG, T0 orange, T1 blue."
     more:
       points:
         - "The fine scale covers ±0.50 mm, and it **repeats**: past 0.5 mm it seems to line up again near the other end. The coarse scale (0.2 mm steps, ±1.0 mm) tells you which window you are in."

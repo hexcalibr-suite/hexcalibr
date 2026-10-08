@@ -3549,20 +3549,6 @@ msgstr ""
 "sembra leggere −0,45 alla sua estremità, perché è andata oltre il suo campo "
 "ed è ricominciata."
 
-#. photo alt
-msgctxt "idex-alignment/read-coarse"
-msgid "Macro photo of a coarse Vernier scale reading a large offset"
-msgstr "Foto macro di una scala grossa Vernier che legge un offset grande"
-
-#. photo caption
-msgctxt "idex-alignment/read-coarse"
-msgid ""
-"A large offset: the coarse scale reads +0.6 while the fine scale wraps "
-"around. Trust the coarse scale for the window."
-msgstr ""
-"Un offset grande: la scala grossa legge +0,6 mentre la scala fine "
-"ricomincia da capo. Per la finestra fidati della scala grossa."
-
 #. More: point
 msgctxt "idex-alignment/read-coarse"
 msgid ""
