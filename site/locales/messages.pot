@@ -1422,7 +1422,8 @@ msgctxt "home/what-it-is"
 msgid ""
 "Screen recording: the temperature tower downloaded from Printables, opened "
 "with File › Open project in PrusaSlicer, sliced, and the layer-slider "
-"markers showing each block's M104 temperature"
+"markers showing each block's M104 temperature; at the end, the nozzle "
+"camera on the tower printing at 240 °C"
 msgstr ""
 
 #. photo caption
