@@ -11011,6 +11011,23 @@ msgid ""
 "blocks, not wherever a string remains."
 msgstr ""
 
+#. More: photo alt
+msgctxt "features/temperature-tower/pins"
+msgid ""
+"Two nozzle-cam clips of the string ladder side by side, same framing, half "
+"speed, the same moment of a layer: on the left the 270 °C block, strings "
+"pulled between the two posts; on the right the 210 °C block, the same move "
+"almost clean"
+msgstr ""
+
+#. More: photo caption
+msgctxt "features/temperature-tower/pins"
+msgid ""
+"Nozzle cam, the owner's PETG on T0, half speed. Left, 270 °C: the move "
+"between the posts pulls strings across the window. Right, 210 °C: the same "
+"move, only a stray hair."
+msgstr ""
+
 #. feature name
 msgctxt "features/temperature-tower/ramp"
 msgid "Overhang ramp (55/65/75/80°)"

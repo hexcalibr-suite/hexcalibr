@@ -93,6 +93,12 @@ features:
           alt: "The whole PETG tower seen from the back-right, the string ladder on the right: strings dense on the bottom blocks, thinning out towards the top"
           caption: "The whole ladder, 270 °C at the bottom to 200 °C at the top: the web thins out block by block. Mark H where it is clearly worse than on the cooler blocks, not wherever a string remains."
           shot: "DONE: _A645891, full frame, the coarse PETG tower v2.3 (270→200) before brushing, back-right face and string ladder against a dark background."
+        - id: F1_pins-nozzlecam-compare_PETG_VC4
+          kind: video
+          aspect: "20/9"
+          alt: "Two nozzle-cam clips of the string ladder side by side, same framing, half speed, the same moment of a layer: on the left the 270 °C block, strings pulled between the two posts; on the right the 210 °C block, the same move almost clean"
+          caption: "Nozzle cam, the owner's PETG on T0, half speed. Left, 270 °C: the move between the posts pulls strings across the window. Right, 210 °C: the same move, only a stray hair."
+          shot: "DONE: recordings temp-tower_pins_270C (125.3–128.1 s) and temp-tower_pins_210C (125.5–128.3 s) of the coarse PETG tower, each cropped 800×720 around the nozzle, side by side with a thin dark separator, tools/clip.sh at 0.5 speed. Poster at 2.5 s. No on-screen text."
 
   - id: ramp
     name: "Overhang ramp (55/65/75/80°)"

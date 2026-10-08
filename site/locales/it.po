@@ -13914,6 +13914,30 @@ msgstr ""
 "dirada blocco dopo blocco. Segna H dove è chiaramente peggiore che sui "
 "blocchi più freddi, non ovunque resti un filo."
 
+#. More: photo alt
+msgctxt "features/temperature-tower/pins"
+msgid ""
+"Two nozzle-cam clips of the string ladder side by side, same framing, half "
+"speed, the same moment of a layer: on the left the 270 °C block, strings "
+"pulled between the two posts; on the right the 210 °C block, the same move "
+"almost clean"
+msgstr ""
+"Due clip della nozzle cam della scaletta dei fili affiancate, stessa "
+"inquadratura, a metà velocità, lo stesso momento di uno strato: a sinistra "
+"il blocco a 270 °C, fili tirati tra i due montanti; a destra il blocco a "
+"210 °C, lo stesso movimento quasi pulito"
+
+#. More: photo caption
+msgctxt "features/temperature-tower/pins"
+msgid ""
+"Nozzle cam, the owner's PETG on T0, half speed. Left, 270 °C: the move "
+"between the posts pulls strings across the window. Right, 210 °C: the same "
+"move, only a stray hair."
+msgstr ""
+"Nozzle cam, il PETG dell'autore sulla T0, a metà velocità. A sinistra, 270 "
+"°C: il movimento tra i montanti tira fili attraverso la finestra. A destra, "
+"210 °C: lo stesso movimento, solo un capello isolato."
+
 #. feature name
 msgctxt "features/temperature-tower/ramp"
 msgid "Overhang ramp (55/65/75/80°)"
