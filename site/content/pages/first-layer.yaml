@@ -95,7 +95,7 @@ steps:
     title: "Step down at every number"
     points:
       - "**While the skirt prints**, raise Z by **+0.075** from your starting value (on Mainsail: +0.05, then +0.025). The outline and hexagon 1 are printed at that height."
-      - "**Every time the nozzle reaches a number**, lower Z by **0.025**, one click on Mainsail. Then write in the table the value your printer actually shows."
+      - "**Every time the nozzle reaches a number**, lower Z by **0.025**, one click on Mainsail. Nothing to write while it prints."
       - "Stop going down early if the surface already turns **wavy, ridged or scraped**: you have found the bottom."
     ladder:
       count: 8
@@ -104,7 +104,7 @@ steps:
     more:
       points:
         - "Each hexagon takes about 10 to 35 seconds, depending on your first-layer speed: enough to press a button and look."
-        - "A missed or double click is no problem: the table keeps the value the printer showed for each hexagon, and that is what you save."
+        - "At the end, check the value the printer shows against the one under the table. If they differ, a click was missed or doubled: look at the hexagons to see where the step is missing, and shift the values after it."
         - expert: "The numbers sit in small flags in the notches below the chain, so the whole hexagon is free for reading. The flag of each hexagon is on its left, where the nozzle arrives."
 
   - part: "Read the result"

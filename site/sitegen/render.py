@@ -402,7 +402,7 @@ LADDER = """
   if (!f) { return; }
   var n = parseInt(f.dataset.count, 10), step = parseFloat(f.dataset.step), up = parseFloat(f.dataset.start);
   var comma = (document.documentElement.lang || 'en').slice(0, 2) !== 'en';
-  var now = f.querySelector('#scala-ora'), out = f.querySelector('#scala-esito');
+  var now = f.querySelector('#scala-ora'), out = f.querySelector('#scala-esito'), end = f.querySelector('#scala-fine');
   var rows = [].slice.call(f.querySelectorAll('tbody tr'));
   var words = JSON.parse(f.dataset.words);
   function num(s) { var v = parseFloat(String(s).trim().replace(',', '.')); return isNaN(v) ? null : v; }
@@ -410,7 +410,6 @@ LADDER = """
   function save() {
     try {
       localStorage.setItem('hexcalibr-scala', JSON.stringify({ now: now.value,
-        seen: rows.map(function (r) { return r.querySelector('input[type=text]').value; }),
         best: (f.querySelector('input[type=radio]:checked') || {}).value || '' }));
     } catch (e) { /* storage blocked: the form still works */ }
   }
@@ -420,25 +419,23 @@ LADDER = """
     rows.forEach(function (r, i) {
       r.querySelector('.obiettivo').textContent = z === null ? '\u2013' : fmt(z + up - i * step);
     });
+    end.textContent = z === null ? '' : words.end.replace('%s', fmt(z + up - (n - 1) * step));
     var b = f.querySelector('input[type=radio]:checked');
-    if (!b) { out.textContent = words.pick; save(); return; }
-    var r = rows[parseInt(b.value, 10)], seen = num(r.querySelector('input[type=text]').value);
-    var v = seen !== null ? seen : (z === null ? null : z + up - parseInt(b.value, 10) * step);
-    out.textContent = v === null ? words.pick : words.save.replace('%s', fmt(v));
+    out.textContent = (!b || z === null) ? words.pick
+      : words.save.replace('%s', fmt(z + up - parseInt(b.value, 10) * step));
     save();
   }
   try {
     var st = JSON.parse(localStorage.getItem('hexcalibr-scala') || 'null');
     if (st) {
       now.value = st.now || '';
-      rows.forEach(function (r, i) { r.querySelector('input[type=text]').value = (st.seen || [])[i] || ''; });
-      if (st.best !== '') { var x = f.querySelector('input[type=radio][value="' + st.best + '"]'); if (x) { x.checked = true; } }
+      if (st.best) { var x = f.querySelector('input[type=radio][value="' + st.best + '"]'); if (x) { x.checked = true; } }
     }
   } catch (e) { /* nothing stored */ }
   f.addEventListener('input', update);
   f.addEventListener('change', update);
   f.querySelector('#scala-cancella').addEventListener('click', function () {
-    now.value = ''; rows.forEach(function (r) { r.querySelector('input[type=text]').value = ''; });
+    now.value = '';
     var b = f.querySelector('input[type=radio]:checked'); if (b) { b.checked = false; }
     update();
   });
@@ -1213,25 +1210,26 @@ class Site:
 
     def ladder(self, lad):
         """The first-layer ladder form (`ladder: {count, step, start}` on a step): the user types the
-        Z offset shown now; the table fills with the value to set at each hexagon, and has a box for
-        the value the printer actually showed and a choice of the best hexagon."""
+        Z offset shown before the print; the table fills with the value to set at each hexagon, says
+        what the printer must show at the end (a missed click shows up there), and the hexagon
+        ticked as best gives the value to save. Nothing to type while the nozzle is moving."""
         n, step, start = int(lad["count"]), float(lad["step"]), float(lad["start"])
-        words = {"pick": self.T("ladder_pick"), "save": self.T("ladder_save")}
+        words = {"pick": self.T("ladder_pick"), "save": self.T("ladder_save"), "end": self.T("ladder_end")}
         r = ["<form class=\"scala-z\" id=\"scala-z\" data-count=\"%d\" data-step=\"%g\" data-start=\"%g\" "
              "data-words=\"%s\" onsubmit=\"return false\">" % (n, step, start, _e(json.dumps(words))),
              "<p><label for=\"scala-ora\">%s</label> <input id=\"scala-ora\" type=\"text\" inputmode=\"decimal\" "
              "size=\"7\" placeholder=\"0.000\"> <span class=\"scala-via\">%s <b id=\"scala-via\">\u2013</b></span></p>"
              % (_e(self.T("ladder_now")), _e(self.T("ladder_start") % self._signed(start))),
              "<div class=\"tabella\"><table><thead><tr><th scope=\"col\">%s</th><th scope=\"col\">%s</th>"
-             "<th scope=\"col\">%s</th><th scope=\"col\">%s</th></tr></thead><tbody>"
-             % tuple(_e(self.T(k)) for k in ("ladder_hex", "ladder_target", "ladder_seen", "ladder_best"))]
+             "<th scope=\"col\">%s</th></tr></thead><tbody>"
+             % tuple(_e(self.T(k)) for k in ("ladder_hex", "ladder_target", "ladder_best"))]
         for i in range(n):
             r.append("<tr><td><b>%d</b></td><td class=\"obiettivo\">\u2013</td>"
-                     "<td><input type=\"text\" inputmode=\"decimal\" size=\"7\" aria-label=\"%s %d\"></td>"
                      "<td><input type=\"radio\" name=\"scala-best\" value=\"%d\" aria-label=\"%s %d\"></td></tr>"
-                     % (i + 1, _e(self.T("ladder_seen")), i + 1, i, _e(self.T("ladder_best")), i + 1))
+                     % (i + 1, i, _e(self.T("ladder_best")), i + 1))
         r.append("</tbody></table></div>")
-        r.append("<p class=\"scala-esito\" id=\"scala-esito\" aria-live=\"polite\"></p>"
+        r.append("<p class=\"scala-fine\" id=\"scala-fine\"></p>"
+                 "<p class=\"scala-esito\" id=\"scala-esito\" aria-live=\"polite\"></p>"
                  "<p><button type=\"button\" id=\"scala-cancella\">%s</button></p></form>" % _e(self.T("ladder_clear")))
         return "".join(r)
 

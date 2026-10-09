@@ -752,9 +752,11 @@ msgctxt "ui/ladder_target"
 msgid "Set it to"
 msgstr ""
 
-#. interface: ladder_seen
-msgctxt "ui/ladder_seen"
-msgid "Value the printer showed"
+#. interface: ladder_end
+msgctxt "ui/ladder_end"
+msgid ""
+"At the end the printer must show %s. If it shows something else, a click "
+"was missed or doubled: the hexagons after it are one step off."
 msgstr ""
 
 #. interface: ladder_best
@@ -1556,7 +1558,7 @@ msgstr ""
 msgctxt "first-layer/steps"
 msgid ""
 "**Every time the nozzle reaches a number**, lower Z by **0.025**, one click "
-"on Mainsail. Then write in the table the value your printer actually shows."
+"on Mainsail. Nothing to write while it prints."
 msgstr ""
 
 #. point
@@ -1576,8 +1578,9 @@ msgstr ""
 #. More: point
 msgctxt "first-layer/steps"
 msgid ""
-"A missed or double click is no problem: the table keeps the value the "
-"printer showed for each hexagon, and that is what you save."
+"At the end, check the value the printer shows against the one under the "
+"table. If they differ, a click was missed or doubled: look at the hexagons "
+"to see where the step is missing, and shift the values after it."
 msgstr ""
 
 #. More: point (expert)
