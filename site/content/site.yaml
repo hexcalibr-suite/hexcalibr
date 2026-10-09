@@ -33,7 +33,7 @@ contents:
   - group: "Tests, in the recommended order"
     numbered: true
     entries:
-      - planned: "First layer and Z offset"
+      - page: first-layer
         note: "printer · do it first"
       - page: temperature-tower
         note: "filament · the first test for a new filament"
@@ -81,6 +81,7 @@ links:
   printables-temperature-tower: "https://www.printables.com/model/1870420-temperature-tower-for-prusaslicer-pla-petg-absasa"
   printables-max-flow: "https://www.printables.com/model/1870791-max-volumetric-flow-test-for-prusaslicer-hotend-fl"
   printables-pressure-advance: "https://www.printables.com/model/1870778-pressure-advance-test-for-prusaslicer-klipper-prus"
+  printables-first-layer: ""
   printables-idex-alignment: "https://www.printables.com/model/1871007-idex-tool-offset-test-for-prusaslicer-vernier-005"
   repository: "https://github.com/hexcalibr-suite/hexcalibr"
   translate: "https://github.com/hexcalibr-suite/hexcalibr/blob/main/site/CONTRIBUTING-TRANSLATIONS.md"

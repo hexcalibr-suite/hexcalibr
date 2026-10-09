@@ -396,6 +396,57 @@ SCORE_BANDS = """
 # fails or that has a flag; the limit is the band below it; the suggestion is
 # 85 % of the limit (80 % when the limit band was degrading), with 80/85/90 %
 # shown. Nothing is stored.
+LADDER = """
+(function () {
+  var f = document.getElementById('scala-z');
+  if (!f) { return; }
+  var n = parseInt(f.dataset.count, 10), step = parseFloat(f.dataset.step), up = parseFloat(f.dataset.start);
+  var comma = (document.documentElement.lang || 'en').slice(0, 2) !== 'en';
+  var now = f.querySelector('#scala-ora'), out = f.querySelector('#scala-esito');
+  var rows = [].slice.call(f.querySelectorAll('tbody tr'));
+  var words = JSON.parse(f.dataset.words);
+  function num(s) { var v = parseFloat(String(s).trim().replace(',', '.')); return isNaN(v) ? null : v; }
+  function fmt(v) { var t = (v >= 0 ? '+' : '\u2212') + Math.abs(v).toFixed(3); return comma ? t.replace('.', ',') : t; }
+  function save() {
+    try {
+      localStorage.setItem('hexcalibr-scala', JSON.stringify({ now: now.value,
+        seen: rows.map(function (r) { return r.querySelector('input[type=text]').value; }),
+        best: (f.querySelector('input[type=radio]:checked') || {}).value || '' }));
+    } catch (e) { /* storage blocked: the form still works */ }
+  }
+  function update() {
+    var z = num(now.value);
+    f.querySelector('#scala-via').textContent = z === null ? '\u2013' : fmt(z + up);
+    rows.forEach(function (r, i) {
+      r.querySelector('.obiettivo').textContent = z === null ? '\u2013' : fmt(z + up - i * step);
+    });
+    var b = f.querySelector('input[type=radio]:checked');
+    if (!b) { out.textContent = words.pick; save(); return; }
+    var r = rows[parseInt(b.value, 10)], seen = num(r.querySelector('input[type=text]').value);
+    var v = seen !== null ? seen : (z === null ? null : z + up - parseInt(b.value, 10) * step);
+    out.textContent = v === null ? words.pick : words.save.replace('%s', fmt(v));
+    save();
+  }
+  try {
+    var st = JSON.parse(localStorage.getItem('hexcalibr-scala') || 'null');
+    if (st) {
+      now.value = st.now || '';
+      rows.forEach(function (r, i) { r.querySelector('input[type=text]').value = (st.seen || [])[i] || ''; });
+      if (st.best !== '') { var x = f.querySelector('input[type=radio][value="' + st.best + '"]'); if (x) { x.checked = true; } }
+    }
+  } catch (e) { /* nothing stored */ }
+  f.addEventListener('input', update);
+  f.addEventListener('change', update);
+  f.querySelector('#scala-cancella').addEventListener('click', function () {
+    now.value = ''; rows.forEach(function (r) { r.querySelector('input[type=text]').value = ''; });
+    var b = f.querySelector('input[type=radio]:checked'); if (b) { b.checked = false; }
+    update();
+  });
+  update();
+})();
+"""
+
+
 SCORE_FLOW = """
 (function () {
   var tab = document.getElementById('scheda');
@@ -1155,6 +1206,35 @@ class Site:
         r.append("</tbody></table></div>")
         return "".join(r)
 
+    def _signed(self, v):
+        """+0.075 style, with the language's decimal comma where it has one."""
+        t = ("%+.3f" % v).rstrip("0").rstrip(".").replace("-", "\u2212")
+        return t.replace(".", ",") if self.lang != "en" else t
+
+    def ladder(self, lad):
+        """The first-layer ladder form (`ladder: {count, step, start}` on a step): the user types the
+        Z offset shown now; the table fills with the value to set at each hexagon, and has a box for
+        the value the printer actually showed and a choice of the best hexagon."""
+        n, step, start = int(lad["count"]), float(lad["step"]), float(lad["start"])
+        words = {"pick": self.T("ladder_pick"), "save": self.T("ladder_save")}
+        r = ["<form class=\"scala-z\" id=\"scala-z\" data-count=\"%d\" data-step=\"%g\" data-start=\"%g\" "
+             "data-words=\"%s\" onsubmit=\"return false\">" % (n, step, start, _e(json.dumps(words))),
+             "<p><label for=\"scala-ora\">%s</label> <input id=\"scala-ora\" type=\"text\" inputmode=\"decimal\" "
+             "size=\"7\" placeholder=\"0.000\"> <span class=\"scala-via\">%s <b id=\"scala-via\">\u2013</b></span></p>"
+             % (_e(self.T("ladder_now")), _e(self.T("ladder_start") % self._signed(start))),
+             "<div class=\"tabella\"><table><thead><tr><th scope=\"col\">%s</th><th scope=\"col\">%s</th>"
+             "<th scope=\"col\">%s</th><th scope=\"col\">%s</th></tr></thead><tbody>"
+             % tuple(_e(self.T(k)) for k in ("ladder_hex", "ladder_target", "ladder_seen", "ladder_best"))]
+        for i in range(n):
+            r.append("<tr><td><b>%d</b></td><td class=\"obiettivo\">\u2013</td>"
+                     "<td><input type=\"text\" inputmode=\"decimal\" size=\"7\" aria-label=\"%s %d\"></td>"
+                     "<td><input type=\"radio\" name=\"scala-best\" value=\"%d\" aria-label=\"%s %d\"></td></tr>"
+                     % (i + 1, _e(self.T("ladder_seen")), i + 1, i, _e(self.T("ladder_best")), i + 1))
+        r.append("</tbody></table></div>")
+        r.append("<p class=\"scala-esito\" id=\"scala-esito\" aria-live=\"polite\"></p>"
+                 "<p><button type=\"button\" id=\"scala-cancella\">%s</button></p></form>" % _e(self.T("ladder_clear")))
+        return "".join(r)
+
     def step(self, sid, title, number, body_html, photos):
         r = ["<section class=\"passo\" id=\"%s\">" % sid,
              "<h2>%s<a class=\"ancora\" href=\"#%s\">%s</a></h2>"
@@ -1269,6 +1349,8 @@ class Site:
                 body.append(self.table(st["table"]))
             if st.get("points"):
                 body.append(self.points(st["points"]))
+            if st.get("ladder"):
+                body.append(self.ladder(st["ladder"]))
             if st.get("printables"):
                 body.append(self.printables(st["printables"]))
             if st.get("translators"):
@@ -1293,6 +1375,8 @@ class Site:
         if p.get("kind") == "scorecard":
             mode = self.features[p["features"]].get("scoring")
             score = {"bands": SCORE_BANDS, "idex": IDEX_FIT + SCORE_IDEX, "flow": SCORE_FLOW}.get(mode, SCORE)
+        if any(st.get("ladder") for st in p.get("steps", [])):
+            score += LADDER
         r.append("</main></div>\n<script>%s%s%s%s</script>\n</body>\n</html>\n"
                  % (FOLLOW, FILTER, MORE if has_more else "", score))
         return "\n".join(r)

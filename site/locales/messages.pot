@@ -732,6 +732,51 @@ msgctxt "ui/printables_collection"
 msgid "All %s tests on Printables"
 msgstr ""
 
+#. interface: ladder_now
+msgctxt "ui/ladder_now"
+msgid "Z offset the printer shows now:"
+msgstr ""
+
+#. interface: ladder_start
+msgctxt "ui/ladder_start"
+msgid "first hexagon (%s):"
+msgstr ""
+
+#. interface: ladder_hex
+msgctxt "ui/ladder_hex"
+msgid "Hexagon"
+msgstr ""
+
+#. interface: ladder_target
+msgctxt "ui/ladder_target"
+msgid "Set it to"
+msgstr ""
+
+#. interface: ladder_seen
+msgctxt "ui/ladder_seen"
+msgid "Value the printer showed"
+msgstr ""
+
+#. interface: ladder_best
+msgctxt "ui/ladder_best"
+msgid "Best"
+msgstr ""
+
+#. interface: ladder_pick
+msgctxt "ui/ladder_pick"
+msgid "Tick the hexagon that looks best."
+msgstr ""
+
+#. interface: ladder_save
+msgctxt "ui/ladder_save"
+msgid "Save this Z offset: %s"
+msgstr ""
+
+#. interface: ladder_clear
+msgctxt "ui/ladder_clear"
+msgid "Clear"
+msgstr ""
+
 #. site tagline
 msgctxt "site"
 msgid "3D print calibration suite"
@@ -752,11 +797,6 @@ msgstr ""
 #. contents group heading
 msgctxt "site/contents"
 msgid "Tests, in the recommended order"
-msgstr ""
-
-#. contents: planned
-msgctxt "site/contents"
-msgid "First layer and Z offset"
 msgstr ""
 
 #. contents: note
@@ -1188,6 +1228,558 @@ msgid ""
 msgstr ""
 
 #. page title
+msgctxt "first-layer"
+msgid "First layer and Z offset"
+msgstr ""
+
+#. page description
+msgctxt "first-layer"
+msgid ""
+"Find the nozzle height that squishes the first layer just right: a chain of "
+"hexagons you step down live, side by side, then a whole-bed check."
+msgstr ""
+
+#. page intro
+msgctxt "first-layer"
+msgid ""
+"A single layer: a chain of eight hexagons in the middle of the bed. While "
+"it prints, you lower the nozzle a little at each hexagon with your "
+"printer's own Z buttons, so every hexagon is printed at a different height. "
+"Then you compare them side by side and keep the best one. A second file "
+"checks that value over the whole bed.\n"
+"\n"
+"A few minutes and about 1 g of filament, with **no changes to your "
+"profiles**. The file never moves the nozzle by itself: every change is "
+"yours.\n"
+msgstr ""
+
+#. More: intro
+msgctxt "first-layer"
+msgid ""
+"The first layer carries everything printed on top of it. Too high, and the "
+"lines stay round and separate: the part lets go, and every test that "
+"follows is read on a weak base. Too low, and the plastic has nowhere to go: "
+"ridges, waves, a scraped bed. Judging one patch on its own is hard; judging "
+"eight neighbours that differ by 0.025 mm each is easy.\n"
+msgstr ""
+
+#. callout
+msgctxt "first-layer"
+msgid ""
+"**You make every change.** The file contains no G-code at all. Never start "
+"much lower than your current value, and stop going down as soon as the "
+"surface turns wavy or ridged."
+msgstr ""
+
+#. box title
+msgctxt "first-layer"
+msgid "What you need"
+msgstr ""
+
+#. box column title
+msgctxt "first-layer"
+msgid "To print"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"The [ladder file](page:first-layer#which-file), and the map for your bed"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"Your own printer, print and filament profiles, already working; a clean bed"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"A way to change Z **while printing**: the Z offset buttons in Mainsail or "
+"Fluidd, *Live Adjust Z* on a Prusa, babystepping on Marlin"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid "About 1 g of filament (the map 1 to 2.5 g)"
+msgstr ""
+
+#. box column title
+msgctxt "first-layer"
+msgid "To read it"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"The [table on this page](page:first-layer#steps), on screen or on paper"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid "A lamp you can move, or a phone torch"
+msgstr ""
+
+#. box item
+msgctxt "first-layer"
+msgid "A fingernail"
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Before printing"
+msgstr ""
+
+#. step title
+msgctxt "first-layer/what-for"
+msgid "What it is for, and when to run it"
+msgstr ""
+
+#. point
+msgctxt "first-layer/what-for"
+msgid ""
+"It finds the **Z offset**: how far the nozzle sits from the bed on the "
+"first layer, so that the lines are pressed flat and joined, without being "
+"scraped."
+msgstr ""
+
+#. point
+msgctxt "first-layer/what-for"
+msgid ""
+"Run it **first**, before any other test, and again after changing the "
+"nozzle, the bed sheet or the probe."
+msgstr ""
+
+#. photo alt
+msgctxt "first-layer/what-for"
+msgid ""
+"The printed ladder of eight hexagons on the bed, seen from above: the first "
+"hexagons with visible gaps between the lines, the middle ones flat and "
+"joined, the last ones wavy"
+msgstr ""
+
+#. photo caption
+msgctxt "first-layer/what-for"
+msgid "The ladder printed: from hexagon 1 (highest) to 8 (lowest)."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/what-for"
+msgid ""
+"The Z offset belongs to the **printer** (probe, nozzle, bed sheet), not to "
+"the filament. PETG usually likes a little less squish than PLA: if you "
+"print both, check it with PETG too."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/what-for"
+msgid ""
+"A **bed mesh** corrects a bed that is not flat; it does not set the height. "
+"If the first layer is good in the middle and bad in a corner, the problem "
+"is the mesh, not the Z offset: that is what the map file shows."
+msgstr ""
+
+#. More: point (beginner)
+msgctxt "first-layer/what-for"
+msgid ""
+"The paper test under the nozzle gets you close, within about 0.1 mm. This "
+"test finishes the job."
+msgstr ""
+
+#. step title
+msgctxt "first-layer/which-file"
+msgid "Which file"
+msgstr ""
+
+#. point
+msgctxt "first-layer/which-file"
+msgid ""
+"Print the **ladder first**. Print the map afterwards, at the value you "
+"chose."
+msgstr ""
+
+#. table header
+msgctxt "first-layer/which-file"
+msgid "File"
+msgstr ""
+
+#. table header
+msgctxt "first-layer/which-file"
+msgid "What it is"
+msgstr ""
+
+#. table header
+msgctxt "first-layer/which-file"
+msgid "Bed"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "`first-layer_ladder.3mf`"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "The ladder: 8 hexagons, 152 mm long, one layer"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "Any bed from 180 mm"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "`first-layer_ladder_T1.3mf`"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "The same, printed by the second tool (IDEX, toolchangers)"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "`first-layer_map_<bed>.3mf`"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "The map: 5 or 9 numbered cells and a thin web across the bed"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid ""
+"Pick your bed size: 180, 250, 300, 350, 400, 500, `xl`, `mk4`, `coreone`, "
+"`j1`"
+msgstr ""
+
+#. step title
+msgctxt "first-layer/before-print"
+msgid "Before you start"
+msgstr ""
+
+#. point
+msgctxt "first-layer/before-print"
+msgid ""
+"**Write down the Z offset your printer shows now.** It is the starting "
+"point. Type it into the table below."
+msgstr ""
+
+#. point
+msgctxt "first-layer/before-print"
+msgid ""
+"Find the Z buttons you will use while printing. Mainsail has a **±0.025** "
+"button: one click per hexagon. A Prusa's *Live Adjust Z* moves in small "
+"steps: turn it until the value has changed by 0.025."
+msgstr ""
+
+#. point
+msgctxt "first-layer/before-print"
+msgid "Clean the bed. A greasy spot looks like a wrong Z offset."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/before-print"
+msgid ""
+"The model is 0.2 mm high on a 0.4 nozzle: it slices to **one layer** for "
+"any first-layer height from 0.1 to 0.39 mm. Keep your usual first-layer "
+"height and speed."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/before-print"
+msgid ""
+"**Elephant foot compensation is forced to 0** on the object: the whole test "
+"is the first layer, and the compensation would shrink it."
+msgstr ""
+
+#. More: point (expert)
+msgctxt "first-layer/before-print"
+msgid ""
+"On Klipper the Z buttons send `SET_GCODE_OFFSET Z_ADJUST=… MOVE=1`. The "
+"adjustment lasts until a restart: save it afterwards (see [Save the "
+"value](page:first-layer#save))."
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Print and step down"
+msgstr ""
+
+#. step title
+msgctxt "first-layer/open"
+msgid "Open, slice and check the order"
+msgstr ""
+
+#. callout
+msgctxt "first-layer/open"
+msgid ""
+"Open it with **File › Open project**, never with Import: an import drops "
+"the settings that make the nozzle sweep the chain in order."
+msgstr ""
+
+#. point
+msgctxt "first-layer/open"
+msgid "**File › Open project**, then **Slice now**."
+msgstr ""
+
+#. point
+msgctxt "first-layer/open"
+msgid ""
+"In the preview, play the first layer with the horizontal slider: after the "
+"outline, the nozzle fills **hexagon 1 first, then 2, and so on up to 8**. "
+"That is what makes the steps work."
+msgstr ""
+
+#. step title
+msgctxt "first-layer/steps"
+msgid "Step down at every number"
+msgstr ""
+
+#. point
+msgctxt "first-layer/steps"
+msgid ""
+"**While the skirt prints**, raise Z by **+0.075** from your starting value "
+"(on Mainsail: +0.05, then +0.025). The outline and hexagon 1 are printed at "
+"that height."
+msgstr ""
+
+#. point
+msgctxt "first-layer/steps"
+msgid ""
+"**Every time the nozzle reaches a number**, lower Z by **0.025**, one click "
+"on Mainsail. Then write in the table the value your printer actually shows."
+msgstr ""
+
+#. point
+msgctxt "first-layer/steps"
+msgid ""
+"Stop going down early if the surface already turns **wavy, ridged or "
+"scraped**: you have found the bottom."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/steps"
+msgid ""
+"Each hexagon takes about 10 to 35 seconds, depending on your first-layer "
+"speed: enough to press a button and look."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/steps"
+msgid ""
+"A missed or double click is no problem: the table keeps the value the "
+"printer showed for each hexagon, and that is what you save."
+msgstr ""
+
+#. More: point (expert)
+msgctxt "first-layer/steps"
+msgid ""
+"The numbers sit in small flags in the notches below the chain, so the whole "
+"hexagon is free for reading. The flag of each hexagon is on its left, where "
+"the nozzle arrives."
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Read the result"
+msgstr ""
+
+#. step title
+msgctxt "first-layer/read"
+msgid "Compare the hexagons"
+msgstr ""
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"Look at the hexagons side by side, with the light low and raking along the "
+"lines."
+msgstr ""
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Too high:** round, separate lines, gaps you can see the bed through, "
+"edges that lift."
+msgstr ""
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Right:** flat lines, joined with no gaps, still visible; smooth under a "
+"fingernail."
+msgstr ""
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Too low:** lines that vanish into a shiny, wavy or ridged surface, "
+"plastic pushed up at the edges, marks on the bed."
+msgstr ""
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Tick the best hexagon in the table.** If two look equally good, take the "
+"higher one."
+msgstr ""
+
+#. photo alt
+msgctxt "first-layer/read"
+msgid ""
+"Three hexagons of the ladder side by side, close up: too high with gaps, "
+"right, too low with ridges"
+msgstr ""
+
+#. photo caption
+msgctxt "first-layer/read"
+msgid ""
+"Too high, right, too low: three neighbouring hexagons of the same ladder."
+msgstr ""
+
+#. More: point
+msgctxt "first-layer/read"
+msgid ""
+"**Peel and fold** the hexagon you chose (and its neighbours if in doubt): a "
+"good one comes off as **one sheet** and folds without splitting; one that "
+"splits into lines was too high; a sheet with waves or drag marks was too "
+"low."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "first-layer/read"
+msgid ""
+"**A glassy, perfectly smooth surface** is often too low, not perfect: the "
+"lines should still be visible."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "first-layer/read"
+msgid ""
+"**Gaps only at the edges**: a flow (extrusion multiplier) or speed effect, "
+"not Z. Judge the middle of each hexagon."
+msgstr ""
+
+#. step title
+msgctxt "first-layer/save"
+msgid "Save the value"
+msgstr ""
+
+#. point
+msgctxt "first-layer/save"
+msgid ""
+"Set the Z offset to the value the table gives, then save it the way your "
+"printer does."
+msgstr ""
+
+#. table header
+msgctxt "first-layer/save"
+msgid "Printer"
+msgstr ""
+
+#. table header
+msgctxt "first-layer/save"
+msgid "How to keep the value"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "Klipper (Mainsail, Fluidd)"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid ""
+"After the print, `Z_OFFSET_APPLY_PROBE` (probe) or `Z_OFFSET_APPLY_ENDSTOP` "
+"(Z endstop), then `SAVE_CONFIG`"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "RatOS"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid ""
+"Not verified yet: RatOS has its own macros for the probe offset. Use them "
+"if you know them; otherwise set the value again after each restart until "
+"this line is filled in"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "Prusa (Buddy: MK4, Core One, XL, MINI)"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid ""
+"*Live Adjust Z* keeps the value for the sheet in use; on load-cell printers "
+"set *Printer Settings › General › Z offset* in PrusaSlicer instead"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "Marlin"
+msgstr ""
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "`M851 Z…` (probe) or babystep, then `M500`"
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Check the whole bed"
+msgstr ""
+
+#. step title
+msgctxt "first-layer/map"
+msgid "Print the map"
+msgstr ""
+
+#. point
+msgctxt "first-layer/map"
+msgid "Print the map for your bed **without touching Z**."
+msgstr ""
+
+#. point
+msgctxt "first-layer/map"
+msgid ""
+"Every cell should look like the hexagon you chose. The web between them "
+"shows the zones in between."
+msgstr ""
+
+#. point
+msgctxt "first-layer/map"
+msgid ""
+"**One corner different from the rest** points to the bed mesh, not to the Z "
+"offset: re-run the mesh and check that it is applied."
+msgstr ""
+
+#. photo alt
+msgctxt "first-layer/map"
+msgid ""
+"The map printed on a 400 mm bed: nine numbered hexagonal cells joined by a "
+"thin web"
+msgstr ""
+
+#. photo caption
+msgctxt "first-layer/map"
+msgid "The map on the author's 400 mm bed."
+msgstr ""
+
+#. page title
 msgctxt "further-reading"
 msgid "Further reading"
 msgstr ""
@@ -1389,7 +1981,8 @@ msgstr ""
 #. point
 msgctxt "home/release-1"
 msgid ""
-"**Coming next:** first layer and Z offset, flow (extrusion multiplier), "
+"**New, not yet on Printables:** [first layer and Z "
+"offset](page:first-layer). **Coming next:** flow (extrusion multiplier), "
 "retraction, and dimensions and fit. They are listed in grey in the contents."
 msgstr ""
 

@@ -22,7 +22,7 @@ steps:
       - "[Maximum volumetric flow](page:max-flow): how much plastic per second your hotend can melt. [Files on Printables](link:printables-max-flow)"
       - "[Pressure advance](page:pressure-advance): sharp corners and even walls, per filament and firmware. [Files on Printables](link:printables-pressure-advance)"
       - "[IDEX and multi-tool alignment](page:idex-alignment): the XY offset between two toolheads, over the whole bed. [Files on Printables](link:printables-idex-alignment)"
-      - "**Coming next:** first layer and Z offset, flow (extrusion multiplier), retraction, and dimensions and fit. They are listed in grey in the contents."
+      - "**New, not yet on Printables:** [first layer and Z offset](page:first-layer). **Coming next:** flow (extrusion multiplier), retraction, and dimensions and fit. They are listed in grey in the contents."
       - "The files are updated often: download them from Printables, not from a re-upload, to get the latest version."
     printables: printables-collection
   - id: what-it-is

@@ -1,0 +1,157 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# Test P2 on this site, first layer and Z offset (hexcalibr-core v0.5.2: a chain of 8 hexagons,
+# one layer, stepped live by the user; a whole-bed map of numbered cells and a thin web). Facts
+# come from suite/definitions/first_layer.toml and docs/phase2/first-layer-proposal.md (workspace).
+# Draft: written 2026-10-09 before the first real print; photos still to come.
+id: first-layer
+title: "First layer and Z offset"
+nav_title: "First layer and Z offset"
+description: "Find the nozzle height that squishes the first layer just right: a chain of hexagons you step down live, side by side, then a whole-bed check."
+numbered: true
+intro: |
+  A single layer: a chain of eight hexagons in the middle of the bed. While it prints, you lower the nozzle a little at each hexagon with your printer's own Z buttons, so every hexagon is printed at a different height. Then you compare them side by side and keep the best one. A second file checks that value over the whole bed.
+
+  A few minutes and about 1 g of filament, with **no changes to your profiles**. The file never moves the nozzle by itself: every change is yours.
+more:
+  intro: |
+    The first layer carries everything printed on top of it. Too high, and the lines stay round and separate: the part lets go, and every test that follows is read on a weak base. Too low, and the plastic has nowhere to go: ridges, waves, a scraped bed. Judging one patch on its own is hard; judging eight neighbours that differ by 0.025 mm each is easy.
+callouts:
+  - kind: warn
+    text: "**You make every change.** The file contains no G-code at all. Never start much lower than your current value, and stop going down as soon as the surface turns wavy or ridged."
+need:
+  title: "What you need"
+  columns:
+    - title: "To print"
+      items:
+        - "The [ladder file](page:first-layer#which-file), and the map for your bed"
+        - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+        - "Your own printer, print and filament profiles, already working; a clean bed"
+        - "A way to change Z **while printing**: the Z offset buttons in Mainsail or Fluidd, *Live Adjust Z* on a Prusa, babystepping on Marlin"
+        - "About 1 g of filament (the map 1 to 2.5 g)"
+    - title: "To read it"
+      items:
+        - "The [table on this page](page:first-layer#steps), on screen or on paper"
+        - "A lamp you can move, or a phone torch"
+        - "A fingernail"
+
+steps:
+  - part: "Before printing"
+
+  - id: what-for
+    title: "What it is for, and when to run it"
+    points:
+      - "It finds the **Z offset**: how far the nozzle sits from the bed on the first layer, so that the lines are pressed flat and joined, without being scraped."
+      - "Run it **first**, before any other test, and again after changing the nozzle, the bed sheet or the probe."
+    photos:
+      - id: FL_ladder-overview_PETG_VC4
+        alt: "The printed ladder of eight hexagons on the bed, seen from above: the first hexagons with visible gaps between the lines, the middle ones flat and joined, the last ones wavy"
+        caption: "The ladder printed: from hexagon 1 (highest) to 8 (lowest)."
+        aspect: "3/1"
+        shot: "TOP-DOWN on the bed, the whole ladder in frame, front at the bottom, numbers readable. Raking light from the front, low, along the lines, so gaps and ridges show. The ladder printed with the steps in the guide."
+    more:
+      points:
+        - "The Z offset belongs to the **printer** (probe, nozzle, bed sheet), not to the filament. PETG usually likes a little less squish than PLA: if you print both, check it with PETG too."
+        - "A **bed mesh** corrects a bed that is not flat; it does not set the height. If the first layer is good in the middle and bad in a corner, the problem is the mesh, not the Z offset: that is what the map file shows."
+        - beginner: "The paper test under the nozzle gets you close, within about 0.1 mm. This test finishes the job."
+
+  - id: which-file
+    title: "Which file"
+    printables: printables-first-layer
+    table:
+      head: ["File", "What it is", "Bed"]
+      rows:
+        - ["`first-layer_ladder.3mf`", "The ladder: 8 hexagons, 152 mm long, one layer", "Any bed from 180 mm"]
+        - ["`first-layer_ladder_T1.3mf`", "The same, printed by the second tool (IDEX, toolchangers)", "Any bed from 180 mm"]
+        - ["`first-layer_map_<bed>.3mf`", "The map: 5 or 9 numbered cells and a thin web across the bed", "Pick your bed size: 180, 250, 300, 350, 400, 500, `xl`, `mk4`, `coreone`, `j1`"]
+    points:
+      - "Print the **ladder first**. Print the map afterwards, at the value you chose."
+
+  - id: before-print
+    title: "Before you start"
+    points:
+      - "**Write down the Z offset your printer shows now.** It is the starting point. Type it into the table below."
+      - "Find the Z buttons you will use while printing. Mainsail has a **±0.025** button: one click per hexagon. A Prusa's *Live Adjust Z* moves in small steps: turn it until the value has changed by 0.025."
+      - "Clean the bed. A greasy spot looks like a wrong Z offset."
+    more:
+      points:
+        - "The model is 0.2 mm high on a 0.4 nozzle: it slices to **one layer** for any first-layer height from 0.1 to 0.39 mm. Keep your usual first-layer height and speed."
+        - "**Elephant foot compensation is forced to 0** on the object: the whole test is the first layer, and the compensation would shrink it."
+        - expert: "On Klipper the Z buttons send `SET_GCODE_OFFSET Z_ADJUST=… MOVE=1`. The adjustment lasts until a restart: save it afterwards (see [Save the value](page:first-layer#save))."
+
+  - part: "Print and step down"
+
+  - id: open
+    title: "Open, slice and check the order"
+    points:
+      - "**File › Open project**, then **Slice now**."
+      - "In the preview, play the first layer with the horizontal slider: after the outline, the nozzle fills **hexagon 1 first, then 2, and so on up to 8**. That is what makes the steps work."
+    callouts:
+      - kind: warn
+        text: "Open it with **File › Open project**, never with Import: an import drops the settings that make the nozzle sweep the chain in order."
+
+  - id: steps
+    title: "Step down at every number"
+    points:
+      - "**While the skirt prints**, raise Z by **+0.075** from your starting value (on Mainsail: +0.05, then +0.025). The outline and hexagon 1 are printed at that height."
+      - "**Every time the nozzle reaches a number**, lower Z by **0.025**, one click on Mainsail. Then write in the table the value your printer actually shows."
+      - "Stop going down early if the surface already turns **wavy, ridged or scraped**: you have found the bottom."
+    ladder:
+      count: 8
+      step: 0.025
+      start: 0.075
+    more:
+      points:
+        - "Each hexagon takes about 10 to 35 seconds, depending on your first-layer speed: enough to press a button and look."
+        - "A missed or double click is no problem: the table keeps the value the printer showed for each hexagon, and that is what you save."
+        - expert: "The numbers sit in small flags in the notches below the chain, so the whole hexagon is free for reading. The flag of each hexagon is on its left, where the nozzle arrives."
+
+  - part: "Read the result"
+
+  - id: read
+    title: "Compare the hexagons"
+    points:
+      - "Look at the hexagons side by side, with the light low and raking along the lines."
+      - "**Too high:** round, separate lines, gaps you can see the bed through, edges that lift."
+      - "**Right:** flat lines, joined with no gaps, still visible; smooth under a fingernail."
+      - "**Too low:** lines that vanish into a shiny, wavy or ridged surface, plastic pushed up at the edges, marks on the bed."
+      - "**Tick the best hexagon in the table.** If two look equally good, take the higher one."
+    photos:
+      - id: FL_hex-compare_PETG_VC4
+        alt: "Three hexagons of the ladder side by side, close up: too high with gaps, right, too low with ridges"
+        caption: "Too high, right, too low: three neighbouring hexagons of the same ladder."
+        aspect: "3/1"
+        shot: "MACRO, top-down, three neighbouring hexagons (too high, right, too low) filling the frame, raking light from the side along the lines. Same ladder as the overview."
+    more:
+      points:
+        - "**Peel and fold** the hexagon you chose (and its neighbours if in doubt): a good one comes off as **one sheet** and folds without splitting; one that splits into lines was too high; a sheet with waves or drag marks was too low."
+        - misread: "**A glassy, perfectly smooth surface** is often too low, not perfect: the lines should still be visible."
+        - misread: "**Gaps only at the edges**: a flow (extrusion multiplier) or speed effect, not Z. Judge the middle of each hexagon."
+
+  - id: save
+    title: "Save the value"
+    points:
+      - "Set the Z offset to the value the table gives, then save it the way your printer does."
+    table:
+      head: ["Printer", "How to keep the value"]
+      rows:
+        - ["Klipper (Mainsail, Fluidd)", "After the print, `Z_OFFSET_APPLY_PROBE` (probe) or `Z_OFFSET_APPLY_ENDSTOP` (Z endstop), then `SAVE_CONFIG`"]
+        - ["RatOS", "Not verified yet: RatOS has its own macros for the probe offset. Use them if you know them; otherwise set the value again after each restart until this line is filled in"]
+        - ["Prusa (Buddy: MK4, Core One, XL, MINI)", "*Live Adjust Z* keeps the value for the sheet in use; on load-cell printers set *Printer Settings › General › Z offset* in PrusaSlicer instead"]
+        - ["Marlin", "`M851 Z…` (probe) or babystep, then `M500`"]
+
+  - part: "Check the whole bed"
+
+  - id: map
+    title: "Print the map"
+    points:
+      - "Print the map for your bed **without touching Z**."
+      - "Every cell should look like the hexagon you chose. The web between them shows the zones in between."
+      - "**One corner different from the rest** points to the bed mesh, not to the Z offset: re-run the mesh and check that it is applied."
+    photos:
+      - id: FL_map-overview_PETG_VC4
+        alt: "The map printed on a 400 mm bed: nine numbered hexagonal cells joined by a thin web"
+        caption: "The map on the author's 400 mm bed."
+        aspect: "1/1"
+        shot: "The whole bed from above or slightly from the front, the nine cells readable, raking light. Then one close-up of the best and the worst cell."

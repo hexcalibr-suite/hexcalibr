@@ -794,6 +794,51 @@ msgctxt "ui/printables_collection"
 msgid "All %s tests on Printables"
 msgstr "Tutti i test %s su Printables"
 
+#. interface: ladder_now
+msgctxt "ui/ladder_now"
+msgid "Z offset the printer shows now:"
+msgstr "Z offset che la stampante mostra adesso:"
+
+#. interface: ladder_start
+msgctxt "ui/ladder_start"
+msgid "first hexagon (%s):"
+msgstr "primo esagono (%s):"
+
+#. interface: ladder_hex
+msgctxt "ui/ladder_hex"
+msgid "Hexagon"
+msgstr "Esagono"
+
+#. interface: ladder_target
+msgctxt "ui/ladder_target"
+msgid "Set it to"
+msgstr "Impostalo a"
+
+#. interface: ladder_seen
+msgctxt "ui/ladder_seen"
+msgid "Value the printer showed"
+msgstr "Valore mostrato dalla stampante"
+
+#. interface: ladder_best
+msgctxt "ui/ladder_best"
+msgid "Best"
+msgstr "Migliore"
+
+#. interface: ladder_pick
+msgctxt "ui/ladder_pick"
+msgid "Tick the hexagon that looks best."
+msgstr "Spunta l'esagono che sembra migliore."
+
+#. interface: ladder_save
+msgctxt "ui/ladder_save"
+msgid "Save this Z offset: %s"
+msgstr "Salva questo Z offset: %s"
+
+#. interface: ladder_clear
+msgctxt "ui/ladder_clear"
+msgid "Clear"
+msgstr "Cancella"
+
 #. site tagline
 msgctxt "site"
 msgid "3D print calibration suite"
@@ -817,11 +862,6 @@ msgstr "Per iniziare"
 msgctxt "site/contents"
 msgid "Tests, in the recommended order"
 msgstr "I test, nell'ordine consigliato"
-
-#. contents: planned
-msgctxt "site/contents"
-msgid "First layer and Z offset"
-msgstr "Primo strato e offset Z"
 
 #. contents: note
 msgctxt "site/contents"
@@ -1323,6 +1363,558 @@ msgstr ""
 "cassetto di torri senza etichetta non ti dice niente."
 
 #. page title
+msgctxt "first-layer"
+msgid "First layer and Z offset"
+msgstr "Primo strato e Z offset"
+
+#. page description
+msgctxt "first-layer"
+msgid ""
+"Find the nozzle height that squishes the first layer just right: a chain of "
+"hexagons you step down live, side by side, then a whole-bed check."
+msgstr "Trova l'altezza dell'ugello che schiaccia il primo strato al punto giusto: una catena di esagoni che abbassi dal vivo, affiancati, poi un controllo su tutto il piatto."
+
+#. page intro
+msgctxt "first-layer"
+msgid ""
+"A single layer: a chain of eight hexagons in the middle of the bed. While "
+"it prints, you lower the nozzle a little at each hexagon with your "
+"printer's own Z buttons, so every hexagon is printed at a different height. "
+"Then you compare them side by side and keep the best one. A second file "
+"checks that value over the whole bed.\n"
+"\n"
+"A few minutes and about 1 g of filament, with **no changes to your "
+"profiles**. The file never moves the nozzle by itself: every change is "
+"yours.\n"
+msgstr "Un solo strato: una catena di otto esagoni al centro del piatto. Mentre stampa, abbassi un poco l'ugello a ogni esagono con i pulsanti Z della tua stampante, così ogni esagono è stampato a un'altezza diversa. Poi li confronti affiancati e tieni il migliore. Un secondo file controlla quel valore su tutto il piatto.\n\nPochi minuti e circa 1 g di filamento, **senza modificare i profili**. Il file non muove mai l'ugello da solo: ogni cambio lo fai tu.\n"
+
+#. More: intro
+msgctxt "first-layer"
+msgid ""
+"The first layer carries everything printed on top of it. Too high, and the "
+"lines stay round and separate: the part lets go, and every test that "
+"follows is read on a weak base. Too low, and the plastic has nowhere to go: "
+"ridges, waves, a scraped bed. Judging one patch on its own is hard; judging "
+"eight neighbours that differ by 0.025 mm each is easy.\n"
+msgstr "Il primo strato regge tutto quello che ci stampi sopra. Troppo alto, e le linee restano tonde e separate: il pezzo si stacca, e ogni test successivo si legge su una base debole. Troppo basso, e la plastica non sa dove andare: creste, onde, piatto graffiato. Giudicare una chiazza da sola è difficile; giudicare otto vicine che differiscono di 0,025 mm l'una dall'altra è facile.\n"
+
+#. callout
+msgctxt "first-layer"
+msgid ""
+"**You make every change.** The file contains no G-code at all. Never start "
+"much lower than your current value, and stop going down as soon as the "
+"surface turns wavy or ridged."
+msgstr "**Ogni cambio lo fai tu.** Il file non contiene G-code. Non partire mai molto più in basso del valore attuale, e smetti di scendere appena la superficie diventa ondulata o a creste."
+
+#. box title
+msgctxt "first-layer"
+msgid "What you need"
+msgstr "Cosa ti serve"
+
+#. box column title
+msgctxt "first-layer"
+msgid "To print"
+msgstr "Per stampare"
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"The [ladder file](page:first-layer#which-file), and the map for your bed"
+msgstr "Il [file della scala](page:first-layer#which-file), e la mappa per il tuo piatto"
+
+#. box item
+msgctxt "first-layer"
+msgid "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+msgstr "PrusaSlicer 2.9 (2.7 è la versione minima che apre il progetto)"
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"Your own printer, print and filament profiles, already working; a clean bed"
+msgstr "I tuoi profili di stampante, stampa e filamento, già funzionanti; un piatto pulito"
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"A way to change Z **while printing**: the Z offset buttons in Mainsail or "
+"Fluidd, *Live Adjust Z* on a Prusa, babystepping on Marlin"
+msgstr "Un modo per cambiare Z **durante la stampa**: i pulsanti dello Z offset in Mainsail o Fluidd, *Live Adjust Z* su una Prusa, il babystepping su Marlin"
+
+#. box item
+msgctxt "first-layer"
+msgid "About 1 g of filament (the map 1 to 2.5 g)"
+msgstr "Circa 1 g di filamento (la mappa da 1 a 2,5 g)"
+
+#. box column title
+msgctxt "first-layer"
+msgid "To read it"
+msgstr "Per leggerla"
+
+#. box item
+msgctxt "first-layer"
+msgid ""
+"The [table on this page](page:first-layer#steps), on screen or on paper"
+msgstr "La [tabella in questa pagina](page:first-layer#steps), a schermo o su carta"
+
+#. box item
+msgctxt "first-layer"
+msgid "A lamp you can move, or a phone torch"
+msgstr "Una lampada che puoi spostare, o la torcia del telefono"
+
+#. box item
+msgctxt "first-layer"
+msgid "A fingernail"
+msgstr "Un'unghia"
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Before printing"
+msgstr "Prima di stampare"
+
+#. step title
+msgctxt "first-layer/what-for"
+msgid "What it is for, and when to run it"
+msgstr "A cosa serve, e quando farlo"
+
+#. point
+msgctxt "first-layer/what-for"
+msgid ""
+"It finds the **Z offset**: how far the nozzle sits from the bed on the "
+"first layer, so that the lines are pressed flat and joined, without being "
+"scraped."
+msgstr "Trova lo **Z offset**: quanto l'ugello sta lontano dal piatto sul primo strato, perché le linee vengano schiacciate piatte e unite, senza graffiare."
+
+#. point
+msgctxt "first-layer/what-for"
+msgid ""
+"Run it **first**, before any other test, and again after changing the "
+"nozzle, the bed sheet or the probe."
+msgstr "Fallo **per primo**, prima di ogni altro test, e di nuovo dopo aver cambiato ugello, piano di stampa o sonda."
+
+#. photo alt
+msgctxt "first-layer/what-for"
+msgid ""
+"The printed ladder of eight hexagons on the bed, seen from above: the first "
+"hexagons with visible gaps between the lines, the middle ones flat and "
+"joined, the last ones wavy"
+msgstr "La scala di otto esagoni stampata sul piatto, vista dall'alto: i primi esagoni con fessure visibili tra le linee, quelli centrali piatti e uniti, gli ultimi ondulati"
+
+#. photo caption
+msgctxt "first-layer/what-for"
+msgid "The ladder printed: from hexagon 1 (highest) to 8 (lowest)."
+msgstr "La scala stampata: dall'esagono 1 (il più alto) all'8 (il più basso)."
+
+#. More: point
+msgctxt "first-layer/what-for"
+msgid ""
+"The Z offset belongs to the **printer** (probe, nozzle, bed sheet), not to "
+"the filament. PETG usually likes a little less squish than PLA: if you "
+"print both, check it with PETG too."
+msgstr "Lo Z offset è della **stampante** (sonda, ugello, piano), non del filamento. Il PETG di solito vuole un po' meno schiacciamento del PLA: se li stampi tutti e due, controllalo anche con il PETG."
+
+#. More: point
+msgctxt "first-layer/what-for"
+msgid ""
+"A **bed mesh** corrects a bed that is not flat; it does not set the height. "
+"If the first layer is good in the middle and bad in a corner, the problem "
+"is the mesh, not the Z offset: that is what the map file shows."
+msgstr "La **mesh del piatto** corregge un piatto non piano; non stabilisce l'altezza. Se il primo strato è buono al centro e cattivo in un angolo, il problema è la mesh, non lo Z offset: è quello che mostra il file della mappa."
+
+#. More: point (beginner)
+msgctxt "first-layer/what-for"
+msgid ""
+"The paper test under the nozzle gets you close, within about 0.1 mm. This "
+"test finishes the job."
+msgstr "La prova del foglio sotto l'ugello ti porta vicino, entro circa 0,1 mm. Questo test finisce il lavoro."
+
+#. step title
+msgctxt "first-layer/which-file"
+msgid "Which file"
+msgstr "Quale file"
+
+#. point
+msgctxt "first-layer/which-file"
+msgid ""
+"Print the **ladder first**. Print the map afterwards, at the value you "
+"chose."
+msgstr "Stampa **prima la scala**. Poi la mappa, al valore che hai scelto."
+
+#. table header
+msgctxt "first-layer/which-file"
+msgid "File"
+msgstr "File"
+
+#. table header
+msgctxt "first-layer/which-file"
+msgid "What it is"
+msgstr "Cos'è"
+
+#. table header
+msgctxt "first-layer/which-file"
+msgid "Bed"
+msgstr "Piatto"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "`first-layer_ladder.3mf`"
+msgstr "`first-layer_ladder.3mf`"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "The ladder: 8 hexagons, 152 mm long, one layer"
+msgstr "La scala: 8 esagoni, lunga 152 mm, un solo strato"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "Any bed from 180 mm"
+msgstr "Qualsiasi piatto da 180 mm in su"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "`first-layer_ladder_T1.3mf`"
+msgstr "`first-layer_ladder_T1.3mf`"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "The same, printed by the second tool (IDEX, toolchangers)"
+msgstr "La stessa, stampata dal secondo utensile (IDEX, cambio utensile)"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "`first-layer_map_<bed>.3mf`"
+msgstr "`first-layer_map_<bed>.3mf`"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid "The map: 5 or 9 numbered cells and a thin web across the bed"
+msgstr "La mappa: 5 o 9 celle numerate e una rete sottile su tutto il piatto"
+
+#. table cell
+msgctxt "first-layer/which-file"
+msgid ""
+"Pick your bed size: 180, 250, 300, 350, 400, 500, `xl`, `mk4`, `coreone`, "
+"`j1`"
+msgstr "Scegli la misura del tuo piatto: 180, 250, 300, 350, 400, 500, `xl`, `mk4`, `coreone`, `j1`"
+
+#. step title
+msgctxt "first-layer/before-print"
+msgid "Before you start"
+msgstr "Prima di cominciare"
+
+#. point
+msgctxt "first-layer/before-print"
+msgid ""
+"**Write down the Z offset your printer shows now.** It is the starting "
+"point. Type it into the table below."
+msgstr "**Annota lo Z offset che la stampante mostra adesso.** È il punto di partenza. Scrivilo nella tabella qui sotto."
+
+#. point
+msgctxt "first-layer/before-print"
+msgid ""
+"Find the Z buttons you will use while printing. Mainsail has a **±0.025** "
+"button: one click per hexagon. A Prusa's *Live Adjust Z* moves in small "
+"steps: turn it until the value has changed by 0.025."
+msgstr "Trova i pulsanti Z che userai durante la stampa. Mainsail ha un pulsante **±0,025**: un clic per esagono. Il *Live Adjust Z* di una Prusa si muove a piccoli passi: giralo finché il valore è cambiato di 0,025."
+
+#. point
+msgctxt "first-layer/before-print"
+msgid "Clean the bed. A greasy spot looks like a wrong Z offset."
+msgstr "Pulisci il piatto. Una zona unta sembra uno Z offset sbagliato."
+
+#. More: point
+msgctxt "first-layer/before-print"
+msgid ""
+"The model is 0.2 mm high on a 0.4 nozzle: it slices to **one layer** for "
+"any first-layer height from 0.1 to 0.39 mm. Keep your usual first-layer "
+"height and speed."
+msgstr "Il modello è alto 0,2 mm con un ugello da 0,4: diventa **un solo strato** per qualsiasi altezza del primo strato da 0,1 a 0,39 mm. Tieni l'altezza e la velocità del primo strato che usi di solito."
+
+#. More: point
+msgctxt "first-layer/before-print"
+msgid ""
+"**Elephant foot compensation is forced to 0** on the object: the whole test "
+"is the first layer, and the compensation would shrink it."
+msgstr "**La compensazione della zampa d'elefante è forzata a 0** sull'oggetto: tutto il test è il primo strato, e la compensazione lo restringerebbe."
+
+#. More: point (expert)
+msgctxt "first-layer/before-print"
+msgid ""
+"On Klipper the Z buttons send `SET_GCODE_OFFSET Z_ADJUST=… MOVE=1`. The "
+"adjustment lasts until a restart: save it afterwards (see [Save the "
+"value](page:first-layer#save))."
+msgstr "Su Klipper i pulsanti Z mandano `SET_GCODE_OFFSET Z_ADJUST=… MOVE=1`. La regolazione dura fino al riavvio: salvala dopo (vedi [Salva il valore](page:first-layer#save))."
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Print and step down"
+msgstr "Stampa e scendi a passi"
+
+#. step title
+msgctxt "first-layer/open"
+msgid "Open, slice and check the order"
+msgstr "Apri, processa e controlla l'ordine"
+
+#. callout
+msgctxt "first-layer/open"
+msgid ""
+"Open it with **File › Open project**, never with Import: an import drops "
+"the settings that make the nozzle sweep the chain in order."
+msgstr "Aprilo con **File › Apri progetto**, mai con Importa: l'importazione perde le impostazioni che fanno percorrere la catena in ordine."
+
+#. point
+msgctxt "first-layer/open"
+msgid "**File › Open project**, then **Slice now**."
+msgstr "**File › Apri progetto**, poi **Processa ora**."
+
+#. point
+msgctxt "first-layer/open"
+msgid ""
+"In the preview, play the first layer with the horizontal slider: after the "
+"outline, the nozzle fills **hexagon 1 first, then 2, and so on up to 8**. "
+"That is what makes the steps work."
+msgstr "Nell'anteprima, scorri il primo strato con il cursore orizzontale: dopo il contorno, l'ugello riempie **prima l'esagono 1, poi il 2, e così via fino all'8**. È quello che fa funzionare i passi."
+
+#. step title
+msgctxt "first-layer/steps"
+msgid "Step down at every number"
+msgstr "Scendi a ogni numero"
+
+#. point
+msgctxt "first-layer/steps"
+msgid ""
+"**While the skirt prints**, raise Z by **+0.075** from your starting value "
+"(on Mainsail: +0.05, then +0.025). The outline and hexagon 1 are printed at "
+"that height."
+msgstr "**Mentre stampa lo skirt**, alza Z di **+0,075** rispetto al valore di partenza (su Mainsail: +0,05, poi +0,025). Il contorno e l'esagono 1 vengono stampati a quell'altezza."
+
+#. point
+msgctxt "first-layer/steps"
+msgid ""
+"**Every time the nozzle reaches a number**, lower Z by **0.025**, one click "
+"on Mainsail. Then write in the table the value your printer actually shows."
+msgstr "**Ogni volta che l'ugello arriva a un numero**, abbassa Z di **0,025**, un clic su Mainsail. Poi scrivi nella tabella il valore che la stampante mostra davvero."
+
+#. point
+msgctxt "first-layer/steps"
+msgid ""
+"Stop going down early if the surface already turns **wavy, ridged or "
+"scraped**: you have found the bottom."
+msgstr "Smetti di scendere prima se la superficie diventa già **ondulata, a creste o graffiata**: hai trovato il fondo."
+
+#. More: point
+msgctxt "first-layer/steps"
+msgid ""
+"Each hexagon takes about 10 to 35 seconds, depending on your first-layer "
+"speed: enough to press a button and look."
+msgstr "Ogni esagono dura da circa 10 a 35 secondi, secondo la velocità del primo strato: il tempo di premere un pulsante e guardare."
+
+#. More: point
+msgctxt "first-layer/steps"
+msgid ""
+"A missed or double click is no problem: the table keeps the value the "
+"printer showed for each hexagon, and that is what you save."
+msgstr "Un clic saltato o doppio non è un problema: la tabella tiene il valore che la stampante ha mostrato per ogni esagono, ed è quello che salvi."
+
+#. More: point (expert)
+msgctxt "first-layer/steps"
+msgid ""
+"The numbers sit in small flags in the notches below the chain, so the whole "
+"hexagon is free for reading. The flag of each hexagon is on its left, where "
+"the nozzle arrives."
+msgstr "I numeri stanno in piccole bandierine negli incavi sotto la catena, così tutto l'esagono resta libero per la lettura. La bandierina di ogni esagono è alla sua sinistra, da dove arriva l'ugello."
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Read the result"
+msgstr "Leggi il risultato"
+
+#. step title
+msgctxt "first-layer/read"
+msgid "Compare the hexagons"
+msgstr "Confronta gli esagoni"
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"Look at the hexagons side by side, with the light low and raking along the "
+"lines."
+msgstr "Guarda gli esagoni affiancati, con la luce bassa e radente lungo le linee."
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Too high:** round, separate lines, gaps you can see the bed through, "
+"edges that lift."
+msgstr "**Troppo alto:** linee tonde e separate, fessure da cui vedi il piatto, bordi che si sollevano."
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Right:** flat lines, joined with no gaps, still visible; smooth under a "
+"fingernail."
+msgstr "**Giusto:** linee piatte, unite senza fessure, ancora visibili; liscio sotto l'unghia."
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Too low:** lines that vanish into a shiny, wavy or ridged surface, "
+"plastic pushed up at the edges, marks on the bed."
+msgstr "**Troppo basso:** linee che spariscono in una superficie lucida, ondulata o a creste, plastica spinta in su ai bordi, segni sul piatto."
+
+#. point
+msgctxt "first-layer/read"
+msgid ""
+"**Tick the best hexagon in the table.** If two look equally good, take the "
+"higher one."
+msgstr "**Spunta nella tabella l'esagono migliore.** Se due sembrano ugualmente buoni, prendi il più alto."
+
+#. photo alt
+msgctxt "first-layer/read"
+msgid ""
+"Three hexagons of the ladder side by side, close up: too high with gaps, "
+"right, too low with ridges"
+msgstr "Tre esagoni della scala affiancati, da vicino: troppo alto con fessure, giusto, troppo basso con creste"
+
+#. photo caption
+msgctxt "first-layer/read"
+msgid ""
+"Too high, right, too low: three neighbouring hexagons of the same ladder."
+msgstr "Troppo alto, giusto, troppo basso: tre esagoni vicini della stessa scala."
+
+#. More: point
+msgctxt "first-layer/read"
+msgid ""
+"**Peel and fold** the hexagon you chose (and its neighbours if in doubt): a "
+"good one comes off as **one sheet** and folds without splitting; one that "
+"splits into lines was too high; a sheet with waves or drag marks was too "
+"low."
+msgstr "**Stacca e piega** l'esagono che hai scelto (e i vicini, se hai dubbi): uno buono viene via come **un foglio unico** e si piega senza aprirsi; uno che si apre in linee era troppo alto; un foglio con onde o segni di trascinamento era troppo basso."
+
+#. More: point (misread)
+msgctxt "first-layer/read"
+msgid ""
+"**A glassy, perfectly smooth surface** is often too low, not perfect: the "
+"lines should still be visible."
+msgstr "**Una superficie vetrosa, perfettamente liscia** spesso è troppo bassa, non perfetta: le linee devono ancora vedersi."
+
+#. More: point (misread)
+msgctxt "first-layer/read"
+msgid ""
+"**Gaps only at the edges**: a flow (extrusion multiplier) or speed effect, "
+"not Z. Judge the middle of each hexagon."
+msgstr "**Fessure solo ai bordi**: un effetto del flusso (moltiplicatore di estrusione) o della velocità, non di Z. Giudica il centro di ogni esagono."
+
+#. step title
+msgctxt "first-layer/save"
+msgid "Save the value"
+msgstr "Salva il valore"
+
+#. point
+msgctxt "first-layer/save"
+msgid ""
+"Set the Z offset to the value the table gives, then save it the way your "
+"printer does."
+msgstr "Imposta lo Z offset al valore che dà la tabella, poi salvalo come vuole la tua stampante."
+
+#. table header
+msgctxt "first-layer/save"
+msgid "Printer"
+msgstr "Stampante"
+
+#. table header
+msgctxt "first-layer/save"
+msgid "How to keep the value"
+msgstr "Come tenere il valore"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "Klipper (Mainsail, Fluidd)"
+msgstr "Klipper (Mainsail, Fluidd)"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid ""
+"After the print, `Z_OFFSET_APPLY_PROBE` (probe) or `Z_OFFSET_APPLY_ENDSTOP` "
+"(Z endstop), then `SAVE_CONFIG`"
+msgstr "Dopo la stampa, `Z_OFFSET_APPLY_PROBE` (sonda) o `Z_OFFSET_APPLY_ENDSTOP` (finecorsa Z), poi `SAVE_CONFIG`"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "RatOS"
+msgstr "RatOS"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid ""
+"Not verified yet: RatOS has its own macros for the probe offset. Use them "
+"if you know them; otherwise set the value again after each restart until "
+"this line is filled in"
+msgstr "Non ancora verificato: RatOS ha le sue macro per l'offset della sonda. Usale se le conosci; altrimenti reimposta il valore dopo ogni riavvio finché questa riga non è completata"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "Prusa (Buddy: MK4, Core One, XL, MINI)"
+msgstr "Prusa (Buddy: MK4, Core One, XL, MINI)"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid ""
+"*Live Adjust Z* keeps the value for the sheet in use; on load-cell printers "
+"set *Printer Settings › General › Z offset* in PrusaSlicer instead"
+msgstr "*Live Adjust Z* tiene il valore per il piano in uso; sulle stampanti con cella di carico imposta invece *Impostazioni stampante › Generale › Z offset* in PrusaSlicer"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "Marlin"
+msgstr "Marlin"
+
+#. table cell
+msgctxt "first-layer/save"
+msgid "`M851 Z…` (probe) or babystep, then `M500`"
+msgstr "`M851 Z…` (sonda) o babystep, poi `M500`"
+
+#. part heading (groups steps)
+msgctxt "first-layer"
+msgid "Check the whole bed"
+msgstr "Controlla tutto il piatto"
+
+#. step title
+msgctxt "first-layer/map"
+msgid "Print the map"
+msgstr "Stampa la mappa"
+
+#. point
+msgctxt "first-layer/map"
+msgid "Print the map for your bed **without touching Z**."
+msgstr "Stampa la mappa per il tuo piatto **senza toccare Z**."
+
+#. point
+msgctxt "first-layer/map"
+msgid ""
+"Every cell should look like the hexagon you chose. The web between them "
+"shows the zones in between."
+msgstr "Ogni cella deve sembrare l'esagono che hai scelto. La rete tra le celle mostra le zone in mezzo."
+
+#. point
+msgctxt "first-layer/map"
+msgid ""
+"**One corner different from the rest** points to the bed mesh, not to the Z "
+"offset: re-run the mesh and check that it is applied."
+msgstr "**Un angolo diverso dagli altri** indica la mesh del piatto, non lo Z offset: rifai la mesh e controlla che venga applicata."
+
+#. photo alt
+msgctxt "first-layer/map"
+msgid ""
+"The map printed on a 400 mm bed: nine numbered hexagonal cells joined by a "
+"thin web"
+msgstr "La mappa stampata su un piatto da 400 mm: nove celle esagonali numerate unite da una rete sottile"
+
+#. photo caption
+msgctxt "first-layer/map"
+msgid "The map on the author's 400 mm bed."
+msgstr "La mappa sul piatto da 400 mm dell'autore."
+
+#. page title
 msgctxt "further-reading"
 msgid "Further reading"
 msgstr "Approfondimenti"
@@ -1589,13 +2181,8 @@ msgstr ""
 
 #. point
 msgctxt "home/release-1"
-msgid ""
-"**Coming next:** first layer and Z offset, flow (extrusion multiplier), "
-"retraction, and dimensions and fit. They are listed in grey in the contents."
-msgstr ""
-"**In arrivo:** primo strato e Z offset, flusso (moltiplicatore di "
-"estrusione), retrazione, dimensioni e accoppiamenti. Sono elencati in "
-"grigio nell'indice."
+msgid "**New, not yet on Printables:** [first layer and Z offset](page:first-layer). **Coming next:** flow (extrusion multiplier), retraction, and dimensions and fit. They are listed in grey in the contents."
+msgstr "**Nuovo, non ancora su Printables:** [primo strato e Z offset](page:first-layer). **In arrivo:** flusso (moltiplicatore di estrusione), retrazione, dimensioni e accoppiamenti. Sono elencati in grigio nell'indice."
 
 #. point
 msgctxt "home/release-1"
@@ -3533,13 +4120,27 @@ msgstr ""
 
 #. More: photo alt
 msgctxt "idex-alignment/read-vernier"
-msgid "Macro photo of the fine X scale of station 5 reading -0.30: an amber arrow marks the red T1 tick that lines up with the yellow T0 tick at the \"3\" on the left"
-msgstr "Foto macro della scala fine X della stazione 5 che legge -0,30: una freccia ambra indica la tacca rossa di T1 allineata alla tacca gialla di T0 al \"3\" a sinistra"
+msgid ""
+"Macro photo of the fine X scale of station 5 reading -0.30: an amber arrow "
+"marks the red T1 tick that lines up with the yellow T0 tick at the \"3\" on "
+"the left"
+msgstr ""
+"Foto macro della scala fine X della stazione 5 che legge -0,30: una freccia "
+"ambra indica la tacca rossa di T1 allineata alla tacca gialla di T0 al "
+"\"3\" a sinistra"
 
 #. More: photo caption
 msgctxt "idex-alignment/read-vernier"
-msgid "Reading -0.30, from the author's print with idex_xoffset raised by 0.25 on purpose: the aligned tick is the \"3\" on the side away from the \"+\", so T1 printed 0.30 mm to the left of T0. The neighbours drift apart on both sides."
-msgstr "Lettura -0,30, dalla stampa dell'autore con idex_xoffset alzato apposta di 0,25: la tacca allineata è il \"3\" dalla parte opposta al \"+\", quindi T1 ha stampato 0,30 mm a sinistra di T0. Le tacche vicine si allontanano da entrambi i lati."
+msgid ""
+"Reading -0.30, from the author's print with idex_xoffset raised by 0.25 on "
+"purpose: the aligned tick is the \"3\" on the side away from the \"+\", so "
+"T1 printed 0.30 mm to the left of T0. The neighbours drift apart on both "
+"sides."
+msgstr ""
+"Lettura -0,30, dalla stampa dell'autore con idex_xoffset alzato apposta di "
+"0,25: la tacca allineata è il \"3\" dalla parte opposta al \"+\", quindi T1 "
+"ha stampato 0,30 mm a sinistra di T0. Le tacche vicine si allontanano da "
+"entrambi i lati."
 
 #. step title
 msgctxt "idex-alignment/read-coarse"
@@ -13369,13 +13970,29 @@ msgstr "Segna ✓ solo quando **entrambe** le punte superano."
 
 #. photo alt
 msgctxt "features/pressure-advance/tip90"
-msgid "The coarse PETG pressure advance tower in silhouette against a light panel, band numbers 1 to 9 on the front: the outline of the tip on the right is straight in the low bands and ragged from about band 6 up"
-msgstr "La torre ampia di pressure advance in PETG in controluce davanti a un pannello luminoso, numeri delle fasce da 1 a 9 sul davanti: il profilo della punta a destra è dritto nelle fasce basse e frastagliato più o meno dalla fascia 6 in su"
+msgid ""
+"The coarse PETG pressure advance tower in silhouette against a light panel, "
+"band numbers 1 to 9 on the front: the outline of the tip on the right is "
+"straight in the low bands and ragged from about band 6 up"
+msgstr ""
+"La torre ampia di pressure advance in PETG in controluce davanti a un "
+"pannello luminoso, numeri delle fasce da 1 a 9 sul davanti: il profilo "
+"della punta a destra è dritto nelle fasce basse e frastagliato più o meno "
+"dalla fascia 6 in su"
 
 #. photo caption
 msgctxt "features/pressure-advance/tip90"
-msgid "Against a light background the tip's outline is easy to read. Author's coarse PETG tower (PA 0 → 0.20): straight up to band 5, ragged from band 6 up, where PA is too high and eats the tip. With PA too low the same outline would be bumpy in the lowest bands instead."
-msgstr "Contro uno sfondo chiaro il profilo della punta si legge subito. Torre ampia in PETG dell'autore (PA 0 → 0,20): dritto fino alla fascia 5, frastagliato dalla fascia 6 in su, dove il PA è troppo alto e mangia la punta. Con il PA troppo basso, invece, lo stesso profilo sarebbe bitorzoluto nelle fasce più basse."
+msgid ""
+"Against a light background the tip's outline is easy to read. Author's "
+"coarse PETG tower (PA 0 → 0.20): straight up to band 5, ragged from band 6 "
+"up, where PA is too high and eats the tip. With PA too low the same outline "
+"would be bumpy in the lowest bands instead."
+msgstr ""
+"Contro uno sfondo chiaro il profilo della punta si legge subito. Torre "
+"ampia in PETG dell'autore (PA 0 → 0,20): dritto fino alla fascia 5, "
+"frastagliato dalla fascia 6 in su, dove il PA è troppo alto e mangia la "
+"punta. Con il PA troppo basso, invece, lo stesso profilo sarebbe "
+"bitorzoluto nelle fasce più basse."
 
 #. More: intro
 msgctxt "features/pressure-advance/tip90"

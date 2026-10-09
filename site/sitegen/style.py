@@ -336,6 +336,16 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
 .scheda-strumenti { display: flex; flex-wrap: wrap; gap: .8rem 1.4rem; align-items: center;
                     margin: 0 0 1rem; }
 .scheda-strumenti label { font-size: .92rem; }
+.scala-z { margin: .4rem 0 1.2rem; }
+.scala-z input[type=text] { width: 5.5rem; font: inherit; text-align: center; padding: .25rem .4rem;
+  border: 1px solid var(--filo); border-radius: 6px; background: var(--carta); color: var(--testo); }
+.scala-z input[type=text]:focus { outline: 2px solid var(--accento); outline-offset: 1px; }
+.scala-z input[type=radio] { width: 1.1rem; height: 1.1rem; accent-color: var(--accento); }
+.scala-z .obiettivo { font-variant-numeric: tabular-nums; font-weight: 600; }
+.scala-z .scala-via { color: var(--muto); margin-left: .6rem; }
+.scala-z .scala-esito { font-weight: 700; color: var(--accento-testo); }
+.scala-z button { font: inherit; font-size: .88rem; padding: .3rem .8rem; border: 1px solid var(--filo);
+  border-radius: 6px; background: var(--fondo2); color: var(--testo); cursor: pointer; }
 .scheda-strumenti select, .scheda-strumenti button {
   font: inherit; font-size: .92rem; padding: .4rem .7rem; border-radius: 8px;
   border: 1px solid var(--filo); background: var(--fondo2); color: var(--testo); min-height: 2.5rem; }
