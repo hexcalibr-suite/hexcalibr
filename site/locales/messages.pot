@@ -2001,9 +2001,9 @@ msgstr ""
 #. point
 msgctxt "home/release-1"
 msgid ""
-"**New, not yet on Printables:** [first layer and Z "
-"offset](page:first-layer). **Coming next:** flow (extrusion multiplier), "
-"retraction, and dimensions and fit. They are listed in grey in the contents."
+"**New:** [first layer and Z offset](page:first-layer). **Coming next:** "
+"flow (extrusion multiplier), retraction, and dimensions and fit. They are "
+"listed in grey in the contents."
 msgstr ""
 
 #. point
