@@ -13390,44 +13390,13 @@ msgstr "Segna ✓ solo quando **entrambe** le punte superano."
 
 #. photo alt
 msgctxt "features/pressure-advance/tip90"
-msgid ""
-"The right 90 degree tip seen edge-on against a white background, bands 1 to "
-"6: a row of small blobs that stops at band 5"
-msgstr ""
-"La punta a 90 gradi destra vista di profilo contro uno sfondo bianco, fasce "
-"da 1 a 6: una fila di piccoli grumi che si ferma alla fascia 5"
+msgid "The coarse PETG pressure advance tower in silhouette against a light panel, band numbers 1 to 9 on the front: the outline of the tip on the right is straight in the low bands and ragged from about band 6 up"
+msgstr "La torre ampia di pressure advance in PETG in controluce davanti a un pannello luminoso, numeri delle fasce da 1 a 9 sul davanti: il profilo della punta a destra è dritto nelle fasce basse e frastagliato più o meno dalla fascia 6 in su"
 
 #. photo caption
 msgctxt "features/pressure-advance/tip90"
-msgid ""
-"One tip edge-on against a light background: the row of small blobs in the "
-"low bands fades out at the right band."
-msgstr ""
-"Una punta di profilo contro uno sfondo chiaro: la fila di piccoli grumi "
-"delle fasce basse sparisce alla fascia giusta."
-
-#. stand-in photo alt
-msgctxt "features/pressure-advance/tip90"
-msgid ""
-"Phone photo of the author's fine PETG pressure advance tower, front face "
-"with the band numbers 1 to 9: the edge beside the numbers is bumpy in the "
-"lowest bands and straight higher up"
-msgstr ""
-"Foto col telefono della torre fine di pressure advance in PETG dell'autore, "
-"faccia frontale con i numeri delle fasce da 1 a 9: lo spigolo accanto ai "
-"numeri è bitorzoluto nelle fasce più basse e dritto più in alto"
-
-#. stand-in photo caption
-msgctxt "features/pressure-advance/tip90"
-msgid ""
-"The author's fine PETG tower (PA 0 → 0.08), front face: on the convex edge "
-"beside the numbers, bands 1–3 carry a row of small blobs that is gone from "
-"band 4–5. A soft phone photo; the edge-on view of a tip is still to come."
-msgstr ""
-"La torre fine in PETG dell'autore (PA 0 → 0,08), faccia frontale: sullo "
-"spigolo convesso accanto ai numeri, le fasce 1–3 hanno una fila di piccole "
-"gocce che sparisce dalla fascia 4–5. È una foto col telefono, poco nitida; "
-"la vista di taglio di una punta arriverà più avanti."
+msgid "Against a light background the tip's outline is easy to read. Author's coarse PETG tower (PA 0 → 0.20): straight up to band 5, ragged from band 6 up, where PA is too high and eats the tip. With PA too low the same outline would be bumpy in the lowest bands instead."
+msgstr "Contro uno sfondo chiaro il profilo della punta si legge subito. Torre ampia in PETG dell'autore (PA 0 → 0,20): dritto fino alla fascia 5, frastagliato dalla fascia 6 in su, dove il PA è troppo alto e mangia la punta. Con il PA troppo basso, invece, lo stesso profilo sarebbe bitorzoluto nelle fasce più basse."
 
 #. More: intro
 msgctxt "features/pressure-advance/tip90"

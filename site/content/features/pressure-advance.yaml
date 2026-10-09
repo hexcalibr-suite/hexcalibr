@@ -131,15 +131,10 @@ features:
       - "Mark ✓ only when **both** tips pass."
     photos:
       - id: F2_tip90-edgeon_PETG_VC4
-        alt: "The right 90 degree tip seen edge-on against a white background, bands 1 to 6: a row of small blobs that stops at band 5"
-        caption: "One tip edge-on against a light background: the row of small blobs in the low bands fades out at the right band."
-        shot: "RIGHT 90° tip, the whole tower, seen exactly edge-on (camera on the line of the tip edge, so the edge is a silhouette) against a plain white sheet or a bright window, soft even light, no raking light. Bands 1 to 6 in frame (bottom up). The owner's PETG tower shows blobs in bands 1–4, gone from band 5 (0.04): keep that tower for this shot. Paper tags with the band numbers beside the tower. STILL TO SHOOT: on the owner's coarse PETG tower (98 mm/s) no blobs are visible on any tip in bands 1–2, so use a tower that shows them (the fine PETG tower, or one printed with --flow 12)."
-        stand_in:
-          source: "Phone photo media/photos/2026-10-08_phone/pa-fine-0-0.08_front-numbers_blob-row-bands1-3_BEST-too-low.jpg, cropped to the tower."
-          aspect: "1/1"
-          alt: "Phone photo of the author's fine PETG pressure advance tower, front face with the band numbers 1 to 9: the edge beside the numbers is bumpy in the lowest bands and straight higher up"
-          caption: "The author's fine PETG tower (PA 0 → 0.08), front face: on the convex edge beside the numbers, bands 1–3 carry a row of small blobs that is gone from band 4–5. A soft phone photo; the edge-on view of a tip is still to come."
-          redo: "Phone photo, soft focus, flat light, seen from the front: the blob row only reads at full size, and it is the edge beside the numbers, not the right 90° tip this feature is about. Needed: the right 90° tip edge-on against a white background, sharp, bands 1–6, as in the brief."
+        aspect: "3/4"
+        alt: "The coarse PETG pressure advance tower in silhouette against a light panel, band numbers 1 to 9 on the front: the outline of the tip on the right is straight in the low bands and ragged from about band 6 up"
+        caption: "Against a light background the tip's outline is easy to read. Author's coarse PETG tower (PA 0 → 0.20): straight up to band 5, ragged from band 6 up, where PA is too high and eats the tip. With PA too low the same outline would be bumpy in the lowest bands instead."
+        shot: "DONE from _A645952 (2026-10-09, owner's coarse PETG tower, klipper-dd coarse 0–0.200): front face with the band numbers, light panel behind, 3:4 crop. It shows the too-high side; a version with the blob row of a too-low tower (the fine PETG tower) would be a plus."
     more:
       intro: "**Two tips:** the **right blade**, at the end of the long front-right face, and the **back-left blade**, at the end of the back face. The nozzle arrives at full speed along a straight, brakes hard and turns 90°. These convex tips are **the main reading**: they behave like the 90° corners of your real parts, and PA shows on them first."
       points:
