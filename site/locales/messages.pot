@@ -1541,6 +1541,20 @@ msgid ""
 "That is what makes the steps work."
 msgstr ""
 
+#. photo alt
+msgctxt "first-layer/open"
+msgid ""
+"PrusaSlicer 2.9 preview of the ladder, first layer, horizontal slider part "
+"way: hexagons 1 to 7 already filled, the nozzle in hexagon 8"
+msgstr ""
+
+#. photo caption
+msgctxt "first-layer/open"
+msgid ""
+"The preview half way through the layer: the outline first, then the "
+"hexagons fill one after another, from 1 to 8."
+msgstr ""
+
 #. step title
 msgctxt "first-layer/steps"
 msgid "Step down at every number"

@@ -87,6 +87,12 @@ steps:
     points:
       - "**File › Open project**, then **Slice now**."
       - "In the preview, play the first layer with the horizontal slider: after the outline, the nozzle fills **hexagon 1 first, then 2, and so on up to 8**. That is what makes the steps work."
+    photos:
+      - id: FL_ui-ladder-order_PS29
+        alt: "PrusaSlicer 2.9 preview of the ladder, first layer, horizontal slider part way: hexagons 1 to 7 already filled, the nozzle in hexagon 8"
+        caption: "The preview half way through the layer: the outline first, then the hexagons fill one after another, from 1 to 8."
+        aspect: "4/3"
+        shot: "DONE: owner's screenshot 2026-10-09 (PrusaSlicer 2.9.6, Preview, layer 1, horizontal slider at move 2217), cropped to the 3D view: no profile names, no G-code column."
     callouts:
       - kind: warn
         text: "Open it with **File › Open project**, never with Import: an import drops the settings that make the nozzle sweep the chain in order."

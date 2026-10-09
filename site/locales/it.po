@@ -819,7 +819,10 @@ msgctxt "ui/ladder_end"
 msgid ""
 "At the end the printer must show %s. If it shows something else, a click "
 "was missed or doubled: the hexagons after it are one step off."
-msgstr "Alla fine la stampante deve mostrare %s. Se mostra un altro valore, un clic è stato saltato o doppiato: gli esagoni dopo quel punto sono spostati di un passo."
+msgstr ""
+"Alla fine la stampante deve mostrare %s. Se mostra un altro valore, un clic "
+"è stato saltato o doppiato: gli esagoni dopo quel punto sono spostati di un "
+"passo."
 
 #. interface: ladder_best
 msgctxt "ui/ladder_best"
@@ -1739,6 +1742,20 @@ msgstr ""
 "contorno, l'ugello riempie **prima l'esagono 1, poi il 2, e così via fino "
 "all'8**. È quello che fa funzionare i passi."
 
+#. photo alt
+msgctxt "first-layer/open"
+msgid ""
+"PrusaSlicer 2.9 preview of the ladder, first layer, horizontal slider part "
+"way: hexagons 1 to 7 already filled, the nozzle in hexagon 8"
+msgstr "Anteprima di PrusaSlicer 2.9 della scala, primo strato, cursore orizzontale a metà corsa: esagoni da 1 a 7 già riempiti, l'ugello nell'esagono 8"
+
+#. photo caption
+msgctxt "first-layer/open"
+msgid ""
+"The preview half way through the layer: the outline first, then the "
+"hexagons fill one after another, from 1 to 8."
+msgstr "L'anteprima a metà dello strato: prima il contorno, poi gli esagoni si riempiono uno dopo l'altro, dall'1 all'8."
+
 #. step title
 msgctxt "first-layer/steps"
 msgid "Step down at every number"
@@ -1760,7 +1777,9 @@ msgctxt "first-layer/steps"
 msgid ""
 "**Every time the nozzle reaches a number**, lower Z by **0.025**, one click "
 "on Mainsail. Nothing to write while it prints."
-msgstr "**Ogni volta che l'ugello arriva a un numero**, abbassa Z di **0,025**, un clic su Mainsail. Durante la stampa non devi scrivere niente."
+msgstr ""
+"**Ogni volta che l'ugello arriva a un numero**, abbassa Z di **0,025**, un "
+"clic su Mainsail. Durante la stampa non devi scrivere niente."
 
 #. point
 msgctxt "first-layer/steps"
@@ -1786,7 +1805,10 @@ msgid ""
 "At the end, check the value the printer shows against the one under the "
 "table. If they differ, a click was missed or doubled: look at the hexagons "
 "to see where the step is missing, and shift the values after it."
-msgstr "Alla fine confronta il valore che mostra la stampante con quello sotto la tabella. Se sono diversi, un clic è stato saltato o doppiato: guarda gli esagoni per capire dove manca il passo, e sposta i valori successivi."
+msgstr ""
+"Alla fine confronta il valore che mostra la stampante con quello sotto la "
+"tabella. Se sono diversi, un clic è stato saltato o doppiato: guarda gli "
+"esagoni per capire dove manca il passo, e sposta i valori successivi."
 
 #. More: point (expert)
 msgctxt "first-layer/steps"
