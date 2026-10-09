@@ -46,10 +46,10 @@ steps:
       - "Run it **first**, before any other test, and again after changing the nozzle, the bed sheet or the probe."
     photos:
       - id: FL_ladder-overview_PETG_VC4
-        alt: "The printed ladder of eight hexagons on the bed, seen from above: the first hexagons with visible gaps between the lines, the middle ones flat and joined, the last ones wavy"
-        caption: "The ladder printed: from hexagon 1 (highest) to 8 (lowest)."
+        alt: "The author's printed ladder of eight hexagons on the bed, seen from above: hexagons 1 to 3 with grooves between round lines, 5 flat and joined, 7 and 8 wavy and lumpy"
+        caption: "The author's ladder in PETG, stepped from +0.075 to -0.100: grooves between the lines in 1 to 3, flat and joined in 5, wavy in 7 and 8. Hexagon 5 is the value kept."
         aspect: "3/1"
-        shot: "TOP-DOWN on the bed, the whole ladder in frame, front at the bottom, numbers readable. Raking light from the front, low, along the lines, so gaps and ridges show. The ladder printed with the steps in the guide."
+        shot: "DONE: _A645981 (2026-10-09), PETG on the owner's VC4, T0, start Z offset 0.000, crop of the whole ladder."
     more:
       points:
         - "The Z offset belongs to the **printer** (probe, nozzle, bed sheet), not to the filament. PETG usually likes a little less squish than PLA: if you print both, check it with PETG too."
@@ -125,10 +125,10 @@ steps:
       - "**Tick the best hexagon in the table.** If two look equally good, take the higher one."
     photos:
       - id: FL_hex-compare_PETG_VC4
-        alt: "Three hexagons of the ladder side by side, close up: too high with gaps, right, too low with ridges"
-        caption: "Too high, right, too low: three neighbouring hexagons of the same ladder."
+        alt: "Hexagons 2, 5 and 8 of the same ladder side by side, close up: round lines with dark gaps, flat joined lines, a wavy lumpy surface"
+        caption: "Hexagon 2 (too high: gaps between round lines), 5 (right: flat, joined, the lines still visible) and 8 (too low: wavy and lumpy), from the same ladder."
         aspect: "3/1"
-        shot: "MACRO, top-down, three neighbouring hexagons (too high, right, too low) filling the frame, raking light from the side along the lines. Same ladder as the overview."
+        shot: "DONE: three crops of _A645981, hexagons 2, 5 and 8 at the same scale. A macro with raking light would show the lines even better."
     more:
       points:
         - "**Peel and fold** the hexagon you chose (and its neighbours if in doubt): a good one comes off as **one sheet** and folds without splitting; one that splits into lines was too high; a sheet with waves or drag marks was too low."

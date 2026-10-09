@@ -1361,14 +1361,17 @@ msgstr ""
 #. photo alt
 msgctxt "first-layer/what-for"
 msgid ""
-"The printed ladder of eight hexagons on the bed, seen from above: the first "
-"hexagons with visible gaps between the lines, the middle ones flat and "
-"joined, the last ones wavy"
+"The author's printed ladder of eight hexagons on the bed, seen from above: "
+"hexagons 1 to 3 with grooves between round lines, 5 flat and joined, 7 and "
+"8 wavy and lumpy"
 msgstr ""
 
 #. photo caption
 msgctxt "first-layer/what-for"
-msgid "The ladder printed: from hexagon 1 (highest) to 8 (lowest)."
+msgid ""
+"The author's ladder in PETG, stepped from +0.075 to -0.100: grooves between "
+"the lines in 1 to 3, flat and joined in 5, wavy in 7 and 8. Hexagon 5 is "
+"the value kept."
 msgstr ""
 
 #. More: point
@@ -1653,14 +1656,15 @@ msgstr ""
 #. photo alt
 msgctxt "first-layer/read"
 msgid ""
-"Three hexagons of the ladder side by side, close up: too high with gaps, "
-"right, too low with ridges"
+"Hexagons 2, 5 and 8 of the same ladder side by side, close up: round lines "
+"with dark gaps, flat joined lines, a wavy lumpy surface"
 msgstr ""
 
 #. photo caption
 msgctxt "first-layer/read"
 msgid ""
-"Too high, right, too low: three neighbouring hexagons of the same ladder."
+"Hexagon 2 (too high: gaps between round lines), 5 (right: flat, joined, the "
+"lines still visible) and 8 (too low: wavy and lumpy), from the same ladder."
 msgstr ""
 
 #. More: point
