@@ -210,6 +210,12 @@ features:
         alt: "The broken flag stumps of two blocks: a smooth, flat break on a cold block, a jagged, whitened break at 240 °C"
         caption: "Top, too cold: a clean, flat break along one layer. Bottom, 240 °C, the chosen block: a jagged, whitened break."
         shot: "BACK-LEFT face, AFTER breaking the flags (fingernail on the top edge, push towards the tower). Macro of the stumps at the outer edge of the back-left shelf, camera at about 45° to the face, slightly above, one hard light raking across the breaks so flat vs jagged reads. Two equal crops, one block each, stacked as on the tower: the coldest block (200 or 210 °C) on top, 240 °C below. No text in the image, no paper tags needed (the caption says it). STILL TO SHOOT: the owner's tower so far has only the top three flags broken (200, 210, 220 °C) and was shot from the front, not as a macro of the breaks; break the 240 °C flag too."
+        stand_in:
+          source: "_A645928, cropped (owner's coarse PETG tower v2.3)."
+          aspect: "3/2"
+          alt: "The author's PETG temperature tower after the test, string ladder on the left; three broken flags lie on the cloth in front of it"
+          caption: "The author's tower after breaking the three coldest flags (200, 210 and 220 °C): the pieces lie on the cloth. A close-up comparing the breaks is still to come."
+          redo: "The whole tower from a distance: the flag stumps are behind the string ladder and out of focus, so a flat break and a jagged one cannot be told apart, and the 240 °C flag is not broken yet. Needed: the macro of the stumps, a cold block against 240 °C, as in the brief."
     more:
       intro: "The flag is one line thick, about 3 mm from the wall, with nothing above its top edge. Shows cold."
       points:

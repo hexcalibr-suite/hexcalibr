@@ -1008,6 +1008,19 @@ class Site:
         if self.briefs and ph.get("shot"):
             brief = ("<details class=\"brief\"><summary>%s</summary><p>%s</p></details>"
                      % (_e(self.T("photo_brief")), self.md(ph["shot"])))
+        # A stand-in: an existing photo that fills the slot until the real one is
+        # taken (img/<id>.standin.jpg). It has its own alt and caption, says it is
+        # provisional, and the shot list marks it as still to redo.
+        si = ph.get("stand_in")
+        if si and os.path.exists(os.path.join(self.photos_dir, ph["id"] + ".standin.jpg")):
+            src = "%simg/%s.standin.jpg" % (self.root, ph["id"])
+            if self.briefs and si.get("redo"):
+                brief += ("<details class=\"brief\"><summary>%s</summary><p>%s</p></details>"
+                          % (_e(self.T("photo_redo")), self.md(si["redo"])))
+            return ("<figure class=\"provvisoria\"><a href=\"%s\"><img src=\"%s\" alt=\"%s\" loading=\"lazy\"%s></a>"
+                    "<figcaption><span class=\"etichetta\">%s</span> %s</figcaption>%s</figure>"
+                    % (src, src, _e(self.plain(si["alt"])), self.box(dict(ph, aspect=si.get("aspect") or ph.get("aspect"))),
+                       _e(self.T("photo_provisional")), self.md(si["caption"]), brief))
         return ("<figure class=\"foto-manca\"><div class=\"segnaposto\" role=\"img\" aria-label=\"%s\"%s>"
                 "<strong>%s</strong>%s</div>%s%s</figure>"
                 % (_e(self.plain(ph["alt"])), self.box(ph), _e(self.T("photo_to_come")),

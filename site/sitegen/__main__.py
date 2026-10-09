@@ -210,6 +210,24 @@ def shotlist(src=None):
     src = src or content.load()
     rows = content.all_photos(src)
     out = [SHOTLIST_HEAD.replace("{suite}", src["site"]["suite_name"])]
+
+    def stand_in(ph):
+        return bool(ph.get("stand_in")) and os.path.exists(os.path.join(content.IMG, ph["id"] + ".standin.jpg"))
+    redo = [(pid, where, ph) for pid, where, ph in rows if stand_in(ph) and not any(
+        os.path.exists(os.path.join(content.IMG, ph["id"] + ext)) for ext in (".jpg", ".jpeg", ".png", ".webp", ".svg"))]
+    if redo:
+        # before the protocol's "## Shots" heading: the first thing the owner reads
+        out[0] = out[0].replace("## Protocol", "## Stand-ins: to redo\n\n"
+            "These slots show an existing photo for now (`site/img/<id>.standin.jpg`), labelled\n"
+            "\"Provisional photo\" on the site. It does not show what the caption needs, so the shot\n"
+            "must still be taken. Save the real photo as `site/img/<id>.jpg`: it replaces the stand-in,\n"
+            "then delete the `.standin.jpg` and the `stand_in:` entry in content/.\n\n"
+            "| File id | Page / feature | Stand-in now | Why it must be redone |\n|---|---|---|---|\n"
+            + "".join("| `%s` | %s / %s | %s | %s |\n" % (ph["id"], src["pages"][pid]["title"], where.replace("|", "/"),
+                                                       ph["stand_in"].get("source", "").replace("|", "/"),
+                                                       ph["stand_in"].get("redo", "").replace("|", "/"))
+                      for pid, where, ph in redo)
+            + "\n## Protocol", 1)
     current = None
     for pid, where, ph in rows:
         if pid != current:
@@ -223,8 +241,11 @@ def shotlist(src=None):
         exts = (".webm", ".mp4") if video else (".jpg", ".jpeg", ".png", ".webp", ".svg")
         have = bool(ph.get("youtube")) or any(os.path.exists(os.path.join(content.IMG, ph["id"] + ext))
                                               for ext in exts)
-        out.append("| %d | `%s`%s%s | %s | %s | %s |"
-                   % (k, ph["id"], " VIDEO" if video else "", " (done)" if have else "", where.replace("|", "/"),
+        redo_now = not have and stand_in(ph)
+        out.append("| %d | `%s`%s%s | %s | %s%s | %s |"
+                   % (k, ph["id"], " VIDEO" if video else "",
+                      " (done)" if have else " **STAND-IN, TO REDO**" if redo_now else "", where.replace("|", "/"),
+                      "**TO REDO:** %s **Brief:** " % ph["stand_in"].get("redo", "").replace("|", "/") if redo_now else "",
                       ph.get("shot", "").replace("|", "/").replace("\n", " "),
                       ph.get("caption", "").replace("|", "/")))
     out.append("")

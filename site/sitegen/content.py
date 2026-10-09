@@ -278,6 +278,10 @@ def _photos(st, c, t, pre=""):
         for k in ("alt", "caption"):
             if k in ph:
                 ph[k] = t(c, ph[k], pre + "photo " + k)
+        # a stand-in photo: alt and caption are shown, `redo` is for the owner
+        for k in ("alt", "caption"):
+            if k in ph.get("stand_in", {}):
+                ph["stand_in"][k] = t(c, ph["stand_in"][k], pre + "stand-in photo " + k)
 
 
 def strings(src):

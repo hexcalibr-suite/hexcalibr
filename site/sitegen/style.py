@@ -199,6 +199,10 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
                           rgba(127, 140, 155, .07) 14px 28px); }
 .segnaposto strong { font-family: var(--titoli); font-weight: 600; font-size: 1rem; }
 .segnaposto code { font-size: .78rem; }
+/* A stand-in photo: an existing shot in the slot until the real one is taken.
+   A dashed edge like the placeholder's, and a label at the start of the caption. */
+.provvisoria > a { outline: 2px dashed var(--filo); outline-offset: 3px; }
+.provvisoria .etichetta { font-weight: 600; color: var(--accento-testo); }
 .brief { margin-top: .5rem; font-size: .82rem; }
 .brief summary { cursor: pointer; color: var(--accento-testo); font-weight: 600; }
 .brief p { margin: .4rem 0 0; color: var(--muto); }

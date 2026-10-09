@@ -90,6 +90,16 @@ msgctxt "ui/photo_brief"
 msgid "Shot brief (for the photographer)"
 msgstr "Indicazioni di scatto (per il fotografo)"
 
+#. interface: photo_provisional
+msgctxt "ui/photo_provisional"
+msgid "Provisional photo:"
+msgstr "Foto provvisoria:"
+
+#. interface: photo_redo
+msgctxt "ui/photo_redo"
+msgid "Why it must be redone (for the photographer)"
+msgstr "Perché va rifatta (per il fotografo)"
+
 #. interface: kind_beginner
 msgctxt "ui/kind_beginner"
 msgid "Beginner"
@@ -3260,6 +3270,24 @@ msgid ""
 msgstr ""
 "Fessura a sinistra, sovrapposizione a destra: qui T1 sta a destra di T0."
 
+#. More: stand-in photo alt
+msgctxt "idex-alignment/read-lite"
+msgid ""
+"The Lite 400 printed on the bed, seen from the front: nine small stations "
+"in yellow and red"
+msgstr ""
+"Il Lite 400 stampato sul piatto, visto da davanti: nove piccole stazioni "
+"gialle e rosse"
+
+#. More: stand-in photo caption
+msgctxt "idex-alignment/read-lite"
+msgid ""
+"The author's Lite 400 on the bed (T0 yellow, T1 red). A close-up of a "
+"station with a gap is still to come."
+msgstr ""
+"Il Lite 400 dell'autore sul piatto (T0 giallo, T1 rosso). Il primo piano di "
+"una stazione con una fessura arriverà più avanti."
+
 #. More: photo alt
 msgctxt "idex-alignment/read-lite"
 msgid "Close-up of an aligned Lite station: both contact lines look the same"
@@ -3485,6 +3513,24 @@ msgctxt "idex-alignment/read-vernier"
 msgid "Reading 0.00: the ticks at \"0\" form one straight line."
 msgstr "Lettura 0,00: le tacche allo \"0\" formano un'unica linea dritta."
 
+#. More: stand-in photo alt
+msgctxt "idex-alignment/read-vernier"
+msgid ""
+"Close-up of the fine X scale of a printed Vernier station: the red T1 comb "
+"above the yellow T0 scale labelled 5 to 0 to 5"
+msgstr ""
+"Primo piano della scala fine X di una stazione Vernier stampata: il pettine "
+"rosso di T1 sopra la scala gialla di T0, numerata da 5 a 0 a 5"
+
+#. More: stand-in photo caption
+msgctxt "idex-alignment/read-vernier"
+msgid ""
+"The fine X scale of station 8 of the author's print, close up (T0 yellow, "
+"T1 red). A photo of a scale reading 0.00 is still to come."
+msgstr ""
+"La scala fine X della stazione 8 della stampa dell'autore, da vicino (T0 "
+"giallo, T1 rosso). La foto di una scala che legge 0,00 arriverà più avanti."
+
 #. More: photo alt
 msgctxt "idex-alignment/read-vernier"
 msgid "Macro photo of a fine Vernier scale reading +0.15"
@@ -3497,6 +3543,24 @@ msgid ""
 msgstr ""
 "Lettura +0,15: la tacca allineata è una oltre l'\"1\", dalla parte del "
 "\"+\"."
+
+#. More: stand-in photo alt
+msgctxt "idex-alignment/read-vernier"
+msgid ""
+"Close-up of the fine Y scale of a printed Vernier station: the red T1 comb "
+"beside the yellow T0 scale labelled 5 to 0 to 5"
+msgstr ""
+"Primo piano della scala fine Y di una stazione Vernier stampata: il pettine "
+"rosso di T1 accanto alla scala gialla di T0, numerata da 5 a 0 a 5"
+
+#. More: stand-in photo caption
+msgctxt "idex-alignment/read-vernier"
+msgid ""
+"The fine Y scale of the same station (T0 yellow, T1 red). A photo of a "
+"+0.15 reading is still to come."
+msgstr ""
+"La scala fine Y della stessa stazione (T0 giallo, T1 rosso). La foto di una "
+"lettura di +0,15 arriverà più avanti."
 
 #. step title
 msgctxt "idex-alignment/read-coarse"
@@ -13342,6 +13406,29 @@ msgstr ""
 "Una punta di profilo contro uno sfondo chiaro: la fila di piccoli grumi "
 "delle fasce basse sparisce alla fascia giusta."
 
+#. stand-in photo alt
+msgctxt "features/pressure-advance/tip90"
+msgid ""
+"Phone photo of the author's fine PETG pressure advance tower, front face "
+"with the band numbers 1 to 9: the edge beside the numbers is bumpy in the "
+"lowest bands and straight higher up"
+msgstr ""
+"Foto col telefono della torre fine di pressure advance in PETG dell'autore, "
+"faccia frontale con i numeri delle fasce da 1 a 9: lo spigolo accanto ai "
+"numeri è bitorzoluto nelle fasce più basse e dritto più in alto"
+
+#. stand-in photo caption
+msgctxt "features/pressure-advance/tip90"
+msgid ""
+"The author's fine PETG tower (PA 0 → 0.08), front face: on the convex edge "
+"beside the numbers, bands 1–3 carry a row of small blobs that is gone from "
+"band 4–5. A soft phone photo; the edge-on view of a tip is still to come."
+msgstr ""
+"La torre fine in PETG dell'autore (PA 0 → 0,08), faccia frontale: sullo "
+"spigolo convesso accanto ai numeri, le fasce 1–3 hanno una fila di piccole "
+"gocce che sparisce dalla fascia 4–5. È una foto col telefono, poco nitida; "
+"la vista di taglio di una punta arriverà più avanti."
+
 #. More: intro
 msgctxt "features/pressure-advance/tip90"
 msgid ""
@@ -14827,6 +14914,26 @@ msgid ""
 msgstr ""
 "In alto, troppo freddo: rottura netta e piatta lungo uno strato. In basso, "
 "240 °C, il blocco scelto: rottura frastagliata e sbiancata."
+
+#. stand-in photo alt
+msgctxt "features/temperature-tower/flag"
+msgid ""
+"The author's PETG temperature tower after the test, string ladder on the "
+"left; three broken flags lie on the cloth in front of it"
+msgstr ""
+"La torre di temperatura in PETG dell'autore dopo il test, con la scaletta "
+"dei fili a sinistra; tre bandierine rotte sono sul panno davanti"
+
+#. stand-in photo caption
+msgctxt "features/temperature-tower/flag"
+msgid ""
+"The author's tower after breaking the three coldest flags (200, 210 and 220 "
+"°C): the pieces lie on the cloth. A close-up comparing the breaks is still "
+"to come."
+msgstr ""
+"La torre dell'autore dopo aver rotto le tre bandierine più fredde (200, 210 "
+"e 220 °C): i pezzi sono sul panno. Il primo piano che confronta le rotture "
+"arriverà più avanti."
 
 #. More: intro
 msgctxt "features/temperature-tower/flag"
