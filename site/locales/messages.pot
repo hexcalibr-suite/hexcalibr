@@ -1732,9 +1732,8 @@ msgstr ""
 #. table cell
 msgctxt "first-layer/save"
 msgid ""
-"Not verified yet: RatOS has its own macros for the probe offset. Use them "
-"if you know them; otherwise set the value again after each restart until "
-"this line is filled in"
+"As on Klipper: the save icon next to the Z offset in Mainsail (checked on a "
+"RatRig V-Core 4 IDEX)"
 msgstr ""
 
 #. table cell

@@ -143,7 +143,7 @@ steps:
       head: ["Printer", "How to keep the value"]
       rows:
         - ["Klipper (Mainsail, Fluidd)", "After the print, `Z_OFFSET_APPLY_PROBE` (probe) or `Z_OFFSET_APPLY_ENDSTOP` (Z endstop), then `SAVE_CONFIG`"]
-        - ["RatOS", "Not verified yet: RatOS has its own macros for the probe offset. Use them if you know them; otherwise set the value again after each restart until this line is filled in"]
+        - ["RatOS", "As on Klipper: the save icon next to the Z offset in Mainsail (checked on a RatRig V-Core 4 IDEX)"]
         - ["Prusa (Buddy: MK4, Core One, XL, MINI)", "*Live Adjust Z* keeps the value for the sheet in use; on load-cell printers set *Printer Settings › General › Z offset* in PrusaSlicer instead"]
         - ["Marlin", "`M851 Z…` (probe) or babystep, then `M500`"]
 
