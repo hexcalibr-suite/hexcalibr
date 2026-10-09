@@ -3533,34 +3533,13 @@ msgstr ""
 
 #. More: photo alt
 msgctxt "idex-alignment/read-vernier"
-msgid "Macro photo of a fine Vernier scale reading +0.15"
-msgstr "Foto macro di una scala fine Vernier che legge +0,15"
+msgid "Macro photo of the fine X scale of station 5 reading -0.30: an amber arrow marks the red T1 tick that lines up with the yellow T0 tick at the \"3\" on the left"
+msgstr "Foto macro della scala fine X della stazione 5 che legge -0,30: una freccia ambra indica la tacca rossa di T1 allineata alla tacca gialla di T0 al \"3\" a sinistra"
 
 #. More: photo caption
 msgctxt "idex-alignment/read-vernier"
-msgid ""
-"Reading +0.15: the aligned tick is one past the \"1\", on the \"+\" side."
-msgstr ""
-"Lettura +0,15: la tacca allineata è una oltre l'\"1\", dalla parte del "
-"\"+\"."
-
-#. More: stand-in photo alt
-msgctxt "idex-alignment/read-vernier"
-msgid ""
-"Close-up of the fine Y scale of a printed Vernier station: the red T1 comb "
-"beside the yellow T0 scale labelled 5 to 0 to 5"
-msgstr ""
-"Primo piano della scala fine Y di una stazione Vernier stampata: il pettine "
-"rosso di T1 accanto alla scala gialla di T0, numerata da 5 a 0 a 5"
-
-#. More: stand-in photo caption
-msgctxt "idex-alignment/read-vernier"
-msgid ""
-"The fine Y scale of the same station (T0 yellow, T1 red). A photo of a "
-"+0.15 reading is still to come."
-msgstr ""
-"La scala fine Y della stessa stazione (T0 giallo, T1 rosso). La foto di una "
-"lettura di +0,15 arriverà più avanti."
+msgid "Reading -0.30, from the author's print with idex_xoffset raised by 0.25 on purpose: the aligned tick is the \"3\" on the side away from the \"+\", so T1 printed 0.30 mm to the left of T0. The neighbours drift apart on both sides."
+msgstr "Lettura -0,30, dalla stampa dell'autore con idex_xoffset alzato apposta di 0,25: la tacca allineata è il \"3\" dalla parte opposta al \"+\", quindi T1 ha stampato 0,30 mm a sinistra di T0. Le tacche vicine si allontanano da entrambi i lati."
 
 #. step title
 msgctxt "idex-alignment/read-coarse"

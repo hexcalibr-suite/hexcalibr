@@ -2932,27 +2932,19 @@ msgstr ""
 
 #. More: photo alt
 msgctxt "idex-alignment/read-vernier"
-msgid "Macro photo of a fine Vernier scale reading +0.15"
+msgid ""
+"Macro photo of the fine X scale of station 5 reading -0.30: an amber arrow "
+"marks the red T1 tick that lines up with the yellow T0 tick at the \"3\" on "
+"the left"
 msgstr ""
 
 #. More: photo caption
 msgctxt "idex-alignment/read-vernier"
 msgid ""
-"Reading +0.15: the aligned tick is one past the \"1\", on the \"+\" side."
-msgstr ""
-
-#. More: stand-in photo alt
-msgctxt "idex-alignment/read-vernier"
-msgid ""
-"Close-up of the fine Y scale of a printed Vernier station: the red T1 comb "
-"beside the yellow T0 scale labelled 5 to 0 to 5"
-msgstr ""
-
-#. More: stand-in photo caption
-msgctxt "idex-alignment/read-vernier"
-msgid ""
-"The fine Y scale of the same station (T0 yellow, T1 red). A photo of a "
-"+0.15 reading is still to come."
+"Reading -0.30, from the author's print with idex_xoffset raised by 0.25 on "
+"purpose: the aligned tick is the \"3\" on the side away from the \"+\", so "
+"T1 printed 0.30 mm to the left of T0. The neighbours drift apart on both "
+"sides."
 msgstr ""
 
 #. step title

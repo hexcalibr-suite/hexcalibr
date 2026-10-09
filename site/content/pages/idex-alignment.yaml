@@ -293,16 +293,11 @@ steps:
             alt: "Close-up of the fine X scale of a printed Vernier station: the red T1 comb above the yellow T0 scale labelled 5 to 0 to 5"
             caption: "The fine X scale of station 8 of the author's print, close up (T0 yellow, T1 red). A photo of a scale reading 0.00 is still to come."
             redo: "A crop of the station photo: soft, flat light, not a station set to read 0.00, and at this size the aligned tick cannot be picked out. Needed: the macro, top-down, raking light along the ticks, at a station that reads 0.00, as in the brief."
-        - id: F7_vernier-plus015_PETG_VC4
-          alt: "Macro photo of a fine Vernier scale reading +0.15"
-          caption: "Reading +0.15: the aligned tick is one past the \"1\", on the \"+\" side."
-          shot: "MACRO, same framing and light as F7_vernier-zero, at a station that reads +0.15 (made on purpose with a temporary −0.15 change of idex_xoffset if needed). Mark the aligned tick and its two symmetric neighbours with thin amber (#EFA00B) arrows added in editing; no text in the image."
-          stand_in:
-            source: "Crop of F7_vernier-station_PETG_VC4 (station 8, fine Y scale)."
-            aspect: "3/4"
-            alt: "Close-up of the fine Y scale of a printed Vernier station: the red T1 comb beside the yellow T0 scale labelled 5 to 0 to 5"
-            caption: "The fine Y scale of the same station (T0 yellow, T1 red). A photo of a +0.15 reading is still to come."
-            redo: "A small crop (470 px wide) of the station photo, the Y scale instead of X, and no +0.15 offset: it only shows what a fine scale looks like. Needed: the macro at a station printed with a +0.15 offset, with the arrows added in editing, as in the brief."
+        - id: F7_vernier-minus030_PETG_VC4
+          aspect: "9/4"
+          alt: "Macro photo of the fine X scale of station 5 reading -0.30: an amber arrow marks the red T1 tick that lines up with the yellow T0 tick at the \"3\" on the left"
+          caption: "Reading -0.30, from the author's print with idex_xoffset raised by 0.25 on purpose: the aligned tick is the \"3\" on the side away from the \"+\", so T1 printed 0.30 mm to the left of T0. The neighbours drift apart on both sides."
+          shot: "DONE from _A645958 (2026-10-09 afternoon, station 5 of the Vernier 400 printed with idex_xoffset VAOC 0.109 + 0.25): crop of the fine X scale, amber arrow added at the aligned tick. Replaces the +0.15 brief: a negative reading, read on purpose. Measured from the photo: -0.32."
 
   - id: read-coarse
     title: "When to use the coarse scale"
