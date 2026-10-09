@@ -421,6 +421,7 @@ LADDER = """
     });
     end.textContent = z === null ? '' : words.end.replace('%s', fmt(z + up - (n - 1) * step));
     var b = f.querySelector('input[type=radio]:checked');
+    rows.forEach(function (r) { r.classList.toggle('migliore', !!b && r.contains(b)); });
     out.textContent = (!b || z === null) ? words.pick
       : words.save.replace('%s', fmt(z + up - parseInt(b.value, 10) * step));
     save();
@@ -432,6 +433,11 @@ LADDER = """
       if (st.best) { var x = f.querySelector('input[type=radio][value="' + st.best + '"]'); if (x) { x.checked = true; } }
     }
   } catch (e) { /* nothing stored */ }
+  rows.forEach(function (r) {
+    r.addEventListener('click', function (e) {
+      if (e.target.tagName !== 'INPUT') { r.querySelector('input[type=radio]').checked = true; update(); }
+    });
+  });
   f.addEventListener('input', update);
   f.addEventListener('change', update);
   f.querySelector('#scala-cancella').addEventListener('click', function () {

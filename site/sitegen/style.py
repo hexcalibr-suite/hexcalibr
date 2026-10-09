@@ -342,6 +342,9 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
 .scala-z input[type=text]:focus { outline: 2px solid var(--accento); outline-offset: 1px; }
 .scala-z input[type=radio] { width: 1.1rem; height: 1.1rem; accent-color: var(--accento); }
 .scala-z .obiettivo { font-variant-numeric: tabular-nums; font-weight: 600; }
+.scala-z tbody tr { cursor: pointer; }
+.scala-z tbody tr.migliore td { background: var(--attenzione-fondo); color: var(--accento-testo); font-weight: 700; }
+.scala-z tbody tr.migliore td:first-child { box-shadow: inset 4px 0 0 var(--accento); }
 .scala-z .scala-via { color: var(--muto); margin-left: .6rem; }
 .scala-z .scala-esito { font-weight: 700; color: var(--accento-testo); }
 .scala-z button { font: inherit; font-size: .88rem; padding: .3rem .8rem; border: 1px solid var(--filo);
