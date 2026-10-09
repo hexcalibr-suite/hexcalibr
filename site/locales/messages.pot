@@ -4607,7 +4607,17 @@ msgctxt "license/credits"
 msgid ""
 "[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) by "
 "Andrew Ellis: the one-variable-per-test approach, the order of filament "
-"tests, and the pattern methods for pressure advance and flow."
+"tests, and the pattern methods for pressure advance and flow, and judging "
+"first-layer squish by eye."
+msgstr ""
+
+#. point
+msgctxt "license/credits"
+msgid ""
+"**Live Z My Way** by Jeff Jordan, from the Prusa forum, and the "
+"[calibration strip](https://www.printables.com/model/105404) built on it: "
+"stepping the Z offset live during one print and comparing the steps side by "
+"side, the idea behind the first-layer ladder."
 msgstr ""
 
 #. point

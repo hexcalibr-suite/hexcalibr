@@ -38,7 +38,8 @@ steps:
     title: "Credits and sources"
     intro: "The test **methods** build on public work by others. The models, texts and photos here are original: no model, text or image has been copied from these sources. Read them: they go deeper than any single guide."
     points:
-      - "[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) by Andrew Ellis: the one-variable-per-test approach, the order of filament tests, and the pattern methods for pressure advance and flow."
+      - "[Ellis' Print Tuning Guide](https://ellis3dp.com/Print-Tuning-Guide/) by Andrew Ellis: the one-variable-per-test approach, the order of filament tests, and the pattern methods for pressure advance and flow, and judging first-layer squish by eye."
+      - "**Live Z My Way** by Jeff Jordan, from the Prusa forum, and the [calibration strip](https://www.printables.com/model/105404) built on it: stepping the Z offset live during one print and comparing the steps side by side, the idea behind the first-layer ladder."
       - "[Klipper documentation](https://www.klipper3d.org/): pressure advance, resonance compensation and rotation distance, and the G-code each firmware accepts."
       - "[OrcaSlicer wiki](https://github.com/OrcaSlicer/OrcaSlicer/wiki): the calibration sequence of its Calibration menu and how its temperature, flow and pressure advance tests are read."
       - "[CNC Kitchen](https://www.cnckitchen.com/) by Stefan Hermann: why 20 mm calibration cubes mislead, and hotend flow-rate benchmarking."
