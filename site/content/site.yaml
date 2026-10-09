@@ -80,7 +80,7 @@ links:
   # "share your make" step link here
   printables-temperature-tower: "https://www.printables.com/model/1870420-temperature-tower-for-prusaslicer-pla-petg-absasa"
   printables-max-flow: ""
-  printables-pressure-advance: ""
+  printables-pressure-advance: "https://www.printables.com/model/1870778-pressure-advance-test-for-prusaslicer-klipper-prus"
   printables-idex-alignment: ""
   repository: "https://github.com/hexcalibr-suite/hexcalibr"
   translate: "https://github.com/hexcalibr-suite/hexcalibr/blob/main/site/CONTRIBUTING-TRANSLATIONS.md"
