@@ -1964,8 +1964,17 @@ msgstr ""
 #. step intro
 msgctxt "home/release-1"
 msgid ""
-"The first public release has four tests. Each comes with a guide, a "
-"scorecard and its files on Printables."
+"The first public release has five tests. Each comes with a guide and its "
+"files on Printables; four also have a scorecard, and the first-layer guide "
+"has a step table."
+msgstr ""
+
+#. point
+msgctxt "home/release-1"
+msgid ""
+"[First layer and Z offset](page:first-layer): the nozzle height that "
+"squishes the first layer just right, stepped live. [Files on "
+"Printables](link:printables-first-layer)"
 msgstr ""
 
 #. point
@@ -2001,9 +2010,8 @@ msgstr ""
 #. point
 msgctxt "home/release-1"
 msgid ""
-"**New:** [first layer and Z offset](page:first-layer). **Coming next:** "
-"flow (extrusion multiplier), retraction, and dimensions and fit. They are "
-"listed in grey in the contents."
+"**Coming next:** flow (extrusion multiplier), retraction, and dimensions "
+"and fit. They are listed in grey in the contents."
 msgstr ""
 
 #. point
