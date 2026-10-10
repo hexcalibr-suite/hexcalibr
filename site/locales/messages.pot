@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HexCalibr docs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09\n"
+"POT-Creation-Date: 2026-10-10\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1790,13 +1790,16 @@ msgstr ""
 #. photo alt
 msgctxt "first-layer/map"
 msgid ""
-"The map printed on a 400 mm bed: nine numbered hexagonal cells joined by a "
-"thin web"
+"The map printed in PETG on a 400 mm bed, seen from above: nine numbered "
+"hexagonal cells at the corners, edges and centre, joined by a thin web of "
+"lines"
 msgstr ""
 
 #. photo caption
 msgctxt "first-layer/map"
-msgid "The map on the author's 400 mm bed."
+msgid ""
+"The author's map on a 400 mm bed, printed at the value kept from the ladder "
+"(-0.025) without touching Z."
 msgstr ""
 
 #. page title

@@ -157,7 +157,7 @@ steps:
       - "**One corner different from the rest** points to the bed mesh, not to the Z offset: re-run the mesh and check that it is applied."
     photos:
       - id: FL_map-overview_PETG_VC4
-        alt: "The map printed on a 400 mm bed: nine numbered hexagonal cells joined by a thin web"
-        caption: "The map on the author's 400 mm bed."
-        aspect: "1/1"
-        shot: "The whole bed from above or slightly from the front, the nine cells readable, raking light. Then one close-up of the best and the worst cell."
+        alt: "The map printed in PETG on a 400 mm bed, seen from above: nine numbered hexagonal cells at the corners, edges and centre, joined by a thin web of lines"
+        caption: "The author's map on a 400 mm bed, printed at the value kept from the ladder (-0.025) without touching Z."
+        aspect: "4/3"
+        shot: "DONE: _A645987 (2026-10-09), PETG on the owner's VC4, T0, Z offset -0.025, whole bed from above. Bottom row a little soft; a close-up of cell 6 (paler, lines visible: light or a high spot?) still to check."
