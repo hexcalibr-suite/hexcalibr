@@ -271,6 +271,8 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
 .tabella th, .tabella td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--filo);
                            vertical-align: top; }
 .tabella code.file { font-weight: 600; color: var(--testo); }
+.tabella ul.cella-punti { margin: 0; padding-left: 1.1rem; }
+.tabella ul.cella-punti li { margin: .1rem 0; }
 .tabella code.file span { white-space: nowrap; }
 .tabella th { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muto);
               font-weight: 600; }

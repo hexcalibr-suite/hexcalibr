@@ -1188,9 +1188,25 @@ class Site:
                 % (_e(self.T("more")), "".join(inner)))
 
     def cell(self, text):
-        """A table cell: one line per "\\n". A .3mf file name in `code` keeps
-        its words together and may wrap only once, before its numbers."""
-        html = "<br>".join(self.md(line) for line in text.split("\n"))
+        """A table cell: one line per "\\n"; lines starting with "- " make a
+        bulleted list. A .3mf file name in `code` keeps its words together and
+        may wrap only once, before its numbers."""
+        out, items = [], []
+        for line in text.split("\n"):
+            if line.startswith("- "):
+                items.append("<li>%s</li>" % self.md(line[2:]))
+                continue
+            if items:
+                out.append("<ul class=\"cella-punti\">%s</ul>" % "".join(items))
+                items = []
+            out.append(self.md(line))
+        if items:
+            out.append("<ul class=\"cella-punti\">%s</ul>" % "".join(items))
+        html = ""
+        for i, x in enumerate(out):
+            if i and not x.startswith("<ul") and not out[i - 1].startswith("<ul"):
+                html += "<br>"
+            html += x
 
         def file_name(m):
             name = m.group(1)
