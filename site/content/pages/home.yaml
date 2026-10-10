@@ -49,7 +49,7 @@ steps:
       head: ["", "Fast path", "Full path"]
       rows:
         - ["When", "A new filament on a printer that already prints well", "A new printer, or after changing hotend, extruder or other hardware"]
-        - ["Tests", "- Temperature (if the filament is new to you, prints fast or strings)\n- Pressure advance\n- Flow", "- Firmware checks\n- First layer\n- Temperature\n- Max volumetric flow\n- Pressure advance\n- Flow\n- Retraction\n- Dimensions\n- Then the IDEX tests"]
+        - ["Tests", "1. Temperature (if the filament is new to you, prints fast or strings)\n2. Pressure advance\n3. Flow", "1. Firmware checks\n2. First layer\n3. Temperature\n4. Max volumetric flow\n5. Pressure advance\n6. Flow\n7. Retraction\n8. Dimensions\n9. Then the IDEX tests"]
         - ["Time", "About 35 minutes of printing for the tests available now (temperature and pressure advance)", "Each guide gives the time of its test, plus waiting"]
         - ["Filament", "About 15 g", "Each guide gives the grams of its test"]
     more:

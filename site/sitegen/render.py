@@ -1189,22 +1189,32 @@ class Site:
 
     def cell(self, text):
         """A table cell: one line per "\\n"; lines starting with "- " make a
-        bulleted list. A .3mf file name in `code` keeps its words together and
-        may wrap only once, before its numbers."""
-        out, items = [], []
-        for line in text.split("\n"):
-            if line.startswith("- "):
-                items.append("<li>%s</li>" % self.md(line[2:]))
-                continue
+        bulleted list, lines starting with "1. ", "2. "... a numbered one. A
+        .3mf file name in `code` keeps its words together and may wrap only
+        once, before its numbers."""
+        out, items, kind = [], [], None
+
+        def flush():
             if items:
-                out.append("<ul class=\"cella-punti\">%s</ul>" % "".join(items))
-                items = []
+                out.append("<%s class=\"cella-punti\">%s</%s>" % (kind, "".join(items), kind))
+                items.clear()
+
+        for line in text.split("\n"):
+            m = re.match(r"(- |\d+\. )", line)
+            if m:
+                k = "ul" if m.group(1) == "- " else "ol"
+                if k != kind:
+                    flush()
+                kind = k
+                items.append("<li>%s</li>" % self.md(line[m.end():]))
+                continue
+            flush()
             out.append(self.md(line))
-        if items:
-            out.append("<ul class=\"cella-punti\">%s</ul>" % "".join(items))
+        flush()
         html = ""
         for i, x in enumerate(out):
-            if i and not x.startswith("<ul") and not out[i - 1].startswith("<ul"):
+            lst = ("<ul", "<ol")
+            if i and not x.startswith(lst) and not out[i - 1].startswith(lst):
                 html += "<br>"
             html += x
 
