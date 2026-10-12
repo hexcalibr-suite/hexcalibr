@@ -108,8 +108,8 @@ steps:
       - id: F4_compare_PETG_VC4
         alt: "Pads 1, 4 and 7 of the same coarse print side by side under the same raking light: deep dark grooves between the lines on pad 1, an even top with faint lines on pad 4, raised, separate lines on pad 7"
         caption: "Pads 1 (91 %), 4 (100 %) and 7 (109 %), same photo, same light. Pad 1: dark grooves between the lines. Pad 4: the lines close up into an even top. Pad 7: too much plastic, so each line stands up as a ridge."
-        aspect: "10/3"
-        shot: "DONE: three crops from the same photo _A645991 (2026-10-11), so light and scale match. The close-ups _A645992-96 have a different light per shot: do not mix them in one comparison."
+        aspect: "3/1"
+        shot: "DONE: three crops from the same photo _A645991 (2026-10-11), so light and scale match; each crop keeps the pad's number (owner, 2026-10-12). The close-ups _A645992-96 have a different light per shot: do not mix them in one comparison."
     more:
       points:
         - misread: "**The edges always look fuller**: the perimeters and the turnarounds of the top lines add plastic there. Judge the middle."
