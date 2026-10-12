@@ -2589,7 +2589,7 @@ msgstr ""
 msgctxt "home/release-1"
 msgid ""
 "[Flow (extrusion multiplier)](page:flow): top surfaces filled without gaps "
-"or ridges, per filament. Files on Printables very soon."
+"or ridges, per filament. [Files on Printables](link:printables-flow)"
 msgstr ""
 
 #. point
