@@ -350,6 +350,8 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
 .scala-z tbody tr.migliore td:first-child { box-shadow: inset 4px 0 0 var(--accento); }
 .scala-z .scala-via { color: var(--muto); margin-left: .6rem; }
 .scala-z .scala-esito { font-weight: 700; color: var(--accento-testo); }
+.scala-z.flusso .scala-esito code { font-weight: 700; }
+.scala-z.flusso #flusso-fine { margin-top: .8rem; }
 .scala-z button { font: inherit; font-size: .88rem; padding: .3rem .8rem; border: 1px solid var(--filo);
   border-radius: 6px; background: var(--fondo2); color: var(--testo); cursor: pointer; }
 .scheda-strumenti select, .scheda-strumenti button {

@@ -450,6 +450,95 @@ LADDER = """
 """
 
 
+# Flow guide selector (`flowpick:` on a step): tick the best pad of the coarse
+# print -> the fine file to print next; tick the best pad of the fine print and
+# type the profile's extrusion multiplier -> the new value. State kept in
+# localStorage (per viewer convenience only), wrapped in try/catch.
+FLOWPICK = """
+(function () {
+  var f = document.getElementById('flusso-scelta');
+  if (!f) { return; }
+  var coarse = JSON.parse(f.dataset.coarse), half = parseInt(f.dataset.half, 10), step = parseInt(f.dataset.step, 10);
+  var pattern = f.dataset.pattern, words = JSON.parse(f.dataset.words);
+  var comma = (document.documentElement.lang || 'en').slice(0, 2) !== 'en';
+  var now = f.querySelector('#flusso-ora'), next = f.querySelector('#flusso-file'), out = f.querySelector('#flusso-esito');
+  var fineBox = f.querySelector('#flusso-fine'), fineRows = [].slice.call(fineBox.querySelectorAll('tbody tr'));
+  var coarseRows = [].slice.call(f.querySelectorAll('#flusso-grosso tbody tr'));
+  function num(s) { var v = parseFloat(String(s).trim().replace(',', '.')); return isNaN(v) || v <= 0 ? null : v; }
+  function fmt(v) { var t = String(Math.round(v * 1000) / 1000); return comma ? t.replace('.', ',') : t; }
+  function checked(name) { var b = f.querySelector('input[name=' + name + ']:checked'); return b ? parseInt(b.value, 10) : null; }
+  function save() {
+    try {
+      localStorage.setItem('hexcalibr-flusso', JSON.stringify({ now: now.value, c: checked('flusso-c'), f: checked('flusso-f') }));
+    } catch (e) { /* storage blocked: the form still works */ }
+  }
+  function update() {
+    var c = checked('flusso-c');
+    coarseRows.forEach(function (r, i) { r.classList.toggle('migliore', c === i); });
+    if (c === null) {
+      next.innerHTML = '';
+      next.textContent = words.pick_coarse;
+      fineBox.hidden = true;
+      out.textContent = '';
+      save();
+      return;
+    }
+    var centre = coarse[c], lo = centre - half * step, hi = centre + half * step;
+    var name = pattern.replace('{a}', lo).replace('{b}', hi);
+    next.innerHTML = '';
+    next.appendChild(document.createTextNode(words.next.split('%s')[0]));
+    var code = document.createElement('code'); code.textContent = name; next.appendChild(code);
+    next.appendChild(document.createTextNode(words.next.split('%s')[1] || ''));
+    if (c === 0 || c === coarse.length - 1) {
+      next.appendChild(document.createElement('br'));
+      next.appendChild(document.createTextNode(words.edge_coarse));
+    }
+    fineBox.hidden = false;
+    fineRows.forEach(function (r, i) { r.querySelector('.obiettivo').textContent = (lo + i * step) + ' %'; });
+    var fb = checked('flusso-f');
+    fineRows.forEach(function (r, i) { r.classList.toggle('migliore', fb === i); });
+    var em = num(now.value);
+    if (fb === null || em === null) {
+      out.textContent = fb === null ? words.pick_fine : words.type_now;
+    } else if (em < 0.5 || em > 1.5) {
+      out.textContent = words.odd.replace('%s', fmt(em));
+    } else if (lo + fb * step === 100) {
+      out.textContent = words.perfect.replace('%s', fmt(em));
+    } else {
+      var t = words.result.replace('%s', fmt(em * (lo + fb * step) / 100));
+      if (fb === 0 || fb === fineRows.length - 1) { t += ' ' + words.edge_fine; }
+      out.textContent = t;
+    }
+    save();
+  }
+  try {
+    var st = JSON.parse(localStorage.getItem('hexcalibr-flusso') || 'null');
+    if (st) {
+      now.value = st.now || '';
+      [['flusso-c', st.c], ['flusso-f', st.f]].forEach(function (p) {
+        if (p[1] !== null && p[1] !== undefined) {
+          var x = f.querySelector('input[name=' + p[0] + '][value="' + p[1] + '"]'); if (x) { x.checked = true; }
+        }
+      });
+    }
+  } catch (e) { /* nothing stored */ }
+  coarseRows.concat(fineRows).forEach(function (r) {
+    r.addEventListener('click', function (e) {
+      if (e.target.tagName !== 'INPUT') { r.querySelector('input[type=radio]').checked = true; update(); }
+    });
+  });
+  f.addEventListener('input', update);
+  f.addEventListener('change', update);
+  f.querySelector('#flusso-cancella').addEventListener('click', function () {
+    now.value = '';
+    [].slice.call(f.querySelectorAll('input[type=radio]:checked')).forEach(function (b) { b.checked = false; });
+    update();
+  });
+  update();
+})();
+"""
+
+
 SCORE_FLOW = """
 (function () {
   var tab = document.getElementById('scheda');
@@ -1265,6 +1354,39 @@ class Site:
                  "<p><button type=\"button\" id=\"scala-cancella\">%s</button></p></form>" % _e(self.T("ladder_clear")))
         return "".join(r)
 
+    def flowpick(self, fp):
+        """The flow guide's selector (`flowpick: {coarse: [..], half, step, pattern}`): tick the best
+        coarse pad -> the fine file to print; tick the best fine pad and type the extrusion
+        multiplier now in the filament profile -> the new value (now x percent / 100)."""
+        coarse = [int(v) for v in fp["coarse"]]
+        half, step = int(fp["half"]), int(fp.get("step", 1))
+        words = {k: self.T("flow_" + k) for k in ("pick_coarse", "next", "edge_coarse", "pick_fine", "type_now",
+                                                 "result", "edge_fine", "perfect", "odd")}
+        head = "<thead><tr><th scope=\"col\">%s</th><th scope=\"col\">%s</th><th scope=\"col\">%s</th></tr></thead>" \
+            % tuple(_e(self.T(k)) for k in ("flow_pad", "flow_value", "ladder_best"))
+        r = ["<form class=\"scala-z flusso\" id=\"flusso-scelta\" data-coarse=\"%s\" data-half=\"%d\" "
+             "data-step=\"%d\" data-pattern=\"%s\" data-words=\"%s\" onsubmit=\"return false\">"
+             % (_e(json.dumps(coarse)), half, step, _e(fp["pattern"]), _e(json.dumps(words))),
+             "<p><b>%s</b></p>" % _e(self.T("flow_coarse_title")),
+             "<div class=\"tabella\" id=\"flusso-grosso\"><table>%s<tbody>" % head]
+        for i, v in enumerate(coarse):
+            r.append("<tr><td><b>%d</b></td><td>%d %%</td><td><input type=\"radio\" name=\"flusso-c\" value=\"%d\" "
+                     "aria-label=\"%s %d\"></td></tr>" % (i + 1, v, i, _e(self.T("ladder_best")), i + 1))
+        r.append("</tbody></table></div>")
+        r.append("<p class=\"scala-esito\" id=\"flusso-file\" aria-live=\"polite\"></p>")
+        r.append("<div id=\"flusso-fine\" hidden><p><b>%s</b></p><div class=\"tabella\"><table>%s<tbody>"
+                 % (_e(self.T("flow_fine_title")), head))
+        for i in range(2 * half + 1):
+            r.append("<tr><td><b>%d</b></td><td class=\"obiettivo\">\u2013</td><td><input type=\"radio\" "
+                     "name=\"flusso-f\" value=\"%d\" aria-label=\"%s %d\"></td></tr>"
+                     % (i + 1, i, _e(self.T("ladder_best")), i + 1))
+        r.append("</tbody></table></div>")
+        r.append("<p><label for=\"flusso-ora\">%s</label> <input id=\"flusso-ora\" type=\"text\" "
+                 "inputmode=\"decimal\" size=\"7\" placeholder=\"1.00\"></p>" % _e(self.T("flow_now")))
+        r.append("<p class=\"scala-esito\" id=\"flusso-esito\" aria-live=\"polite\"></p></div>")
+        r.append("<p><button type=\"button\" id=\"flusso-cancella\">%s</button></p></form>" % _e(self.T("ladder_clear")))
+        return "".join(r)
+
     def step(self, sid, title, number, body_html, photos):
         r = ["<section class=\"passo\" id=\"%s\">" % sid,
              "<h2>%s<a class=\"ancora\" href=\"#%s\">%s</a></h2>"
@@ -1381,6 +1503,8 @@ class Site:
                 body.append(self.points(st["points"]))
             if st.get("ladder"):
                 body.append(self.ladder(st["ladder"]))
+            if st.get("flowpick"):
+                body.append(self.flowpick(st["flowpick"]))
             if st.get("printables"):
                 body.append(self.printables(st["printables"]))
             if st.get("translators"):
@@ -1407,6 +1531,8 @@ class Site:
             score = {"bands": SCORE_BANDS, "idex": IDEX_FIT + SCORE_IDEX, "flow": SCORE_FLOW}.get(mode, SCORE)
         if any(st.get("ladder") for st in p.get("steps", [])):
             score += LADDER
+        if any(st.get("flowpick") for st in p.get("steps", [])):
+            score += FLOWPICK
         r.append("</main></div>\n<script>%s%s%s%s</script>\n</body>\n</html>\n"
                  % (FOLLOW, FILTER, MORE if has_more else "", score))
         return "\n".join(r)

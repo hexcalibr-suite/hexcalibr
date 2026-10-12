@@ -844,6 +844,97 @@ msgctxt "ui/ladder_clear"
 msgid "Clear"
 msgstr "Cancella"
 
+#. interface: flow_coarse_title
+msgctxt "ui/flow_coarse_title"
+msgid "1. Coarse print: tick the best pad"
+msgstr "1. Stampa grossolana: spunta il pad migliore"
+
+#. interface: flow_fine_title
+msgctxt "ui/flow_fine_title"
+msgid "2. Fine print: tick the best pad"
+msgstr "2. Stampa fine: spunta il pad migliore"
+
+#. interface: flow_pad
+msgctxt "ui/flow_pad"
+msgid "Pad"
+msgstr "Pad"
+
+#. interface: flow_value
+msgctxt "ui/flow_value"
+msgid "Flow"
+msgstr "Flusso"
+
+#. interface: flow_pick_coarse
+msgctxt "ui/flow_pick_coarse"
+msgid "Tick the best pad of the coarse print."
+msgstr "Spunta il pad migliore della stampa grossolana."
+
+#. interface: flow_next
+msgctxt "ui/flow_next"
+msgid "Print next: %s"
+msgstr "Stampa poi: %s"
+
+#. interface: flow_edge_coarse
+msgctxt "ui/flow_edge_coarse"
+msgid ""
+"The best pad is at one end: the right value may lie beyond it. Set the "
+"extrusion multiplier to your value times this percent, then print the "
+"coarse file again."
+msgstr ""
+"Il pad migliore è a un'estremità: il valore giusto potrebbe essere oltre. "
+"Imposta il moltiplicatore di estrusione al tuo valore per questa "
+"percentuale, poi ristampa il file grossolano."
+
+#. interface: flow_pick_fine
+msgctxt "ui/flow_pick_fine"
+msgid "Tick the best pad of the fine print."
+msgstr "Spunta il pad migliore della stampa fine."
+
+#. interface: flow_type_now
+msgctxt "ui/flow_type_now"
+msgid "Type the extrusion multiplier your filament profile has now."
+msgstr ""
+"Scrivi il moltiplicatore di estrusione che ha adesso il tuo profilo "
+"filamento."
+
+#. interface: flow_now
+msgctxt "ui/flow_now"
+msgid "Extrusion multiplier in your filament profile now:"
+msgstr "Moltiplicatore di estrusione nel tuo profilo filamento adesso:"
+
+#. interface: flow_result
+msgctxt "ui/flow_result"
+msgid "New extrusion multiplier: %s"
+msgstr "Nuovo moltiplicatore di estrusione: %s"
+
+#. interface: flow_edge_fine
+msgctxt "ui/flow_edge_fine"
+msgid ""
+"The best pad is at one end of the fine print: save this value, then print "
+"flow_fine_97-103 to check it (pad 4 should now look best)."
+msgstr ""
+"Il pad migliore è a un'estremità della stampa fine: salva questo valore, "
+"poi stampa flow_fine_97-103 per controllarlo (adesso dovrebbe sembrare "
+"migliore il pad 4)."
+
+#. interface: flow_perfect
+msgctxt "ui/flow_perfect"
+msgid ""
+"Spot on! Your extrusion multiplier is already right: keep %s, nothing to "
+"change. Your filament profile was well tuned."
+msgstr ""
+"Perfetto! Il tuo moltiplicatore di estrusione è già giusto: tieni %s, non "
+"c'è niente da cambiare. Il tuo profilo filamento era già ben regolato."
+
+#. interface: flow_odd
+msgctxt "ui/flow_odd"
+msgid ""
+"%s does not look like an extrusion multiplier (usually between 0.90 and "
+"1.10): check the value in Filament Settings › Filament."
+msgstr ""
+"%s non sembra un moltiplicatore di estrusione (di solito è tra 0,90 e "
+"1,10): controlla il valore in Impostazioni filamento › Filamento."
+
 #. site tagline
 msgctxt "site"
 msgid "3D print calibration suite"
@@ -887,11 +978,6 @@ msgstr "filamento + hotend · dopo la torre di temperatura"
 msgctxt "site/contents"
 msgid "filament, per firmware · after the temperature tower"
 msgstr "filamento, per firmware · dopo la torre di temperatura"
-
-#. contents: planned
-msgctxt "site/contents"
-msgid "Flow (extrusion multiplier)"
-msgstr "Flusso (moltiplicatore di estrusione)"
 
 #. contents: note
 msgctxt "site/contents"
@@ -2067,6 +2153,643 @@ msgstr ""
 "dalla scala (-0,025) senza toccare Z."
 
 #. page title
+msgctxt "flow"
+msgid "Flow (extrusion multiplier)"
+msgstr "Flusso (moltiplicatore di estrusione)"
+
+#. page description
+msgctxt "flow"
+msgid ""
+"Find the extrusion multiplier that fills top surfaces without gaps or "
+"ridges: seven hexagonal pads in a staircase, each printed at a different "
+"flow, then a fine pass around the best one."
+msgstr ""
+"Trova il moltiplicatore di estrusione che riempie le superfici superiori "
+"senza buchi né creste: sette pad esagonali a scala, ognuno stampato con un "
+"flusso diverso, poi un passaggio fine attorno al migliore."
+
+#. page intro
+msgctxt "flow"
+msgid ""
+"Seven hexagonal pads in a row, each one step taller than the one before. "
+"The top of every pad is printed with a slightly different amount of "
+"plastic, from 91 % to 109 %. Look at the tops with a low light, pick the "
+"smoothest one with no gaps and no ridges, then print the fine file for that "
+"pad: seven more pads, 1 % apart. The best one gives your new extrusion "
+"multiplier.\n"
+"\n"
+"About 8 g of filament and **about 30 minutes** per print, with **no changes "
+"to your profiles**.\n"
+msgstr ""
+"Sette pad esagonali in fila, ognuno un gradino più alto del precedente. La "
+"faccia superiore di ogni pad è stampata con una quantità di plastica "
+"leggermente diversa, dal 91 % al 109 %. Guarda le facce con una luce bassa, "
+"scegli la più liscia, senza buchi e senza creste, poi stampa il file fine "
+"per quel pad: altri sette pad, a distanza dell'1 %. Il migliore ti dà il "
+"nuovo moltiplicatore di estrusione.\n"
+"\n"
+"Circa 8 g di filamento e **circa 30 minuti** per stampa, **senza modificare "
+"i tuoi profili**.\n"
+
+#. More: intro
+msgctxt "flow"
+msgid ""
+"PrusaSlicer has no flow setting per object, so the file sends a flow factor "
+"(`M221`) at the layer where each pad's top begins: the four top layers of "
+"pad 1 print at 91 %, those of pad 2 at 94 %, and so on. The pads below and "
+"above share those layers, but only their hidden insides. The file also "
+"fixes the speed of the pads at 60 mm/s, so every top is printed the same "
+"way, and puts everything back to 100 % at the end.\n"
+msgstr ""
+"PrusaSlicer non ha un'impostazione di flusso per oggetto, quindi il file "
+"manda un fattore di flusso (`M221`) al layer in cui comincia la faccia "
+"superiore di ogni pad: i quattro layer superiori del pad 1 si stampano al "
+"91 %, quelli del pad 2 al 94 %, e così via. I pad più bassi e più alti "
+"condividono quei layer, ma solo con il loro interno nascosto. Il file fissa "
+"anche la velocità dei pad a 60 mm/s, così ogni faccia è stampata allo "
+"stesso modo, e alla fine rimette tutto al 100 %.\n"
+
+#. callout
+msgctxt "flow"
+msgid ""
+"Open the file with **File › Open project**. Never with **Import**, never as "
+"a ZIP: an import keeps the shape but drops the flow factors, and every pad "
+"would print the same."
+msgstr ""
+"Apri il file con **File › Apri progetto**. Mai con **Importa**, mai come "
+"ZIP: l'importazione tiene la forma ma perde i fattori di flusso, e tutti i "
+"pad verrebbero uguali."
+
+#. box title
+msgctxt "flow"
+msgid "What you need"
+msgstr "Cosa ti serve"
+
+#. box column title
+msgctxt "flow"
+msgid "To print"
+msgstr "Per stampare"
+
+#. box item
+msgctxt "flow"
+msgid "The [coarse file](page:flow#which-file), then one fine file"
+msgstr "Il [file grossolano](page:flow#which-file), poi un file fine"
+
+#. box item
+msgctxt "flow"
+msgid "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+msgstr "PrusaSlicer 2.9 (la 2.7 è la minima che apre il progetto)"
+
+#. box item
+msgctxt "flow"
+msgid "Your own printer, print and filament profiles, already working"
+msgstr ""
+"La tua stampante e i tuoi profili di stampa e filamento, già funzionanti"
+
+#. box item
+msgctxt "flow"
+msgid ""
+"The [first layer](page:first-layer), the "
+"[temperature](page:temperature-tower) and the [pressure "
+"advance](page:pressure-advance) already set"
+msgstr ""
+"Il [primo strato](page:first-layer), la "
+"[temperatura](page:temperature-tower) e il [pressure "
+"advance](page:pressure-advance) già impostati"
+
+#. box item
+msgctxt "flow"
+msgid "The filament to test, **dry**: about 8 g per print"
+msgstr "Il filamento da provare, **asciutto**: circa 8 g per stampa"
+
+#. box item
+msgctxt "flow"
+msgid "A bed at least **180 mm** wide"
+msgstr "Un piatto largo almeno **180 mm**"
+
+#. box column title
+msgctxt "flow"
+msgid "To read it"
+msgstr "Per leggerlo"
+
+#. box item
+msgctxt "flow"
+msgid "A lamp you can move, or a phone torch"
+msgstr "Una lampada orientabile, o la torcia del telefono"
+
+#. box item
+msgctxt "flow"
+msgid "A fingernail"
+msgstr "Un'unghia"
+
+#. box item
+msgctxt "flow"
+msgid "The [selector on this page](page:flow#choose)"
+msgstr "Il [selettore in questa pagina](page:flow#choose)"
+
+#. part heading (groups steps)
+msgctxt "flow"
+msgid "Before printing"
+msgstr "Prima di stampare"
+
+#. step title
+msgctxt "flow/what-for"
+msgid "What it is for, and when to run it"
+msgstr "A cosa serve e quando farlo"
+
+#. point
+msgctxt "flow/what-for"
+msgid ""
+"It finds the **extrusion multiplier** of a filament: how much plastic "
+"PrusaSlicer asks for, so that solid layers are full without being "
+"overfilled."
+msgstr ""
+"Trova il **moltiplicatore di estrusione** di un filamento: quanta plastica "
+"chiede PrusaSlicer, perché i layer pieni siano completi senza essere troppo "
+"pieni."
+
+#. point
+msgctxt "flow/what-for"
+msgid ""
+"Run it **after pressure advance**, once per filament (and per nozzle). The "
+"result goes into **Filament Settings › Filament › Extrusion multiplier**."
+msgstr ""
+"Fallo **dopo il pressure advance**, una volta per filamento (e per ugello). "
+"Il risultato va in **Impostazioni filamento › Filamento › Moltiplicatore di "
+"estrusione**."
+
+#. photo alt
+msgctxt "flow/what-for"
+msgid ""
+"The coarse flow test printed: seven hexagonal pads in a staircase on a thin "
+"strip with the numbers 1 to 7"
+msgstr ""
+"Il test di flusso grossolano stampato: sette pad esagonali a scala su una "
+"striscia sottile con i numeri da 1 a 7"
+
+#. photo caption
+msgctxt "flow/what-for"
+msgid ""
+"The coarse print in PETG: from pad 1 (91 %) to pad 7 (109 %). The top lines "
+"run the same way on every pad; the low rim on pad 7 is where the file puts "
+"flow and speed back to 100 %."
+msgstr ""
+"La stampa coarse in PETG: dal pad 1 (91 %) al pad 7 (109 %). Le linee in "
+"superficie hanno lo stesso verso su tutti i pad; il bordino basso sul pad 7 "
+"è dove il file riporta flusso e velocità al 100 %."
+
+#. More: point
+msgctxt "flow/what-for"
+msgid ""
+"Too little plastic leaves **gaps** between the top lines and weak walls; "
+"too much makes **ridges**, rough tops, blobs and parts that come out "
+"slightly too big."
+msgstr ""
+"Troppa poca plastica lascia **buchi** tra le linee superiori e pareti "
+"deboli; troppa fa **creste**, facce ruvide, grumi e pezzi un po' più grandi "
+"del dovuto."
+
+#. More: point
+msgctxt "flow/what-for"
+msgid ""
+"Read it on **top surfaces**, not by measuring a wall with a caliper: a wall "
+"wobbles a little, so it always measures too thick, and 0.02 mm already "
+"means 5 %. That is why this test reads tops, as Ellis' guide recommends."
+msgstr ""
+"Si legge sulle **superfici superiori**, non misurando una parete con il "
+"calibro: una parete ondeggia un poco, quindi misura sempre troppo spessa, e "
+"0,02 mm sono già il 5 %. Per questo il test legge le facce superiori, come "
+"raccomanda la guida di Ellis."
+
+#. More: point
+msgctxt "flow/what-for"
+msgid ""
+"It comes **after pressure advance**: PA changes how the line starts and "
+"ends, which shows on the tops."
+msgstr ""
+"Viene **dopo il pressure advance**: il PA cambia come inizia e finisce la "
+"linea, e si vede sulle facce superiori."
+
+#. More: point (beginner)
+msgctxt "flow/what-for"
+msgid ""
+"The multiplier is a correction on top of the filament diameter. Most "
+"filaments land between 0.92 and 1.05."
+msgstr ""
+"Il moltiplicatore è una correzione sopra il diametro del filamento. La "
+"maggior parte dei filamenti sta tra 0,92 e 1,05."
+
+#. step title
+msgctxt "flow/which-file"
+msgid "Which file"
+msgstr "Quale file"
+
+#. point
+msgctxt "flow/which-file"
+msgid ""
+"There are seven fine files, one for each coarse pad: `88-94`, `91-97`, "
+"`94-100`, `97-103`, `100-106`, `103-109`, `106-112`. Print only the one the "
+"selector gives you."
+msgstr ""
+"I file fini sono sette, uno per ogni pad del grossolano: `88-94`, `91-97`, "
+"`94-100`, `97-103`, `100-106`, `103-109`, `106-112`. Stampa solo quello che "
+"ti indica il selettore."
+
+#. table header
+msgctxt "flow/which-file"
+msgid "File"
+msgstr "File"
+
+#. table header
+msgctxt "flow/which-file"
+msgid "Pads"
+msgstr "Pad"
+
+#. table header
+msgctxt "flow/which-file"
+msgid "When"
+msgstr "Quando"
+
+#. table cell
+msgctxt "flow/which-file"
+msgid "`flow_coarse_91-109.3mf`"
+msgstr "`flow_coarse_91-109.3mf`"
+
+#. table cell
+msgctxt "flow/which-file"
+msgid "First: finds the zone"
+msgstr "Prima: trova la zona"
+
+#. table cell
+msgctxt "flow/which-file"
+msgid "`flow_fine_<from>-<to>.3mf`"
+msgstr "`flow_fine_<from>-<to>.3mf`"
+
+#. table cell
+msgctxt "flow/which-file"
+msgid "7 pads, 1 % apart, centred on one coarse pad"
+msgstr "7 pad a distanza dell'1 %, centrati su un pad del grossolano"
+
+#. table cell
+msgctxt "flow/which-file"
+msgid ""
+"Second: the one for your best coarse pad (the [selector](page:flow#choose) "
+"names it)"
+msgstr ""
+"Poi: quello del tuo pad migliore nel grossolano (lo indica il "
+"[selettore](page:flow#choose))"
+
+#. More: point
+msgctxt "flow/which-file"
+msgid ""
+"The fine file covers ±3 % around the coarse pad you chose. The coarse step "
+"is 3 %, so the right value is always within that range."
+msgstr ""
+"Il file fine copre ±3 % attorno al pad del grossolano che hai scelto. Il "
+"passo del grossolano è del 3 %, quindi il valore giusto è sempre in "
+"quell'intervallo."
+
+#. More: point
+msgctxt "flow/which-file"
+msgid ""
+"Every file is 150 × 30 mm and about 8 mm tall: it fits any bed from 180 mm."
+msgstr ""
+"Ogni file misura 150 × 30 mm ed è alto circa 8 mm: sta su qualsiasi piatto "
+"da 180 mm in su."
+
+#. More: point (expert)
+msgctxt "flow/which-file"
+msgid ""
+"On an IDEX or multi-tool printer, assign the object to the tool you "
+"calibrate (right-click › Change extruder). The multiplier belongs to the "
+"filament profile of that tool."
+msgstr ""
+"Su una stampante IDEX o multi-utensile, assegna l'oggetto alla testa che "
+"stai calibrando (tasto destro › Cambia estrusore). Il moltiplicatore "
+"appartiene al profilo filamento di quella testa."
+
+#. step title
+msgctxt "flow/before-print"
+msgid "Before you start"
+msgstr "Prima di cominciare"
+
+#. point
+msgctxt "flow/before-print"
+msgid ""
+"**Write down the extrusion multiplier** in your filament profile "
+"(**Filament Settings › Filament**). You need it at the end."
+msgstr ""
+"**Annota il moltiplicatore di estrusione** del tuo profilo filamento "
+"(**Impostazioni filamento › Filamento**). Ti serve alla fine."
+
+#. point
+msgctxt "flow/before-print"
+msgid ""
+"Nothing else to change: layer height, speed and flow are set by the file "
+"for the pads only."
+msgstr ""
+"Nient'altro da cambiare: altezza layer, velocità e flusso li imposta il "
+"file, solo per i pad."
+
+#. More: point
+msgctxt "flow/before-print"
+msgid ""
+"The layer height is forced to **0.2 mm** (half the nozzle): the file must "
+"know where each pad's top begins."
+msgstr ""
+"L'altezza layer è forzata a **0,2 mm** (metà ugello): il file deve sapere "
+"dove comincia la faccia superiore di ogni pad."
+
+#. More: point
+msgctxt "flow/before-print"
+msgid ""
+"The pads print at **60 mm/s**, every line, as Ellis' guide recommends for "
+"this test. The slicer sees a slow print and never slows the small top pads "
+"down; a speed factor (`M220`) brings them to 60 mm/s."
+msgstr ""
+"I pad si stampano a **60 mm/s**, tutte le linee, come raccomanda la guida "
+"di Ellis per questo test. Lo slicer vede una stampa lenta e non rallenta "
+"mai i pad piccoli in cima; un fattore di velocità (`M220`) li porta a 60 "
+"mm/s."
+
+#. More: point
+msgctxt "flow/before-print"
+msgid ""
+"The narrow raised strip at the back of pad 7 is not a pad: its last layers "
+"put the flow and the speed back to 100 % and show the end message."
+msgstr ""
+"La striscia sottile rialzata sul retro del pad 7 non è un pad: i suoi "
+"ultimi layer rimettono flusso e velocità al 100 % e mostrano il messaggio "
+"di fine."
+
+#. More: point
+msgctxt "flow/before-print"
+msgid ""
+"**If you cancel the print**, send `M221 S100` and `M220 S100` from the "
+"console before the next print."
+msgstr ""
+"**Se annulli la stampa**, manda `M221 S100` e `M220 S100` dalla console "
+"prima della stampa successiva."
+
+#. part heading (groups steps)
+msgctxt "flow"
+msgid "Print and read"
+msgstr "Stampa e lettura"
+
+#. step title
+msgctxt "flow/open"
+msgid "Open, slice and print"
+msgstr "Apri, processa e stampa"
+
+#. point
+msgctxt "flow/open"
+msgid ""
+"**File › Open project**, then **Slice now**. In the preview the pads rise "
+"one step each, from 1 on the left to 7 on the right."
+msgstr ""
+"**File › Apri progetto**, poi **Processa ora**. Nell'anteprima i pad "
+"salgono di un gradino ciascuno, dall'1 a sinistra al 7 a destra."
+
+#. point
+msgctxt "flow/open"
+msgid "Print the coarse file. Do not touch speed or flow while it prints."
+msgstr ""
+"Stampa il file grossolano. Non toccare velocità né flusso mentre stampa."
+
+#. step title
+msgctxt "flow/read"
+msgid "Read the tops"
+msgstr "Leggi le facce superiori"
+
+#. point
+msgctxt "flow/read"
+msgid ""
+"Hold a light low, raking across the top lines, and look at the **middle** "
+"of each pad."
+msgstr ""
+"Tieni una luce bassa, radente di traverso alle linee superiori, e guarda il "
+"**centro** di ogni pad."
+
+#. point
+msgctxt "flow/read"
+msgid ""
+"**Too little:** gaps or dark grooves between the lines; you may see the "
+"infill through them."
+msgstr ""
+"**Troppo poco:** buchi o solchi scuri tra le linee; a volte si vede il "
+"riempimento sotto."
+
+#. point
+msgctxt "flow/read"
+msgid ""
+"**Right:** lines joined with no gaps, a flat, even top; the lines are still "
+"faintly visible, and you can still feel them with a fingernail."
+msgstr ""
+"**Giusto:** linee unite senza buchi, una faccia piana e uniforme; le linee "
+"si vedono ancora appena, e con l'unghia si sentono ancora."
+
+#. point
+msgctxt "flow/read"
+msgid ""
+"**Too much:** ridges (lines standing higher than their neighbours), a rough "
+"top that catches your fingernail, plastic piled up at the edges."
+msgstr ""
+"**Troppo:** creste (linee più alte delle vicine), una faccia ruvida che fa "
+"presa sull'unghia, plastica accumulata ai bordi."
+
+#. point
+msgctxt "flow/read"
+msgid ""
+"If two pads look alike, **run a fingernail across the lines** of both: keep "
+"the one where it glides evenly, without dropping into grooves or catching "
+"on a raised line."
+msgstr ""
+"Se due pad sembrano uguali, **passa l'unghia di traverso sulle linee** di "
+"entrambi: tieni quello su cui scorre in modo uniforme, senza cadere nei "
+"solchi e senza impuntarsi su una linea rialzata."
+
+#. point
+msgctxt "flow/read"
+msgid ""
+"If they still feel equally good, **take the higher one**: a little too much "
+"is better than a little too little."
+msgstr ""
+"Se al tatto sono ancora uguali, **prendi quello più alto**: un po' troppo è "
+"meglio di un po' troppo poco."
+
+#. photo alt
+msgctxt "flow/read"
+msgid ""
+"Pads 1, 4 and 7 of the same coarse print side by side under the same raking "
+"light: deep dark grooves between the lines on pad 1, an even top with faint "
+"lines on pad 4, raised, separate lines on pad 7"
+msgstr ""
+"I pad 1, 4 e 7 della stessa stampa coarse affiancati, con la stessa luce "
+"radente: solchi scuri e profondi tra le linee sul pad 1, una superficie "
+"uniforme con linee appena visibili sul pad 4, linee rialzate e separate sul "
+"pad 7"
+
+#. photo caption
+msgctxt "flow/read"
+msgid ""
+"Pads 1 (91 %), 4 (100 %) and 7 (109 %), same photo, same light. Pad 1: dark "
+"grooves between the lines. Pad 4: the lines close up into an even top. Pad "
+"7: too much plastic, so each line stands up as a ridge."
+msgstr ""
+"Pad 1 (91 %), 4 (100 %) e 7 (109 %), stessa foto, stessa luce. Pad 1: "
+"solchi scuri tra le linee. Pad 4: le linee si chiudono in una superficie "
+"uniforme. Pad 7: troppa plastica, ogni linea si alza come una cresta."
+
+#. More: point (misread)
+msgctxt "flow/read"
+msgid ""
+"**The edges always look fuller**: the perimeters and the turnarounds of the "
+"top lines add plastic there. Judge the middle."
+msgstr ""
+"**I bordi sembrano sempre più pieni**: i perimetri e le inversioni delle "
+"linee superiori aggiungono plastica lì. Giudica il centro."
+
+#. More: point (misread)
+msgctxt "flow/read"
+msgid ""
+"**A glossy, perfectly smooth top** can be too much: look for the faint "
+"lines, and for ridges under a fingernail."
+msgstr ""
+"**Una faccia lucida e perfettamente liscia** può essere troppo: cerca le "
+"linee appena visibili, e le creste sotto l'unghia."
+
+#. More: point (misread)
+msgctxt "flow/read"
+msgid ""
+"**You can feel lines on every pad**, even the best one: that is the shape "
+"of each printed line, not a flow error. The multiplier only makes the lines "
+"even; for a truly smooth top, turn on ironing (**Print Settings › Infill › "
+"Ironing**, expert mode) on the parts that need it."
+msgstr ""
+"**Le linee si sentono su tutti i pad**, anche sul migliore: è la forma di "
+"ogni linea stampata, non un errore di flusso. Il moltiplicatore rende solo "
+"le linee uniformi; per una faccia davvero liscia attiva la stiratura "
+"(**Impostazioni di stampa › Riempimento › Stiratura**, modalità Esperto) "
+"sui pezzi che ne hanno bisogno."
+
+#. More: point (misread)
+msgctxt "flow/read"
+msgid ""
+"**Gaps only on one side of each line**, or rough patches that move from pad "
+"to pad: wet filament or a worn nozzle, not the multiplier."
+msgstr ""
+"**Buchi solo su un lato di ogni linea**, o zone ruvide che cambiano da pad "
+"a pad: filamento umido o ugello consumato, non il moltiplicatore."
+
+#. More: point
+msgctxt "flow/read"
+msgid ""
+"Pad 1 is the lowest and pad 7 the highest, but every top is the same: four "
+"layers over sparse infill, with the lines running the same way on every "
+"pad. The height does not change the reading."
+msgstr ""
+"Il pad 1 è il più basso e il pad 7 il più alto, ma ogni faccia superiore è "
+"uguale: quattro layer sopra un riempimento rado, con le linee nello stesso "
+"verso su ogni pad. L'altezza non cambia la lettura."
+
+#. step title
+msgctxt "flow/choose"
+msgid "Choose the fine file, then the new value"
+msgstr "Scegli il file fine, poi il nuovo valore"
+
+#. point
+msgctxt "flow/choose"
+msgid ""
+"Tick the best pad of the coarse print: the selector names the fine file to "
+"print."
+msgstr ""
+"Spunta il pad migliore della stampa grossolana: il selettore indica il file "
+"fine da stampare."
+
+#. point
+msgctxt "flow/choose"
+msgid ""
+"Print it, read it the same way, tick its best pad and type the extrusion "
+"multiplier your profile has now: the selector gives the new value."
+msgstr ""
+"Stampalo, leggilo allo stesso modo, spunta il suo pad migliore e scrivi il "
+"moltiplicatore di estrusione che ha adesso il tuo profilo: il selettore ti "
+"dà il nuovo valore."
+
+#. More: point
+msgctxt "flow/choose"
+msgid ""
+"New multiplier = the multiplier now × the best pad's percent ÷ 100. "
+"Example: 0.98 now, best pad 96 % → 0.98 × 0.96 = 0.94."
+msgstr ""
+"Nuovo moltiplicatore = moltiplicatore attuale × percentuale del pad "
+"migliore ÷ 100. Esempio: 0,98 adesso, pad migliore 96 % → 0,98 × 0,96 = "
+"0,94."
+
+#. step title
+msgctxt "flow/save"
+msgid "Save the value"
+msgstr "Salva il valore"
+
+#. point
+msgctxt "flow/save"
+msgid ""
+"Type the new value into **Filament Settings › Filament › Extrusion "
+"multiplier** and **save the filament preset** (the disk icon)."
+msgstr ""
+"Scrivi il nuovo valore in **Impostazioni filamento › Filamento › "
+"Moltiplicatore di estrusione** e **salva il preset del filamento** (l'icona "
+"del dischetto)."
+
+#. point
+msgctxt "flow/save"
+msgid ""
+"Print the fine file `flow_fine_97-103` once more if you want to check it: "
+"pad 4 (100 %) should now look best."
+msgstr ""
+"Se vuoi controllarlo, stampa ancora una volta il file fine "
+"`flow_fine_97-103`: adesso dovrebbe sembrare migliore il pad 4 (100 %)."
+
+#. photo alt
+msgctxt "flow/save"
+msgid ""
+"Close-up of pad 4 of the check print flow_fine_97-103 after saving the new "
+"multiplier: the top lines are joined into a flat, even surface, still "
+"faintly visible, with no gaps and no raised lines"
+msgstr ""
+"Primo piano del pad 4 della stampa di controllo flow_fine_97-103 dopo aver "
+"salvato il nuovo moltiplicatore: le linee superiori sono unite in una "
+"faccia piana e uniforme, ancora appena visibili, senza buchi né linee "
+"rialzate"
+
+#. photo caption
+msgctxt "flow/save"
+msgid ""
+"The check print `flow_fine_97-103` after saving the new value (PETG, 0.85 → "
+"0.88): pad 4 (100 %) is the best one. Lines joined, no grooves, none "
+"standing up; you still see and feel them."
+msgstr ""
+"La stampa di controllo `flow_fine_97-103` dopo aver salvato il nuovo valore "
+"(PETG, 0,85 → 0,88): il pad 4 (100 %) è il migliore. Linee unite, niente "
+"solchi, nessuna rialzata; si vedono e si sentono ancora."
+
+#. More: point
+msgctxt "flow/save"
+msgid ""
+"The value belongs to this filament on this nozzle. A new spool of the same "
+"filament usually keeps it; a different brand or colour can differ by a few "
+"percent."
+msgstr ""
+"Il valore vale per questo filamento su questo ugello. Una bobina nuova "
+"dello stesso filamento di solito lo mantiene; un'altra marca o un altro "
+"colore possono differire di qualche percento."
+
+#. More: point
+msgctxt "flow/save"
+msgid "If you later change the nozzle or the hotend, run it again."
+msgstr "Se poi cambi ugello o hotend, rifallo."
+
+#. page title
 msgctxt "further-reading"
 msgid "Further reading"
 msgstr "Approfondimenti"
@@ -2284,13 +3007,14 @@ msgstr "Cosa c'è nella release 1"
 #. step intro
 msgctxt "home/release-1"
 msgid ""
-"The first public release has five tests. Each comes with a guide and its "
-"files on Printables; four also have a scorecard, and the first-layer guide "
-"has a step table."
+"The first public release has six tests. Each comes with a guide and its "
+"files on Printables; four also have a scorecard, the first-layer guide has "
+"a step table and the flow guide a selector that works out the new value."
 msgstr ""
-"La prima versione pubblica ha cinque test. Ognuno ha la sua guida e i suoi "
-"file su Printables; quattro hanno anche una scheda punteggio, e la guida "
-"del primo strato ha una tabella dei passi."
+"La prima versione pubblica ha sei test. Ognuno ha la sua guida e i suoi file "
+"su Printables; quattro hanno anche una scheda punteggio, la guida del primo "
+"strato ha una tabella dei passi e quella del flusso un selettore che calcola "
+"il nuovo valore."
 
 #. point
 msgctxt "home/release-1"
@@ -2347,11 +3071,21 @@ msgstr ""
 #. point
 msgctxt "home/release-1"
 msgid ""
-"**Coming next:** flow (extrusion multiplier), retraction, and dimensions "
-"and fit. They are listed in grey in the contents."
+"[Flow (extrusion multiplier)](page:flow): top surfaces filled without gaps "
+"or ridges, per filament. Files on Printables very soon."
 msgstr ""
-"**In arrivo:** flusso (moltiplicatore di estrusione), retrazione, "
-"dimensioni e accoppiamenti. Sono elencati in grigio nell'indice."
+"[Flusso (moltiplicatore di estrusione)](page:flow): superfici superiori "
+"piene, senza buchi né creste, per ogni filamento. File su Printables a "
+"brevissimo."
+
+#. point
+msgctxt "home/release-1"
+msgid ""
+"**Coming next:** retraction, and dimensions and fit. They are listed in "
+"grey in the contents."
+msgstr ""
+"**In arrivo:** retrazione, dimensioni e accoppiamenti. Sono elencati in "
+"grigio nell'indice."
 
 #. point
 msgctxt "home/release-1"
@@ -2482,7 +3216,8 @@ msgid ""
 "2. [Pressure advance](page:pressure-advance)\n"
 "3. Flow"
 msgstr ""
-"1. [Temperatura](page:temperature-tower) (se il filamento è nuovo per te, stampa veloce o fa fili)\n"
+"1. [Temperatura](page:temperature-tower) (se il filamento è nuovo per te, "
+"stampa veloce o fa fili)\n"
 "2. [Pressure advance](page:pressure-advance)\n"
 "3. Flusso"
 
