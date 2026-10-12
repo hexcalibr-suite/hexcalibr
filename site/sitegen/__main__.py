@@ -10,7 +10,9 @@ Run from the site/ folder:
                                       with the POT: changed English -> fuzzy
     python3 -m sitegen init xx        start a new language: locales/xx.po
     python3 -m sitegen check [xx]     verify translations keep placeholders,
-                                      code, links and TBD marks; exit 1 on errors
+                                      code, links and TBD marks, and that the
+                                      home lists every written test (see
+                                      consistency.py); exit 1 on errors
     python3 -m sitegen stats          how complete each language is
     python3 -m sitegen shotlist       rewrite PHOTO-SHOTLIST.md from the sources
 
@@ -26,7 +28,7 @@ import shutil
 import sys
 import urllib.parse
 
-from . import content, markup, po, render
+from . import consistency, content, markup, po, render
 from .style import STYLE
 
 
@@ -112,6 +114,9 @@ def check(codes=None):
     src = content.load()
     codes = codes or [c for c in src["languages"] if c != "en"]
     bad = 0
+    for msg in consistency.check(src):
+        bad += 1
+        print("check release: " + msg)
     for code in codes:
         path = os.path.join(content.LOCALES, code + ".po")
         if not os.path.exists(path):

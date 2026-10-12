@@ -50,9 +50,9 @@ steps:
       head: ["", "Fast path", "Full path"]
       rows:
         - ["When", "A new filament on a printer that already prints well", "A new printer, or after changing hotend, extruder or other hardware"]
-        - ["Tests", "1. [Temperature](page:temperature-tower) (if the filament is new to you, prints fast or strings)\n2. [Pressure advance](page:pressure-advance)\n3. Flow", "1. [Firmware checks](page:before-you-start)\n2. [First layer](page:first-layer)\n3. [Temperature](page:temperature-tower)\n4. [Max volumetric flow](page:max-flow)\n5. [Pressure advance](page:pressure-advance)\n6. Flow\n7. Retraction\n8. Dimensions\n9. Then the [IDEX tests](page:idex-alignment)"]
-        - ["Time", "About 35 minutes of printing for the tests available now (temperature and pressure advance)", "Each guide gives the time of its test, plus waiting"]
-        - ["Filament", "About 15 g", "Each guide gives the grams of its test"]
+        - ["Tests", "1. [Temperature](page:temperature-tower) (if the filament is new to you, prints fast or strings)\n2. [Pressure advance](page:pressure-advance)\n3. [Flow](page:flow)", "1. [Firmware checks](page:before-you-start)\n2. [First layer](page:first-layer)\n3. [Temperature](page:temperature-tower)\n4. [Max volumetric flow](page:max-flow)\n5. [Pressure advance](page:pressure-advance)\n6. [Flow](page:flow)\n7. Retraction\n8. Dimensions\n9. Then the [IDEX tests](page:idex-alignment)"]
+        - ["Time", "About 1 h 15 min of printing: pressure advance 15 min, flow two prints of 30 min. Add 40 min for the temperature tower", "Each guide gives the time of its test, plus waiting"]
+        - ["Filament", "About 20 g: pressure advance 5 g, flow two prints of 8 g. Add 7 to 10 g for the temperature tower", "Each guide gives the grams of its test"]
     more:
       points:
       - "**Firmware checks** are not printed tests: belts, PID tuning, extruder steps (rotation distance) and input shaping are done with your firmware's own tools. Do them before the first layer."

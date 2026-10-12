@@ -2704,7 +2704,7 @@ msgid ""
 "1. [Temperature](page:temperature-tower) (if the filament is new to you, "
 "prints fast or strings)\n"
 "2. [Pressure advance](page:pressure-advance)\n"
-"3. Flow"
+"3. [Flow](page:flow)"
 msgstr ""
 
 #. table cell
@@ -2715,7 +2715,7 @@ msgid ""
 "3. [Temperature](page:temperature-tower)\n"
 "4. [Max volumetric flow](page:max-flow)\n"
 "5. [Pressure advance](page:pressure-advance)\n"
-"6. Flow\n"
+"6. [Flow](page:flow)\n"
 "7. Retraction\n"
 "8. Dimensions\n"
 "9. Then the [IDEX tests](page:idex-alignment)"
@@ -2729,8 +2729,8 @@ msgstr ""
 #. table cell
 msgctxt "home/fast-or-full"
 msgid ""
-"About 35 minutes of printing for the tests available now (temperature and "
-"pressure advance)"
+"About 1 h 15 min of printing: pressure advance 15 min, flow two prints of "
+"30 min. Add 40 min for the temperature tower"
 msgstr ""
 
 #. table cell
@@ -2745,7 +2745,9 @@ msgstr ""
 
 #. table cell
 msgctxt "home/fast-or-full"
-msgid "About 15 g"
+msgid ""
+"About 20 g: pressure advance 5 g, flow two prints of 8 g. Add 7 to 10 g for "
+"the temperature tower"
 msgstr ""
 
 #. table cell
