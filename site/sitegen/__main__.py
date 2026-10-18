@@ -325,6 +325,11 @@ def build():
             os.makedirs(os.path.join(out, "img"))
             for n in imgs:
                 shutil.copyfile(os.path.join(content.IMG, n), os.path.join(out, "img", n))
+    # site/tmp/: temporary files shared by link (test files for one user), served at /tmp/,
+    # kept out of search engines by robots.txt and never linked from the pages
+    tmp = os.path.join(content.HERE, "tmp")
+    if os.path.isdir(tmp):
+        shutil.copytree(tmp, os.path.join(out, "tmp"))
     tbd = sorted({m for _, t, _ in english for m in markup.TBD.findall(t)})
     print("build: %d photo slots (see PHOTO-SHOTLIST.md); %d distinct TBD marks:" % (n_photos, len(tbd)))
     for t in tbd:
@@ -361,7 +366,7 @@ def write_extras(out, src, langs, base):
     suite = src["site"]["suite_name"]
     with open(os.path.join(out, "404.html"), "w", encoding="utf-8") as f:
         f.write(NOT_FOUND.replace("{suite}", suite))
-    robots = "User-agent: *\nAllow: /\n"
+    robots = "User-agent: *\nAllow: /\nDisallow: /tmp/\n"
     if base:
         robots += "Sitemap: %s/sitemap.xml\n" % base
     with open(os.path.join(out, "robots.txt"), "w", encoding="utf-8") as f:
