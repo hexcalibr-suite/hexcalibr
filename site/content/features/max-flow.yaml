@@ -38,6 +38,8 @@ rules:
 # a fine pass (--centre, "_fine_" file) is typed as a custom range.
 blocks_max: 16
 presets:
+  - name: "flex-0.4 · 1–10 mm³/s, TPU (also _T0 / _T1)"
+    flows: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   - name: "standard-0.4 · 4–32 mm³/s"
     flows: [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
   - name: "standard-0.6 · 6–36 mm³/s"
@@ -66,6 +68,7 @@ features:
     fail: "Thin or missing lines, gaps between layers, a rough \"sandpaper\" texture or stringy lines. It starts in the middle of the straights and spreads in the next bands."
     points:
       - "Hold the part at arm's length first, then close up with a light raking along each straight. The straight along X faces the back: turn the part round."
+      - "**TPU and flexible filaments:** the first sign is usually a **crosshatch texture** on the straights, not a torn wall. On clear TPU the numbers are hard to read: count the bands from the bottom, using the divider lines."
     photos:
       - id: F3_face-good_PETG_VC4
         alt: "Close-up of the middle of the front straight, bands 14 to 30 of the yellow PETG wedge: fine, even layer lines, the wall closed and smooth"
@@ -75,6 +78,10 @@ features:
         alt: "Close-up of the same part of the front straight, bands 34 to 50: thin, broken and missing lines, loose strings and small blobs"
         caption: "Bands 34–50, same photo, same spot along the straight: thin and broken lines, gaps and strings. Band 34 is the onset."
         shot: "DONE from _A645933: a 1650×1100 crop right above F3_face-good_PETG_VC4, same position along the straight, bands 7–11 (34–50)."
+      - id: F3_flex-wall_TPU_VC4
+        alt: "The TPU test in clear TPU, back light on a dark background: the lower wall smooth and see-through, a crosshatch texture higher up on the straights, and loose strings draped from the column to the round end at the top"
+        caption: "flex-0.4, clear TPU 87A, T0: clean up to band 3, crosshatch from band 4, collapsed from band 7. Limit 3 mm³/s, set 2.5."
+        shot: "DONE from _A646105 (media/photos/2026-10-25_reflex-maxflow-tpu, back light): centre crop 4350×2900, Adobe RGB to sRGB, 2400×1600."
     more:
       intro: "The engraved number is the flow **on the long straights**: the nozzle speeds up out of the column, holds full speed along the straight, keeps most of it through the round end and brakes back into the column. So judge **the middle third of each straight**, in the **upper two thirds** of each band: the first layers of a band are the transition while the hotend settles at the new flow."
       points:

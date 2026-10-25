@@ -20,7 +20,7 @@ sketch: sketches/max-flow.svg   # pencil drawing beside the intro (hexcalibr-cor
 intro: |
   A thin wall printed in bands, each one faster than the one below: a small hex column with a long wedge, whose two straight walls keep the nozzle at full speed long enough for the hotend to show its real limit. The number on the column beside each band is its flow in mm³/s, measured on the two long straights. **Read the straights, not the column**: find the last band that is still clean there, and put 80–90 % of it into your filament profile.
 
-  9 to 25 minutes and 16 to 45 g of filament, with **no changes to your profiles**.
+  9 to 35 minutes and 7 to 45 g of filament, with **no changes to your profiles**.
 more:
   intro: |
     The wall is **one thick line** (1.75 × the nozzle wide, 0.75 × the nozzle high: 0.70 × 0.30 mm on a 0.4 nozzle), so the same flow needs half the speed of an ordinary line. A speed factor sent at each band (`M220`) makes the printer run faster; the slicer itself sees a slow, steady print and never slows it down. The numbers are the flow in the middle of the two long straights.
@@ -38,7 +38,7 @@ need:
         - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
         - "Your own printer, print and filament profiles, already working"
         - "The temperature from the [temperature tower](page:temperature-tower)"
-        - "The filament to test, **dry**: 16 to 45 g of it"
+        - "The filament to test, **dry**: 7 to 45 g of it"
         - "A bed at least **180 mm** wide (the `uhf-0.4` file needs 200 mm: a MK4, a Core One or larger)"
     - title: "To read it"
       items:
@@ -79,6 +79,7 @@ steps:
     title: "Which file"
     points:
       - "Find your hotend in the table, then take the file for **your nozzle**. Not listed? Use the row with the closest claim."
+      - "**TPU and other flexible filaments:** take `flex-0.4`, whatever your hotend. Their limit comes from the filament, far below what any hotend melts in PLA or PETG."
       - "**IDEX:** test each tool on its own: `_T0` and `_T1` files ([see below](page:max-flow#apply))."
       - "The code in the table is the middle of the **file name**: `hf-0.4` is **`max-flow_hf-0.4_10-50.3mf`** (the numbers are the flow range). Get that **single .3mf** from the {suite} page on Printables (below), never \"Download all\" as a ZIP."
     printables: printables-max-flow
@@ -97,6 +98,7 @@ steps:
         - ["Phaetus Rapido UHF, Rapido 2 UHF, Dragon UHF; Trianglelab Dragon ACE", "≈ 75 / ≈ 75 / ≈ 70.5; 74", "Rapido UHF 0.4: 30 (Ellis)", "`hf-0.4`, then `uhf-0.4`", "`uhf-0.6`", "`uhf-0.8`"]
         - ["Mellow / VzBot Goliath, Chube Conduction", "≈ 50+ / none (about 80 reported)", "–", "`uhf-0.4`", "`uhf-0.6`", "`uhf-0.8`"]
         - ["Slice Magnum+, E3D SuperVolcano, Phaetus Rapido X", "≈ 88–91 / ≈ 110 / ≈ 100+", "–", "–", "`uhf-0.6`", "`extreme-0.8` / `extreme-1.0`"]
+        - ["**Any hotend, TPU or another flexible filament**", "–", "Prusa profiles: 1.35–3.5", "`flex-0.4`", "–", "–"]
     photos:
       - id: F3_tower-iso_render
         alt: "Render of the maximum flow test: a small hex column with numbers on its front face and a long wedge with a round end"
@@ -104,10 +106,11 @@ steps:
         aspect: "1/1"
         shot: "RENDER, already done: copy of docs/previews/flow-tower-iso.png. Replace only with a real photo that reads as clearly."
     more:
-      intro: "Nine files in four tiers. The tier comes from your hotend, the file from your nozzle. Each file's top band is at least **120 % of the highest claim** of its tier, so a hotend that really reaches its claim still shows a failing band."
+      intro: "Ten files in five tiers. The tier comes from your hotend (for TPU, from the filament), the file from your nozzle. Each file's top band is at least **120 % of the highest claim** of its tier, so a hotend that really reaches its claim still shows a failing band."
       table:
         head: ["File", "Bands (mm³/s)", "Line × layer", "Top speed", "Footprint", "PETG", "Time"]
         rows:
+          - ["`max-flow_flex-0.4_1-10.3mf`", "1, 2 … 10 (10 bands)", "0.70 × 0.30 mm", "52 mm/s", "75 × 34 mm", "7.0 g", "≈ 35 min"]
           - ["`max-flow_standard-0.4_4-32.3mf`", "4, 6 … 32 (15 bands)", "0.70 × 0.30 mm", "168 mm/s", "146 × 61 mm", "18.6 g", "≈ 25 min"]
           - ["`max-flow_standard-0.6_6-36.3mf`", "6, 9 … 36 (11)", "1.05 × 0.45 mm", "84 mm/s", "95 × 40 mm", "18.4 g", "≈ 21 min"]
           - ["`max-flow_hf-0.4_10-50.3mf`", "10, 14 … 50 (11)", "0.70 × 0.30 mm", "262 mm/s", "169 × 70 mm", "15.8 g", "≈ 14 min"]
@@ -123,7 +126,8 @@ steps:
         - "**Seven wide bands on the bigger files.** `hf-0.6`, `uhf-0.6`, `uhf-0.8` and both `extreme` files go up in larger steps (8, 12 and 25 mm³/s, about 12–14 % of the top band) to save a third or more of the filament. Each band is as tall as on the other files, so it is just as easy to judge; the limit is simply less precise ([what that changes](page:max-flow#choose))."
         - "**Bed fit.** Every file fits a 180 × 180 mm bed (Prusa MINI, Bambu Lab A1 mini) with room for a skirt, except `uhf-0.4`: it is 193 mm long, because holding 336 mm/s for 0.3 s needs it. It fits a MK4 (250 × 210), a Core One (250 × 220) and any larger bed."
         - "**Nothing failed?** Print the next tier for your nozzle (standard → hf → uhf → extreme). **Everything failed?** Print the tier below."
-        - "**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf` and `max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` are assigned to that tool, object and speed codes. Per-tool versions of the other files are not published yet."
+        - "**`flex-0.4`, for TPU and other flexible filaments.** Its base speed is 5 mm/s (under 1 mm³/s), below the lowest flex limit in the Prusa profiles (1.35 mm³/s), so PrusaSlicer never slows it down. The top band, 10 mm³/s, is about three times what flexible filaments usually reach. The time above is measured: the slow bands take most of it."
+        - "**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf`, `max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` and `max-flow_flex-0.4_1-10_T0.3mf` / `_T1.3mf` are assigned to that tool, object and speed codes. Per-tool versions of the other files are not published yet."
         - expert: "**Your own range:** `python3 -I calib.py max-flow --start 6 --end 30 --step 3 --nozzle 0.4 --name PETG-revo`. Add `--estimate` for grams, time, top speed and the acceleration the top band needs."
         - expert: "**Worked example, the author's RatRig V-Core 4 IDEX** (Klipper): Phaetus Rapido UHF and an LDO Orbiter 2.5 on both tools; T0 has an \"Alpha\" PCD 0.4 nozzle, T1 a Phaetus PS M6 copper 0.4. Files: `max-flow_hf-0.4_10-50_T0.3mf` and `_T1.3mf`. **T0, PETG at 240 °C:** band 30 is the last clean wall, band 34 the onset; the heater held within ±0.8 °C (72 % power at most) and the extruder never clicked, so the hotend's melt was the limit, not the extruder. Set **25 mm³/s** (85 %). T1 has the same V6 bore: expect a band or two either way, and give it its own number."
         - misread: "**Taking the 0.6 or 0.8 file for a 0.4 nozzle because the hotend is UHF.** A 0.4 nozzle caps even a UHF hotend: Ellis measured about 30 mm³/s on a Rapido UHF with a 0.4 brass nozzle against the 75 claimed. Pick the file for the nozzle you print with."
@@ -283,6 +287,7 @@ steps:
       points:
         - "Example, the author's PETG on hf-0.4 (T0, PCD 0.4 nozzle, 240 °C): band 30 is clean, band 34 shows the first gaps, the heater stays within ±0.8 °C and the extruder is silent. Onset 34, limit **30**: the hotend's melt capacity. **25 mm³/s** (85 %)."
         - "Example, standard-0.4: band 18 fails, band 16 is clean. Limit 16: **13–14 mm³/s**."
+        - "Example, the author's clear TPU 87A on flex-0.4 (T0): band 3 is clean, a crosshatch texture starts on the straights in band 4, the wall collapses from band 7, and the extruder never clicked. Onset 4, limit **3**: **2.5 mm³/s**."
         - "**Band 1 already fails:** not a flow problem. Check the temperature, a partial clog, wet filament and the filament diameter in the profile."
         - "**Nothing fails:** print the next file up for your nozzle, or a custom range above the top band."
         - "**Seven-band files** (`hf-0.6`, `uhf-0.6`, `uhf-0.8`, `extreme`): one step is 12–14 % of the top band, so your real limit lies somewhere between the last clean band and the onset. 80–90 % of the last clean band is still a safe setting: you only leave part of one step unused. Example, PETG on uhf-0.6: band 64 is clean, band 76 shows gaps. Limit 64: **51–58 mm³/s**."

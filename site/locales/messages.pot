@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HexCalibr docs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-13\n"
+"POT-Creation-Date: 2026-10-25\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5309,7 +5309,7 @@ msgstr ""
 #. callout
 msgctxt "max-flow-scorecard"
 msgid ""
-"Follows the max-flow test v1.3.0, hex column and wedge (all nine files are "
+"Follows the max-flow test v1.3.0, hex column and wedge (all ten files are "
 "in the menu; the `_T0` / `_T1` files have the same bands). Judge the middle "
 "of the two long straights. The wall decides together with **Heater sag** "
 "and **Clicks**: any of them failing makes the band fail. Printed on A4: the "
@@ -5339,7 +5339,7 @@ msgid ""
 "straights. **Read the straights, not the column**: find the last band that "
 "is still clean there, and put 80–90 % of it into your filament profile.\n"
 "\n"
-"9 to 25 minutes and 16 to 45 g of filament, with **no changes to your "
+"9 to 35 minutes and 7 to 45 g of filament, with **no changes to your "
 "profiles**.\n"
 msgstr ""
 
@@ -5398,7 +5398,7 @@ msgstr ""
 
 #. box item
 msgctxt "max-flow"
-msgid "The filament to test, **dry**: 16 to 45 g of it"
+msgid "The filament to test, **dry**: 7 to 45 g of it"
 msgstr ""
 
 #. box item
@@ -5545,6 +5545,14 @@ msgctxt "max-flow/which-file"
 msgid ""
 "Find your hotend in the table, then take the file for **your nozzle**. Not "
 "listed? Use the row with the closest claim."
+msgstr ""
+
+#. point
+msgctxt "max-flow/which-file"
+msgid ""
+"**TPU and other flexible filaments:** take `flex-0.4`, whatever your "
+"hotend. Their limit comes from the filament, far below what any hotend "
+"melts in PLA or PETG."
 msgstr ""
 
 #. point
@@ -5792,13 +5800,28 @@ msgctxt "max-flow/which-file"
 msgid "`extreme-0.8` / `extreme-1.0`"
 msgstr ""
 
+#. table cell
+msgctxt "max-flow/which-file"
+msgid "**Any hotend, TPU or another flexible filament**"
+msgstr ""
+
+#. table cell
+msgctxt "max-flow/which-file"
+msgid "Prusa profiles: 1.35–3.5"
+msgstr ""
+
+#. table cell
+msgctxt "max-flow/which-file"
+msgid "`flex-0.4`"
+msgstr ""
+
 #. More: intro
 msgctxt "max-flow/which-file"
 msgid ""
-"Nine files in four tiers. The tier comes from your hotend, the file from "
-"your nozzle. Each file's top band is at least **120 % of the highest "
-"claim** of its tier, so a hotend that really reaches its claim still shows "
-"a failing band."
+"Ten files in five tiers. The tier comes from your hotend (for TPU, from the "
+"filament), the file from your nozzle. Each file's top band is at least "
+"**120 % of the highest claim** of its tier, so a hotend that really reaches "
+"its claim still shows a failing band."
 msgstr ""
 
 #. More: point
@@ -5848,8 +5871,19 @@ msgstr ""
 #. More: point
 msgctxt "max-flow/which-file"
 msgid ""
-"**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf` and "
-"`max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` are assigned to that tool, "
+"**`flex-0.4`, for TPU and other flexible filaments.** Its base speed is 5 "
+"mm/s (under 1 mm³/s), below the lowest flex limit in the Prusa profiles "
+"(1.35 mm³/s), so PrusaSlicer never slows it down. The top band, 10 mm³/s, "
+"is about three times what flexible filaments usually reach. The time above "
+"is measured: the slow bands take most of it."
+msgstr ""
+
+#. More: point
+msgctxt "max-flow/which-file"
+msgid ""
+"**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf`, "
+"`max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` and "
+"`max-flow_flex-0.4_1-10_T0.3mf` / `_T1.3mf` are assigned to that tool, "
 "object and speed codes. Per-tool versions of the other files are not "
 "published yet."
 msgstr ""
@@ -5921,17 +5955,47 @@ msgstr ""
 
 #. More: table cell
 msgctxt "max-flow/which-file"
+msgid "`max-flow_flex-0.4_1-10.3mf`"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "1, 2 … 10 (10 bands)"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "0.70 × 0.30 mm"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "52 mm/s"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "75 × 34 mm"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "7.0 g"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "≈ 35 min"
+msgstr ""
+
+#. More: table cell
+msgctxt "max-flow/which-file"
 msgid "`max-flow_standard-0.4_4-32.3mf`"
 msgstr ""
 
 #. More: table cell
 msgctxt "max-flow/which-file"
 msgid "4, 6 … 32 (15 bands)"
-msgstr ""
-
-#. More: table cell
-msgctxt "max-flow/which-file"
-msgid "0.70 × 0.30 mm"
 msgstr ""
 
 #. More: table cell
@@ -7094,6 +7158,15 @@ msgstr ""
 msgctxt "max-flow/choose"
 msgid ""
 "Example, standard-0.4: band 18 fails, band 16 is clean. Limit 16: **13–14 "
+"mm³/s**."
+msgstr ""
+
+#. More: point
+msgctxt "max-flow/choose"
+msgid ""
+"Example, the author's clear TPU 87A on flex-0.4 (T0): band 3 is clean, a "
+"crosshatch texture starts on the straights in band 4, the wall collapses "
+"from band 7, and the extruder never clicked. Onset 4, limit **3**: **2.5 "
 "mm³/s**."
 msgstr ""
 
@@ -11315,6 +11388,14 @@ msgid ""
 "round."
 msgstr ""
 
+#. point
+msgctxt "features/max-flow/faces"
+msgid ""
+"**TPU and flexible filaments:** the first sign is usually a **crosshatch "
+"texture** on the straights, not a torn wall. On clear TPU the numbers are "
+"hard to read: count the bands from the bottom, using the divider lines."
+msgstr ""
+
 #. photo alt
 msgctxt "features/max-flow/faces"
 msgid ""
@@ -11341,6 +11422,21 @@ msgctxt "features/max-flow/faces"
 msgid ""
 "Bands 34–50, same photo, same spot along the straight: thin and broken "
 "lines, gaps and strings. Band 34 is the onset."
+msgstr ""
+
+#. photo alt
+msgctxt "features/max-flow/faces"
+msgid ""
+"The TPU test in clear TPU, back light on a dark background: the lower wall "
+"smooth and see-through, a crosshatch texture higher up on the straights, "
+"and loose strings draped from the column to the round end at the top"
+msgstr ""
+
+#. photo caption
+msgctxt "features/max-flow/faces"
+msgid ""
+"flex-0.4, clear TPU 87A, T0: clean up to band 3, crosshatch from band 4, "
+"collapsed from band 7. Limit 3 mm³/s, set 2.5."
 msgstr ""
 
 #. More: intro

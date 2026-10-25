@@ -6561,18 +6561,12 @@ msgstr "Scheda stampabile"
 #. callout
 msgctxt "max-flow-scorecard"
 msgid ""
-"Follows the max-flow test v1.3.0, hex column and wedge (all nine files are "
+"Follows the max-flow test v1.3.0, hex column and wedge (all ten files are "
 "in the menu; the `_T0` / `_T1` files have the same bands). Judge the middle "
 "of the two long straights. The wall decides together with **Heater sag** "
 "and **Clicks**: any of them failing makes the band fail. Printed on A4: the "
 "rules on page 1, the grid on page 2."
-msgstr ""
-"Segue il test di flusso massimo v1.3.0, colonna esagonale e cuneo (tutti e "
-"nove i file sono nel menu; i file `_T0` / `_T1` hanno le stesse fasce). "
-"Giudica il centro dei due rettilinei lunghi. La parete decide insieme a "
-"**Calo di temperatura** e **Scatti**: se uno dei tre non è superato, la "
-"fascia non è superata. Stampata su A4: le regole a pagina 1, la griglia a "
-"pagina 2."
+msgstr "Segue il test di flusso massimo v1.3.0, colonna esagonale e cuneo (tutti e dieci i file sono nel menu; i file `_T0` / `_T1` hanno le stesse fasce). Giudica il centro dei due rettilinei lunghi. La parete decide insieme a **Calo di temperatura** e **Scatti**: se uno dei tre non è superato, la fascia non è superata. Stampata su A4: le regole a pagina 1, la griglia a pagina 2."
 
 #. page title
 msgctxt "max-flow"
@@ -6600,19 +6594,9 @@ msgid ""
 "straights. **Read the straights, not the column**: find the last band that "
 "is still clean there, and put 80–90 % of it into your filament profile.\n"
 "\n"
-"9 to 25 minutes and 16 to 45 g of filament, with **no changes to your "
+"9 to 35 minutes and 7 to 45 g of filament, with **no changes to your "
 "profiles**.\n"
-msgstr ""
-"Una parete sottile stampata a fasce, ognuna più veloce di quella sotto: una "
-"piccola colonna esagonale con un lungo cuneo, i cui due rettilinei tengono "
-"l'ugello alla piena velocità abbastanza a lungo perché l'hotend mostri il "
-"suo limite reale. Il numero sulla colonna accanto a ogni fascia è il suo "
-"flusso in mm³/s, misurato sui due rettilinei lunghi. **Leggi i rettilinei, "
-"non la colonna**: trova l'ultima fascia ancora pulita lì e metti l'80–90 % "
-"di quel valore nel profilo filamento.\n"
-"\n"
-"Da 9 a 25 minuti e da 16 a 45 g di filamento, **senza modificare i tuoi "
-"profili**.\n"
+msgstr "Una parete sottile stampata a fasce, ognuna più veloce di quella sotto: una piccola colonna esagonale con un lungo cuneo, i cui due rettilinei tengono l'ugello alla piena velocità abbastanza a lungo perché l'hotend mostri il suo limite reale. Il numero sulla colonna accanto a ogni fascia è il suo flusso in mm³/s, misurato sui due rettilinei lunghi. **Leggi i rettilinei, non la colonna**: trova l'ultima fascia ancora pulita lì e metti l'80–90 % di quel valore nel profilo filamento.\n\nDa 9 a 35 minuti e da 7 a 45 g di filamento, **senza modificare i tuoi profili**.\n"
 
 #. More: intro
 msgctxt "max-flow"
@@ -6683,8 +6667,8 @@ msgstr ""
 
 #. box item
 msgctxt "max-flow"
-msgid "The filament to test, **dry**: 16 to 45 g of it"
-msgstr "Il filamento da provare, **asciutto**: da 16 a 45 g"
+msgid "The filament to test, **dry**: 7 to 45 g of it"
+msgstr "Il filamento da provare, **asciutto**: da 7 a 45 g"
 
 #. box item
 msgctxt "max-flow"
@@ -6881,6 +6865,14 @@ msgid ""
 msgstr ""
 "Trova il tuo hotend nella tabella, poi prendi il file per **il tuo "
 "ugello**. Non c'è? Usa la riga con il valore dichiarato più vicino."
+
+#. point
+msgctxt "max-flow/which-file"
+msgid ""
+"**TPU and other flexible filaments:** take `flex-0.4`, whatever your "
+"hotend. Their limit comes from the filament, far below what any hotend "
+"melts in PLA or PETG."
+msgstr "**TPU e altri filamenti flessibili:** prendi `flex-0.4`, qualunque sia il tuo hotend. Il loro limite dipende dal filamento ed è molto sotto quello che qualsiasi hotend fonde in PLA o PETG."
 
 #. point
 msgctxt "max-flow/which-file"
@@ -7137,18 +7129,29 @@ msgctxt "max-flow/which-file"
 msgid "`extreme-0.8` / `extreme-1.0`"
 msgstr "`extreme-0.8` / `extreme-1.0`"
 
+#. table cell
+msgctxt "max-flow/which-file"
+msgid "**Any hotend, TPU or another flexible filament**"
+msgstr "**Qualsiasi hotend, TPU o altro filamento flessibile**"
+
+#. table cell
+msgctxt "max-flow/which-file"
+msgid "Prusa profiles: 1.35–3.5"
+msgstr "profili Prusa: 1,35–3,5"
+
+#. table cell
+msgctxt "max-flow/which-file"
+msgid "`flex-0.4`"
+msgstr "`flex-0.4`"
+
 #. More: intro
 msgctxt "max-flow/which-file"
 msgid ""
-"Nine files in four tiers. The tier comes from your hotend, the file from "
-"your nozzle. Each file's top band is at least **120 % of the highest "
-"claim** of its tier, so a hotend that really reaches its claim still shows "
-"a failing band."
-msgstr ""
-"Nove file in quattro livelli. Il livello dipende dal tuo hotend, il file "
-"dal tuo ugello. La fascia più alta di ogni file è almeno il **120 % del "
-"valore dichiarato più alto** del suo livello, così anche un hotend che "
-"raggiunge davvero quanto dichiarato mostra una fascia che cede."
+"Ten files in five tiers. The tier comes from your hotend (for TPU, from the "
+"filament), the file from your nozzle. Each file's top band is at least "
+"**120 % of the highest claim** of its tier, so a hotend that really reaches "
+"its claim still shows a failing band."
+msgstr "Dieci file in cinque livelli. Il livello dipende dal tuo hotend (per il TPU, dal filamento), il file dal tuo ugello. La fascia più alta di ogni file è almeno il **120 % del valore dichiarato più alto** del suo livello, così anche un hotend che raggiunge davvero quanto dichiarato mostra una fascia che cede."
 
 #. More: point
 msgctxt "max-flow/which-file"
@@ -7219,15 +7222,22 @@ msgstr ""
 #. More: point
 msgctxt "max-flow/which-file"
 msgid ""
-"**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf` and "
-"`max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` are assigned to that tool, "
+"**`flex-0.4`, for TPU and other flexible filaments.** Its base speed is 5 "
+"mm/s (under 1 mm³/s), below the lowest flex limit in the Prusa profiles "
+"(1.35 mm³/s), so PrusaSlicer never slows it down. The top band, 10 mm³/s, "
+"is about three times what flexible filaments usually reach. The time above "
+"is measured: the slow bands take most of it."
+msgstr "**`flex-0.4`, per TPU e altri filamenti flessibili.** La velocità di base è 5 mm/s (meno di 1 mm³/s), sotto il limite flex più basso dei profili Prusa (1,35 mm³/s), quindi PrusaSlicer non la rallenta mai. La fascia più alta, 10 mm³/s, è circa tre volte quello che raggiungono di solito i filamenti flessibili. Il tempo indicato è misurato: la maggior parte se ne va nelle fasce lente."
+
+#. More: point
+msgctxt "max-flow/which-file"
+msgid ""
+"**IDEX and multi-tool:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf`, "
+"`max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` and "
+"`max-flow_flex-0.4_1-10_T0.3mf` / `_T1.3mf` are assigned to that tool, "
 "object and speed codes. Per-tool versions of the other files are not "
 "published yet."
-msgstr ""
-"**IDEX e multi-utensile:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf` e "
-"`max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` sono assegnati a quella testa, "
-"oggetto e codici di velocità. Le versioni per singola testa degli altri "
-"file non sono ancora pubblicate."
+msgstr "**IDEX e multi-utensile:** `max-flow_hf-0.4_10-50_T0.3mf` / `_T1.3mf`, `max-flow_uhf-0.4_16-64_T0.3mf` / `_T1.3mf` e `max-flow_flex-0.4_1-10_T0.3mf` / `_T1.3mf` sono assegnati a quella testa, oggetto e codici di velocità. Le versioni per singola testa degli altri file non sono ancora pubblicate."
 
 #. More: point (expert)
 msgctxt "max-flow/which-file"
@@ -7312,6 +7322,41 @@ msgstr "Tempo"
 
 #. More: table cell
 msgctxt "max-flow/which-file"
+msgid "`max-flow_flex-0.4_1-10.3mf`"
+msgstr "`max-flow_flex-0.4_1-10.3mf`"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "1, 2 … 10 (10 bands)"
+msgstr "1, 2 … 10 (10 fasce)"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "0.70 × 0.30 mm"
+msgstr "0,70 × 0,30 mm"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "52 mm/s"
+msgstr "52 mm/s"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "75 × 34 mm"
+msgstr "75 × 34 mm"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "7.0 g"
+msgstr "7,0 g"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
+msgid "≈ 35 min"
+msgstr "≈ 35 min"
+
+#. More: table cell
+msgctxt "max-flow/which-file"
 msgid "`max-flow_standard-0.4_4-32.3mf`"
 msgstr "`max-flow_standard-0.4_4-32.3mf`"
 
@@ -7319,11 +7364,6 @@ msgstr "`max-flow_standard-0.4_4-32.3mf`"
 msgctxt "max-flow/which-file"
 msgid "4, 6 … 32 (15 bands)"
 msgstr "4, 6 … 32 (15 fasce)"
-
-#. More: table cell
-msgctxt "max-flow/which-file"
-msgid "0.70 × 0.30 mm"
-msgstr "0,70 × 0,30 mm"
 
 #. More: table cell
 msgctxt "max-flow/which-file"
@@ -7651,10 +7691,9 @@ msgstr ""
 "**Flusso volumetrico effettivo** (Actual volumetric flow rate), le facce "
 "corte della colonna restano molto sotto il valore della fascia nelle fasce "
 "veloci: lì l'ugello non ha spazio per arrivare alla piena velocità, ed è "
-"per questo che la colonna non si legge. "
-"**Velocità** mostra le velocità delle fasce (21–168 mm/s su standard-0.4). "
-"L'altezza strato è 0,75 × l'ugello (0,30 mm sui file da 0,4), qualunque "
-"cosa dica il tuo profilo."
+"per questo che la colonna non si legge. **Velocità** mostra le velocità "
+"delle fasce (21–168 mm/s su standard-0.4). L'altezza strato è 0,75 × "
+"l'ugello (0,30 mm sui file da 0,4), qualunque cosa dica il tuo profilo."
 
 #. More: point
 msgctxt "max-flow/open-project"
@@ -8704,6 +8743,15 @@ msgid ""
 msgstr ""
 "Esempio, standard-0.4: la fascia 18 non è superata, la 16 è pulita. Limite "
 "16: **13–14 mm³/s**."
+
+#. More: point
+msgctxt "max-flow/choose"
+msgid ""
+"Example, the author's clear TPU 87A on flex-0.4 (T0): band 3 is clean, a "
+"crosshatch texture starts on the straights in band 4, the wall collapses "
+"from band 7, and the extruder never clicked. Onset 4, limit **3**: **2.5 "
+"mm³/s**."
+msgstr "Esempio, il TPU 87A trasparente dell'autore su flex-0.4 (T0): la fascia 3 è pulita, nella fascia 4 compare una texture a rete sui rettilinei, dalla fascia 7 la parete crolla e l'estrusore non ha mai fatto scatti. Cedimento 4, limite **3**: **2,5 mm³/s**."
 
 #. More: point
 msgctxt "max-flow/choose"
@@ -14287,6 +14335,14 @@ msgstr ""
 "radente lungo ogni rettilineo. Il rettilineo lungo X guarda indietro: gira "
 "il pezzo."
 
+#. point
+msgctxt "features/max-flow/faces"
+msgid ""
+"**TPU and flexible filaments:** the first sign is usually a **crosshatch "
+"texture** on the straights, not a torn wall. On clear TPU the numbers are "
+"hard to read: count the bands from the bottom, using the divider lines."
+msgstr "**TPU e filamenti flessibili:** il primo segno di solito è una **texture a rete** sui rettilinei, non una parete strappata. Sul TPU trasparente i numeri si leggono male: conta le fasce dal basso, usando le linee divisorie."
+
 #. photo alt
 msgctxt "features/max-flow/faces"
 msgid ""
@@ -14322,6 +14378,21 @@ msgid ""
 msgstr ""
 "Fasce 34–50, stessa foto, stesso punto del rettilineo: linee sottili e "
 "interrotte, vuoti e fili. La fascia 34 è il cedimento."
+
+#. photo alt
+msgctxt "features/max-flow/faces"
+msgid ""
+"The TPU test in clear TPU, back light on a dark background: the lower wall "
+"smooth and see-through, a crosshatch texture higher up on the straights, "
+"and loose strings draped from the column to the round end at the top"
+msgstr "Il test in TPU trasparente, in controluce su fondo scuro: la parete bassa liscia e trasparente, una texture a rete più in alto sui rettilinei e fili sciolti appesi dalla colonna all'estremità tonda, in cima"
+
+#. photo caption
+msgctxt "features/max-flow/faces"
+msgid ""
+"flex-0.4, clear TPU 87A, T0: clean up to band 3, crosshatch from band 4, "
+"collapsed from band 7. Limit 3 mm³/s, set 2.5."
+msgstr "flex-0.4, TPU 87A trasparente, T0: pulito fino alla fascia 3, texture a rete dalla fascia 4, crollato dalla fascia 7. Limite 3 mm³/s, impostato 2,5."
 
 #. More: intro
 msgctxt "features/max-flow/faces"
