@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HexCalibr docs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-25\n"
+"POT-Creation-Date: 2026-11-10\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -905,6 +905,11 @@ msgctxt "site/contents"
 msgid "filament · after pressure advance"
 msgstr ""
 
+#. contents: note
+msgctxt "site/contents"
+msgid "filament · optional, after flow"
+msgstr ""
+
 #. contents: planned
 msgctxt "site/contents"
 msgid "Retraction"
@@ -1378,7 +1383,7 @@ msgstr ""
 msgctxt "first-layer"
 msgid ""
 "A way to change Z **while printing**: the Z offset buttons in Mainsail or "
-"Fluidd, *Live Adjust Z* on a Prusa, babystepping on Marlin"
+"Fluidd, **Live Adjust Z** on a Prusa, babystepping on Marlin"
 msgstr ""
 
 #. box item
@@ -1556,7 +1561,7 @@ msgstr ""
 msgctxt "first-layer/before-print"
 msgid ""
 "Find the Z buttons you will use while printing. Mainsail has a **±0.025** "
-"button: one click per hexagon. A Prusa's *Live Adjust Z* moves in small "
+"button: one click per hexagon. A Prusa's **Live Adjust Z** moves in small "
 "steps: turn it until the value has changed by 0.025."
 msgstr ""
 
@@ -1818,8 +1823,9 @@ msgstr ""
 #. table cell
 msgctxt "first-layer/save"
 msgid ""
-"*Live Adjust Z* keeps the value for the sheet in use; on load-cell printers "
-"set *Printer Settings › General › Z offset* in PrusaSlicer instead"
+"**Live Adjust Z** keeps the value for the sheet in use; on load-cell "
+"printers set **Printer Settings › General › Z offset** in PrusaSlicer "
+"instead"
 msgstr ""
 
 #. table cell
@@ -2542,7 +2548,7 @@ msgstr ""
 #. step intro
 msgctxt "home/release-1"
 msgid ""
-"The first public release has six tests. Each comes with a guide and its "
+"The first public release has seven tests. Each comes with a guide and its "
 "files on Printables; four also have a scorecard, the first-layer guide has "
 "a step table and the flow guide a selector that works out the new value."
 msgstr ""
@@ -2590,6 +2596,13 @@ msgctxt "home/release-1"
 msgid ""
 "[Flow (extrusion multiplier)](page:flow): top surfaces filled without gaps "
 "or ridges, per filament. [Files on Printables](link:printables-flow)"
+msgstr ""
+
+#. point
+msgctxt "home/release-1"
+msgid ""
+"[Ironing](page:ironing): smooth top surfaces, with the ironing flow and "
+"speed for each filament. [Files on Printables](link:printables-ironing)"
 msgstr ""
 
 #. point
@@ -2716,9 +2729,10 @@ msgid ""
 "4. [Max volumetric flow](page:max-flow)\n"
 "5. [Pressure advance](page:pressure-advance)\n"
 "6. [Flow](page:flow)\n"
-"7. Retraction\n"
-"8. Dimensions\n"
-"9. Then the [IDEX tests](page:idex-alignment)"
+"7. [Ironing](page:ironing), if you use it\n"
+"8. Retraction\n"
+"9. Dimensions\n"
+"10. Then the [IDEX tests](page:idex-alignment)"
 msgstr ""
 
 #. table cell
@@ -2806,6 +2820,13 @@ msgctxt "home/order"
 msgid ""
 "**Pressure advance before flow:** the flow test reads top surfaces, which "
 "pressure advance changes."
+msgstr ""
+
+#. More: point
+msgctxt "home/order"
+msgid ""
+"**Ironing after flow:** the ironing flow is a percentage of a normal line, "
+"so the extrusion multiplier must be right first."
 msgstr ""
 
 #. More: point
@@ -5045,6 +5066,443 @@ msgid ""
 msgstr ""
 
 #. page title
+msgctxt "ironing"
+msgid "Ironing (flow and speed)"
+msgstr ""
+
+#. page nav_title
+msgctxt "ironing"
+msgid "Ironing"
+msgstr ""
+
+#. page description
+msgctxt "ironing"
+msgid ""
+"Find the ironing flow and speed that make top surfaces smooth: fifteen "
+"hexagons, each ironed with a different flow and speed, in one print."
+msgstr ""
+
+#. page intro
+msgctxt "ironing"
+msgid ""
+"Fifteen hexagons on one thin plate. The top of each one is ironed with a "
+"different amount of plastic (5 % to 25 %, the columns) and at a different "
+"speed (15, 30 and 60 mm/s, the rows). Look at the tops under a low light, "
+"run a fingernail over them, and pick the smoothest: its column and row "
+"labels are your ironing flow and speed.\n"
+"\n"
+"About 5 g of filament and **about 47 minutes**, with **no changes to your "
+"profiles**.\n"
+msgstr ""
+
+#. More: intro
+msgctxt "ironing"
+msgid ""
+"Each hexagon has its own modifier in PrusaSlicer, which sets the ironing "
+"flow and speed for that hexagon only. There is no custom G-code and no "
+"firmware command: the file works on any printer that PrusaSlicer can slice "
+"for. The labels and the plate around the hexagons are not ironed.\n"
+msgstr ""
+
+#. box title
+msgctxt "ironing"
+msgid "What you need"
+msgstr ""
+
+#. box column title
+msgctxt "ironing"
+msgid "To print"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid "The [test file](page:ironing#which-file)"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid ""
+"Your own printer, print and filament profiles, already working, with a "
+"**0.4 mm** nozzle"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid ""
+"The [temperature](page:temperature-tower) and the [flow](page:flow) already "
+"set"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid "The filament to test, **dry**: about 5 g"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid "A bed at least **180 mm** wide"
+msgstr ""
+
+#. box column title
+msgctxt "ironing"
+msgid "To read it"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid "A lamp you can move, or a phone torch"
+msgstr ""
+
+#. box item
+msgctxt "ironing"
+msgid "A fingernail"
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "ironing"
+msgid "Before printing"
+msgstr ""
+
+#. step title
+msgctxt "ironing/what-for"
+msgid "What it is for, and when to run it"
+msgstr ""
+
+#. point
+msgctxt "ironing/what-for"
+msgid ""
+"**Ironing** is a last pass of the hot nozzle over a top surface, with a "
+"trickle of plastic, to flatten the lines into a smooth, even top."
+msgstr ""
+
+#. point
+msgctxt "ironing/what-for"
+msgid ""
+"This test finds the **ironing flow** and the **ironing speed** that work "
+"for a filament. Run it **after flow**, once per filament, if you use "
+"ironing."
+msgstr ""
+
+#. photo alt
+msgctxt "ironing/what-for"
+msgid ""
+"The ironing test printed in yellow PETG: fifteen hexagons in five columns "
+"labelled 5 % to 25 % and three rows labelled 15, 30 and 60, on a thin "
+"joined plate"
+msgstr ""
+
+#. photo caption
+msgctxt "ironing/what-for"
+msgid ""
+"The print in PETG: flow from 5 % (left) to 25 % (right), speed 15, 30 and "
+"60 mm/s (front to back). Light from the back, so the ironed tops reflect it."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/what-for"
+msgid ""
+"Too little plastic leaves the **top lines visible**, in stripes. Too much "
+"makes the top **rough and bumpy**: the extra plastic gathers in small "
+"scales and ridges."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/what-for"
+msgid ""
+"Flow and speed work together. The flow is plastic per millimetre of path, "
+"so the speed does not change how much plastic goes down; it changes how "
+"long the hot nozzle stays on each spot. That is why the test is a grid and "
+"not a single row."
+msgstr ""
+
+#. More: point (beginner)
+msgctxt "ironing/what-for"
+msgid ""
+"Ironing makes tops look moulded, but it is slow: turn it on only for the "
+"parts that need a smooth top."
+msgstr ""
+
+#. step title
+msgctxt "ironing/which-file"
+msgid "Which file"
+msgstr ""
+
+#. point
+msgctxt "ironing/which-file"
+msgid ""
+"There is only one file: the 5 % steps are close enough to choose a value."
+msgstr ""
+
+#. table header
+msgctxt "ironing/which-file"
+msgid "File"
+msgstr ""
+
+#. table header
+msgctxt "ironing/which-file"
+msgid "Columns: flow"
+msgstr ""
+
+#. table header
+msgctxt "ironing/which-file"
+msgid "Rows: speed"
+msgstr ""
+
+#. table cell
+msgctxt "ironing/which-file"
+msgid "`ironing_5-25.3mf`"
+msgstr ""
+
+#. table cell
+msgctxt "ironing/which-file"
+msgid "15, 30, 60 mm/s"
+msgstr ""
+
+#. More: point
+msgctxt "ironing/which-file"
+msgid ""
+"The PrusaSlicer default, 15 % at 15 mm/s, is in the grid: the 15 % column, "
+"front row."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/which-file"
+msgid ""
+"The plate is 133 × 69 mm and three layers thick (about 0.6 mm): it fits any "
+"bed from 180 mm."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/which-file"
+msgid ""
+"The file sets the spacing between ironing passes to 0.1 mm, the PrusaSlicer "
+"default. A closer spacing adds plastic exactly like a higher flow, so "
+"changing both would blur the reading."
+msgstr ""
+
+#. More: point (expert)
+msgctxt "ironing/which-file"
+msgid ""
+"On an IDEX or multi-tool printer, assign the object to the tool you "
+"calibrate (right-click › Change extruder)."
+msgstr ""
+
+#. step title
+msgctxt "ironing/before-print"
+msgid "Before you start"
+msgstr ""
+
+#. point
+msgctxt "ironing/before-print"
+msgid ""
+"Nothing to change in your profiles: the file turns ironing on for the "
+"hexagons only and sets their flow and speed."
+msgstr ""
+
+#. point
+msgctxt "ironing/before-print"
+msgid ""
+"**Clean the nozzle** before printing. Plastic stuck on the nozzle can drop "
+"onto a hexagon as a blob."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/before-print"
+msgid ""
+"The layer height is forced to **0.2 mm**, with **one perimeter**, so that "
+"the plate is three solid layers and most of it is top surface."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/before-print"
+msgid ""
+"The first-layer height comes from your profile: anything from 0.15 to 0.32 "
+"mm gives the same three layers."
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "ironing"
+msgid "Print and read"
+msgstr ""
+
+#. step title
+msgctxt "ironing/open"
+msgid "Open, slice and print"
+msgstr ""
+
+#. point
+msgctxt "ironing/open"
+msgid ""
+"**File › Open project**, then **Slice now**. In the object list each "
+"hexagon has a modifier named after its flow and speed, for example `ironing "
+"15% 30 mm/s`."
+msgstr ""
+
+#. point
+msgctxt "ironing/open"
+msgid ""
+"Print it. **Leave the speed factor at 100 %** while it prints: it changes "
+"the ironing speed too, and the rows would no longer match their labels."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/open"
+msgid ""
+"The ironing is done on the last layer, hexagon by hexagon, and takes most "
+"of the print time."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/open"
+msgid ""
+"To check the file, look at the preview with the **Speed** legend: the three "
+"rows show different colours (15 and 30 mm/s can be close shades if your "
+"profile prints fast). The **Volumetric flow rate** legend shows them all in "
+"the lowest colour: ironing uses so little plastic that the scale, made for "
+"the other lines, cannot tell them apart."
+msgstr ""
+
+#. step title
+msgctxt "ironing/read"
+msgid "Read the tops"
+msgstr ""
+
+#. point
+msgctxt "ironing/read"
+msgid ""
+"Hold a light low and look at the **middle** of each hexagon, then tilt the "
+"plate until the light reflects off the tops."
+msgstr ""
+
+#. point
+msgctxt "ironing/read"
+msgid ""
+"**Too little:** the lines of the top layer still show, in stripes; the top "
+"looks streaky."
+msgstr ""
+
+#. point
+msgctxt "ironing/read"
+msgid ""
+"**Right:** an even top with no stripes and no bumps; at most a very fine "
+"texture. A fingernail glides over it."
+msgstr ""
+
+#. point
+msgctxt "ironing/read"
+msgid ""
+"**Too much:** small bumps or scales all over the top, ridges you feel with "
+"a fingernail."
+msgstr ""
+
+#. point
+msgctxt "ironing/read"
+msgid ""
+"Run a fingernail over the best ones and keep the smoothest. If two speeds "
+"feel the same, **take the faster one**: ironing is slow, and the fastest "
+"row that still looks right saves time on every print."
+msgstr ""
+
+#. photo alt
+msgctxt "ironing/read"
+msgid ""
+"Three hexagons of the front row of the same print side by side, with their "
+"labels: diagonal lines still visible at 5 %, an even top with a very fine "
+"texture at 15 %, a top covered in small bumps at 25 %"
+msgstr ""
+
+#. photo caption
+msgctxt "ironing/read"
+msgid ""
+"5 %, 15 % and 25 %, front row (15 mm/s), same photo, same light. 5 %: the "
+"top lines still show. 15 %: even. 25 %: too much plastic, small bumps all "
+"over. On this print the author felt the smoothest top at **15 % and 30 "
+"mm/s**, and ridges at 25 %."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "ironing/read"
+msgid ""
+"**Marks at the corners** of a hexagon: that is where the nozzle starts and "
+"ends each hexagon. Judge the middle."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "ironing/read"
+msgid ""
+"**A blob or a scratch** on one hexagon only: plastic that built up on the "
+"nozzle and dropped onto it or dragged across it, not a flow problem. Clean "
+"the nozzle and judge its neighbours."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "ironing/read"
+msgid ""
+"**Fine scratches** that show only under raking light come from handling. "
+"Read the overall texture, not the scratches."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/read"
+msgid ""
+"In the author's PETG print the best flow was the same as the PrusaSlicer "
+"default (15 %), but at twice the speed: 30 mm/s irons in half the time."
+msgstr ""
+
+#. step title
+msgctxt "ironing/save"
+msgid "Save the values"
+msgstr ""
+
+#. point
+msgctxt "ironing/save"
+msgid ""
+"Ironing is a **print setting**, in expert mode. Set **Print Settings › "
+"Infill › Ironing**: tick **Enable ironing**, choose the **Ironing Type** "
+"(usually **All top surfaces**) and type the **Flow rate** of your best "
+"hexagon."
+msgstr ""
+
+#. point
+msgctxt "ironing/save"
+msgid ""
+"Check that **Spacing between ironing passes**, on the same page, is **0.1 "
+"mm**: the flow you found is valid at that spacing."
+msgstr ""
+
+#. point
+msgctxt "ironing/save"
+msgid ""
+"Type its speed in **Print Settings › Speed › Ironing**, then **save the "
+"print preset** (the disk icon)."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/save"
+msgid ""
+"The values belong to the filament, but ironing is a print setting: keep one "
+"print preset per material, or turn ironing on for single objects "
+"(right-click › Add settings › Ironing, and › Speed for the ironing speed)."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/save"
+msgid ""
+"Ironing makes the print longer: use it on parts that need a smooth top, not "
+"on every print."
+msgstr ""
+
+#. More: point
+msgctxt "ironing/save"
+msgid "If you change the nozzle or the flow of the filament, run it again."
+msgstr ""
+
+#. page title
 msgctxt "license"
 msgid "License and credits"
 msgstr ""
@@ -6400,9 +6858,9 @@ msgstr ""
 #. More: point
 msgctxt "max-flow/how-it-works"
 msgid ""
-"PrusaSlicer's cooling logic (*Slow down if layer print time is below*, "
-"*Enable fan if below*) and the filament's max volumetric speed only see the "
-"slow speed: they never slow the bands down, and the fan stays at your "
+"PrusaSlicer's cooling logic (**Slow down if layer print time is below**, "
+"**Enable fan if below**) and the filament's max volumetric speed only see "
+"the slow speed: they never slow the bands down, and the fan stays at your "
 "filament's normal setting."
 msgstr ""
 
@@ -6658,8 +7116,8 @@ msgid ""
 "column, speeds up along the first straight, goes round the end, runs back "
 "along the second and brakes into the column. The engraved number is the "
 "flow at **full speed** on the straights. The test runs at your profile's "
-"**external perimeter acceleration** (*Print Settings › Speed › Acceleration "
-"control (advanced)*)."
+"**external perimeter acceleration** (**Print Settings › Speed › "
+"Acceleration control (advanced)**)."
 msgstr ""
 
 #. More: point
@@ -6702,7 +7160,7 @@ msgctxt "max-flow/firmware-limits"
 msgid ""
 "**Marlin:** `M203 E` caps the whole move, printing moves included (filament "
 "speed = flow ÷ 2.405). `M201 E` caps the extruder acceleration. **Prusa:** "
-"with *Emit to G-code*, the machine limits in the printer profile are what "
+"with **Emit to G-code**, the machine limits in the printer profile are what "
 "the printer uses; standard-0.4 fits every Prusa profile, hf-0.4 needs 262 "
 "mm/s (MK4/Core One normal mode, not stealth)."
 msgstr ""
@@ -10498,8 +10956,8 @@ msgid ""
 "end; the label, the hole and the ramp tongues seen from the side looked the "
 "same on every block. A column that does not change gets ✓ on every block: "
 "the flags and the columns that do change decide. The label and the smooth "
-"face are marked *Confirms only*; the hole is marked *Confirms* and is not "
-"counted at all."
+"face are marked **Confirms only**; the hole is marked **Confirms** and is "
+"not counted at all."
 msgstr ""
 
 #. More: point
@@ -12626,7 +13084,7 @@ msgstr ""
 msgctxt "features/temperature-tower/ramp"
 msgid ""
 "The tongues print at the bridge speed (25 mm/s) with the bridge fan: the "
-"file turns on PrusaSlicer's *Detect bridging perimeters* for this object. "
+"file turns on PrusaSlicer's **Detect bridging perimeters** for this object. "
 "The angle reached also depends on your fan; use the number to compare "
 "blocks: the angle at which the tongues start to fail drops as the "
 "temperature rises."

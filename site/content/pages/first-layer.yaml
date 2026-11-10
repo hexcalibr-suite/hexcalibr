@@ -28,7 +28,7 @@ need:
         - "The [ladder file](page:first-layer#which-file), and the map for your bed"
         - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
         - "Your own printer, print and filament profiles, already working; a clean bed"
-        - "A way to change Z **while printing**: the Z offset buttons in Mainsail or Fluidd, *Live Adjust Z* on a Prusa, babystepping on Marlin"
+        - "A way to change Z **while printing**: the Z offset buttons in Mainsail or Fluidd, **Live Adjust Z** on a Prusa, babystepping on Marlin"
         - "About 1 g of filament (the map 1 to 2.5 g)"
     - title: "To read it"
       items:
@@ -72,7 +72,7 @@ steps:
     title: "Before you start"
     points:
       - "**Write down the Z offset your printer shows now.** It is the starting point. Type it into the table below."
-      - "Find the Z buttons you will use while printing. Mainsail has a **±0.025** button: one click per hexagon. A Prusa's *Live Adjust Z* moves in small steps: turn it until the value has changed by 0.025."
+      - "Find the Z buttons you will use while printing. Mainsail has a **±0.025** button: one click per hexagon. A Prusa's **Live Adjust Z** moves in small steps: turn it until the value has changed by 0.025."
       - "Clean the bed. A greasy spot looks like a wrong Z offset."
     more:
       points:
@@ -144,7 +144,7 @@ steps:
       rows:
         - ["Klipper (Mainsail, Fluidd)", "After the print, `Z_OFFSET_APPLY_PROBE` (probe) or `Z_OFFSET_APPLY_ENDSTOP` (Z endstop), then `SAVE_CONFIG`"]
         - ["RatOS", "As on Klipper: the save icon next to the Z offset in Mainsail (checked on a RatRig V-Core 4 IDEX)"]
-        - ["Prusa (Buddy: MK4, Core One, XL, MINI)", "*Live Adjust Z* keeps the value for the sheet in use; on load-cell printers set *Printer Settings › General › Z offset* in PrusaSlicer instead"]
+        - ["Prusa (Buddy: MK4, Core One, XL, MINI)", "**Live Adjust Z** keeps the value for the sheet in use; on load-cell printers set **Printer Settings › General › Z offset** in PrusaSlicer instead"]
         - ["Marlin", "`M851 Z…` (probe) or babystep, then `M500`"]
 
   - part: "Check the whole bed"

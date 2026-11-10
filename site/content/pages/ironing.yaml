@@ -1,0 +1,126 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# Ironing test (hexcalibr-core v0.3.0: one plate, 5 x 3 regular hexagons, one ParameterModifier per
+# hexagon carrying its ironing_flowrate and ironing_speed; ironing_5-25.3mf = flow 5-25 % x speed 15/30/60 mm/s).
+# Facts come from suite/definitions/ironing.toml (hexcalibr-core). Photos: the owner's coarse PETG
+# print on the VC4, T0 (2026-11-10, speed factor 100 %); measured print time 47 min (Moonraker).
+# NOT in site.yaml yet: the owner decides when it goes public.
+id: ironing
+title: "Ironing (flow and speed)"
+nav_title: "Ironing"
+description: "Find the ironing flow and speed that make top surfaces smooth: fifteen hexagons, each ironed with a different flow and speed, in one print."
+numbered: true
+intro: |
+  Fifteen hexagons on one thin plate. The top of each one is ironed with a different amount of plastic (5 % to 25 %, the columns) and at a different speed (15, 30 and 60 mm/s, the rows). Look at the tops under a low light, run a fingernail over them, and pick the smoothest: its column and row labels are your ironing flow and speed.
+
+  About 5 g of filament and **about 47 minutes**, with **no changes to your profiles**.
+more:
+  intro: |
+    Each hexagon has its own modifier in PrusaSlicer, which sets the ironing flow and speed for that hexagon only. There is no custom G-code and no firmware command: the file works on any printer that PrusaSlicer can slice for. The labels and the plate around the hexagons are not ironed.
+need:
+  title: "What you need"
+  columns:
+    - title: "To print"
+      items:
+        - "The [test file](page:ironing#which-file)"
+        - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+        - "Your own printer, print and filament profiles, already working, with a **0.4 mm** nozzle"
+        - "The [temperature](page:temperature-tower) and the [flow](page:flow) already set"
+        - "The filament to test, **dry**: about 5 g"
+        - "A bed at least **180 mm** wide"
+    - title: "To read it"
+      items:
+        - "A lamp you can move, or a phone torch"
+        - "A fingernail"
+
+steps:
+  - part: "Before printing"
+
+  - id: what-for
+    title: "What it is for, and when to run it"
+    points:
+      - "**Ironing** is a last pass of the hot nozzle over a top surface, with a trickle of plastic, to flatten the lines into a smooth, even top."
+      - "This test finds the **ironing flow** and the **ironing speed** that work for a filament. Run it **after flow**, once per filament, if you use ironing."
+    photos:
+      - id: IR_overview_PETG_VC4
+        alt: "The ironing test printed in yellow PETG: fifteen hexagons in five columns labelled 5 % to 25 % and three rows labelled 15, 30 and 60, on a thin joined plate"
+        caption: "The print in PETG: flow from 5 % (left) to 25 % (right), speed 15, 30 and 60 mm/s (front to back). Light from the back, so the ironed tops reflect it."
+        aspect: "2/1"
+        shot: "DONE: _A646252 (2026-11-10), the owner's coarse PETG print (v0.3.0, T0, speed factor 100 %), from above, light reflected off the tops, dark background; cropped 2:1, sRGB."
+    more:
+      points:
+        - "Too little plastic leaves the **top lines visible**, in stripes. Too much makes the top **rough and bumpy**: the extra plastic gathers in small scales and ridges."
+        - "Flow and speed work together. The flow is plastic per millimetre of path, so the speed does not change how much plastic goes down; it changes how long the hot nozzle stays on each spot. That is why the test is a grid and not a single row."
+        - beginner: "Ironing makes tops look moulded, but it is slow: turn it on only for the parts that need a smooth top."
+
+  - id: which-file
+    title: "Which file"
+    printables: printables-ironing
+    table:
+      head: ["File", "Columns: flow", "Rows: speed"]
+      rows:
+        - ["`ironing_5-25.3mf`", "5, 10, 15, 20, 25 %", "15, 30, 60 mm/s"]
+    points:
+      - "There is only one file: the 5 % steps are close enough to choose a value."
+    more:
+      points:
+        - "The PrusaSlicer default, 15 % at 15 mm/s, is in the grid: the 15 % column, front row."
+        - "The plate is 133 × 69 mm and three layers thick (about 0.6 mm): it fits any bed from 180 mm."
+        - "The file sets the spacing between ironing passes to 0.1 mm, the PrusaSlicer default. A closer spacing adds plastic exactly like a higher flow, so changing both would blur the reading."
+        - expert: "On an IDEX or multi-tool printer, assign the object to the tool you calibrate (right-click › Change extruder)."
+
+  - id: before-print
+    title: "Before you start"
+    points:
+      - "Nothing to change in your profiles: the file turns ironing on for the hexagons only and sets their flow and speed."
+      - "**Clean the nozzle** before printing. Plastic stuck on the nozzle can drop onto a hexagon as a blob."
+    more:
+      points:
+        - "The layer height is forced to **0.2 mm**, with **one perimeter**, so that the plate is three solid layers and most of it is top surface."
+        - "The first-layer height comes from your profile: anything from 0.15 to 0.32 mm gives the same three layers."
+
+  - part: "Print and read"
+
+  - id: open
+    title: "Open, slice and print"
+    points:
+      - "**File › Open project**, then **Slice now**. In the object list each hexagon has a modifier named after its flow and speed, for example `ironing 15% 30 mm/s`."
+      - "Print it. **Leave the speed factor at 100 %** while it prints: it changes the ironing speed too, and the rows would no longer match their labels."
+    more:
+      points:
+        - "The ironing is done on the last layer, hexagon by hexagon, and takes most of the print time."
+        - "To check the file, look at the preview with the **Speed** legend: the three rows show different colours (15 and 30 mm/s can be close shades if your profile prints fast). The **Volumetric flow rate** legend shows them all in the lowest colour: ironing uses so little plastic that the scale, made for the other lines, cannot tell them apart."
+
+  - id: read
+    title: "Read the tops"
+    points:
+      - "Hold a light low and look at the **middle** of each hexagon, then tilt the plate until the light reflects off the tops."
+      - "**Too little:** the lines of the top layer still show, in stripes; the top looks streaky."
+      - "**Right:** an even top with no stripes and no bumps; at most a very fine texture. A fingernail glides over it."
+      - "**Too much:** small bumps or scales all over the top, ridges you feel with a fingernail."
+      - "Run a fingernail over the best ones and keep the smoothest. If two speeds feel the same, **take the faster one**: ironing is slow, and the fastest row that still looks right saves time on every print."
+    photos:
+      - id: IR_compare_PETG_VC4
+        alt: "Three hexagons of the front row of the same print side by side, with their labels: diagonal lines still visible at 5 %, an even top with a very fine texture at 15 %, a top covered in small bumps at 25 %"
+        caption: "5 %, 15 % and 25 %, front row (15 mm/s), same photo, same light. 5 %: the top lines still show. 15 %: even. 25 %: too much plastic, small bumps all over. On this print the author felt the smoothest top at **15 % and 30 mm/s**, and ridges at 25 %."
+        aspect: "39/14"
+        shot: "DONE: three crops from the same photo _A646252 (2026-11-10), so light and scale match; each crop keeps the column label (as in the flow compare); sRGB."
+    more:
+      points:
+        - misread: "**Marks at the corners** of a hexagon: that is where the nozzle starts and ends each hexagon. Judge the middle."
+        - misread: "**A blob or a scratch** on one hexagon only: plastic that built up on the nozzle and dropped onto it or dragged across it, not a flow problem. Clean the nozzle and judge its neighbours."
+        - misread: "**Fine scratches** that show only under raking light come from handling. Read the overall texture, not the scratches."
+        - "In the author's PETG print the best flow was the same as the PrusaSlicer default (15 %), but at twice the speed: 30 mm/s irons in half the time."
+
+  - id: save
+    title: "Save the values"
+    points:
+      - "Ironing is a **print setting**, in expert mode. Set **Print Settings › Infill › Ironing**: tick **Enable ironing**, choose the **Ironing Type** (usually **All top surfaces**) and type the **Flow rate** of your best hexagon."
+      - "Check that **Spacing between ironing passes**, on the same page, is **0.1 mm**: the flow you found is valid at that spacing."
+      - "Type its speed in **Print Settings › Speed › Ironing**, then **save the print preset** (the disk icon)."
+    more:
+      points:
+        - "The values belong to the filament, but ironing is a print setting: keep one print preset per material, or turn ironing on for single objects (right-click › Add settings › Ironing, and › Speed for the ironing speed)."
+        - "Ironing makes the print longer: use it on parts that need a smooth top, not on every print."
+        - "If you change the nozzle or the flow of the filament, run it again."

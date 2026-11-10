@@ -16,7 +16,7 @@ callouts:
 steps:
   - id: release-1
     title: "What's in release 1"
-    intro: "The first public release has six tests. Each comes with a guide and its files on Printables; four also have a scorecard, the first-layer guide has a step table and the flow guide a selector that works out the new value."
+    intro: "The first public release has seven tests. Each comes with a guide and its files on Printables; four also have a scorecard, the first-layer guide has a step table and the flow guide a selector that works out the new value."
     points:
       - "[First layer and Z offset](page:first-layer): the nozzle height that squishes the first layer just right, stepped live. [Files on Printables](link:printables-first-layer)"
       - "[Temperature tower](page:temperature-tower): the nozzle temperature for a filament. [Files on Printables](link:printables-temperature-tower)"
@@ -24,6 +24,7 @@ steps:
       - "[Pressure advance](page:pressure-advance): sharp corners and even walls, per filament and firmware. [Files on Printables](link:printables-pressure-advance)"
       - "[IDEX and multi-tool alignment](page:idex-alignment): the XY offset between two toolheads, over the whole bed. [Files on Printables](link:printables-idex-alignment)"
       - "[Flow (extrusion multiplier)](page:flow): top surfaces filled without gaps or ridges, per filament. [Files on Printables](link:printables-flow)"
+      - "[Ironing](page:ironing): smooth top surfaces, with the ironing flow and speed for each filament. [Files on Printables](link:printables-ironing)"
       - "**Coming next:** retraction, and dimensions and fit. They are listed in grey in the contents."
       - "The files are updated often: download them from Printables, not from a re-upload, to get the latest version."
     printables: printables-collection
@@ -50,7 +51,7 @@ steps:
       head: ["", "Fast path", "Full path"]
       rows:
         - ["When", "A new filament on a printer that already prints well", "A new printer, or after changing hotend, extruder or other hardware"]
-        - ["Tests", "1. [Temperature](page:temperature-tower) (if the filament is new to you, prints fast or strings)\n2. [Pressure advance](page:pressure-advance)\n3. [Flow](page:flow)", "1. [Firmware checks](page:before-you-start)\n2. [First layer](page:first-layer)\n3. [Temperature](page:temperature-tower)\n4. [Max volumetric flow](page:max-flow)\n5. [Pressure advance](page:pressure-advance)\n6. [Flow](page:flow)\n7. Retraction\n8. Dimensions\n9. Then the [IDEX tests](page:idex-alignment)"]
+        - ["Tests", "1. [Temperature](page:temperature-tower) (if the filament is new to you, prints fast or strings)\n2. [Pressure advance](page:pressure-advance)\n3. [Flow](page:flow)", "1. [Firmware checks](page:before-you-start)\n2. [First layer](page:first-layer)\n3. [Temperature](page:temperature-tower)\n4. [Max volumetric flow](page:max-flow)\n5. [Pressure advance](page:pressure-advance)\n6. [Flow](page:flow)\n7. [Ironing](page:ironing), if you use it\n8. Retraction\n9. Dimensions\n10. Then the [IDEX tests](page:idex-alignment)"]
         - ["Time", "About 1 h 15 min of printing: pressure advance 15 min, flow two prints of 30 min. Add 40 min for the temperature tower", "Each guide gives the time of its test, plus waiting"]
         - ["Filament", "About 20 g: pressure advance 5 g, flow two prints of 8 g. Add 7 to 10 g for the temperature tower", "Each guide gives the grams of its test"]
     more:
@@ -67,5 +68,6 @@ steps:
       - "**Temperature before everything else for a filament:** flow, pressure advance and retraction all change with temperature."
       - "**Maximum volumetric flow before pressure advance:** pressure advance is calibrated at speeds the hotend can really melt."
       - "**Pressure advance before flow:** the flow test reads top surfaces, which pressure advance changes."
+      - "**Ironing after flow:** the ironing flow is a percentage of a normal line, so the extrusion multiplier must be right first."
       - "**Retraction last:** good pressure advance often removes most stringing by itself."
       - "The tests not written yet are listed in grey: they arrive one at a time."

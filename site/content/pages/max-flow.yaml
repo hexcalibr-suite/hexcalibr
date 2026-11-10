@@ -172,7 +172,7 @@ steps:
       points:
         - "The file asks PrusaSlicer for one slow speed (13.5 mm/s on standard-0.4). At the start of each band, `M220 S<percent>` tells the printer to run everything that many times faster: `M220 S1010` is 10.1 ×."
         - "**Flow = speed × line area.** standard-0.4, band 26: 13.5 mm/s × 10.10 × 0.1907 mm² = 26.0 mm³/s."
-        - "PrusaSlicer's cooling logic (*Slow down if layer print time is below*, *Enable fan if below*) and the filament's max volumetric speed only see the slow speed: they never slow the bands down, and the fan stays at your filament's normal setting."
+        - "PrusaSlicer's cooling logic (**Slow down if layer print time is below**, **Enable fan if below**) and the filament's max volumetric speed only see the slow speed: they never slow the bands down, and the fan stays at your filament's normal setting."
         - "`M220` works on Marlin, Prusa firmware (MK4/MK4S, MK3.9/3.5, Core One, XL, MINI, MK3), Klipper and RepRapFirmware: one file for every printer."
         - "`M220` also speeds up travel and retraction moves. Your firmware limits cap them."
         - expert: "The factors go up to about 2900 %. One unconfirmed report says factors of 1000 % or more misbehave on an unnamed printer; no firmware source we read clamps them. If yours does, the bands above it stop getting faster and look better than their label: generate a file with `--max-factor 999`."
@@ -196,7 +196,7 @@ steps:
         - ["extreme-0.8", "180", "236 mm/s", "1670 mm/s²", "74.8 mm/s"]
         - ["extreme-1.0", "180", "151 mm/s", "490 mm/s²", "74.8 mm/s"]
     more:
-      intro: "**Read the middle of the two long straights.** The nozzle leaves the column, speeds up along the first straight, goes round the end, runs back along the second and brakes into the column. The engraved number is the flow at **full speed** on the straights. The test runs at your profile's **external perimeter acceleration** (*Print Settings › Speed › Acceleration control (advanced)*)."
+      intro: "**Read the middle of the two long straights.** The nozzle leaves the column, speeds up along the first straight, goes round the end, runs back along the second and brakes into the column. The engraved number is the flow at **full speed** on the straights. The test runs at your profile's **external perimeter acceleration** (**Print Settings › Speed › Acceleration control (advanced)**)."
       table:
         head: ["Top band of the file", "1000 mm/s²", "3000 mm/s²", "4000 mm/s²", "10000 mm/s²"]
         rows:
@@ -214,7 +214,7 @@ steps:
         - "**Klipper's `minimum_cruise_ratio`** (default 0.5, `[printer]`; formerly `max_accel_to_decel`) limits the peak speed of a short move. The straights are long enough that it changes nothing at 4000 mm/s²; at 1000 mm/s² the fast 0.4 files peak a little below their top label (table)."
         - "**The round end:** the nozzle keeps the band's speed through it up to about 140–170 mm/s and slows to that on faster bands (Klipper's default `square_corner_velocity` 5). Do not read it; read the straights."
         - "`[extruder] max_extrude_cross_section` needs no change: the tower's line is 0.30 × nozzle², the default limit 4 × nozzle². Klipper has no extruder speed limit on printing moves; `max_extrude_only_velocity` only matters for the [extrude-in-air check](page:max-flow#air)."
-        - "**Marlin:** `M203 E` caps the whole move, printing moves included (filament speed = flow ÷ 2.405). `M201 E` caps the extruder acceleration. **Prusa:** with *Emit to G-code*, the machine limits in the printer profile are what the printer uses; standard-0.4 fits every Prusa profile, hf-0.4 needs 262 mm/s (MK4/Core One normal mode, not stealth)."
+        - "**Marlin:** `M203 E` caps the whole move, printing moves included (filament speed = flow ÷ 2.405). `M201 E` caps the extruder acceleration. **Prusa:** with **Emit to G-code**, the machine limits in the printer profile are what the printer uses; standard-0.4 fits every Prusa profile, hf-0.4 needs 262 mm/s (MK4/Core One normal mode, not stealth)."
         - "**Bed slingers at 1000–3000 mm/s²:** the straights reach the label, but hold it for less time on the fast 0.4 files. Prefer the larger-nozzle file of your tier if you have that nozzle: the same flow at a lower speed."
         - expert: "`python3 -I calib.py max-flow --preset hf-0.4 --effective --accel 4000 --max-velocity 300 --min-cruise-ratio 0.5` prints the flow each band really reaches with your own limits."
 

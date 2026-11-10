@@ -112,7 +112,7 @@ features:
       intro: "55° is next to the right corner, then 65° and 75°, and 80° at the back. They all reach 5 mm out, so only the angle changes: at 75° and 80° each layer hangs almost entirely in the air, where hot plastic droops. Write the angle in the Notes column (55, 65, 75, 80, or 0 if none)."
       points:
         - beginner: "Turn the tower so you look up at the undersides of the tongues under a lamp. Start from the 55° tongue next to the right corner, go towards the back and stop at the first rough one."
-        - expert: "The tongues print at the bridge speed (25 mm/s) with the bridge fan: the file turns on PrusaSlicer's *Detect bridging perimeters* for this object. The angle reached also depends on your fan; use the number to compare blocks: the angle at which the tongues start to fail drops as the temperature rises."
+        - expert: "The tongues print at the bridge speed (25 mm/s) with the bridge fan: the file turns on PrusaSlicer's **Detect bridging perimeters** for this object. The angle reached also depends on your fan; use the number to compare blocks: the angle at which the tongues start to fail drops as the temperature rises."
         - misread: "The 80° tongue is very flat and may droop a little on every block. That says nothing about temperature: compare where the droop **starts** from block to block."
         - misread: "Seen from the side, the tongues may look the same on every block: on the author's PETG tower (270 → 200 °C) they did. Judge the undersides; if they too look the same, mark ✓ on every block."
 
