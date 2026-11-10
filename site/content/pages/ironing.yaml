@@ -101,6 +101,11 @@ steps:
       - "**Too much:** small bumps or scales all over the top, ridges you feel with a fingernail."
       - "Run a fingernail over the best ones and keep the smoothest. If two speeds feel the same, **take the faster one**: ironing is slow, and the fastest row that still looks right saves time on every print."
     photos:
+      - id: IR_reflection_PETG_VC4
+        alt: "The whole ironing grid photographed with a low light reflected off the tops: the 5 % and 10 % hexagons of the 60 mm/s row look dotted, the others even and glossy"
+        caption: "The light reflected off the tops, at a low angle. In the 60 mm/s row the 5 % and 10 % hexagons look dotted: too little plastic at that speed. From 15 % on the tops look even. The scratch on 10 % at 30 mm/s is plastic dropped from the nozzle, not the setting."
+        aspect: "600/269"
+        shot: "DONE: _A646247 (2026-11-10), the owner's reflection shot (low specular light), cropped around the grid with its labels; sRGB."
       - id: IR_compare_PETG_VC4
         alt: "Three hexagons of the front row of the same print side by side, with their labels: diagonal lines still visible at 5 %, an even top with a very fine texture at 15 %, a top covered in small bumps at 25 %"
         caption: "5 %, 15 % and 25 %, front row (15 mm/s), same photo, same light. 5 %: the top lines still show. 15 %: even. 25 %: too much plastic, small bumps all over. On this print the author felt the smoothest top at **15 % and 30 mm/s**, and ridges at 25 %."

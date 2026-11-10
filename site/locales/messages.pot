@@ -5411,6 +5411,23 @@ msgstr ""
 #. photo alt
 msgctxt "ironing/read"
 msgid ""
+"The whole ironing grid photographed with a low light reflected off the "
+"tops: the 5 % and 10 % hexagons of the 60 mm/s row look dotted, the others "
+"even and glossy"
+msgstr ""
+
+#. photo caption
+msgctxt "ironing/read"
+msgid ""
+"The light reflected off the tops, at a low angle. In the 60 mm/s row the 5 "
+"% and 10 % hexagons look dotted: too little plastic at that speed. From 15 "
+"% on the tops look even. The scratch on 10 % at 30 mm/s is plastic dropped "
+"from the nozzle, not the setting."
+msgstr ""
+
+#. photo alt
+msgctxt "ironing/read"
+msgid ""
 "Three hexagons of the front row of the same print side by side, with their "
 "labels: diagonal lines still visible at 5 %, an even top with a very fine "
 "texture at 15 %, a top covered in small bumps at 25 %"
