@@ -49,7 +49,7 @@ steps:
         alt: "The retraction ring printed in yellow PETG: eleven small hexagonal pillars on a thin ring, with a label tab under each gap from 0.0 to 2.0"
         caption: "The direct-drive ring in PETG: eleven pillars, eleven gaps, from 0.0 to 2.0 mm of retraction. The labels are outside the ring, under each gap."
         aspect: "3/2"
-        shot: "PROVISIONAL: _A646262 (2026-11-11), the owner's direct-drive PETG print from above at an angle, brightened; warm light makes the yellow look gold. A redo under the same light as the side shots (_A646268) would match the colour."
+        shot: "DONE: _A646280 (2026-11-11), the whole ring from the front, gap 0.0 facing the camera, diffuse front light (no back light), wide foam background; cropped 3:2, sRGB."
     more:
       points:
         - "Wet filament strings at any retraction length, and so does a nozzle that is too hot. If every gap has strings, dry the filament and check the temperature before you change the retraction."
