@@ -25,7 +25,7 @@ steps:
       - "[IDEX and multi-tool alignment](page:idex-alignment): the XY offset between two toolheads, over the whole bed. [Files on Printables](link:printables-idex-alignment)"
       - "[Flow (extrusion multiplier)](page:flow): top surfaces filled without gaps or ridges, per filament. [Files on Printables](link:printables-flow)"
       - "[Ironing](page:ironing): smooth top surfaces, with the ironing flow and speed for each filament. [Files on Printables](link:printables-ironing)"
-      - "[Retraction](page:retraction): the shortest retraction that stops stringing, one length per gap of a ring of pillars, in a 16-minute print."
+      - "[Retraction](page:retraction): the shortest retraction that stops stringing, one length per gap of a ring of pillars, in a 16-minute print. [Files on Printables](link:printables-retraction)"
       - "**Coming next:** dimensions and fit. It is listed in grey in the contents."
       - "The files are updated often: download them from Printables, not from a re-upload, to get the latest version."
     printables: printables-collection

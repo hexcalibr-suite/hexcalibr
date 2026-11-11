@@ -2755,7 +2755,8 @@ msgstr ""
 msgctxt "home/release-1"
 msgid ""
 "[Retraction](page:retraction): the shortest retraction that stops "
-"stringing, one length per gap of a ring of pillars, in a 16-minute print."
+"stringing, one length per gap of a ring of pillars, in a 16-minute print. "
+"[Files on Printables](link:printables-retraction)"
 msgstr ""
 
 #. point

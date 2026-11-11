@@ -7,7 +7,7 @@
 # (site/js/retraction.js). Design: docs/phase2/retraction-proposal.md (workspace repo), sections 6-7.
 # Photos: the owner's direct-drive print in yellow PETG on the VC4, T0, 2026-11-11 (profile 0.8 mm);
 # measured print time 16.3 min (Moonraker print_duration), 1.21 m of filament.
-# NOT on Printables yet; the owner decides when it goes public.
+# Printables: model 1909756 (published 2026-11-11).
 id: retraction
 title: "Retraction"
 nav_title: "Retraction"
@@ -57,6 +57,7 @@ steps:
 
   - id: which-file
     title: "Which file"
+    printables: printables-retraction
     table:
       head: ["File", "Extruder", "Gaps: retraction length"]
       rows:
