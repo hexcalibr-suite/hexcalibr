@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# The retraction test's G-code rewriter: the reader drops the G-code exported
+# from the retraction ring 3MF and gets back a file where each gap between two
+# pillars has its own retraction length. The code is site/js/retraction.js
+# (and site/js/bgcode.js for binary G-code); the page glue is
+# sitegen/render.py TOOL_RETRACTION. Nothing is uploaded.
+id: retraction-rewriter
+kind: tool
+tool: retraction
+title: "Retraction rewriter"
+nav_title: "Retraction rewriter"
+breadcrumb: "Tool"
+description: "Drop the G-code of the retraction ring: each gap between two pillars gets its own retraction length, and you download the file to print. Runs in your browser."
+intro: |
+  The retraction test prints a ring of pillars, and each gap between two pillars needs its own retraction length. PrusaSlicer can't change retraction inside one print, so this page does it on the G-code you export: **slice the 3MF as it is, export the G-code, drop it here, print the file you download.**
+
+  Nothing is uploaded: the file is read and rewritten in your browser.
+callouts:
+  - kind: info
+    text: "Takes plain .gcode and binary .bgcode, and always gives back plain .gcode, which every printer prints. Only the retractions on the travels between neighbouring pillars change; every other line stays as PrusaSlicer wrote it."

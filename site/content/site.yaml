@@ -45,8 +45,8 @@ contents:
         note: "filament · after pressure advance"
       - page: ironing
         note: "filament · optional, after flow"
-      - planned: "Retraction"
-        note: "filament"
+      - page: retraction
+        note: "filament · after pressure advance"
       - planned: "Dimensions, shrinkage and fit"
         note: "printer + filament"
   - group: "IDEX and multi-tool"
@@ -60,6 +60,9 @@ contents:
       - page: max-flow-scorecard
       - page: pressure-advance-scorecard
       - page: idex-alignment-scorecard
+  - group: "Tools"
+    entries:
+      - page: retraction-rewriter
   - group: "About"
     entries:
       - page: further-reading

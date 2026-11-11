@@ -1,0 +1,127 @@
+# SPDX-FileCopyrightText: 2026 Matteo Beretta
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# Retraction test (hexcalibr-core suite/definitions/retraction.toml v0.1.0): a ring of N hexagonal
+# pillars, one retraction length per gap. The 3MF changes nothing about retraction: it carries one
+# comment (;HEXCALIBR retraction v1 ...) and the page retraction-rewriter rewrites the exported G-code
+# (site/js/retraction.js). Design: docs/phase2/retraction-proposal.md (workspace repo), sections 6-7.
+# Photos: the owner's direct-drive print in yellow PETG on the VC4, T0, 2026-11-11 (profile 0.8 mm);
+# measured print time 16.3 min (Moonraker print_duration), 1.21 m of filament.
+# NOT on Printables yet; the owner decides when it goes public.
+id: retraction
+title: "Retraction"
+nav_title: "Retraction"
+description: "Find the shortest retraction that stops stringing: a ring of pillars where every gap gets its own retraction length, in one 16-minute print."
+numbered: true
+intro: |
+  A ring of small pillars. Every time the nozzle jumps from one pillar to the next it retracts, and **each gap of the ring gets a different retraction length**, written on the label under it. Look at the ring one gap at a time and pick the **shortest length with no strings**: that is your retraction length.
+
+  About 4 g of filament and **about 16 minutes**, with **no changes to your profiles**. One extra step: the G-code goes through a [page of this site](page:retraction-rewriter) before you print it.
+more:
+  intro: |
+    PrusaSlicer has one retraction length for the whole print, so the 3MF can't set a different one per gap. It only adds a comment to the G-code; the [retraction rewriter](page:retraction-rewriter) reads it, finds the pillars and changes the retractions between them. That works on every firmware, Prusa, Klipper, Marlin and RepRapFirmware, with no firmware retraction and no printer settings to change.
+need:
+  title: "What you need"
+  columns:
+    - title: "To print"
+      items:
+        - "The [test file](page:retraction#which-file) for your extruder: direct drive or bowden"
+        - "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+        - "Your own printer, print and filament profiles, already working, with a **0.4 mm** nozzle and a retraction length **above 0**"
+        - "The [temperature](page:temperature-tower) and [pressure advance](page:pressure-advance) already set"
+        - "The filament to test, **dry**: about 4 g"
+        - "A bed at least **110 mm** wide"
+    - title: "To read it"
+      items:
+        - "A lamp"
+        - "Something dark to put inside the ring: a card, a phone face down"
+
+steps:
+  - part: "Before printing"
+
+  - id: what-for
+    title: "What it is for, and when to run it"
+    points:
+      - "**Retraction** pulls the filament back a little before each travel, so the nozzle doesn't ooze while it moves. Too little leaves **strings** and **blobs**; too much costs time and, on a direct-drive extruder, can pull molten plastic up where it jams."
+      - "This test finds the **shortest length that stops the strings** for one filament. Run it **after the temperature and pressure advance**: a nozzle that is too hot strings at any length, and pressure advance changes how much plastic is left in the nozzle when it stops."
+    photos:
+      - id: RT_overview_PETG_VC4
+        alt: "The retraction ring printed in yellow PETG: eleven small hexagonal pillars on a thin ring, with a label tab under each gap from 0.0 to 2.0"
+        caption: "The direct-drive ring in PETG: eleven pillars, eleven gaps, from 0.0 to 2.0 mm of retraction. The labels are outside the ring, under each gap."
+        aspect: "3/2"
+        shot: "PROVISIONAL: _A646262 (2026-11-11), the owner's direct-drive PETG print from above at an angle, brightened; warm light makes the yellow look gold. A redo under the same light as the side shots (_A646268) would match the colour."
+    more:
+      points:
+        - "Wet filament strings at any retraction length, and so does a nozzle that is too hot. If every gap has strings, dry the filament and check the temperature before you change the retraction."
+        - beginner: "If your prints have no strings today, there is no need to run it: the test is for filaments that string, or for a new extruder or hotend."
+
+  - id: which-file
+    title: "Which file"
+    table:
+      head: ["File", "Extruder", "Gaps: retraction length"]
+      rows:
+        - ["`retraction_dd_0-2.3mf`", "direct drive", "11 gaps, 0 to 2.0 mm in steps of 0.2"]
+        - ["`retraction_bowden_0-6.3mf`", "bowden", "13 gaps, 0 to 6.0 mm in steps of 0.5"]
+    points:
+      - "Pick the file for your extruder. The gaps go **counter-clockwise** from the front, and the last gap closes the ring: 2.0 (or 6.0) sits next to 0."
+    more:
+      points:
+        - "The direct-drive ring is 95 mm across, the bowden ring 107 mm, both 12.6 mm tall. Each gap is about 15 mm wide."
+        - "The pillars are hollow, with two walls and a closed top, so all of the time goes into the travels you are testing."
+        - expert: "On an IDEX or multi-tool printer, assign the object to the tool you calibrate (right-click › Change extruder)."
+
+  - id: before-print
+    title: "Before you start"
+    points:
+      - "Nothing to change in your profiles. Only check that your retraction length is **above 0** (Printer Settings › Extruder 1 › Retraction › Length, or the Filament Overrides one): the page changes the retractions PrusaSlicer writes, and can't add them if there are none."
+      - "**Clean the nozzle** before printing. Plastic stuck on the nozzle drops on the pillars as blobs that have nothing to do with retraction."
+    more:
+      points:
+        - "**Firmware retraction** must be off (Printer Settings › General › Firmware › Use firmware retraction): with it on, the G-code has no lengths to change. The page tells you if it is on."
+        - "**Arc fitting** must be off (Print Settings › Advanced). It is off by default."
+        - "The layer height is forced to **0.2 mm**. Wipe, z-hop, the retraction speed and the extra length on restart stay as your profile has them; the page keeps them and changes only the length."
+
+  - part: "Print and read"
+
+  - id: open
+    title: "Open, slice, rewrite and print"
+    points:
+      - "**File › Open project**, then **Slice now**, then **Export G-code**. Binary G-code (`.bgcode`) is fine."
+      - "Open the [retraction rewriter](page:retraction-rewriter) and drop the file on it. It shows a table with every gap and the number of travels it rewrote, and a button to **download the file to print**."
+      - "Print the downloaded file, not the one PrusaSlicer exported. Its name ends in `_retraction-0-2.gcode` (or `-0-6`)."
+    more:
+      points:
+        - "Nothing is uploaded: the page reads and rewrites the file in your browser."
+        - "The PrusaSlicer preview of the original file shows your own retraction everywhere: the change is only in the downloaded file. Its first ring layer has a line `;HEXCALIBR rewritten` that says how many retractions it changed."
+        - "If you print the original file by mistake, nothing bad happens: every gap gets your own retraction, and the test shows nothing."
+        - "On the author's printer the ring took **16 minutes**, plus the start routine."
+
+  - id: read
+    title: "Read the gaps"
+    points:
+      - "Put something dark **inside** the ring, light it from the side, and look at **one gap at a time** from outside, at the height of the pillars."
+      - "**Too short:** strings across the gap, at many heights, and blobs on the sides of the two pillars that face the gap."
+      - "**Right:** the sides facing the gap are as clean as the others, and the gap is empty. At most one very fine hair."
+      - "Start from 0 and go round the ring: your length is the **first gap that is clean**. If the next one or two look just as clean, keep the first: a longer retraction only costs time."
+    photos:
+      - id: RT_compare_PETG_VC4
+        alt: "Four gaps of the same PETG ring: 0.0 full of strings with blobs on the pillar sides, 0.2 still with strings at many heights, 0.4 and 0.8 clean with only a fine hair at the top"
+        caption: "The same ring at 0.0, 0.2, 0.4 and 0.8 mm (top left to bottom right). 0.0: strings and blobs. 0.2: fewer, but still strings at every height. 0.4: clean. 0.8 (the author's profile): just as clean. In this PETG the answer is **0.4 mm**."
+        aspect: "2340/2052"
+        shot: "DONE: crops of the centred gap from _A646268, _A646269, _A646270 and _A646272 (2026-11-11), same light and framing, label tab in each crop; sRGB."
+    more:
+      points:
+        - misread: "**One fine hair at the top**, running over several gaps at the same height: it shows at every length, so it is not the retraction. Judge the sides of the pillars and the middle of the gap."
+        - misread: "**Strings in the gap next to 0:** the pillar between 0 and the next gap collects the ooze of the 0 gap, and its hairs hang into its other side too. Judge the next gap by its other pillar."
+        - misread: "**A blob on one pillar only**, on the top or on a side that doesn't face a gap: plastic dropped from the nozzle. Clean the nozzle and judge the neighbours."
+        - "On a direct-drive extruder the change usually happens in the first few gaps. If even the longest gap strings, check the filament (dry it) and the temperature first; then print the bowden file, which goes further."
+
+  - id: save
+    title: "Save the value"
+    points:
+      - "The best place is the filament: **Filament Settings › Filament Overrides › Retraction › Length**, tick it and type your length, then **save the filament preset**. Retraction depends on the filament, so each one keeps its own."
+      - "Or, for every filament on that printer: **Printer Settings › Extruder 1 › Retraction › Length**, then save the printer preset."
+    more:
+      points:
+        - "If you change the nozzle, the hotend or the extruder, run it again."
+        - "The length you found is valid with your retraction speed and wipe settings: change those, and check it again."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HexCalibr docs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10\n"
+"POT-Creation-Date: 2026-11-11\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -858,6 +858,156 @@ msgid ""
 "1.10): check the value in Filament Settings › Filament."
 msgstr ""
 
+#. interface: rt_drop
+msgctxt "ui/rt_drop"
+msgid "Drop the G-code you exported here (.gcode or .bgcode)"
+msgstr ""
+
+#. interface: rt_choose
+msgctxt "ui/rt_choose"
+msgid "Choose the file"
+msgstr ""
+
+#. interface: rt_reading
+msgctxt "ui/rt_reading"
+msgid "Reading %s…"
+msgstr ""
+
+#. interface: rt_working
+msgctxt "ui/rt_working"
+msgid "Rewriting…"
+msgstr ""
+
+#. interface: rt_done
+msgctxt "ui/rt_done"
+msgid ""
+"Done: %d retractions rewritten on %d gaps. %d others kept as your profile "
+"has them (%s mm): base, tops, layer changes."
+msgstr ""
+
+#. interface: rt_gap
+msgctxt "ui/rt_gap"
+msgid "Gap"
+msgstr ""
+
+#. interface: rt_length
+msgctxt "ui/rt_length"
+msgid "Retraction (mm)"
+msgstr ""
+
+#. interface: rt_travels
+msgctxt "ui/rt_travels"
+msgid "Travels rewritten"
+msgstr ""
+
+#. interface: rt_download
+msgctxt "ui/rt_download"
+msgid "Download the file to print"
+msgstr ""
+
+#. interface: rt_note
+msgctxt "ui/rt_note"
+msgid ""
+"Print this file as it is. Opening it in PrusaSlicer shows no difference: "
+"only the E values of the retractions changed."
+msgstr ""
+
+#. interface: rt_err_type
+msgctxt "ui/rt_err_type"
+msgid ""
+"This is not a G-code file. Drop the .gcode or .bgcode PrusaSlicer exported."
+msgstr ""
+
+#. interface: rt_err_3mf
+msgctxt "ui/rt_err_3mf"
+msgid ""
+"This is the 3MF project. Open it in PrusaSlicer, slice, export the G-code, "
+"then drop that file here."
+msgstr ""
+
+#. interface: rt_err_read
+msgctxt "ui/rt_err_read"
+msgid "The file could not be read: %s"
+msgstr ""
+
+#. interface: rt_err_no_marker
+msgctxt "ui/rt_err_no_marker"
+msgid ""
+"This file has no HEXCALIBR retraction comment. Slice the retraction 3MF as "
+"it is and export the G-code; other objects or tests don't work here."
+msgstr ""
+
+#. interface: rt_err_bad_marker
+msgctxt "ui/rt_err_bad_marker"
+msgid ""
+"The HEXCALIBR comment in this file is from another version of the test. "
+"Download the 3MF again."
+msgstr ""
+
+#. interface: rt_err_already
+msgctxt "ui/rt_err_already"
+msgid "This file has already been rewritten. Print it as it is."
+msgstr ""
+
+#. interface: rt_err_firmware_retraction
+msgctxt "ui/rt_err_firmware_retraction"
+msgid ""
+"Firmware retraction is on (G10 and G11). Untick Printer Settings › General "
+"› Firmware › Use firmware retraction, slice again and export."
+msgstr ""
+
+#. interface: rt_err_unsupported
+msgctxt "ui/rt_err_unsupported"
+msgid ""
+"The file uses %s, which this page can't rewrite. If it is G2 or G3, turn "
+"off Print Settings › Advanced › Arc fitting, slice again and export."
+msgstr ""
+
+#. interface: rt_err_no_ring
+msgctxt "ui/rt_err_no_ring"
+msgid ""
+"The ring of pillars was not found (%d of %d pillars). Slice the 3MF as it "
+"is: don't scale, cut or add objects."
+msgstr ""
+
+#. interface: rt_err_ring_mismatch
+msgctxt "ui/rt_err_ring_mismatch"
+msgid ""
+"The pillars are not where the comment says (%s mm off). The ring was "
+"probably rotated, mirrored or scaled: open the 3MF again and slice it "
+"without changes."
+msgstr ""
+
+#. interface: rt_err_no_retracts
+msgctxt "ui/rt_err_no_retracts"
+msgid ""
+"This file has no retractions: your retraction length is 0. Set Printer "
+"Settings › Extruder › Retraction › Length above 0 (and the Filament "
+"Overrides one, if it is ticked), slice again and export."
+msgstr ""
+
+#. interface: rt_err_no_gap_travels
+msgctxt "ui/rt_err_no_gap_travels"
+msgid ""
+"Your profile retracts, but not on the travels between the pillars. Set "
+"Printer Settings › Extruder › Retraction › Minimum travel after retraction "
+"to 2 mm, slice again and export."
+msgstr ""
+
+#. interface: rt_err_gap_missed
+msgctxt "ui/rt_err_gap_missed"
+msgid ""
+"No retraction on the travels of the %s mm gap. Check Minimum travel after "
+"retraction (Printer Settings › Extruder): 2 mm is the usual value."
+msgstr ""
+
+#. interface: rt_err_internal
+msgctxt "ui/rt_err_internal"
+msgid ""
+"Something went wrong while rewriting this file. Please report it on GitHub, "
+"with the file."
+msgstr ""
+
 #. site tagline
 msgctxt "site"
 msgid "3D print calibration suite"
@@ -912,16 +1062,6 @@ msgstr ""
 
 #. contents: planned
 msgctxt "site/contents"
-msgid "Retraction"
-msgstr ""
-
-#. contents: note
-msgctxt "site/contents"
-msgid "filament"
-msgstr ""
-
-#. contents: planned
-msgctxt "site/contents"
 msgid "Dimensions, shrinkage and fit"
 msgstr ""
 
@@ -943,6 +1083,11 @@ msgstr ""
 #. contents group heading
 msgctxt "site/contents"
 msgid "Printable cards"
+msgstr ""
+
+#. contents group heading
+msgctxt "site/contents"
+msgid "Tools"
 msgstr ""
 
 #. contents group heading
@@ -2548,9 +2693,10 @@ msgstr ""
 #. step intro
 msgctxt "home/release-1"
 msgid ""
-"The first public release has seven tests. Each comes with a guide and its "
+"The first public release has eight tests. Each comes with a guide and its "
 "files on Printables; four also have a scorecard, the first-layer guide has "
-"a step table and the flow guide a selector that works out the new value."
+"a step table, the flow guide a selector that works out the new value and "
+"the retraction guide a page that rewrites the G-code."
 msgstr ""
 
 #. point
@@ -2608,8 +2754,14 @@ msgstr ""
 #. point
 msgctxt "home/release-1"
 msgid ""
-"**Coming next:** retraction, and dimensions and fit. They are listed in "
-"grey in the contents."
+"[Retraction](page:retraction): the shortest retraction that stops "
+"stringing, one length per gap of a ring of pillars, in a 16-minute print."
+msgstr ""
+
+#. point
+msgctxt "home/release-1"
+msgid ""
+"**Coming next:** dimensions and fit. It is listed in grey in the contents."
 msgstr ""
 
 #. point
@@ -2730,7 +2882,7 @@ msgid ""
 "5. [Pressure advance](page:pressure-advance)\n"
 "6. [Flow](page:flow)\n"
 "7. [Ironing](page:ironing), if you use it\n"
-"8. Retraction\n"
+"8. [Retraction](page:retraction)\n"
 "9. Dimensions\n"
 "10. Then the [IDEX tests](page:idex-alignment)"
 msgstr ""
@@ -9868,6 +10020,497 @@ msgstr ""
 #. More: point
 msgctxt "pressure-advance/troubleshooting-more"
 msgid "**PrusaSlicer 3.x alpha:** not tested with these files yet."
+msgstr ""
+
+#. page title
+msgctxt "retraction-rewriter"
+msgid "Retraction rewriter"
+msgstr ""
+
+#. page description
+msgctxt "retraction-rewriter"
+msgid ""
+"Drop the G-code of the retraction ring: each gap between two pillars gets "
+"its own retraction length, and you download the file to print. Runs in your "
+"browser."
+msgstr ""
+
+#. page intro
+msgctxt "retraction-rewriter"
+msgid ""
+"The retraction test prints a ring of pillars, and each gap between two "
+"pillars needs its own retraction length. PrusaSlicer can't change "
+"retraction inside one print, so this page does it on the G-code you export: "
+"**slice the 3MF as it is, export the G-code, drop it here, print the file "
+"you download.**\n"
+"\n"
+"Nothing is uploaded: the file is read and rewritten in your browser.\n"
+msgstr ""
+
+#. page breadcrumb
+msgctxt "retraction-rewriter"
+msgid "Tool"
+msgstr ""
+
+#. callout
+msgctxt "retraction-rewriter"
+msgid ""
+"Takes plain .gcode and binary .bgcode, and always gives back plain .gcode, "
+"which every printer prints. Only the retractions on the travels between "
+"neighbouring pillars change; every other line stays as PrusaSlicer wrote it."
+msgstr ""
+
+#. page title
+msgctxt "retraction"
+msgid "Retraction"
+msgstr ""
+
+#. page description
+msgctxt "retraction"
+msgid ""
+"Find the shortest retraction that stops stringing: a ring of pillars where "
+"every gap gets its own retraction length, in one 16-minute print."
+msgstr ""
+
+#. page intro
+msgctxt "retraction"
+msgid ""
+"A ring of small pillars. Every time the nozzle jumps from one pillar to the "
+"next it retracts, and **each gap of the ring gets a different retraction "
+"length**, written on the label under it. Look at the ring one gap at a time "
+"and pick the **shortest length with no strings**: that is your retraction "
+"length.\n"
+"\n"
+"About 4 g of filament and **about 16 minutes**, with **no changes to your "
+"profiles**. One extra step: the G-code goes through a [page of this "
+"site](page:retraction-rewriter) before you print it.\n"
+msgstr ""
+
+#. More: intro
+msgctxt "retraction"
+msgid ""
+"PrusaSlicer has one retraction length for the whole print, so the 3MF can't "
+"set a different one per gap. It only adds a comment to the G-code; the "
+"[retraction rewriter](page:retraction-rewriter) reads it, finds the pillars "
+"and changes the retractions between them. That works on every firmware, "
+"Prusa, Klipper, Marlin and RepRapFirmware, with no firmware retraction and "
+"no printer settings to change.\n"
+msgstr ""
+
+#. box title
+msgctxt "retraction"
+msgid "What you need"
+msgstr ""
+
+#. box column title
+msgctxt "retraction"
+msgid "To print"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid ""
+"The [test file](page:retraction#which-file) for your extruder: direct drive "
+"or bowden"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid "PrusaSlicer 2.9 (2.7 is the minimum that opens the project)"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid ""
+"Your own printer, print and filament profiles, already working, with a "
+"**0.4 mm** nozzle and a retraction length **above 0**"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid ""
+"The [temperature](page:temperature-tower) and [pressure "
+"advance](page:pressure-advance) already set"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid "The filament to test, **dry**: about 4 g"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid "A bed at least **110 mm** wide"
+msgstr ""
+
+#. box column title
+msgctxt "retraction"
+msgid "To read it"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid "A lamp"
+msgstr ""
+
+#. box item
+msgctxt "retraction"
+msgid "Something dark to put inside the ring: a card, a phone face down"
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "retraction"
+msgid "Before printing"
+msgstr ""
+
+#. step title
+msgctxt "retraction/what-for"
+msgid "What it is for, and when to run it"
+msgstr ""
+
+#. point
+msgctxt "retraction/what-for"
+msgid ""
+"**Retraction** pulls the filament back a little before each travel, so the "
+"nozzle doesn't ooze while it moves. Too little leaves **strings** and "
+"**blobs**; too much costs time and, on a direct-drive extruder, can pull "
+"molten plastic up where it jams."
+msgstr ""
+
+#. point
+msgctxt "retraction/what-for"
+msgid ""
+"This test finds the **shortest length that stops the strings** for one "
+"filament. Run it **after the temperature and pressure advance**: a nozzle "
+"that is too hot strings at any length, and pressure advance changes how "
+"much plastic is left in the nozzle when it stops."
+msgstr ""
+
+#. photo alt
+msgctxt "retraction/what-for"
+msgid ""
+"The retraction ring printed in yellow PETG: eleven small hexagonal pillars "
+"on a thin ring, with a label tab under each gap from 0.0 to 2.0"
+msgstr ""
+
+#. photo caption
+msgctxt "retraction/what-for"
+msgid ""
+"The direct-drive ring in PETG: eleven pillars, eleven gaps, from 0.0 to 2.0 "
+"mm of retraction. The labels are outside the ring, under each gap."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/what-for"
+msgid ""
+"Wet filament strings at any retraction length, and so does a nozzle that is "
+"too hot. If every gap has strings, dry the filament and check the "
+"temperature before you change the retraction."
+msgstr ""
+
+#. More: point (beginner)
+msgctxt "retraction/what-for"
+msgid ""
+"If your prints have no strings today, there is no need to run it: the test "
+"is for filaments that string, or for a new extruder or hotend."
+msgstr ""
+
+#. step title
+msgctxt "retraction/which-file"
+msgid "Which file"
+msgstr ""
+
+#. point
+msgctxt "retraction/which-file"
+msgid ""
+"Pick the file for your extruder. The gaps go **counter-clockwise** from the "
+"front, and the last gap closes the ring: 2.0 (or 6.0) sits next to 0."
+msgstr ""
+
+#. table header
+msgctxt "retraction/which-file"
+msgid "File"
+msgstr ""
+
+#. table header
+msgctxt "retraction/which-file"
+msgid "Extruder"
+msgstr ""
+
+#. table header
+msgctxt "retraction/which-file"
+msgid "Gaps: retraction length"
+msgstr ""
+
+#. table cell
+msgctxt "retraction/which-file"
+msgid "`retraction_dd_0-2.3mf`"
+msgstr ""
+
+#. table cell
+msgctxt "retraction/which-file"
+msgid "direct drive"
+msgstr ""
+
+#. table cell
+msgctxt "retraction/which-file"
+msgid "11 gaps, 0 to 2.0 mm in steps of 0.2"
+msgstr ""
+
+#. table cell
+msgctxt "retraction/which-file"
+msgid "`retraction_bowden_0-6.3mf`"
+msgstr ""
+
+#. table cell
+msgctxt "retraction/which-file"
+msgid "bowden"
+msgstr ""
+
+#. table cell
+msgctxt "retraction/which-file"
+msgid "13 gaps, 0 to 6.0 mm in steps of 0.5"
+msgstr ""
+
+#. More: point
+msgctxt "retraction/which-file"
+msgid ""
+"The direct-drive ring is 95 mm across, the bowden ring 107 mm, both 12.6 mm "
+"tall. Each gap is about 15 mm wide."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/which-file"
+msgid ""
+"The pillars are hollow, with two walls and a closed top, so all of the time "
+"goes into the travels you are testing."
+msgstr ""
+
+#. More: point (expert)
+msgctxt "retraction/which-file"
+msgid ""
+"On an IDEX or multi-tool printer, assign the object to the tool you "
+"calibrate (right-click › Change extruder)."
+msgstr ""
+
+#. step title
+msgctxt "retraction/before-print"
+msgid "Before you start"
+msgstr ""
+
+#. point
+msgctxt "retraction/before-print"
+msgid ""
+"Nothing to change in your profiles. Only check that your retraction length "
+"is **above 0** (Printer Settings › Extruder 1 › Retraction › Length, or the "
+"Filament Overrides one): the page changes the retractions PrusaSlicer "
+"writes, and can't add them if there are none."
+msgstr ""
+
+#. point
+msgctxt "retraction/before-print"
+msgid ""
+"**Clean the nozzle** before printing. Plastic stuck on the nozzle drops on "
+"the pillars as blobs that have nothing to do with retraction."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/before-print"
+msgid ""
+"**Firmware retraction** must be off (Printer Settings › General › Firmware "
+"› Use firmware retraction): with it on, the G-code has no lengths to "
+"change. The page tells you if it is on."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/before-print"
+msgid ""
+"**Arc fitting** must be off (Print Settings › Advanced). It is off by "
+"default."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/before-print"
+msgid ""
+"The layer height is forced to **0.2 mm**. Wipe, z-hop, the retraction speed "
+"and the extra length on restart stay as your profile has them; the page "
+"keeps them and changes only the length."
+msgstr ""
+
+#. part heading (groups steps)
+msgctxt "retraction"
+msgid "Print and read"
+msgstr ""
+
+#. step title
+msgctxt "retraction/open"
+msgid "Open, slice, rewrite and print"
+msgstr ""
+
+#. point
+msgctxt "retraction/open"
+msgid ""
+"**File › Open project**, then **Slice now**, then **Export G-code**. Binary "
+"G-code (`.bgcode`) is fine."
+msgstr ""
+
+#. point
+msgctxt "retraction/open"
+msgid ""
+"Open the [retraction rewriter](page:retraction-rewriter) and drop the file "
+"on it. It shows a table with every gap and the number of travels it "
+"rewrote, and a button to **download the file to print**."
+msgstr ""
+
+#. point
+msgctxt "retraction/open"
+msgid ""
+"Print the downloaded file, not the one PrusaSlicer exported. Its name ends "
+"in `_retraction-0-2.gcode` (or `-0-6`)."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/open"
+msgid ""
+"Nothing is uploaded: the page reads and rewrites the file in your browser."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/open"
+msgid ""
+"The PrusaSlicer preview of the original file shows your own retraction "
+"everywhere: the change is only in the downloaded file. Its first ring layer "
+"has a line `;HEXCALIBR rewritten` that says how many retractions it changed."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/open"
+msgid ""
+"If you print the original file by mistake, nothing bad happens: every gap "
+"gets your own retraction, and the test shows nothing."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/open"
+msgid ""
+"On the author's printer the ring took **16 minutes**, plus the start "
+"routine."
+msgstr ""
+
+#. step title
+msgctxt "retraction/read"
+msgid "Read the gaps"
+msgstr ""
+
+#. point
+msgctxt "retraction/read"
+msgid ""
+"Put something dark **inside** the ring, light it from the side, and look at "
+"**one gap at a time** from outside, at the height of the pillars."
+msgstr ""
+
+#. point
+msgctxt "retraction/read"
+msgid ""
+"**Too short:** strings across the gap, at many heights, and blobs on the "
+"sides of the two pillars that face the gap."
+msgstr ""
+
+#. point
+msgctxt "retraction/read"
+msgid ""
+"**Right:** the sides facing the gap are as clean as the others, and the gap "
+"is empty. At most one very fine hair."
+msgstr ""
+
+#. point
+msgctxt "retraction/read"
+msgid ""
+"Start from 0 and go round the ring: your length is the **first gap that is "
+"clean**. If the next one or two look just as clean, keep the first: a "
+"longer retraction only costs time."
+msgstr ""
+
+#. photo alt
+msgctxt "retraction/read"
+msgid ""
+"Four gaps of the same PETG ring: 0.0 full of strings with blobs on the "
+"pillar sides, 0.2 still with strings at many heights, 0.4 and 0.8 clean "
+"with only a fine hair at the top"
+msgstr ""
+
+#. photo caption
+msgctxt "retraction/read"
+msgid ""
+"The same ring at 0.0, 0.2, 0.4 and 0.8 mm (top left to bottom right). 0.0: "
+"strings and blobs. 0.2: fewer, but still strings at every height. 0.4: "
+"clean. 0.8 (the author's profile): just as clean. In this PETG the answer "
+"is **0.4 mm**."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "retraction/read"
+msgid ""
+"**One fine hair at the top**, running over several gaps at the same height: "
+"it shows at every length, so it is not the retraction. Judge the sides of "
+"the pillars and the middle of the gap."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "retraction/read"
+msgid ""
+"**Strings in the gap next to 0:** the pillar between 0 and the next gap "
+"collects the ooze of the 0 gap, and its hairs hang into its other side too. "
+"Judge the next gap by its other pillar."
+msgstr ""
+
+#. More: point (misread)
+msgctxt "retraction/read"
+msgid ""
+"**A blob on one pillar only**, on the top or on a side that doesn't face a "
+"gap: plastic dropped from the nozzle. Clean the nozzle and judge the "
+"neighbours."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/read"
+msgid ""
+"On a direct-drive extruder the change usually happens in the first few "
+"gaps. If even the longest gap strings, check the filament (dry it) and the "
+"temperature first; then print the bowden file, which goes further."
+msgstr ""
+
+#. step title
+msgctxt "retraction/save"
+msgid "Save the value"
+msgstr ""
+
+#. point
+msgctxt "retraction/save"
+msgid ""
+"The best place is the filament: **Filament Settings › Filament Overrides › "
+"Retraction › Length**, tick it and type your length, then **save the "
+"filament preset**. Retraction depends on the filament, so each one keeps "
+"its own."
+msgstr ""
+
+#. point
+msgctxt "retraction/save"
+msgid ""
+"Or, for every filament on that printer: **Printer Settings › Extruder 1 › "
+"Retraction › Length**, then save the printer preset."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/save"
+msgid "If you change the nozzle, the hotend or the extruder, run it again."
+msgstr ""
+
+#. More: point
+msgctxt "retraction/save"
+msgid ""
+"The length you found is valid with your retraction speed and wipe settings: "
+"change those, and check it again."
 msgstr ""
 
 #. page title

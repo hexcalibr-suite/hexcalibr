@@ -325,6 +325,13 @@ def build():
             os.makedirs(os.path.join(out, "img"))
             for n in imgs:
                 shutil.copyfile(os.path.join(content.IMG, n), os.path.join(out, "img", n))
+    # site/js/: the page tools' scripts (kind: tool), tests left out
+    js = os.path.join(content.HERE, "js")
+    if os.path.isdir(js):
+        os.makedirs(os.path.join(out, "js"))
+        for n in sorted(os.listdir(js)):
+            if n.endswith(".js"):
+                shutil.copyfile(os.path.join(js, n), os.path.join(out, "js", n))
     # site/tmp/: temporary files shared by link (test files for one user), served at /tmp/,
     # kept out of search engines by robots.txt and never linked from the pages
     tmp = os.path.join(content.HERE, "tmp")

@@ -335,6 +335,22 @@ figcaption .credito { white-space: nowrap; font-style: italic; }
 .nota { color: var(--muto); font-size: .92rem; border-top: 1px solid var(--filo);
         margin-top: 3rem; padding-top: 1.2rem; max-width: 70ch; }
 
+/* ------------------------------------------------------------ page tools (kind: tool) */
+.strumento { margin: 1.5rem 0 2rem; }
+.rt-drop { display: flex; flex-direction: column; align-items: center; gap: .8rem; padding: 2.2rem 1rem;
+  border: 2px dashed var(--filo); border-radius: 12px; background: var(--carta); color: var(--testo);
+  text-align: center; cursor: pointer; }
+.rt-drop.sopra, .rt-drop:focus-within { border-color: var(--accento); background: var(--attenzione-fondo); }
+.rt-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.rt-scegli { font-weight: 600; padding: .45rem 1rem; border-radius: 8px; border: 1px solid var(--filo);
+  background: var(--fondo2); }
+.rt-stato { min-height: 1.5em; font-weight: 600; }
+.rt-stato.rt-errore { color: var(--caldo); background: var(--caldo-fondo); padding: .7rem .9rem; border-radius: 8px; }
+.rt-scarica { display: inline-block; font-weight: 700; padding: .55rem 1.1rem; border-radius: 8px;
+  background: var(--accento); color: #16191d; text-decoration: none; }
+.rt-nota { color: var(--muto); font-size: .92rem; }
+.rt-gap td, .rt-gap th { text-align: center; font-variant-numeric: tabular-nums; padding: .25rem .9rem; }
+
 /* ------------------------------------------------------------ the scorecard */
 .scheda-strumenti { display: flex; flex-wrap: wrap; gap: .8rem 1.4rem; align-items: center;
                     margin: 0 0 1rem; }

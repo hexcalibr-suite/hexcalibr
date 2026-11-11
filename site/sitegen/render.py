@@ -759,6 +759,78 @@ var IDEX_FIT = (function () {
 /*END_IDEX_FIT*/
 """
 
+TOOL_RETRACTION = """
+(function () {
+  var box = document.getElementById('riscrivi');
+  if (!box || !window.HexRetract || !window.HexBgcode) { return; }
+  var W = JSON.parse(box.dataset.words);
+  var input = document.getElementById('rt-file'), drop = document.getElementById('rt-drop');
+  var stato = document.getElementById('rt-stato'), esito = document.getElementById('rt-esito');
+  var link = document.getElementById('rt-scarica'), nome = document.getElementById('rt-nome');
+  var righe = document.getElementById('rt-righe'), url = null;
+  // %s and %d are filled in order, as in the other languages' strings
+  function fmt(s) {
+    var a = [].slice.call(arguments, 1), i = 0;
+    return s.replace(/%[sd]/g, function () { return String(a[i++]); });
+  }
+  function say(text, bad) { stato.textContent = text; stato.className = 'rt-stato' + (bad ? ' rt-errore' : ''); }
+  function message(e) {
+    var i = e.info || {};
+    switch (e.code) {
+      case 'unsupported': return fmt(W.err_unsupported, i.cmd);
+      case 'no_ring': return fmt(W.err_no_ring, i.found, i.expected);
+      case 'ring_mismatch': return fmt(W.err_ring_mismatch, i.off);
+      case 'gap_missed': return fmt(W.err_gap_missed, (i.gaps || []).join(', '));
+      default: return W['err_' + e.code] || W.err_internal;
+    }
+  }
+  async function run(file) {
+    esito.hidden = true;
+    if (url) { URL.revokeObjectURL(url); url = null; }
+    say(fmt(W.reading, file.name));
+    var bytes = new Uint8Array(await file.arrayBuffer()), text;
+    if (bytes[0] === 0x50 && bytes[1] === 0x4b) { say(W.err_3mf, true); return; }
+    try {
+      text = HexBgcode.isBgcode(bytes) ? await HexBgcode.toAscii(bytes) : new TextDecoder().decode(bytes);
+    } catch (e) { say(fmt(W.err_read, e.message), true); return; }
+    if (!/^\s*(;|G\d|M\d)/m.test(text.slice(0, 4096))) { say(W.err_type, true); return; }
+    say(W.working);
+    var res;
+    try { res = HexRetract.rewrite(text); } catch (e) {
+      if (e.name !== 'RetractError') { console.error(e); }
+      say(e.name === 'RetractError' ? message(e) : W.err_internal, true);
+      return;
+    }
+    var s = res.summary, out = HexRetract.outputName(file.name, s.lengths);
+    url = URL.createObjectURL(new Blob([res.gcode], { type: 'text/plain' }));
+    link.href = url; link.download = out; nome.textContent = out;
+    righe.textContent = '';
+    s.lengths.forEach(function (len, k) {
+      var tr = document.createElement('tr');
+      [k + 1, len.toFixed(1), s.perGap[k]]
+        .forEach(function (v) { var td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      righe.appendChild(tr);
+    });
+    say(fmt(W.done, s.rewritten, s.lengths.length, s.kept, s.profileLength));
+    esito.hidden = false;
+  }
+  input.addEventListener('change', function () { if (input.files[0]) { run(input.files[0]); } });
+  ['dragenter', 'dragover'].forEach(function (t) {
+    drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('sopra'); });
+  });
+  ['dragleave', 'drop'].forEach(function (t) {
+    drop.addEventListener(t, function () { drop.classList.remove('sopra'); });
+  });
+  drop.addEventListener('drop', function (e) {
+    e.preventDefault();
+    if (e.dataTransfer.files[0]) { run(e.dataTransfer.files[0]); }
+  });
+})();
+"""
+
+# kind: tool pages -> (files from site/js/, page glue)
+TOOLS = {"retraction": (("bgcode.js", "retraction.js"), TOOL_RETRACTION)}
+
 SCORE_IDEX = """
 (function () {
   var tab = document.getElementById('idex');
@@ -1482,6 +1554,8 @@ class Site:
             r.append(self.tests_list())
         if p.get("kind") == "scorecard":
             r.append(self.scorecard(p))
+        if p.get("kind") == "tool":
+            r.append(self.tool(p))
         n = 0
         numbered = p.get("numbered", False)
         for st in p.get("steps", []):
@@ -1533,6 +1607,10 @@ class Site:
             score += LADDER
         if any(st.get("flowpick") for st in p.get("steps", [])):
             score += FLOWPICK
+        if p.get("kind") == "tool":
+            # the tool's own files (site/js/, copied by build) and the page glue
+            r.append("".join("<script src=\"%sjs/%s\"></script>" % (self.root, f) for f in TOOLS[p["tool"]][0]))
+            score += TOOLS[p["tool"]][1]
         r.append("</main></div>\n<script>%s%s%s%s</script>\n</body>\n</html>\n"
                  % (FOLLOW, FILTER, MORE if has_more else "", score))
         return "\n".join(r)
@@ -1565,6 +1643,32 @@ class Site:
                                 (" <em>— %s</em>" % self.md(note)) if note else ""))
         r.append("</ul>")
         return "\n".join(r)
+
+    def tool(self, p):
+        """A page tool that works on a file the reader drops (kind: tool). Only
+        `retraction` for now: the G-code rewriter (site/js/retraction.js, with
+        site/js/bgcode.js for binary G-code). Everything runs in the browser."""
+        if p.get("tool") != "retraction":
+            raise SystemExit("%s: unknown tool %r" % (p["id"], p.get("tool")))
+        keys = ("rt_reading", "rt_working", "rt_done", "rt_err_type", "rt_err_3mf", "rt_err_read",
+                "rt_err_no_marker", "rt_err_bad_marker", "rt_err_already", "rt_err_firmware_retraction",
+                "rt_err_unsupported", "rt_err_no_ring", "rt_err_ring_mismatch", "rt_err_no_retracts",
+                "rt_err_no_gap_travels", "rt_err_gap_missed", "rt_err_internal")
+        words = {k[3:]: self.T(k) for k in keys}
+        return ("<section class=\"strumento\" id=\"riscrivi\" data-words=\"%s\">"
+                "<label class=\"rt-drop\" id=\"rt-drop\"><span>%s</span>"
+                "<input type=\"file\" id=\"rt-file\" accept=\".gcode,.bgcode,.gco,.g\">"
+                "<span class=\"rt-scegli\">%s</span></label>"
+                "<p class=\"rt-stato\" id=\"rt-stato\" role=\"status\" aria-live=\"polite\"></p>"
+                "<div id=\"rt-esito\" hidden>"
+                "<p><a class=\"rt-scarica\" id=\"rt-scarica\" href=\"#\">%s</a> <code id=\"rt-nome\"></code></p>"
+                "<p class=\"rt-nota\">%s</p>"
+                "<table class=\"rt-gap\"><thead><tr><th scope=\"col\">%s</th><th scope=\"col\">%s</th>"
+                "<th scope=\"col\">%s</th></tr></thead><tbody id=\"rt-righe\"></tbody></table>"
+                "</div></section>"
+                % (_e(json.dumps(words, ensure_ascii=False)), _e(self.T("rt_drop")), _e(self.T("rt_choose")),
+                   _e(self.T("rt_download")), _e(self.T("rt_note")), _e(self.T("rt_gap")),
+                   _e(self.T("rt_length")), _e(self.T("rt_travels"))))
 
     def scorecard(self, p):
         fs = self.features[p["features"]]
